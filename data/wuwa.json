@@ -1,18 +1,13 @@
 {
-  "game": "wuwa",
-  "name": "鸣潮",
-  "collected_at": "2026-09-10T04:02:21+00:00",
-  "current": {
-    "version": "3.6",
-    "start_at": "2026-08-20T11:00:00+08:00"
-  },
-  "next": {
-    "version": "3.7",
-    "expected_start_at": "2026-10-01T11:00:00+08:00",
-    "confirmed": false,
-    "days_remaining": 21
-  },
-  "preview": {
-    "announced": false
-  }
+  "game_name": "鸣潮",
+  "current_version": "3.6",
+  "current_content": [
+    "清宵、景燃",
+    "玄元境",
+    "新剧情与联机玩法"
+  ],
+  "next_version": "3.7",
+  "next_content": [],
+  "preview_status": "未官宣",
+  "days_to_next_version": 21
 }

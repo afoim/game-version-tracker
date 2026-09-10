@@ -1,21 +1,13 @@
 {
-  "game": "starrail",
-  "name": "崩坏：星穹铁道",
-  "collected_at": "2026-09-10T04:02:15+00:00",
-  "current": {
-    "version": "4.5",
-    "maintenance_start": "2026-08-26T06:00:00+08:00",
-    "start_at": "2026-08-26T11:00:00+08:00"
-  },
-  "next": {
-    "version": "4.6",
-    "expected_start_at": "2026-10-07T11:00:00+08:00",
-    "confirmed": false,
-    "days_remaining": 27
-  },
-  "preview": {
-    "announced": false,
-    "title": null,
-    "post_id": null
-  }
+  "game_name": "崩坏：星穹铁道",
+  "current_version": "4.5",
+  "current_content": [
+    "夏日知更鸟、夏日砂金",
+    "千星城新区域",
+    "赛车等新活动"
+  ],
+  "next_version": "4.6",
+  "next_content": [],
+  "preview_status": "未官宣",
+  "days_to_next_version": 27
 }
