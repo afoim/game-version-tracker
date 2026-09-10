@@ -1,0 +1,20 @@
+{
+  "game": "zzz",
+  "name": "绝区零",
+  "collected_at": "2026-09-10T03:37:33+00:00",
+  "current": {
+    "version": "3.2",
+    "start_at": "2026-09-09T07:00:06+08:00"
+  },
+  "next": {
+    "version": "3.3",
+    "expected_start_at": "2026-10-21T07:00:06+08:00",
+    "confirmed": false,
+    "days_remaining": 41
+  },
+  "preview": {
+    "announced": false,
+    "title": null,
+    "post_id": null
+  }
+}
