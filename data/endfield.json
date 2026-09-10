@@ -1,0 +1,26 @@
+{
+  "game": "endfield",
+  "name": "明日方舟：终末地",
+  "collected_at": "2026-09-10T03:47:53+00:00",
+  "current": {
+    "version": "雪凇幽梦",
+    "start_at": "2026-09-02T12:00:00+08:00",
+    "content": [
+      "提弗洛斯、梨诺",
+      "雪地环境与相关版本内容",
+      "集成工业与培养体验优化"
+    ]
+  },
+  "next": {
+    "version": null,
+    "expected_start_at": "2026-10-14T12:00:00+08:00",
+    "confirmed": false,
+    "days_remaining": 34,
+    "content": [
+      "装备方案等后续优化已预告"
+    ]
+  },
+  "preview": {
+    "announced": false
+  }
+}

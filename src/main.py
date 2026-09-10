@@ -6,10 +6,12 @@ from games.genshin import GenshinAdapter
 from games.starrail import StarRailAdapter
 from games.zzz import ZZZAdapter
 from games.wuwa import WuwaAdapter
+from games.endfield import EndfieldAdapter
+from games.yh import YHAdapter
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
-    for adapter in (GenshinAdapter(), StarRailAdapter(), ZZZAdapter(), WuwaAdapter()):
+    for adapter in (GenshinAdapter(), StarRailAdapter(), ZZZAdapter(), WuwaAdapter(), EndfieldAdapter(), YHAdapter()):
         data = adapter.collect()
         out = root / "data" / f"{adapter.slug}.json"
         out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
