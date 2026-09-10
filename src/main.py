@@ -93,13 +93,20 @@ def normalize(adapter, raw: dict) -> dict:
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     adapters = (GenshinAdapter(), StarRailAdapter(), ZZZAdapter(), WuwaAdapter(), EndfieldAdapter(), YHAdapter())
+    games = []
     for adapter in adapters:
         raw = adapter.collect()
-        data = normalize(adapter, raw)
-        out = root / "data" / f"{adapter.slug}.json"
-        out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        print(json.dumps(data, ensure_ascii=False, indent=2))
-        print(f"\nwritten: {out}")
+        games.append(normalize(adapter, raw))
+
+    payload = {"games": games}
+    out = root / "data" / "games.json"
+    out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(payload, ensure_ascii=False, indent=2))
+    print(f"\nwritten: {out}")
+
+    for old in (root / "data").glob("*.json"):
+        if old.name != "games.json":
+            old.unlink()
 
 if __name__ == "__main__":
     main()
