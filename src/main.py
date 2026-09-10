@@ -33,6 +33,7 @@ REQUIRED_TOP_LEVEL = (
     "game_name",
     "current_version",
     "current_content",
+    "current_version_days",
     "next_version",
     "next_content",
     "preview_status",
@@ -59,10 +60,18 @@ def normalize(adapter, raw: dict) -> dict:
         now = dt.datetime.now(expected.tzinfo or dt.timezone.utc)
         days_remaining = max(0, (expected.date() - now.date()).days)
 
+    current_start = current.get("start_at")
+    if not current_start:
+        raise RuntimeError(f"{adapter.slug}: current.start_at must not be null")
+    started = dt.datetime.fromisoformat(current_start)
+    started_now = dt.datetime.now(started.tzinfo or dt.timezone.utc)
+    current_version_days = max(0, (started_now.date() - started.date()).days)
+
     result = {
         "game_name": raw.get("name") or adapter.name,
         "current_version": current.get("version"),
         "current_content": current.get("content", fallback.get("current", [])),
+        "current_version_days": current_version_days,
         "next_version": nxt.get("version") or "暂未公布",
         "next_content": nxt.get("content", fallback.get("next", [])),
         "preview_status": preview_status,
