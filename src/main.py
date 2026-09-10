@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from games.genshin import GenshinAdapter
 from games.starrail import StarRailAdapter
+from games.honkai3 import Honkai3Adapter
 from games.zzz import ZZZAdapter
 from games.wuwa import WuwaAdapter
 from games.endfield import EndfieldAdapter
@@ -94,7 +95,7 @@ def normalize(adapter, raw: dict) -> dict:
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
-    adapters = (GenshinAdapter(), StarRailAdapter(), ZZZAdapter(), WuwaAdapter(), EndfieldAdapter(), YHAdapter(), BlueArchiveJPAdapter(), StellaSoraCNAdapter())
+    adapters = (GenshinAdapter(), StarRailAdapter(), Honkai3Adapter(), ZZZAdapter(), WuwaAdapter(), EndfieldAdapter(), YHAdapter(), BlueArchiveJPAdapter(), StellaSoraCNAdapter())
     games = []
     for adapter in adapters:
         raw = adapter.collect()

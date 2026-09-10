@@ -31,6 +31,21 @@
       "days_to_next_version": 27
     },
     {
+      "game_name": "崩坏3",
+      "current_version": "9.0",
+      "current_content": [
+        "全新协同者：希娜狄雅",
+        "全新神之键：琉璃朱燧",
+        "主线第二部终章：从此，拥抱未来",
+        "主题活动：舰舰与许愿树秘闻"
+      ],
+      "current_version_days": 49,
+      "next_version": "9.1",
+      "next_content": [],
+      "preview_status": "未官宣",
+      "days_to_next_version": 14
+    },
+    {
       "game_name": "绝区零",
       "current_version": "3.2",
       "current_content": [
