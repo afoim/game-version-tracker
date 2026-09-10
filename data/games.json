@@ -87,6 +87,33 @@
       "next_content": [],
       "preview_status": "未官宣",
       "days_to_next_version": 14
+    },
+    {
+      "game_name": "蔚蓝档案（日服）",
+      "current_version": "2026/09/09 更新",
+      "current_content": [
+        "主线剧情更新",
+        "活动内容更新"
+      ],
+      "current_version_days": 1,
+      "next_version": "2026/09/23 更新（预计）",
+      "next_content": [],
+      "preview_status": "未官宣",
+      "days_to_next_version": 13
+    },
+    {
+      "game_name": "星塔旅人（国服）",
+      "current_version": "09/08 更新",
+      "current_content": [
+        "五星旅人：埃莉诺",
+        "五星秘纹：飞吧，笼中鸟",
+        "新活动：奋斗吧！大小姐的旅人修炼手册"
+      ],
+      "current_version_days": 2,
+      "next_version": "09/29 更新（预计）",
+      "next_content": [],
+      "preview_status": "未官宣",
+      "days_to_next_version": 19
     }
   ]
 }

@@ -9,6 +9,8 @@ from games.zzz import ZZZAdapter
 from games.wuwa import WuwaAdapter
 from games.endfield import EndfieldAdapter
 from games.yh import YHAdapter
+from games.bluearchive_jp import BlueArchiveJPAdapter
+from games.stellasora_cn import StellaSoraCNAdapter
 
 CONTENT_FALLBACKS = {
     "genshin": {
@@ -92,7 +94,7 @@ def normalize(adapter, raw: dict) -> dict:
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
-    adapters = (GenshinAdapter(), StarRailAdapter(), ZZZAdapter(), WuwaAdapter(), EndfieldAdapter(), YHAdapter())
+    adapters = (GenshinAdapter(), StarRailAdapter(), ZZZAdapter(), WuwaAdapter(), EndfieldAdapter(), YHAdapter(), BlueArchiveJPAdapter(), StellaSoraCNAdapter())
     games = []
     for adapter in adapters:
         raw = adapter.collect()
