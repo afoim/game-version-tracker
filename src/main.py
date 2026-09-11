@@ -13,6 +13,29 @@ from games.yh import YHAdapter
 from games.bluearchive_jp import BlueArchiveJPAdapter
 from games.stellasora_cn import StellaSoraCNAdapter
 
+BANNER_FALLBACKS = {
+    "genshin": {
+        "characters": ["菲林斯", "伊涅芙"],
+        "start_at": "2026-09-01T18:00:00+08:00",
+        "end_at": "2026-09-22T14:59:00+08:00",
+    },
+    "starrail": {
+        "characters": ["知更鸟·夏日", "遐蝶"],
+        "start_at": "2026-08-26T11:00:00+08:00",
+        "end_at": "2026-09-12T11:59:00+08:00",
+    },
+    "zzz": {
+        "characters": ["克拉蕾", "南宫羽"],
+        "start_at": "2026-09-09T11:00:00+08:00",
+        "end_at": "2026-09-30T11:59:00+08:00",
+    },
+    "bluearchive_jp": {
+        "characters": ["霞（水着）", "圣娅（水着）", "莲见（水着）", "萌绘（水着）", "吹雪（水着）"],
+        "start_at": "2026-09-09T17:00:00+09:00",
+        "end_at": "2026-09-23T10:59:00+09:00",
+    },
+}
+
 CONTENT_FALLBACKS = {
     "genshin": {
         "current": ["奥黛塔、阿罗夏", "至冬新区域", "第三人称射击玩法"],
@@ -41,6 +64,10 @@ REQUIRED_TOP_LEVEL = (
     "next_content",
     "preview_status",
     "days_to_next_version",
+    "current_up_characters",
+    "current_up_start_at",
+    "current_up_end_at",
+    "current_up_days_remaining",
 )
 
 
@@ -49,6 +76,7 @@ def normalize(adapter, raw: dict) -> dict:
     current = raw.get("current") or {}
     nxt = raw.get("next") or {}
     preview = raw.get("preview") or {}
+    banner = raw.get("banner") or BANNER_FALLBACKS.get(adapter.slug, {})
 
     if preview.get("published"):
         preview_status = "已发布"
@@ -70,6 +98,15 @@ def normalize(adapter, raw: dict) -> dict:
     started_now = dt.datetime.now(started.tzinfo or dt.timezone.utc)
     current_version_days = max(0, (started_now.date() - started.date()).days)
 
+    banner_characters = banner.get("characters", [])
+    banner_start_at = banner.get("start_at")
+    banner_end_at = banner.get("end_at")
+    banner_days_remaining = None
+    if banner_end_at:
+        banner_end = dt.datetime.fromisoformat(banner_end_at)
+        banner_now = dt.datetime.now(banner_end.tzinfo or dt.timezone.utc)
+        banner_days_remaining = max(0, (banner_end.date() - banner_now.date()).days)
+
     result = {
         "game_name": raw.get("name") or adapter.name,
         "current_version": current.get("version"),
@@ -79,6 +116,10 @@ def normalize(adapter, raw: dict) -> dict:
         "next_content": nxt.get("content", fallback.get("next", [])),
         "preview_status": preview_status,
         "days_to_next_version": days_remaining,
+        "current_up_characters": banner_characters,
+        "current_up_start_at": banner_start_at,
+        "current_up_end_at": banner_end_at,
+        "current_up_days_remaining": banner_days_remaining,
     }
 
     missing = [key for key in REQUIRED_TOP_LEVEL if key not in result]
