@@ -97,10 +97,14 @@
       "next_content": [],
       "preview_status": "未官宣",
       "days_to_next_version": 20,
-      "current_up_characters": [],
-      "current_up_start_at": null,
-      "current_up_end_at": null,
-      "current_up_days_remaining": null
+      "current_up_characters": [
+        "景燃",
+        "绯雪",
+        "莫宁"
+      ],
+      "current_up_start_at": "2026-09-10T10:00:00+08:00",
+      "current_up_end_at": "2026-09-29T11:59:00+08:00",
+      "current_up_days_remaining": 18
     },
     {
       "game_name": "明日方舟：终末地",
@@ -117,10 +121,12 @@
       ],
       "preview_status": "未官宣",
       "days_to_next_version": 33,
-      "current_up_characters": [],
-      "current_up_start_at": null,
-      "current_up_end_at": null,
-      "current_up_days_remaining": null
+      "current_up_characters": [
+        "提弗洛斯"
+      ],
+      "current_up_start_at": "2026-09-02T12:00:00+08:00",
+      "current_up_end_at": "2026-09-30T11:59:00+08:00",
+      "current_up_days_remaining": 19
     },
     {
       "game_name": "异环",
@@ -135,10 +141,13 @@
       "next_content": [],
       "preview_status": "未官宣",
       "days_to_next_version": 13,
-      "current_up_characters": [],
-      "current_up_start_at": null,
-      "current_up_end_at": null,
-      "current_up_days_remaining": null
+      "current_up_characters": [
+        "灵可",
+        "浔"
+      ],
+      "current_up_start_at": "2026-09-03T11:00:00+08:00",
+      "current_up_end_at": "2026-09-24T05:59:00+08:00",
+      "current_up_days_remaining": 13
     },
     {
       "game_name": "蔚蓝档案（日服）",
@@ -176,10 +185,12 @@
       "next_content": [],
       "preview_status": "未官宣",
       "days_to_next_version": 18,
-      "current_up_characters": [],
-      "current_up_start_at": null,
-      "current_up_end_at": null,
-      "current_up_days_remaining": null
+      "current_up_characters": [
+        "埃莉诺"
+      ],
+      "current_up_start_at": "2026-09-08T17:00:00+08:00",
+      "current_up_end_at": "2026-09-29T10:59:00+08:00",
+      "current_up_days_remaining": 18
     }
   ]
 }
