@@ -2,6 +2,9 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import os
+import sys
+import tempfile
 from pathlib import Path
 from games.genshin import GenshinAdapter
 from games.starrail import StarRailAdapter
@@ -154,23 +157,44 @@ def normalize(adapter, raw: dict) -> dict:
     return result
 
 
+def collect_all(adapters):
+    games, errors = [], []
+    for adapter in adapters:
+        try:
+            games.append(normalize(adapter, adapter.collect()))
+            print(f"OK: {adapter.slug}", flush=True)
+        except Exception as error:
+            errors.append(f"{adapter.slug}: {type(error).__name__}: {error}")
+            print(f"FAILED: {errors[-1]}", file=sys.stderr, flush=True)
+    if errors:
+        raise RuntimeError("Collection incomplete; existing data preserved. " + "; ".join(errors))
+    return games
+
+
+def write_payload(out: Path, payload: dict) -> None:
+    out.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", newline="\n",
+                                         dir=out.parent, delete=False) as stream:
+            temporary = Path(stream.name)
+            stream.write(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
+        os.replace(temporary, out)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     adapters = (GenshinAdapter(), StarRailAdapter(), Honkai3Adapter(), ZZZAdapter(), WuwaAdapter(), EndfieldAdapter(), YHAdapter(), BlueArchiveJPAdapter(), StellaSoraCNAdapter())
-    games = []
-    for adapter in adapters:
-        raw = adapter.collect()
-        games.append(normalize(adapter, raw))
+    games = collect_all(adapters)
 
     payload = {"games": games}
     out = root / "data" / "games.json"
-    out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_payload(out, payload)
     print(json.dumps(payload, ensure_ascii=False, indent=2))
     print(f"\nwritten: {out}")
-
-    for old in (root / "data").glob("*.json"):
-        if old.name != "games.json":
-            old.unlink()
 
 if __name__ == "__main__":
     main()
