@@ -19,14 +19,23 @@ jobs:
     env:
       PYTHONUTF8: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: Regression tests
         run: python -m unittest discover -s tests -v
       - name: Collect
-        run: python src/main.py
+        run: |
+          set -o pipefail
+          python src/main.py 2>&1 | tee collect.log
+      - name: Annotate collector failure
+        if: failure()
+        run: |
+          [ -f collect.log ] || exit 0
+          grep '^FAILED:' collect.log | while IFS= read -r line; do
+            echo "::error::${line#FAILED: }"
+          done
       - name: Commit changed data
         run: |
           git config user.name "github-actions[bot]"
