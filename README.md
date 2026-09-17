@@ -38,7 +38,7 @@ git commit / push
 ```
 
 - `main-agent` 读取当前数据并为全部 9 个游戏生成独立核验任务。
-- `search-worker` 使用 Playwright 打开现有来源、公开搜索结果、官网页面及可发现的网络 JSON；搜索/抓取与 AI 分离。
+- `search-worker` 使用 Playwright 打开现有来源、公开搜索结果、官网页面及可发现的网络 JSON；每个游戏都会额外执行前瞻直播时间与官方录播查询，并允许从官方公告继续跟进到 Bilibili / YouTube / Twitch 等官方视频页；搜索/抓取与 AI 分离。
 - 每个 `child-agent` 只分析一个游戏，只能使用本轮 Playwright 实际读取的证据，只返回结构化 JSON，不写仓库。
 - `review-agent` 独立检查结构、来源、日期、变化证据和明显幻觉风险。
 - 某个游戏证据不足时安全降级：保留该游戏旧事实，继续审核其他游戏，不猜测数据。
@@ -87,13 +87,24 @@ gh run list --workflow ai-tracker.yml
 gh run view <run-id> --log
 ```
 
+### Bilibili 登录态（可选）
+
+GitHub Actions 出口可能触发 Bilibili 412 / 风控。可在仓库 Actions Secrets 中配置 `BILIBILI_COOKIE`，内容为完整的 Bilibili `Cookie` 请求头字符串。
+
+运行时只把该 Secret 注入 Playwright 的 `.bilibili.com` Cookie Jar；不会写入仓库、`agent-output`、`sources` 或日志。未配置时仍继续使用公开页面、公开视频 API 与其他官方来源。
+
+建议保存完整 Cookie 以降低因风控字段缺失造成的失败；若必须最小化，通常至少包含 `SESSDATA`、`bili_jct`、`DedeUserID`，但平台要求可能变化。
+
 ## 数据规则
 
 - 永远保留完整 9 个游戏和现有前端字段。
+- 前瞻使用独立字段：`preview_title`、`preview_start_at`、`preview_live_url`、`preview_replay_url`；未知值使用 `null`。
+- `preview_start_at` 必须是带时区的 ISO 8601；前瞻日期不能冒充版本上线日期。
+- 节目结束后继续核验官方账号录播/回放；第三方搬运、解说或切片不能写入 `preview_replay_url`。官方 YouTube Live 在结束后直接保留为 VOD 时，直播与录播 URL 可以相同。
 - 事实变化必须有本轮真实读取的来源支持。
 - `sources` 中的来源包含 `title`、`url`、`type`、`claims`、`checked_at`。
 - `type` 仅使用 `official_api`、`official`、`official_community`、`secondary`。
-- 未确认日期保持“预计 / 未确认”语义；前瞻日期不能冒充版本上线日期。
+- 未确认日期保持“预计 / 未确认”语义。
 - 已结束卡池不能继续作为当前 UP。
 - 证据不足时保留旧值，而不是让模型猜测。
 

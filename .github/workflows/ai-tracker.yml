@@ -28,6 +28,7 @@ jobs:
       AGENT_SESSION_ID: game-version-tracker-${{ github.run_id }}
       OPENCODE_ZEN_BASE_URL: https://opencode.ai/zen/v1
       OPENCODE_API_KEY: public
+      BILIBILI_COOKIE: ${{ secrets.BILIBILI_COOKIE }}
 
     steps:
       - name: Checkout

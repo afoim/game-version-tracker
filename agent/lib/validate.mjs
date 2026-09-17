@@ -22,6 +22,17 @@ export function validateGame(game, { evidenceUrls = null, requireEvidenceSources
   for (const key of ['current_version', 'next_version', 'preview_status']) {
     assert(typeof game[key] === 'string', `${game.game_name}.${key} 必须是字符串`);
   }
+  for (const key of ['preview_title', 'preview_start_at', 'preview_live_url', 'preview_replay_url']) {
+    assert(game[key] === null || typeof game[key] === 'string', `${game.game_name}.${key} 必须是字符串或 null`);
+  }
+  if (game.preview_start_at !== null) {
+    assert(Number.isFinite(Date.parse(game.preview_start_at)), `${game.game_name}.preview_start_at 必须是有效日期或 null`);
+  }
+  for (const key of ['preview_live_url', 'preview_replay_url']) {
+    if (game[key] !== null) {
+      assert(/^https?:\/\//.test(game[key]), `${game.game_name}.${key} 必须是 HTTP(S) URL 或 null`);
+    }
+  }
   for (const key of ['current_content', 'next_content', 'current_up_characters']) {
     assert(Array.isArray(game[key]), `${game.game_name}.${key} 必须是数组`);
     assert(game[key].every((value) => typeof value === 'string'), `${game.game_name}.${key} 只能包含字符串`);

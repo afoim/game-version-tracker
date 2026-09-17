@@ -14,6 +14,10 @@
         "薇斯纳、沃雅妮莎"
       ],
       "preview_status": "已发布",
+      "preview_title": null,
+      "preview_start_at": null,
+      "preview_live_url": null,
+      "preview_replay_url": null,
       "days_to_next_version": 6,
       "current_up_characters": [
         "菲林斯",
@@ -67,6 +71,10 @@
       "next_version": "4.6",
       "next_content": [],
       "preview_status": "已官宣待发布",
+      "preview_title": null,
+      "preview_start_at": null,
+      "preview_live_url": null,
+      "preview_replay_url": null,
       "days_to_next_version": 11,
       "current_up_characters": [
         "砂金·戏浪",
@@ -129,6 +137,10 @@
       "next_version": "9.1",
       "next_content": [],
       "preview_status": "已发布",
+      "preview_title": null,
+      "preview_start_at": null,
+      "preview_live_url": null,
+      "preview_replay_url": null,
       "days_to_next_version": 7,
       "current_up_characters": [],
       "current_up_start_at": null,
@@ -170,6 +182,10 @@
       "next_version": "3.3",
       "next_content": [],
       "preview_status": "未官宣",
+      "preview_title": null,
+      "preview_start_at": null,
+      "preview_live_url": null,
+      "preview_replay_url": null,
       "days_to_next_version": 34,
       "current_up_characters": [
         "克拉蕾",
@@ -213,6 +229,10 @@
       "next_version": "3.7",
       "next_content": [],
       "preview_status": "已官宣待发布",
+      "preview_title": null,
+      "preview_start_at": null,
+      "preview_live_url": null,
+      "preview_replay_url": null,
       "days_to_next_version": 14,
       "current_up_characters": [
         "景燃",
@@ -272,6 +292,10 @@
         "装备方案等后续优化已预告"
       ],
       "preview_status": "未官宣",
+      "preview_title": null,
+      "preview_start_at": null,
+      "preview_live_url": null,
+      "preview_replay_url": null,
       "days_to_next_version": 27,
       "current_up_characters": [
         "提弗洛斯"
@@ -306,6 +330,10 @@
       "next_version": "1.4",
       "next_content": [],
       "preview_status": "已发布",
+      "preview_title": "《异环》1.4版本「祷歌为谁而诵」前瞻特别节目",
+      "preview_start_at": "2026-09-16T19:30:00+08:00",
+      "preview_live_url": null,
+      "preview_replay_url": "https://www.youtube.com/watch?v=boXt6AVFOHI",
       "days_to_next_version": 7,
       "current_up_characters": [
         "灵可",
@@ -316,16 +344,35 @@
       "current_up_days_remaining": 7,
       "sources": [
         {
-          "title": "《异环》官方网站综合新闻",
-          "url": "https://yh.wanmei.com/m/news/index.html",
+          "title": "《异环》1.4版本前瞻特别节目丨开播预告",
+          "url": "https://www.taptap.cn/moment/847148349596372316",
+          "type": "official_community",
+          "claims": [
+            "next_version",
+            "preview_status",
+            "preview_title",
+            "preview_start_at"
+          ],
+          "checked_at": "2026-09-17T10:08:37.930Z"
+        },
+        {
+          "title": "『NTE』Ver.1.4予告番組",
+          "url": "https://www.youtube.com/watch?v=boXt6AVFOHI",
+          "type": "official_community",
+          "claims": [
+            "preview_replay_url"
+          ],
+          "checked_at": "2026-09-17T10:08:37.930Z"
+        },
+        {
+          "title": "《异环》1.4版本前瞻特别节目 | 情报回顾",
+          "url": "https://yh.wanmei.com/news/gamebroad/20260916/264201.html",
           "type": "official",
           "claims": [
-            "current_version",
-            "current_version_start",
             "next_version",
             "preview_status"
           ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
+          "checked_at": "2026-09-17T18:04:22+08:00"
         },
         {
           "title": "「全频带漫游中！」限定棋盘",
@@ -358,6 +405,10 @@
       "next_version": "2026/09/23 更新（预计）",
       "next_content": [],
       "preview_status": "未官宣",
+      "preview_title": null,
+      "preview_start_at": null,
+      "preview_live_url": null,
+      "preview_replay_url": null,
       "days_to_next_version": 6,
       "current_up_characters": [
         "霞（水着）",
@@ -395,6 +446,10 @@
       "next_version": "09/29 更新（预计）",
       "next_content": [],
       "preview_status": "未官宣",
+      "preview_title": null,
+      "preview_start_at": null,
+      "preview_live_url": null,
+      "preview_replay_url": null,
       "days_to_next_version": 12,
       "current_up_characters": [
         "埃莉诺"

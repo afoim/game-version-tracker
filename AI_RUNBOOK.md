@@ -38,10 +38,13 @@ main-agent 只负责拆分核验目标和生成搜索查询，不直接修改仓
 
 - 官方 API / 官方网站
 - 官方公告 / 官方社区
+- 下一版本前瞻/特别节目的官宣时间、官方直播地址，以及节目结束后的官方录播/回放
 - 现有 `sources`
 - 公开搜索发现的可靠页面
 
-Playwright 读取正文和可用的网络 JSON，并把本轮真实证据交给对应 child-agent。
+Playwright 读取正文和可用的网络 JSON，并把本轮真实证据交给对应 child-agent。无论 main-agent 是否主动生成相关查询，search-worker 都会为每个游戏追加前瞻开播时间与官方录播查询；从官方公告发现 Bilibili / YouTube / Twitch 等视频链接时允许继续读取对应官方视频页。
+
+Bilibili 页面若触发 412 / 风控，优先尝试公开视频 API 元数据；仓库若配置了 `BILIBILI_COOKIE` Actions Secret，则运行时仅将其注入 `.bilibili.com` Cookie Jar 作为页面抓取兜底。Secret 内容不得进入日志、report、evidence 文本或 `sources`。
 
 ## child-agent
 
@@ -56,7 +59,16 @@ Playwright 读取正文和可用的网络 JSON，并把本轮真实证据交给�
 - 证据不足时返回 `verification_status=insufficient`，并保留旧事实。
 - 只有证据明确支持时才允许修改事实字段。
 
-核验内容包括当前版本、当前主要内容、下一版本、前瞻状态、当前 UP / 卡池、相关日期和剩余天数。
+核验内容包括当前版本、当前主要内容、下一版本、前瞻状态、前瞻标题、前瞻开始时间、官方直播地址、官方录播/回放地址、当前 UP / 卡池、相关日期和剩余天数。
+
+前瞻字段：
+
+- `preview_title`: 官方节目标题，未知为 `null`。
+- `preview_start_at`: 带时区 ISO 8601 开播时间，未知为 `null`。
+- `preview_live_url`: 官方直播/预约页，未知为 `null`。
+- `preview_replay_url`: 节目结束后可观看的官方完整录播/回放，未知为 `null`；不得使用第三方搬运、解说或切片。
+- 官方 YouTube Live 在结束后原链接直接成为 VOD 时，`preview_live_url` 与 `preview_replay_url` 可以相同。
+- `preview_status=已发布` 不代表前瞻核验结束；仍必须尝试寻找官方录播。
 
 ## review-agent
 
@@ -68,6 +80,7 @@ review-agent 独立检查整轮候选结果，不修改仓库。
 - JSON 和必填字段是否合法。
 - 已核验候选的 `sources` 是否来自本轮 Playwright 真实读取的 URL。
 - 日期、日期顺序和剩余天数是否合理。
+- 前瞻开播时间是否有时区、是否误当版本上线日期；录播链接是否确为官方账号。
 - 已结束卡池是否错误地继续显示为当前 UP。
 - 所有事实变化是否有 evidence 支持。
 - 是否存在明显幻觉、来源与结论不匹配或把推测写成确认。

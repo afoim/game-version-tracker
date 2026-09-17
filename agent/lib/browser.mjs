@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 const MAX_PAGE_TEXT = Number(process.env.AGENT_MAX_PAGE_TEXT || 7000);
 const MAX_EVIDENCE = Number(process.env.AGENT_MAX_EVIDENCE || 5);
 const NAV_TIMEOUT = Number(process.env.AGENT_NAV_TIMEOUT_MS || 15000);
-const MAX_EXISTING_EVIDENCE = Number(process.env.AGENT_MAX_EXISTING_EVIDENCE || 2);
+const MAX_EXISTING_EVIDENCE = Number(process.env.AGENT_MAX_EXISTING_EVIDENCE || 3);
 
 function cleanText(value) {
   return String(value ?? '')
@@ -86,6 +86,114 @@ function baseDomain(raw) {
   } catch {
     return '';
   }
+}
+
+function isPreviewMediaLink(raw, label = '') {
+  try {
+    const host = new URL(raw).hostname.toLowerCase();
+    const mediaHost =
+      host === 'youtu.be' ||
+      host.endsWith('youtube.com') ||
+      host.endsWith('bilibili.com') ||
+      host.endsWith('twitch.tv');
+    if (!mediaHost) return false;
+    return /前瞻|直播|回放|录播|特別番組|予告番組|生放送|live|youtube|bilibili|twitch/i.test(
+      `${label} ${raw}`,
+    );
+  } catch {
+    return false;
+  }
+}
+
+function youtubeVideoId(raw) {
+  try {
+    const url = new URL(raw);
+    const host = url.hostname.toLowerCase();
+    if (host === 'youtu.be') return url.pathname.split('/').filter(Boolean)[0] || null;
+    if (!host.endsWith('youtube.com')) return null;
+    if (url.searchParams.get('v')) return url.searchParams.get('v');
+    const parts = url.pathname.split('/').filter(Boolean);
+    if (['live', 'shorts', 'embed'].includes(parts[0])) return parts[1] || null;
+  } catch {
+    // Ignore malformed media URLs.
+  }
+  return null;
+}
+
+function bilibiliBvid(raw) {
+  const match = String(raw || '').match(/\b(BV[0-9A-Za-z]+)\b/i);
+  return match ? match[1] : null;
+}
+
+async function fetchMediaMetadata(context, raw, discoveredBy) {
+  const checkedAt = new Date().toISOString();
+  const youtubeId = youtubeVideoId(raw);
+  if (youtubeId) {
+    try {
+      const canonical = `https://www.youtube.com/watch?v=${youtubeId}`;
+      const response = await context.request.get(
+        `https://www.youtube.com/oembed?url=${encodeURIComponent(canonical)}&format=json`,
+        { timeout: NAV_TIMEOUT },
+      );
+      if (response.ok()) {
+        const data = await response.json();
+        return {
+          title: cleanText(data.title || canonical),
+          url: canonical,
+          text: cleanText(
+            JSON.stringify({
+              title: data.title,
+              author_name: data.author_name,
+              author_url: data.author_url,
+              provider_name: data.provider_name,
+            }),
+          ).slice(0, MAX_PAGE_TEXT),
+          http_status: response.status(),
+          checked_at: checkedAt,
+          discovered_by: `media-oembed:${discoveredBy}`,
+        };
+      }
+    } catch {
+      // Fall through to normal page fetching.
+    }
+  }
+
+  const bvid = bilibiliBvid(raw);
+  if (bvid) {
+    try {
+      const canonical = `https://www.bilibili.com/video/${bvid}/`;
+      const response = await context.request.get(
+        `https://api.bilibili.com/x/web-interface/view?bvid=${encodeURIComponent(bvid)}`,
+        { timeout: NAV_TIMEOUT },
+      );
+      if (response.ok()) {
+        const payload = await response.json();
+        if (payload?.code === 0 && payload?.data) {
+          const data = payload.data;
+          return {
+            title: cleanText(data.title || canonical),
+            url: canonical,
+            text: cleanText(
+              JSON.stringify({
+                title: data.title,
+                owner: data.owner ? { mid: data.owner.mid, name: data.owner.name } : null,
+                pubdate: data.pubdate,
+                desc: data.desc,
+                duration: data.duration,
+              }),
+            ).slice(0, MAX_PAGE_TEXT),
+            http_status: response.status(),
+            checked_at: checkedAt,
+            discovered_by: `media-api:${discoveredBy}`,
+          };
+        }
+      }
+    } catch {
+      // Fall through to normal page fetching.
+    }
+  }
+
+  return null;
 }
 
 function gameAnchor(gameName) {
@@ -235,6 +343,22 @@ async function searchDuckDuckGo(page, query) {
     .filter((row) => row.url && allowedResult(row.url));
 }
 
+function parseCookieHeader(raw, domain) {
+  if (!raw) return [];
+  return String(raw)
+    .split(';')
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .flatMap((part) => {
+      const index = part.indexOf('=');
+      if (index <= 0) return [];
+      const name = part.slice(0, index).trim();
+      const value = part.slice(index + 1).trim();
+      if (!name) return [];
+      return [{ name, value, domain, path: '/', secure: true, sameSite: 'Lax' }];
+    });
+}
+
 export async function createEvidenceCollector() {
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
@@ -242,6 +366,11 @@ export async function createEvidenceCollector() {
     userAgent:
       'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36',
   });
+
+  const bilibiliCookies = parseCookieHeader(process.env.BILIBILI_COOKIE, '.bilibili.com');
+  if (bilibiliCookies.length) {
+    await context.addCookies(bilibiliCookies);
+  }
 
   async function search(query) {
     const page = await context.newPage();
@@ -267,6 +396,9 @@ export async function createEvidenceCollector() {
   }
 
   async function fetchPage(url, discoveredBy = 'direct', relevance = null) {
+    const mediaMetadata = await fetchMediaMetadata(context, url, discoveredBy);
+    if (mediaMetadata) return [mediaMetadata];
+
     const page = await context.newPage();
     const networkCandidates = [];
     const pendingNetworkReads = new Set();
@@ -432,8 +564,17 @@ export async function createEvidenceCollector() {
           for (const link of item._links || []) {
             const linkUrl = normalizeUrl(link.url);
             if (!linkUrl || isSearchEngineUrl(linkUrl)) continue;
-            if (baseDomain(linkUrl) !== baseDomain(item.url)) continue;
-            if (!/news|notice|article|detail|info|event|公告|版本|更新|前瞻|お知らせ/i.test(`${link.text || ''} ${linkUrl}`)) continue;
+            const sameSite = baseDomain(linkUrl) === baseDomain(item.url);
+            const previewMedia = isPreviewMediaLink(linkUrl, link.text || '');
+            if (!sameSite && !previewMedia) continue;
+            if (
+              sameSite &&
+              !/news|notice|article|detail|info|event|公告|版本|更新|前瞻|直播|お知らせ|生放送|予告/i.test(
+                `${link.text || ''} ${linkUrl}`,
+              )
+            ) {
+              continue;
+            }
             discoveredLinks.push({
               url: linkUrl,
               discoveredBy: `page-link:${item.url}`,
@@ -455,10 +596,39 @@ export async function createEvidenceCollector() {
     }
 
     const currentVersion = String(currentGame.current_version || '').replace(/[^\p{L}\p{N}./:-]+/gu, ' ').trim();
+    const nextVersion = String(currentGame.next_version || '').replace(/[^\p{L}\p{N}./:-]+/gu, ' ').trim();
     const domainQueries = [...knownDomains]
       .slice(0, 2)
       .map((domain) => `site:${domain} ${assignment.game_name} ${currentVersion}`.trim());
-    const queries = [...domainQueries, ...(assignment.queries || [])].slice(0, 5);
+    const youtubeNames = {
+      原神: 'Genshin Impact',
+      '崩坏：星穹铁道': 'Honkai Star Rail',
+      崩坏3: 'Honkai Impact 3rd',
+      绝区零: 'Zenless Zone Zero',
+      鸣潮: 'Wuthering Waves',
+      '明日方舟：终末地': 'Arknights Endfield',
+      异环: 'NTE',
+      '蔚蓝档案（日服）': 'Blue Archive',
+      '星塔旅人（国服）': 'Stella Sora',
+    };
+    const youtubeName = youtubeNames[assignment.game_name] || assignment.game_name;
+    const previewQueries = assignment.game_name.includes('蔚蓝档案')
+      ? [
+          `ブルーアーカイブ ${nextVersion} 生放送 公式 配信日時`,
+          `site:youtube.com ${youtubeName} ${nextVersion} 生放送 公式`,
+          `site:youtube.com ${youtubeName} ${nextVersion} livestream official`,
+        ]
+      : [
+          `${assignment.game_name} ${nextVersion} 前瞻 直播 开播时间 官方`,
+          `site:bilibili.com/video ${assignment.game_name} ${nextVersion} 前瞻 官方`,
+          `site:youtube.com ${youtubeName} ${nextVersion} preview livestream 予告番組 official`,
+        ];
+    const queries = [
+      ...previewQueries,
+      ...domainQueries.slice(0, 1),
+      ...(assignment.queries || []),
+      ...domainQueries.slice(1),
+    ].slice(0, 5);
     const searchGroups = await Promise.all(
       queries.map(async (query) => ({ query, results: await search(query) })),
     );
