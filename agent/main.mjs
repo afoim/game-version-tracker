@@ -422,21 +422,42 @@ async function writeGithubSummary(report) {
   await appendFile(target, `${lines.join('\n')}\n`, 'utf8');
 }
 
+function refreshSourceTitles(dataset, sourceTitlesByGame) {
+  let changes = 0;
+  for (const game of dataset.games) {
+    const titleMap = sourceTitlesByGame[game.game_name] || {};
+    for (const source of game.sources || []) {
+      const nextTitle = String(titleMap[source.url] || '').trim();
+      if (!nextTitle || nextTitle === source.title) continue;
+      source.title = nextTitle;
+      changes += 1;
+    }
+  }
+  return changes;
+}
+
 async function runMediaOnlyFallback({ currentDataset, runner, reason }) {
   log(`AI provider 不可用，切换 media-only fallback：${reason}`);
   const collector = await createEvidenceCollector();
   try {
+    const refreshedDataset = structuredClone(currentDataset);
     const mediaByGame = {};
+    const sourceTitlesByGame = {};
     for (let index = 0; index < GAME_NAMES.length; index += 1) {
       const gameName = GAME_NAMES[index];
       const currentGame = currentDataset.games.find((game) => game.game_name === gameName);
       const officialMedia = await collector.collectMedia(currentGame);
+      const sourceTitles = await collector.collectSourceTitles(currentGame);
       mediaByGame[gameName] = officialMedia;
+      sourceTitlesByGame[gameName] = sourceTitles;
       log(`[media-only ${index + 1}/${GAME_NAMES.length}] ${gameName}: ${officialMedia.length} 条官方视频`);
     }
 
+    const sourceTitleChanges = refreshSourceTitles(refreshedDataset, sourceTitlesByGame);
+    validateDataset(refreshedDataset);
+
     const { feed: mediaFeed, coverPlan: mediaCoverPlan } = buildMediaFeed({
-      dataset: currentDataset,
+      dataset: refreshedDataset,
       mediaByGame,
       baseUrl: PUBLIC_DATA_BASE_URL,
     });
@@ -446,6 +467,9 @@ async function runMediaOnlyFallback({ currentDataset, runner, reason }) {
     if (!dryRun) {
       mediaCatalogResults = await materializeMediaCovers(mediaFeed, mediaCoverPlan);
       await writeMediaFeed(mediaFeed);
+      if (sourceTitleChanges) {
+        await writeFile(DATA_PATH, `${JSON.stringify(refreshedDataset, null, 2)}\n`, 'utf8');
+      }
     }
 
     const report = {
@@ -462,9 +486,10 @@ async function runMediaOnlyFallback({ currentDataset, runner, reason }) {
       all_verified: false,
       all_children_returned: false,
       insufficient_games: [...GAME_NAMES],
-      dataset_changed: false,
+      dataset_changed: sourceTitleChanges > 0,
       changed_games: [],
       source_migrated_games: [],
+      source_title_changes: sourceTitleChanges,
       preview_media_plan: [],
       preview_media_results: [],
       media_catalog: {
@@ -488,12 +513,13 @@ async function runMediaOnlyFallback({ currentDataset, runner, reason }) {
       review: { approved: true, issues: [], notes: ['AI provider unavailable; deterministic media-only fallback'] },
       children: [],
       evidence: {},
-      proposed_dataset: currentDataset,
+      proposed_dataset: refreshedDataset,
     };
     await writeReport(report);
     await writeGithubSummary(report);
     log(
       `media-only fallback 完成：${mediaFeed.media.items.length} 条媒体；` +
+        `信源标题刷新 ${sourceTitleChanges} 条；` +
         `${dryRun ? 'dry-run 未写文件' : 'media-feed/media 已发布'}。`,
     );
   } finally {
@@ -533,6 +559,7 @@ async function main() {
     collector = await createEvidenceCollector();
     const evidenceByGame = {};
     const mediaByGame = {};
+    const sourceTitlesByGame = {};
     const childResults = [];
     const childReport = [];
 
@@ -544,7 +571,9 @@ async function main() {
       const evidence = await collector.collect(assignment, currentGame);
       evidenceByGame[gameName] = evidence;
       const officialMedia = await collector.collectMedia(currentGame);
+      const sourceTitles = await collector.collectSourceTitles(currentGame);
       mediaByGame[gameName] = officialMedia;
+      sourceTitlesByGame[gameName] = sourceTitles;
       log(
         `[${index + 1}/${GAME_NAMES.length}] ${gameName} 读取 ${evidence.length} 条 Bilibili 官方 evidence、` +
           `${officialMedia.length} 条官方视频；启动 child-agent…`,
@@ -601,6 +630,7 @@ async function main() {
       if (factChanged) changedGames.push(gameName);
       if (sourcesChanged) sourceMigratedGames.push(gameName);
     }
+    const sourceTitleChanges = refreshSourceTitles(proposedDataset, sourceTitlesByGame);
     const mediaPlan = buildPreviewMediaPlan(proposedDataset, evidenceByGame, verifiedGames);
     const { feed: mediaFeed, coverPlan: mediaCoverPlan } = buildMediaFeed({
       dataset: proposedDataset,
@@ -673,6 +703,7 @@ async function main() {
       dataset_changed: datasetChanged,
       changed_games: changedGames,
       source_migrated_games: sourceMigratedGames,
+      source_title_changes: sourceTitleChanges,
       preview_media_plan: mediaPlan.map((entry) => ({
         game_name: entry.game_name,
         dynamic_id: entry.dynamic_id,

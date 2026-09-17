@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { BILIBILI_OFFICIAL_ACCOUNTS } from '../agent/lib/browser.mjs';
+import { BILIBILI_OFFICIAL_ACCOUNTS, summarizeDynamicBody } from '../agent/lib/browser.mjs';
 import { GAME_NAMES, validateDataset } from '../agent/lib/validate.mjs';
 
 const expectedMids = {
@@ -21,6 +21,17 @@ test('fixed official Bilibili accounts exactly match tracked games', () => {
     Object.fromEntries(Object.entries(BILIBILI_OFFICIAL_ACCOUNTS).map(([name, account]) => [name, account.mid])),
     expectedMids,
   );
+});
+
+test('dynamic body fallback produces concise source titles instead of generic official-dynamic labels', () => {
+  assert.equal(
+    summarizeDynamicBody(
+      '#原神#\n「月之一」版本活动祈愿即将开启，旅行者可关注后续角色与武器信息。\n更多详情请见长图。',
+      '原神',
+    ),
+    '「月之一」版本活动祈愿即将开启，旅行者可关注后续角色与武器信息。',
+  );
+  assert.equal(summarizeDynamicBody('原神\n09-18 12:00\n新版本现已开放！', '原神'), '新版本现已开放！');
 });
 
 test('dataset tracks exactly 8 games and contains preview image metadata', async () => {

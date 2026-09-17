@@ -24,6 +24,39 @@ function cleanText(value) {
     .trim();
 }
 
+export function summarizeDynamicBody(value, accountLabel = '') {
+  const label = cleanText(accountLabel);
+  const lines = cleanText(value)
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .filter((line) => line !== label)
+    .filter((line) => !/^https?:\/\//i.test(line))
+    .filter((line) => !/^\d{1,2}-\d{1,2}\s+\d{1,2}:\d{2}$/.test(line));
+
+  const candidates = lines.flatMap((line) =>
+    line
+      .replace(/^#[^#\n]{1,24}#\s*/u, '')
+      .split(/(?<=[。！？!?；;])\s*/u)
+      .map((part) => part.trim())
+      .filter(Boolean),
+  );
+  const picked =
+    candidates.find((part) => part.length >= 8 && /版本|前瞻|角色|活动|祈愿|跃迁|调频|更新|开放|上线|开启|预告/u.test(part)) ||
+    candidates.find((part) => part.length >= 8) ||
+    candidates.find((part) => part.length >= 4) ||
+    '';
+
+  if (!picked) return label ? `${label} · Bilibili` : 'Bilibili 动态';
+  const normalized = picked
+    .replace(/^【([^】]{2,40})】\s*/u, '$1 · ')
+    .replace(/^[\s#｜|·•]+|[\s#｜|·•]+$/gu, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (normalized.length <= 56) return normalized;
+  return `${normalized.slice(0, 55).replace(/[，、：:；;\s]+$/u, '')}…`;
+}
+
 function parseCookieHeader(raw, domain) {
   if (!raw) return [];
   return String(raw)
@@ -184,12 +217,14 @@ function extractImages(item) {
 
 function dynamicTitle(item, account) {
   const archive = extractArchive(item);
-  return cleanText(
-    item?.modules?.module_dynamic?.major?.opus?.title ||
-      archive?.title ||
-      item?.modules?.module_dynamic?.desc?.text ||
-      `${account.label}官方动态`,
-  ).slice(0, 180);
+  const explicitTitle = cleanText(item?.modules?.module_dynamic?.major?.opus?.title || archive?.title || '');
+  if (explicitTitle) return explicitTitle.slice(0, 180);
+  const body = cleanText(
+    item?.modules?.module_dynamic?.desc?.text ||
+      item?.modules?.module_dynamic?.major?.opus?.summary?.text ||
+      dynamicText(item),
+  );
+  return summarizeDynamicBody(body, account.label).slice(0, 180);
 }
 
 export async function createEvidenceCollector() {
@@ -376,6 +411,23 @@ export async function createEvidenceCollector() {
     return evidence;
   }
 
+  async function collectBilibiliOfficialSourceTitles(currentGame) {
+    const account = BILIBILI_OFFICIAL_ACCOUNTS[currentGame.game_name];
+    if (!account) return {};
+    const items = await getBilibiliFeed(account);
+    const titles = {};
+    for (const item of items) {
+      const id = String(item?.id_str || item?.id || '');
+      if (!id) continue;
+      titles[`https://www.bilibili.com/opus/${id}`] = dynamicTitle(item, account);
+      const archive = extractArchive(item);
+      if (archive?.bvid) {
+        titles[`https://www.bilibili.com/video/${archive.bvid}/`] = archive.title;
+      }
+    }
+    return titles;
+  }
+
   async function collectBilibiliOfficialMedia(currentGame) {
     const account = BILIBILI_OFFICIAL_ACCOUNTS[currentGame.game_name];
     if (!account) return [];
@@ -446,6 +498,7 @@ export async function createEvidenceCollector() {
   return {
     collect: (_assignment, currentGame) => collectBilibiliOfficialEvidence(currentGame),
     collectMedia: (currentGame) => collectBilibiliOfficialMedia(currentGame),
+    collectSourceTitles: (currentGame) => collectBilibiliOfficialSourceTitles(currentGame),
     close: () => browser.close(),
   };
 }

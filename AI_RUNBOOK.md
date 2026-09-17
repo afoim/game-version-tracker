@@ -53,6 +53,7 @@ Bilibili 页面/API 若触发 412 / -352 风控，可通过 `BILIBILI_COOKIE` Ac
 - `ui`：服务端驱动页面 section、组件类型、顺序和组件 props。当前生产 Feed 只下发 `game_status_grid` 主 section，并通过 `props.embedded_media` 把官方媒体嵌入对应游戏卡片。
 - `data`：真实游戏数据。
 - `media`：官方视频与封面资源；前端按 `game_name` 与 `embedded_media` 规则过滤到各自游戏卡片。
+- `sources[].title`：优先使用 Bilibili 动态/视频官方标题；动态无标题时从正文提炼简短标题，禁止回退到“XX官方动态”占位文案。
 
 ## child-agent
 

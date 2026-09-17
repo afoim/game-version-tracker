@@ -55,7 +55,9 @@ git commit / push
 
 每个 `data.games[]` 还会额外下发 `icon_url`。8 个游戏图标由后端仓库统一发布在 `data/media/game-icons/`，前端不维护游戏名到图标路径的硬编码映射。
 
-当前生产 UI 只下发一个 `game_status_grid` 主 section，版本状态卡始终是页面主体；官方版本 PV、角色 PV、前瞻节目等媒体通过 `props.embedded_media` 嵌入对应游戏卡片内部。前端只负责解释该配置，不自行决定媒体位置和数量。`media_grid` 解释器仍保留用于协议兼容，但生产 Feed 不再把它作为独立首屏 section。
+当前生产 UI 只下发一个 `game_status_grid` 主 section，版本状态卡始终是页面主体；官方版本 PV、角色 PV、前瞻节目等媒体通过 `props.embedded_media` 嵌入对应游戏卡片内部。版本卡布局只使用 1 / 2 / 4 列，不下发 3 列，避免 8 个游戏在桌面端出现不完整尾行。前端只负责解释该配置，不自行决定媒体位置和数量。`media_grid` 解释器仍保留用于协议兼容，但生产 Feed 不再把它作为独立首屏 section。
+
+Bilibili 动态若有明确标题，`sources[].title` 直接使用官方标题；没有标题时，从动态正文提炼一条不超过约 56 字的可读标题。禁止再用“原神官方动态 / XX官方动态”一类无信息量占位标题。
 
 官方视频采用确定性标题分类，不由模型自由判断：
 
