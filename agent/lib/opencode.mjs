@@ -69,13 +69,13 @@ function createConfig(gatewaySession) {
 }
 
 export async function createLlmRunner() {
-  const cwd = await mkdtemp(path.join(os.tmpdir(), 'game-version-agent-llm-'));
+  const runtimeDir = await mkdtemp(path.join(os.tmpdir(), 'game-version-agent-llm-'));
   const binary = localBinary();
   const gatewaySession = resolveGatewaySession();
-  await writeFile(path.join(cwd, 'opencode.json'), `${JSON.stringify(createConfig(gatewaySession), null, 2)}\n`, 'utf8');
+  const configContent = JSON.stringify(createConfig(gatewaySession));
 
   async function run(prompt, options = {}) {
-    const promptPath = path.join(cwd, `prompt-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
+    const promptPath = path.join(runtimeDir, `prompt-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
     await writeFile(promptPath, String(prompt), 'utf8');
     const args = [
       'run',
@@ -91,11 +91,18 @@ export async function createLlmRunner() {
 
     return new Promise((resolve, reject) => {
       const child = spawn(binary, args, {
-        cwd,
+        // Keep OpenCode inside the checked-out repository. Running it from an
+        // empty temp project can stall while it tries to initialize project
+        // state. The prompt itself remains in a disposable temp directory.
+        cwd: process.cwd(),
         env: {
           ...process.env,
           NO_COLOR: '1',
           OPENCODE_DISABLE_LSP_DOWNLOAD: 'true',
+          // Override only this invocation. This preserves OpenCode's built-in
+          // free-tier transport while explicitly pinning Zen and injecting the
+          // GitHub-run-scoped session header required by this project.
+          OPENCODE_CONFIG_CONTENT: configContent,
         },
         windowsHide: true,
         shell: false,
@@ -146,7 +153,7 @@ export async function createLlmRunner() {
   }
 
   async function close() {
-    await rm(cwd, { recursive: true, force: true });
+    await rm(runtimeDir, { recursive: true, force: true });
   }
 
   return {
