@@ -133,6 +133,8 @@ function extractArchive(item) {
     bvid,
     title: cleanText(archive.title || `Bilibili video ${bvid}`),
     desc: cleanText(archive.desc || ''),
+    cover: archive.cover || null,
+    duration: cleanText(archive.duration_text || archive.duration || ''),
   };
 }
 
@@ -198,6 +200,7 @@ export async function createEvidenceCollector() {
   });
   const bilibiliCookies = parseCookieHeader(process.env.BILIBILI_COOKIE, '.bilibili.com');
   if (bilibiliCookies.length) await context.addCookies(bilibiliCookies);
+  const feedCache = new Map();
 
   async function captureBilibiliFeed(account) {
     const page = await context.newPage();
@@ -263,10 +266,17 @@ export async function createEvidenceCollector() {
     }
   }
 
+  async function getBilibiliFeed(account) {
+    if (!feedCache.has(account.mid)) {
+      feedCache.set(account.mid, captureBilibiliFeed(account));
+    }
+    return feedCache.get(account.mid);
+  }
+
   async function collectBilibiliOfficialEvidence(currentGame) {
     const account = BILIBILI_OFFICIAL_ACCOUNTS[currentGame.game_name];
     if (!account) return [];
-    const items = await captureBilibiliFeed(account);
+    const items = await getBilibiliFeed(account);
     const ranked = items
       .map((item, index) => {
         const text = dynamicText(item);
@@ -315,8 +325,43 @@ export async function createEvidenceCollector() {
     return evidence;
   }
 
+  async function collectBilibiliOfficialMedia(currentGame) {
+    const account = BILIBILI_OFFICIAL_ACCOUNTS[currentGame.game_name];
+    if (!account) return [];
+    const items = await getBilibiliFeed(account);
+    return items
+      .flatMap((item) => {
+        const archive = extractArchive(item);
+        if (!archive) return [];
+        const dynamicId = String(item?.id_str || item?.id || '');
+        const timestamp = dynamicTimestamp(item);
+        const cover = normalizeImageUrl(archive.cover) || extractImages(item)[0] || null;
+        return [
+          {
+            game_name: currentGame.game_name,
+            official_mid: account.mid,
+            official_slug: account.slug,
+            dynamic_id: dynamicId || null,
+            dynamic_url: dynamicId ? `https://www.bilibili.com/opus/${dynamicId}` : null,
+            bvid: archive.bvid,
+            title: archive.title,
+            description: archive.desc,
+            url: `https://www.bilibili.com/video/${archive.bvid}/`,
+            player_url: `https://player.bilibili.com/player.html?bvid=${archive.bvid}`,
+            published_at: timestamp > 0 ? new Date(timestamp * 1000).toISOString() : null,
+            duration: archive.duration || null,
+            remote_cover: cover,
+            text: dynamicText(item),
+          },
+        ];
+      })
+      .sort((a, b) => Date.parse(b.published_at || 0) - Date.parse(a.published_at || 0))
+      .slice(0, 24);
+  }
+
   return {
     collect: (_assignment, currentGame) => collectBilibiliOfficialEvidence(currentGame),
+    collectMedia: (currentGame) => collectBilibiliOfficialMedia(currentGame),
     close: () => browser.close(),
   };
 }

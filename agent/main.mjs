@@ -2,6 +2,7 @@ import { appendFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { BILIBILI_OFFICIAL_ACCOUNTS, createEvidenceCollector } from './lib/browser.mjs';
 import { extractJson } from './lib/json.mjs';
+import { buildMediaFeed, validateMediaFeed } from './lib/media-feed.mjs';
 import { createLlmRunner } from './lib/opencode.mjs';
 import {
   GAME_NAMES,
@@ -339,6 +340,48 @@ async function writeReport(report) {
   await writeFile(REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 }
 
+async function materializeMediaCovers(feed, plan) {
+  await rm(path.join(MEDIA_ROOT, 'catalog'), { recursive: true, force: true });
+  const byId = new Map(feed.media.items.map((item) => [item.id, item]));
+  const results = [];
+
+  for (const item of plan) {
+    const mediaItem = byId.get(item.id);
+    if (!mediaItem) continue;
+    try {
+      const url = new URL(item.remote_url);
+      if (!url.hostname.endsWith('hdslb.com')) throw new Error('非 Bilibili CDN 图片');
+      const response = await fetch(item.remote_url, {
+        headers: {
+          Referer: 'https://www.bilibili.com/',
+          'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/152.0.0.0 Safari/537.36',
+        },
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const bytes = Buffer.from(await response.arrayBuffer());
+      if (!bytes.length || bytes.length > 15 * 1024 * 1024) {
+        throw new Error(`封面大小异常: ${bytes.length}`);
+      }
+      const target = path.join(ROOT, 'data', ...item.relative_path.split('/'));
+      await mkdir(path.dirname(target), { recursive: true });
+      await writeFile(target, bytes);
+      results.push({ id: item.id, published: true, bytes: bytes.length });
+    } catch (error) {
+      mediaItem.poster_url = null;
+      results.push({ id: item.id, published: false, error: error.message });
+    }
+  }
+
+  validateMediaFeed(feed);
+  return results;
+}
+
+async function writeMediaFeed(feed) {
+  validateMediaFeed(feed);
+  await writeFile(path.join(ROOT, 'data', 'media-feed.json'), `${JSON.stringify(feed, null, 2)}\n`, 'utf8');
+}
+
 async function writeGithubSummary(report) {
   const target = process.env.GITHUB_STEP_SUMMARY;
   if (!target) return;
@@ -392,6 +435,7 @@ async function main() {
 
     collector = await createEvidenceCollector();
     const evidenceByGame = {};
+    const mediaByGame = {};
     const childResults = [];
     const childReport = [];
 
@@ -402,7 +446,12 @@ async function main() {
       log(`[${index + 1}/${GAME_NAMES.length}] search-worker 读取 Bilibili 官方账号 ${gameName}…`);
       const evidence = await collector.collect(assignment, currentGame);
       evidenceByGame[gameName] = evidence;
-      log(`[${index + 1}/${GAME_NAMES.length}] ${gameName} 读取 ${evidence.length} 条 Bilibili 官方 evidence；启动 child-agent…`);
+      const officialMedia = await collector.collectMedia(currentGame);
+      mediaByGame[gameName] = officialMedia;
+      log(
+        `[${index + 1}/${GAME_NAMES.length}] ${gameName} 读取 ${evidence.length} 条 Bilibili 官方 evidence、` +
+          `${officialMedia.length} 条官方视频；启动 child-agent…`,
+      );
 
       try {
         const childCall = await callJson(runner, `child-agent:${gameName}`, childPrompt({ assignment, currentGame, evidence }));
@@ -456,7 +505,13 @@ async function main() {
       if (sourcesChanged) sourceMigratedGames.push(gameName);
     }
     const mediaPlan = buildPreviewMediaPlan(proposedDataset, evidenceByGame, verifiedGames);
+    const { feed: mediaFeed, coverPlan: mediaCoverPlan } = buildMediaFeed({
+      dataset: proposedDataset,
+      mediaByGame,
+      baseUrl: PUBLIC_DATA_BASE_URL,
+    });
     validateDataset(proposedDataset);
+    validateMediaFeed(mediaFeed);
 
     const mechanicalIssues = collectReviewIssues({
       currentDataset,
@@ -494,9 +549,13 @@ async function main() {
     const review = reviewCall.value;
     const approved = review?.approved === true && allChildrenReturned && mechanicalIssues.length === 0;
     let mediaResults = [];
+    let mediaCatalogResults = [];
     if (approved && !dryRun) {
       mediaResults = await materializePreviewMedia(proposedDataset, mediaPlan);
       validateDataset(proposedDataset);
+      mediaFeed.data.games = structuredClone(proposedDataset.games);
+      mediaCatalogResults = await materializeMediaCovers(mediaFeed, mediaCoverPlan);
+      validateMediaFeed(mediaFeed);
     }
     const datasetChanged = JSON.stringify(currentDataset) !== JSON.stringify(proposedDataset);
 
@@ -523,12 +582,26 @@ async function main() {
         image_count: entry.items.length,
       })),
       preview_media_results: mediaResults,
+      media_catalog: {
+        item_count: mediaFeed.media.items.length,
+        categories: Object.fromEntries(
+          mediaFeed.media.categories.map((category) => [
+            category.id,
+            mediaFeed.media.items.filter((item) => item.category === category.id).length,
+          ]),
+        ),
+        cover_plan_count: mediaCoverPlan.length,
+        cover_results: mediaCatalogResults,
+      },
       mechanical_issues: mechanicalIssues,
       review,
       children: childReport,
       evidence: evidenceSummary(evidenceByGame),
       proposed_dataset: proposedDataset,
     };
+    if (!dryRun && approved) {
+      await writeMediaFeed(mediaFeed);
+    }
     await writeReport(report);
     await writeGithubSummary(report);
 
@@ -537,7 +610,10 @@ async function main() {
     }
 
     if (!datasetChanged) {
-      log('review-agent 已批准；候选数据与仓库完全一致，不写文件、不产生空提交。');
+      log(
+        `review-agent 已批准；games.json 事实未变化。媒体目录 ${mediaFeed.media.items.length} 条，` +
+          `${dryRun ? 'dry-run 不写文件' : 'media-feed/media 已按需发布'}。`,
+      );
       return;
     }
 

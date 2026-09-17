@@ -1,6 +1,6 @@
 # AI_RUNBOOK
 
-本仓库由 `.github/workflows/ai-tracker.yml` 定时维护 `data/games.json` 与 `data/media/**`。
+本仓库由 `.github/workflows/ai-tracker.yml` 定时维护 `data/games.json`、`data/media-feed.json` 与 `data/media/**`。
 
 ## 执行链
 
@@ -10,7 +10,7 @@ GitHub Actions
   -> Playwright search-worker
   -> 8 个 child-agent
   -> review-agent
-  -> approved 后写 data/games.json + data/media/**
+  -> approved 后写 games.json + media-feed.json + media/**
   -> git commit / push
 ```
 
@@ -38,6 +38,19 @@ main-agent 只负责拆分核验目标，不直接修改仓库，也不生成搜
 不会使用官网、TapTap、微博、HoYoLAB、YouTube、新闻站或第三方搬运作为新一轮事实来源。历史非 Bilibili `sources` 仅作为旧数据留存，待该游戏下一次 verified 后由 Bilibili 官方来源替换。
 
 Bilibili 页面/API 若触发 412 / -352 风控，可通过 `BILIBILI_COOKIE` Actions Secret 注入 `.bilibili.com` Cookie Jar。Secret 内容不得进入日志、report、evidence 文本或 `sources`。登录态不可用时该游戏安全降级为 `insufficient`，不回退其他平台。
+
+同一次官方空间读取同时产生两类结果：
+
+- evidence：送给 child-agent 做版本事实核验。
+- media catalog：不交给模型自由分类，直接从官方视频标题确定 `version_pv` / `character_pv` / `preview_program` / `short_film` / `promotional_pv`。
+
+媒体目录写入 `data/media-feed.json`。视频地址保持官方 Bilibili，封面复制到 `data/media/catalog/` 后发布本站 URL。
+
+`media-feed.json` schema v2 顶层固定为：
+
+- `ui`：服务端驱动页面 section、组件类型、顺序、筛选项和组件 props。
+- `data`：真实游戏数据。
+- `media`：官方视频与封面资源。
 
 ## child-agent
 
@@ -90,7 +103,7 @@ orchestrator 合并 `verified` 的可靠事实变化；同时允许在事实不�
 - review-agent 未批准时不得写 `data/games.json`。
 - review-agent 批准后才允许写入。
 - Action 在提交前再次运行数据校验。
-- Action 只接受 `data/games.json` 与 `data/media/**` 的数据变更；`data/` 下出现其他变化立即失败。
+- Action 只接受 `data/games.json`、`data/media-feed.json` 与 `data/media/**` 的数据变更；`data/` 下出现其他变化立即失败。
 - 没有数据变化时不 commit。
 - 有变化时使用 `github-actions[bot]` commit，并在 push 前 fetch/rebase 最新 `master`；禁止 force push。
 

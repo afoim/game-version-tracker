@@ -1,0 +1,238 @@
+const CATEGORY_LABELS = {
+  version_pv: '版本 PV',
+  character_pv: '角色 PV',
+  preview_program: '版本前瞻',
+  short_film: '动画短片',
+  promotional_pv: '宣传影像',
+};
+
+export const MEDIA_CATEGORIES = Object.freeze(Object.keys(CATEGORY_LABELS));
+
+function assert(condition, message) {
+  if (!condition) throw new Error(message);
+}
+
+function normalizeText(value) {
+  return String(value || '')
+    .normalize('NFKC')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function imageExtension(rawUrl) {
+  try {
+    const match = new URL(rawUrl).pathname.match(/\.(jpg|jpeg|png|webp|avif)$/i);
+    if (match) return `.${match[1].toLowerCase()}`;
+  } catch {
+    // Fall through to jpg.
+  }
+  return '.jpg';
+}
+
+export function classifyOfficialMedia(item) {
+  const title = normalizeText(item?.title);
+
+  if (/前瞻|特别节目|特別番組|通讯|生放送|予告番組/i.test(title)) {
+    return 'preview_program';
+  }
+  if (
+    /(?:\d+(?:\.\d+)+\s*版本[^\n]{0,24}PV)|版本\s*PV|版本宣传(?:片|PV)|版本预告(?:片|PV)|Version\s*\d+(?:\.\d+)+[^\n]{0,24}(?:Trailer|PV)/i.test(
+      title,
+    )
+  ) {
+    return 'version_pv';
+  }
+  if (/角色\s*PV|角色演示|角色展示|角色预告|角色介绍[^\n]{0,12}PV|角色动画短片/i.test(title)) {
+    return 'character_pv';
+  }
+  if (/动画短片|动画\s*CM|剧情短片|角色短片|特别动画/i.test(title)) {
+    return 'short_film';
+  }
+  if (/\bPV\b|宣传\s*PV|概念\s*PV|预告片|Trailer/i.test(title)) {
+    return 'promotional_pv';
+  }
+  return null;
+}
+
+function mediaItem(candidate, game, baseUrl) {
+  const category = classifyOfficialMedia(candidate);
+  if (!category) return null;
+  const slug = candidate.official_slug;
+  const coverRelativePath = candidate.remote_cover
+    ? `media/catalog/${slug}/${candidate.bvid}${imageExtension(candidate.remote_cover)}`
+    : null;
+  const version = normalizeText(candidate.title).match(/(\d+(?:\.\d+)+)\s*版本/)?.[1] || null;
+
+  return {
+    id: `${slug}:${candidate.bvid}`,
+    game_name: game.game_name,
+    category,
+    category_label: CATEGORY_LABELS[category],
+    title: candidate.title,
+    description: candidate.description || null,
+    version,
+    bvid: candidate.bvid,
+    published_at: candidate.published_at,
+    duration: candidate.duration || null,
+    url: candidate.url,
+    player_url: candidate.player_url,
+    poster_url: coverRelativePath ? `${baseUrl}/${coverRelativePath}` : null,
+    source: {
+      platform: 'bilibili',
+      official_mid: candidate.official_mid,
+      dynamic_url: candidate.dynamic_url,
+    },
+    _remote_cover: candidate.remote_cover || null,
+    _cover_relative_path: coverRelativePath,
+  };
+}
+
+function publicMediaItem(item) {
+  const clone = { ...item };
+  delete clone._remote_cover;
+  delete clone._cover_relative_path;
+  return clone;
+}
+
+export function buildMediaFeed({ dataset, mediaByGame, baseUrl, generatedAt = null }) {
+  const normalizedBaseUrl = String(baseUrl).replace(/\/$/, '');
+  const allItems = [];
+  const coverPlan = [];
+
+  for (const game of dataset.games) {
+    const candidates = mediaByGame[game.game_name] || [];
+    const seen = new Set();
+    let accepted = 0;
+    for (const candidate of candidates) {
+      if (!candidate?.bvid || seen.has(candidate.bvid)) continue;
+      seen.add(candidate.bvid);
+      const item = mediaItem(candidate, game, normalizedBaseUrl);
+      if (!item) continue;
+      allItems.push(item);
+      if (item._remote_cover && item._cover_relative_path) {
+        coverPlan.push({
+          id: item.id,
+          remote_url: item._remote_cover,
+          relative_path: item._cover_relative_path,
+          public_url: item.poster_url,
+        });
+      }
+      accepted += 1;
+      if (accepted >= 8) break;
+    }
+  }
+
+  allItems.sort((a, b) => Date.parse(b.published_at || 0) - Date.parse(a.published_at || 0));
+  const items = allItems.slice(0, 48).map(publicMediaItem);
+  const allowedIds = new Set(items.map((item) => item.id));
+  const filteredPlan = coverPlan.filter((item) => allowedIds.has(item.id));
+  const timestamps = [
+    ...items.map((item) => Date.parse(item.published_at || 0)),
+    ...dataset.games.flatMap((game) =>
+      (game.sources || []).map((source) => Date.parse(source.checked_at || 0)),
+    ),
+  ].filter(Number.isFinite);
+  const resolvedGeneratedAt = generatedAt ||
+    (timestamps.length ? new Date(Math.max(...timestamps)).toISOString() : new Date(0).toISOString());
+
+  const feed = {
+    schema_version: 2,
+    generated_at: resolvedGeneratedAt,
+    ui: {
+      page: {
+        title: '游戏资讯',
+        subtitle: '官方版本动态、角色 PV、版本 PV 与前瞻节目',
+        max_width: '7xl',
+        density: 'compact',
+      },
+      sections: [
+        {
+          id: 'official-media',
+          component: 'media_grid',
+          source: 'media.items',
+          title: '官方影像',
+          description: '由各游戏 Bilibili 官方账号直接发布',
+          props: {
+            show_filters: true,
+            categories: MEDIA_CATEGORIES,
+            category_order: ['version_pv', 'character_pv', 'preview_program', 'short_film', 'promotional_pv'],
+            columns: { base: 1, md: 2, xl: 3 },
+            limit: 24,
+            media_aspect_ratio: '16:9',
+            empty_text: '暂未获取到符合规则的官方影像',
+          },
+        },
+        {
+          id: 'game-status',
+          component: 'game_status_grid',
+          source: 'data.games',
+          title: '版本状态',
+          description: '当前版本、下版本、前瞻与当期 UP',
+          props: {
+            columns: { base: 1, md: 2, xl: 3 },
+            show_preview: true,
+            show_up: true,
+            show_sources: true,
+          },
+        },
+      ],
+      components: {
+        media_card: {
+          image_field: 'poster_url',
+          title_field: 'title',
+          eyebrow_field: 'category_label',
+          meta_fields: ['game_name', 'published_at', 'duration'],
+          primary_action: { label: '在 Bilibili 观看', field: 'url' },
+          player_field: 'player_url',
+        },
+        game_status_card: {
+          title_field: 'game_name',
+          current_version_field: 'current_version',
+          next_version_field: 'next_version',
+          preview_fields: ['preview_status', 'preview_title', 'preview_start_at', 'preview_live_url', 'preview_replay_url'],
+          up_fields: ['current_up_characters', 'current_up_start_at', 'current_up_end_at'],
+        },
+      },
+    },
+    data: {
+      games: structuredClone(dataset.games),
+    },
+    media: {
+      categories: MEDIA_CATEGORIES.map((id) => ({ id, label: CATEGORY_LABELS[id] })),
+      items,
+    },
+  };
+
+  validateMediaFeed(feed);
+  return { feed, coverPlan: filteredPlan };
+}
+
+export function validateMediaFeed(feed) {
+  assert(feed && typeof feed === 'object', 'media-feed 必须是对象');
+  assert(feed.schema_version === 2, 'media-feed.schema_version 必须为 2');
+  assert(typeof feed.generated_at === 'string' && Number.isFinite(Date.parse(feed.generated_at)), 'media-feed.generated_at 非法');
+  assert(feed.ui && typeof feed.ui === 'object', 'media-feed.ui 缺失');
+  assert(Array.isArray(feed.ui.sections) && feed.ui.sections.length > 0, 'media-feed.ui.sections 缺失');
+  const components = new Set(['media_grid', 'game_status_grid']);
+  for (const section of feed.ui.sections) {
+    assert(typeof section.id === 'string' && section.id, 'media-feed section.id 非法');
+    assert(components.has(section.component), `未知 UI component: ${section.component}`);
+    assert(typeof section.source === 'string' && section.source, `section ${section.id} source 非法`);
+  }
+  assert(Array.isArray(feed.data?.games), 'media-feed.data.games 必须是数组');
+  assert(Array.isArray(feed.media?.items), 'media-feed.media.items 必须是数组');
+  const ids = new Set();
+  for (const item of feed.media.items) {
+    assert(typeof item.id === 'string' && item.id, 'media item.id 非法');
+    assert(!ids.has(item.id), `media item.id 重复: ${item.id}`);
+    ids.add(item.id);
+    assert(MEDIA_CATEGORIES.includes(item.category), `media category 非法: ${item.category}`);
+    assert(typeof item.title === 'string' && item.title, `${item.id} title 非法`);
+    assert(/^https:\/\/www\.bilibili\.com\/video\/BV/.test(item.url), `${item.id} 视频 URL 非官方 Bilibili video`);
+    assert(/^https:\/\/player\.bilibili\.com\//.test(item.player_url), `${item.id} player_url 非法`);
+    if (item.poster_url !== null) assert(/^https?:\/\//.test(item.poster_url), `${item.id} poster_url 非法`);
+    assert(item.source?.platform === 'bilibili', `${item.id} source.platform 非法`);
+    assert(typeof item.source?.official_mid === 'string' && item.source.official_mid, `${item.id} official_mid 缺失`);
+  }
+  return true;
+}

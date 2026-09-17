@@ -1,6 +1,6 @@
 # Game Version Tracker
 
-由 GitHub Actions 定时运行的 AI Agent 游戏版本维护仓库。唯一发布数据文件是 `data/games.json`。
+由 GitHub Actions 定时运行的 AI Agent 游戏版本维护仓库。发布 `data/games.json`、`data/media-feed.json` 与 `data/media/**`。
 
 ## 维护游戏
 
@@ -21,7 +21,7 @@ GitHub Actions
     v
 main-agent
     |
-    +---- child-agent × 9
+    +---- child-agent × 8
     |         |
     |         v
     |    search-worker / Playwright
@@ -30,7 +30,7 @@ main-agent
 review-agent
     |
     v
-approved ? data/games.json : 保留旧数据
+approved ? games.json + media-feed.json + media/* : 保留旧数据
     |
     v
 git commit / push
@@ -42,7 +42,27 @@ git commit / push
 - `review-agent` 独立检查结构、来源、日期、变化证据和明显幻觉风险。
 - 某个游戏证据不足时安全降级：保留该游戏旧事实，继续审核其他游戏，不猜测数据。
 - 只有 review-agent 批准的可靠事实变化才会写入 `data/games.json`。
-- GitHub Actions 只允许提交 `data/games.json` 与 `data/media/**`；没有变化时不创建空提交。
+- GitHub Actions 只允许提交 `data/games.json`、`data/media-feed.json` 与 `data/media/**`；没有变化时不创建空提交。
+
+## 服务端驱动媒体 Feed
+
+`data/media-feed.json` 是前端的新入口，schema v2 顶层固定为三部分：
+
+- `ui`：服务端决定 section 顺序、组件类型、字段绑定、筛选项、列数和展示开关。
+- `data`：真实游戏版本数据，当前直接包含完整 `games` 数据。
+- `media`：从固定 Bilibili 官方账号动态中提取的官方视频资源。
+
+当前 UI 组件协议包括 `media_grid` 与 `game_status_grid`。前端只负责解释这些组件，不自行决定“先展示 PV 还是版本状态”。
+
+官方视频采用确定性标题分类，不由模型自由判断：
+
+- `version_pv`：版本 PV / 版本宣传片 / Version Trailer。
+- `character_pv`：角色 PV / 角色演示 / 角色展示。
+- `preview_program`：版本前瞻 / 特别节目 / 前瞻通讯。
+- `short_film`：动画短片 / 剧情短片等。
+- `promotional_pv`：其他官方 PV / Trailer。
+
+视频本体始终指向官方 Bilibili；封面从 Bilibili CDN 下载到 `data/media/catalog/<game>/<bvid>.*` 后再由本站提供，避免前端直接热链封面。
 
 ## AI
 
