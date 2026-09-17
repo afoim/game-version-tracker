@@ -111,51 +111,77 @@ export function collectReviewIssues({ currentDataset, proposedDataset, childResu
   for (const gameName of GAME_NAMES) {
     const child = childResults.find((item) => item?.game_name === gameName);
     const evidence = evidenceByGame[gameName] || [];
-    const candidate = proposedDataset.games.find((game) => game.game_name === gameName);
+    const proposedGame = proposedDataset.games.find((game) => game.game_name === gameName);
+    const currentGame = currentDataset.games.find((game) => game.game_name === gameName);
 
     if (!child) {
       issues.push(`${gameName}: 缺少 child-agent 结果`);
       continue;
     }
-    if (child.verification_status !== 'verified') {
-      issues.push(`${gameName}: child-agent 未完成可靠核验 (${child.verification_status || 'unknown'})`);
-    }
-    if (evidence.length === 0) {
-      issues.push(`${gameName}: 没有本轮 Playwright 成功读取的外部来源`);
-    }
-    if (!candidate) {
+    if (!proposedGame || !currentGame) {
       issues.push(`${gameName}: 候选数据缺失`);
       continue;
     }
 
-    const evidenceUrls = new Set(evidence.map((item) => item.url));
-    try {
-      validateGame(candidate, { evidenceUrls, requireEvidenceSources: true });
-    } catch (error) {
-      issues.push(`${gameName}: ${error.message}`);
+    const verified = child.verification_status === 'verified';
+    const reviewCandidate = verified ? child.candidate : currentGame;
+
+    if (verified) {
+      if (evidence.length === 0) {
+        issues.push(`${gameName}: child-agent 标记 verified，但没有本轮 Playwright 成功读取的外部来源`);
+      }
+      const evidenceUrls = new Set(evidence.map((item) => item.url));
+      try {
+        validateGame(reviewCandidate, { evidenceUrls, requireEvidenceSources: true });
+      } catch (error) {
+        issues.push(`${gameName}: ${error.message}`);
+      }
+    } else if (child.verification_status === 'insufficient') {
+      // Evidence can legitimately be unavailable or too weak for a single game.
+      // Safe degradation means that game must remain byte-for-byte factual old
+      // data; it must not block reliable updates for other games.
+      if (hasMeaningfulChange(currentGame, proposedGame)) {
+        issues.push(`${gameName}: 证据不足时 proposedDataset 不得修改旧事实`);
+      }
+      if (child.changed) {
+        issues.push(`${gameName}: 证据不足时 child-agent 不得声明 changed=true`);
+      }
+      try {
+        validateGame(proposedGame);
+      } catch (error) {
+        issues.push(`${gameName}: ${error.message}`);
+      }
+    } else {
+      issues.push(`${gameName}: 非法 verification_status=${child.verification_status || 'unknown'}`);
     }
 
-    const start = parseDate(candidate.current_up_start_at);
-    const end = parseDate(candidate.current_up_end_at);
+    const start = parseDate(reviewCandidate.current_up_start_at);
+    const end = parseDate(reviewCandidate.current_up_end_at);
     if (Number.isNaN(start)) issues.push(`${gameName}: current_up_start_at 不是有效日期`);
     if (Number.isNaN(end)) issues.push(`${gameName}: current_up_end_at 不是有效日期`);
     if (Number.isFinite(start) && Number.isFinite(end) && end <= start) {
       issues.push(`${gameName}: 当前 UP 结束时间不晚于开始时间`);
     }
-    if (candidate.current_up_characters.length > 0 && Number.isFinite(end) && end < now - 60 * 60 * 1000) {
+    if (reviewCandidate.current_up_characters.length > 0 && Number.isFinite(end) && end < now - 60 * 60 * 1000) {
       issues.push(`${gameName}: 当前 UP 已明显结束但仍保留角色`);
     }
-    if (Number.isFinite(end) && candidate.current_up_days_remaining !== null) {
+    if (Number.isFinite(end) && reviewCandidate.current_up_days_remaining !== null) {
       const expected = Math.max(0, Math.ceil((end - now) / 86400000));
-      if (Math.abs(candidate.current_up_days_remaining - expected) > 1) {
-        issues.push(`${gameName}: current_up_days_remaining=${candidate.current_up_days_remaining} 与结束时间推算值 ${expected} 明显不一致`);
+      if (Math.abs(reviewCandidate.current_up_days_remaining - expected) > 1) {
+        issues.push(`${gameName}: current_up_days_remaining=${reviewCandidate.current_up_days_remaining} 与结束时间推算值 ${expected} 明显不一致`);
       }
     }
 
-    const currentGame = currentDataset.games.find((game) => game.game_name === gameName);
-    const factChanged = currentGame ? hasMeaningfulChange(currentGame, candidate) : true;
+    const factChanged = hasMeaningfulChange(currentGame, reviewCandidate);
     if (Boolean(child.changed) !== factChanged) {
       issues.push(`${gameName}: child-agent changed 标记与实际事实差异不一致`);
+    }
+
+    if (verified && factChanged && hasMeaningfulChange(proposedGame, reviewCandidate)) {
+      issues.push(`${gameName}: 已核验的事实变化没有正确合并到 proposedDataset`);
+    }
+    if ((!verified || !factChanged) && hasMeaningfulChange(currentGame, proposedGame)) {
+      issues.push(`${gameName}: 没有已核验事实变化时 proposedDataset 不得修改旧事实`);
     }
   }
 

@@ -195,9 +195,10 @@ async function main() {
       const currentGame = currentDataset.games.find((game) => game.game_name === gameName);
       const result = childResults.find((item) => item.game_name === gameName);
       if (!result || result.verification_status !== 'verified') continue;
+      if (!hasMeaningfulChange(currentGame, result.candidate)) continue;
       const index = proposedDataset.games.findIndex((game) => game.game_name === gameName);
       proposedDataset.games[index] = result.candidate;
-      if (hasMeaningfulChange(currentGame, result.candidate)) changedGames.push(gameName);
+      changedGames.push(gameName);
     }
     validateDataset(proposedDataset);
 
@@ -211,8 +212,18 @@ async function main() {
       const child = childResults.find((item) => item.game_name === gameName);
       return child?.verification_status === 'verified' && (evidenceByGame[gameName] || []).length > 0;
     });
+    const allChildrenReturned = GAME_NAMES.every((gameName) => {
+      const child = childReport.find((item) => item.game_name === gameName);
+      return child && child.cli_session;
+    });
+    const insufficientGames = childReport
+      .filter((item) => item.verification_status === 'insufficient')
+      .map((item) => item.game_name);
 
-    log(`9 个 child-agent 均已返回；all_verified=${allVerified}；启动独立 review-agent…`);
+    log(
+      `child-agent 调用完整=${allChildrenReturned}；all_verified=${allVerified}；` +
+        `安全降级=${insufficientGames.length ? insufficientGames.join('、') : '无'}；启动独立 review-agent…`,
+    );
     const reviewCall = await callJson(
       runner,
       'review-agent',
@@ -225,7 +236,7 @@ async function main() {
       }),
     );
     const review = reviewCall.value;
-    const approved = review?.approved === true && allVerified && mechanicalIssues.length === 0;
+    const approved = review?.approved === true && allChildrenReturned && mechanicalIssues.length === 0;
     const datasetChanged = JSON.stringify(currentDataset) !== JSON.stringify(proposedDataset);
 
     const report = {
@@ -240,6 +251,8 @@ async function main() {
       dry_run: dryRun,
       approved,
       all_verified: allVerified,
+      all_children_returned: allChildrenReturned,
+      insufficient_games: insufficientGames,
       dataset_changed: datasetChanged,
       changed_games: changedGames,
       mechanical_issues: mechanicalIssues,

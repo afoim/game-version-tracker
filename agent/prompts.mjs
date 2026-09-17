@@ -87,10 +87,13 @@ export function reviewPrompt({ currentDataset, proposedDataset, childResults, ev
 必须检查：
 1. JSON/对象结构是否完整，9 个游戏是否齐全且没有重复。
 2. 必填字段是否存在且类型合理。
-3. 每个 candidate.sources 是否都对应本轮 Playwright 实际读取成功的网页；来源是否真的存在。
+3. 对 verification_status=verified 的 child-agent，candidate.sources 必须都对应本轮 Playwright 实际读取成功的网页；来源必须真的存在。
 4. 日期是否可解析、顺序是否合理、当前卡池是否已经明显过期、剩余天数是否明显不合理。
 5. 所有事实变化是否能从对应 evidence 支持；发现明显幻觉、把推测写成确认、来源与结论不匹配时必须拒绝。
-6. 任一游戏没有本轮有效证据，或者 child-agent 返回 insufficient，都必须拒绝整批写入。
+6. verification_status=insufficient 是允许的安全降级：说明 search-worker 已尝试核验但证据不足。此时该游戏必须保留 currentDataset 的旧事实，不能因为证据不足而猜测或改值；它本身不应导致整批拒绝。
+7. 只有以下情况需要拒绝整批：缺少 child-agent 结果、verified 结果没有真实 evidence、insufficient 游戏却修改了旧事实、可靠变化缺少来源支持、结构/日期明显错误、或存在明显幻觉。
+
+重要：proposedDataset 只合并“verified 且有实质事实变化”的 candidate。verified 但事实没变时，允许 proposedDataset 保留旧 sources/checked_at，从而避免每天仅因核验时间刷新就产生无意义提交。insufficient 游戏同样必须完整保留旧数据。
 
 程序化预审发现的问题：
 ${json(mechanicalIssues)}
@@ -107,7 +110,7 @@ ${json(evidenceSummary)}
 orchestrator 合并后的候选数据：
 ${json(proposedDataset)}
 
-不要因为“看起来可能正确”就批准。只有证据足够、结构完整、没有明显幻觉时才 approved=true。
+不要因为“看起来可能正确”就批准变化；但也不要因为某个游戏诚实返回 insufficient 就否决其他游戏的可靠更新。只要所有不确定游戏都安全保留旧事实、所有被合并的变化都有证据、结构完整且没有明显幻觉，就可以 approved=true。
 
 只返回严格 JSON，不要 Markdown：
 {
