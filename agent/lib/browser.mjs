@@ -36,7 +36,13 @@ function unwrapDuckDuckGo(raw) {
 
 function allowedResult(url) {
   try {
-    const host = new URL(url).hostname.toLowerCase();
+    const parsed = new URL(url);
+    const host = parsed.hostname.toLowerCase();
+    // Bing wraps external results in /ck/a redirect links. Keep those search
+    // candidates so Playwright can follow them to the actual source page.
+    if ((host === 'bing.com' || host === 'www.bing.com') && parsed.pathname.startsWith('/ck/a')) {
+      return true;
+    }
     return ![
       'bing.com',
       'www.bing.com',
@@ -47,6 +53,22 @@ function allowedResult(url) {
     ].includes(host);
   } catch {
     return false;
+  }
+}
+
+function isSearchEngineUrl(raw) {
+  try {
+    const host = new URL(raw).hostname.toLowerCase();
+    return [
+      'bing.com',
+      'www.bing.com',
+      'duckduckgo.com',
+      'www.duckduckgo.com',
+      'google.com',
+      'www.google.com',
+    ].includes(host);
+  } catch {
+    return true;
   }
 }
 
@@ -108,12 +130,31 @@ export async function createEvidenceCollector() {
         waitUntil: 'domcontentloaded',
         timeout: NAV_TIMEOUT,
       });
-      await page.waitForTimeout(500);
+      // Static pages are available immediately; hydrated official game sites can
+      // need a few seconds before article text appears.
+      await page
+        .waitForFunction(() => (document.body?.innerText || '').trim().length >= 80, null, { timeout: 5000 })
+        .catch(() => {});
       const status = response?.status() ?? null;
       const title = cleanText(await page.title());
       const text = cleanText(await page.locator('body').innerText({ timeout: 5000 }).catch(() => ''));
       const finalUrl = normalizeUrl(page.url()) || normalizeUrl(url);
-      if (!finalUrl || text.length < 80 || (status !== null && status >= 400)) return null;
+      const blockText = text.slice(0, 1200).toLowerCase();
+      const looksBlocked =
+        blockText.includes('access denied') ||
+        blockText.includes('verify you are human') ||
+        blockText.includes('captcha') ||
+        blockText.includes('请求被拒绝') ||
+        blockText.includes('访问被拒绝');
+      if (
+        !finalUrl ||
+        isSearchEngineUrl(finalUrl) ||
+        text.length < 80 ||
+        looksBlocked ||
+        (status !== null && status >= 400)
+      ) {
+        return null;
+      }
       return {
         title: title || finalUrl,
         url: finalUrl,

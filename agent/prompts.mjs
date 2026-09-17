@@ -67,7 +67,7 @@ ${json(evidenceForModel)}
 - url 和 checked_at 必须逐字复制对应 evidence。
 - type 只能是 official_api / official / official_community / secondary。
 - claims 只写该网页实际支持的字段。
-- 如果 evidence 为空，verification_status 必须是 insufficient，并原样返回当前 candidate。
+- verification_status=verified 只表示“本轮证据确实对这个游戏的当前版本/更新、下一版本/前瞻、当前 UP 中至少一个核心事实完成了有效核验”；只有打开了网页但内容无关、过旧或无法支撑任何核心事实时，也必须返回 insufficient。evidence 为空时同样必须返回 insufficient，并原样返回当前 candidate。
 
 candidate 必须是该游戏完整对象，保留当前对象已有的全部前端字段，不得增加解释性字段。changed 表示除 sources/checked_at 外是否有事实变化。
 
