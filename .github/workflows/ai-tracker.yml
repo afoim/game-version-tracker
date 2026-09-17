@@ -1,0 +1,69 @@
+name: AI Game Version Tracker
+
+on:
+  schedule:
+    - cron: '15 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: game-version-tracker-ai
+  cancel-in-progress: false
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      AGENT_DRY_RUN: 'true'
+      AGENT_MODEL: muse-spark-1.3-contributor-free
+      AGENT_SESSION_ID: game-version-tracker-${{ github.run_id }}
+      OPENCODE_ZEN_BASE_URL: https://opencode.ai/zen/v1
+      OPENCODE_API_KEY: public
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Cache node_modules
+        id: node-modules-cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node22-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Node dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Cache Playwright Chromium
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Chromium system dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate current dataset
+        run: npm run validate
+
+      - name: Run AI tracker dry-run
+        run: npm run agent:dry
+
+      - name: Upload AI report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-tracker-report-${{ github.run_id }}
+          path: agent-output/
+          if-no-files-found: warn
+          retention-days: 14

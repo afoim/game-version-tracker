@@ -1,0 +1,15 @@
+{
+  "name": "game-version-tracker-agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "agent": "node agent/main.mjs",
+    "agent:dry": "node agent/main.mjs --dry-run",
+    "validate": "node agent/validate-data.mjs"
+  },
+  "dependencies": {
+    "opencode-ai": "1.18.12",
+    "playwright": "1.63.0"
+  }
+}
