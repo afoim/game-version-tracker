@@ -282,6 +282,24 @@ function normalizeChildResult(result, gameName, currentGame, evidence) {
     };
   }
 
+  const evidenceByUrl = new Map(evidence.map((item) => [item.url, item]));
+  result.candidate.sources = (result.candidate.sources || [])
+    .flatMap((source) => {
+      const item = evidenceByUrl.get(source?.url);
+      if (!item) return [];
+      return [
+        {
+          title: item.title || item.url,
+          url: item.url,
+          type: 'official_community',
+          claims: Array.isArray(source.claims)
+            ? source.claims.filter((claim) => typeof claim === 'string')
+            : [],
+          checked_at: item.checked_at,
+        },
+      ];
+    });
+
   const guard = enforceBilibiliEvidence(currentGame, result.candidate, evidence);
   result.candidate = guard.candidate;
   if (guard.reverted.length) {
