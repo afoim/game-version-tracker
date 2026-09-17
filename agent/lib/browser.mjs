@@ -201,6 +201,7 @@ export async function createEvidenceCollector() {
   const bilibiliCookies = parseCookieHeader(process.env.BILIBILI_COOKIE, '.bilibili.com');
   if (bilibiliCookies.length) await context.addCookies(bilibiliCookies);
   const feedCache = new Map();
+  const videoFeedCache = new Map();
 
   async function captureBilibiliFeed(account) {
     const page = await context.newPage();
@@ -273,6 +274,56 @@ export async function createEvidenceCollector() {
     return feedCache.get(account.mid);
   }
 
+  async function captureBilibiliVideoUploads(account) {
+    const page = await context.newPage();
+    const videosByBvid = new Map();
+    const pending = new Set();
+    const onResponse = (response) => {
+      const task = (async () => {
+        try {
+          const url = new URL(response.url());
+          if (
+            !url.hostname.endsWith('bilibili.com') ||
+            url.pathname !== '/x/space/wbi/arc/search' ||
+            url.searchParams.get('mid') !== String(account.mid) ||
+            response.status() >= 400
+          ) return;
+          const payload = await response.json().catch(() => null);
+          const videos = payload?.code === 0 ? payload?.data?.list?.vlist : null;
+          if (!Array.isArray(videos)) return;
+          for (const video of videos) {
+            const bvid = cleanText(video?.bvid || '');
+            if (bvid) videosByBvid.set(bvid, video);
+          }
+        } catch {
+          // Keep already captured upload pages when one response is blocked/malformed.
+        }
+      })();
+      pending.add(task);
+      task.finally(() => pending.delete(task));
+    };
+    page.on('response', onResponse);
+    try {
+      await page.goto(`https://space.bilibili.com/${account.mid}/upload/video`, {
+        waitUntil: 'domcontentloaded',
+        timeout: NAV_TIMEOUT + 5000,
+      }).catch(() => null);
+      await page.waitForTimeout(2200);
+      await Promise.allSettled([...pending]);
+      return [...videosByBvid.values()];
+    } finally {
+      page.off('response', onResponse);
+      await page.close().catch(() => {});
+    }
+  }
+
+  async function getBilibiliVideoUploads(account) {
+    if (!videoFeedCache.has(account.mid)) {
+      videoFeedCache.set(account.mid, captureBilibiliVideoUploads(account));
+    }
+    return videoFeedCache.get(account.mid);
+  }
+
   async function collectBilibiliOfficialEvidence(currentGame) {
     const account = BILIBILI_OFFICIAL_ACCOUNTS[currentGame.game_name];
     if (!account) return [];
@@ -329,7 +380,8 @@ export async function createEvidenceCollector() {
     const account = BILIBILI_OFFICIAL_ACCOUNTS[currentGame.game_name];
     if (!account) return [];
     const items = await getBilibiliFeed(account);
-    return items
+    const uploads = await getBilibiliVideoUploads(account);
+    const dynamicMedia = items
       .flatMap((item) => {
         const archive = extractArchive(item);
         if (!archive) return [];
@@ -354,9 +406,41 @@ export async function createEvidenceCollector() {
             text: dynamicText(item),
           },
         ];
-      })
+      });
+
+    const uploadMedia = uploads.flatMap((video) => {
+      const bvid = cleanText(video?.bvid || '');
+      const title = cleanText(video?.title || '');
+      if (!bvid || !title) return [];
+      const timestamp = Number(video?.created || video?.pubdate || video?.ctime || 0);
+      return [
+        {
+          game_name: currentGame.game_name,
+          official_mid: account.mid,
+          official_slug: account.slug,
+          dynamic_id: null,
+          dynamic_url: null,
+          bvid,
+          title,
+          description: cleanText(video?.description || video?.desc || ''),
+          url: `https://www.bilibili.com/video/${bvid}/`,
+          player_url: `https://player.bilibili.com/player.html?bvid=${bvid}`,
+          published_at: timestamp > 0 ? new Date(timestamp * 1000).toISOString() : null,
+          duration: cleanText(video?.length || video?.duration || '') || null,
+          remote_cover: normalizeImageUrl(video?.pic || video?.cover) || null,
+          text: cleanText(`${account.label}\n${title}\n${video?.description || video?.desc || ''}`).slice(0, MAX_PAGE_TEXT),
+        },
+      ];
+    });
+
+    const deduped = new Map();
+    for (const item of [...dynamicMedia, ...uploadMedia]) {
+      const existing = deduped.get(item.bvid);
+      if (!existing || (!existing.remote_cover && item.remote_cover)) deduped.set(item.bvid, item);
+    }
+    return [...deduped.values()]
       .sort((a, b) => Date.parse(b.published_at || 0) - Date.parse(a.published_at || 0))
-      .slice(0, 24);
+      .slice(0, 40);
   }
 
   return {

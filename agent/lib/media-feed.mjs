@@ -63,13 +63,17 @@ export function classifyOfficialMedia(item) {
   ) {
     return 'version_pv';
   }
-  if (/角色\s*PV|角色演示|角色展示|角色预告|角色介绍[^\n]{0,12}PV|角色动画短片/i.test(title)) {
+  if (
+    /角色\s*PV|角色演示|角色展示|角色预告|角色介绍[^\n]{0,12}PV|角色动画短片|先导演示|干员(?:战斗)?演示/i.test(
+      title,
+    )
+  ) {
     return 'character_pv';
   }
   if (/动画短片|动画\s*CM|剧情短片|角色短片|特别动画/i.test(title)) {
     return 'short_film';
   }
-  if (/\bPV\b|宣传\s*PV|概念\s*PV|预告片|Trailer/i.test(title)) {
+  if (/\bPV\b|宣传\s*PV|概念\s*PV|预告片|Trailer|特别映像|概念CG/i.test(title)) {
     return 'promotional_pv';
   }
   return null;
@@ -182,7 +186,7 @@ export function buildMediaFeed({ dataset, mediaByGame, baseUrl, generatedAt = nu
               source: 'media.items',
               position: 'after_preview',
               categories: ['version_pv', 'character_pv', 'preview_program', 'short_film', 'promotional_pv'],
-              limit_per_game: 2,
+              limit_per_game: 4,
               layout: 'featured_compact',
               show_category: true,
               show_duration: true,

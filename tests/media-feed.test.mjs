@@ -32,6 +32,14 @@ test('classifies official PV titles deterministically', () => {
     'character_pv',
   );
   assert.equal(
+    classifyOfficialMedia({ ...baseCandidate, title: '《绝区零》先导演示丨蕾米埃尔' }),
+    'character_pv',
+  );
+  assert.equal(
+    classifyOfficialMedia({ ...baseCandidate, title: '《明日方舟：终末地》干员战斗演示 - 诀' }),
+    'character_pv',
+  );
+  assert.equal(
     classifyOfficialMedia({ ...baseCandidate, title: '《异环》1.4版本前瞻特别节目回顾' }),
     'preview_program',
   );
@@ -87,7 +95,7 @@ test('builds server-driven feed with ui, real data and media resources', () => {
   assert.equal(feed.ui.sections.length, 1);
   assert.equal(feed.ui.sections[0].component, 'game_status_grid');
   assert.equal(feed.ui.sections[0].props.embedded_media.source, 'media.items');
-  assert.equal(feed.ui.sections[0].props.embedded_media.limit_per_game, 2);
+  assert.equal(feed.ui.sections[0].props.embedded_media.limit_per_game, 4);
   assert.deepEqual(feed.ui.sections[0].props.embedded_media.categories, [
     'version_pv',
     'character_pv',

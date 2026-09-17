@@ -33,7 +33,7 @@ main-agent 只负责拆分核验目标，不直接修改仓库，也不生成搜
 
 网页读取由 Playwright 完成，AI 不自行联网。search-worker 不使用 Bing、DuckDuckGo 或其他搜索引擎。
 
-每个游戏只读取程序内固定白名单中的 Bilibili 官方账号空间。Playwright 打开官方账号的动态页，截获 Bilibili 页面自身发出的、带 WBI 签名的 `/x/polymer/web-dynamic/v1/feed/space` 请求，并从最近动态与官方视频中挑选与当前版本、下一版本、前瞻和卡池最相关的 evidence。
+每个游戏只读取程序内固定白名单中的 Bilibili 官方账号空间。Playwright 打开官方账号的动态页，截获 Bilibili 页面自身发出的、带 WBI 签名的 `/x/polymer/web-dynamic/v1/feed/space` 请求，并从最近动态中挑选与当前版本、下一版本、前瞻和卡池最相关的 evidence。媒体目录另外打开该官号的 `/upload/video` 页面，截获页面自身的 `/x/space/wbi/arc/search` 投稿列表；因此角色 PV / 版本 PV 不依赖官方是否同步发动态。
 
 不会使用官网、TapTap、微博、HoYoLAB、YouTube、新闻站或第三方搬运作为新一轮事实来源。历史非 Bilibili `sources` 仅作为旧数据留存，待该游戏下一次 verified 后由 Bilibili 官方来源替换。
 
