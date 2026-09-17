@@ -143,12 +143,12 @@ export function buildMediaFeed({ dataset, mediaByGame, baseUrl, generatedAt = nu
         });
       }
       accepted += 1;
-      if (accepted >= 8) break;
+      if (accepted >= 4) break;
     }
   }
 
   allItems.sort((a, b) => Date.parse(b.published_at || 0) - Date.parse(a.published_at || 0));
-  const items = allItems.slice(0, 48).map(publicMediaItem);
+  const items = allItems.map(publicMediaItem);
   const allowedIds = new Set(items.map((item) => item.id));
   const filteredPlan = coverPlan.filter((item) => allowedIds.has(item.id));
   const timestamps = [

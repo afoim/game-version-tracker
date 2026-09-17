@@ -440,7 +440,7 @@ export async function createEvidenceCollector() {
     }
     return [...deduped.values()]
       .sort((a, b) => Date.parse(b.published_at || 0) - Date.parse(a.published_at || 0))
-      .slice(0, 40);
+      .slice(0, 80);
   }
 
   return {
