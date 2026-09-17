@@ -23,10 +23,16 @@ const PUBLIC_DATA_BASE_URL = String(
   process.env.GAME_DATA_BASE_URL || 'https://game-version-tracker.pages.dev',
 ).replace(/\/$/, '');
 const dryRun = process.argv.includes('--dry-run') || process.env.AGENT_DRY_RUN === 'true';
+const mediaOnly = process.argv.includes('--media-only') || process.env.AGENT_MEDIA_ONLY === 'true';
 const PREVIEW_FIELDS = ['preview_status', 'preview_title', 'preview_start_at', 'preview_live_url', 'preview_replay_url'];
 
 function log(message) {
   console.log(`[agent] ${message}`);
+}
+
+function isProviderUnavailableError(error) {
+  const message = String(error?.message || error || '');
+  return /FreeTierError|free tier can only be used from within OpenCode|statusCode.?403/i.test(message);
 }
 
 async function callJson(runner, role, prompt) {
@@ -393,6 +399,7 @@ async function writeGithubSummary(report) {
     `- Gateway session: \`${report.gateway_session}\``,
     `- review-agent: **${report.approved ? 'APPROVED' : 'REJECTED'}**`,
     `- Dry run: \`${report.dry_run}\``,
+    `- Media-only fallback: \`${Boolean(report.media_only_fallback)}\``,
     `- Fact changes: ${report.changed_games?.length ? report.changed_games.join('、') : '无'}`,
     `- Dataset changed: \`${report.dataset_changed}\``,
     '',
@@ -415,20 +422,110 @@ async function writeGithubSummary(report) {
   await appendFile(target, `${lines.join('\n')}\n`, 'utf8');
 }
 
+async function runMediaOnlyFallback({ currentDataset, runner, reason }) {
+  log(`AI provider 不可用，切换 media-only fallback：${reason}`);
+  const collector = await createEvidenceCollector();
+  try {
+    const mediaByGame = {};
+    for (let index = 0; index < GAME_NAMES.length; index += 1) {
+      const gameName = GAME_NAMES[index];
+      const currentGame = currentDataset.games.find((game) => game.game_name === gameName);
+      const officialMedia = await collector.collectMedia(currentGame);
+      mediaByGame[gameName] = officialMedia;
+      log(`[media-only ${index + 1}/${GAME_NAMES.length}] ${gameName}: ${officialMedia.length} 条官方视频`);
+    }
+
+    const { feed: mediaFeed, coverPlan: mediaCoverPlan } = buildMediaFeed({
+      dataset: currentDataset,
+      mediaByGame,
+      baseUrl: PUBLIC_DATA_BASE_URL,
+    });
+    validateMediaFeed(mediaFeed);
+
+    let mediaCatalogResults = [];
+    if (!dryRun) {
+      mediaCatalogResults = await materializeMediaCovers(mediaFeed, mediaCoverPlan);
+      await writeMediaFeed(mediaFeed);
+    }
+
+    const report = {
+      started_from: process.env.GITHUB_SHA || null,
+      finished_at: new Date().toISOString(),
+      model: runner?.model || null,
+      provider: runner?.provider || null,
+      endpoint: runner?.baseUrl || null,
+      gateway_session: runner?.gatewaySession || null,
+      dry_run: dryRun,
+      approved: true,
+      media_only_fallback: true,
+      fallback_reason: String(reason || 'media-only requested'),
+      all_verified: false,
+      all_children_returned: false,
+      insufficient_games: [...GAME_NAMES],
+      dataset_changed: false,
+      changed_games: [],
+      source_migrated_games: [],
+      preview_media_plan: [],
+      preview_media_results: [],
+      media_catalog: {
+        item_count: mediaFeed.media.items.length,
+        categories: Object.fromEntries(
+          mediaFeed.media.categories.map((category) => [
+            category.id,
+            mediaFeed.media.items.filter((item) => item.category === category.id).length,
+          ]),
+        ),
+        per_game: Object.fromEntries(
+          GAME_NAMES.map((gameName) => [
+            gameName,
+            mediaFeed.media.items.filter((item) => item.game_name === gameName).length,
+          ]),
+        ),
+        cover_plan_count: mediaCoverPlan.length,
+        cover_results: mediaCatalogResults,
+      },
+      mechanical_issues: [],
+      review: { approved: true, issues: [], notes: ['AI provider unavailable; deterministic media-only fallback'] },
+      children: [],
+      evidence: {},
+      proposed_dataset: currentDataset,
+    };
+    await writeReport(report);
+    await writeGithubSummary(report);
+    log(
+      `media-only fallback 完成：${mediaFeed.media.items.length} 条媒体；` +
+        `${dryRun ? 'dry-run 未写文件' : 'media-feed/media 已发布'}。`,
+    );
+  } finally {
+    await collector.close().catch(() => {});
+  }
+}
+
 async function main() {
   await mkdir(OUTPUT_DIR, { recursive: true });
   const currentDataset = JSON.parse(await readFile(DATA_PATH, 'utf8'));
   validateDataset(currentDataset);
 
-  const runner = await createLlmRunner();
+  const runner = mediaOnly ? null : await createLlmRunner();
   let collector;
   try {
+    if (mediaOnly) {
+      await runMediaOnlyFallback({ currentDataset, runner: null, reason: 'explicit media-only mode' });
+      return;
+    }
     log(`模型: ${runner.model}`);
     log(`Zen endpoint: ${runner.baseUrl}`);
     log(`x-opencode-session: ${runner.gatewaySession}`);
     log(`main-agent 正在读取仓库摘要并生成 ${GAME_NAMES.length} 个子任务…`);
 
-    const planCall = await callJson(runner, 'main-agent', mainPlanPrompt(currentDataset));
+    let planCall;
+    try {
+      planCall = await callJson(runner, 'main-agent', mainPlanPrompt(currentDataset));
+    } catch (error) {
+      if (!isProviderUnavailableError(error)) throw error;
+      await runMediaOnlyFallback({ currentDataset, runner, reason: error.message });
+      return;
+    }
     const assignments = planCall.value.assignments;
     validateAssignments(assignments);
     log(`main-agent 已完成任务分配，cli-session=${planCall.cliSessionId || 'n/a'}`);
@@ -634,7 +731,7 @@ async function main() {
     );
   } finally {
     await collector?.close().catch(() => {});
-    await runner.close().catch(() => {});
+    await runner?.close().catch(() => {});
   }
 }
 

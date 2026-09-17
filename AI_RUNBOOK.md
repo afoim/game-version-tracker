@@ -39,6 +39,8 @@ main-agent 只负责拆分核验目标，不直接修改仓库，也不生成搜
 
 Bilibili 页面/API 若触发 412 / -352 风控，可通过 `BILIBILI_COOKIE` Actions Secret 注入 `.bilibili.com` Cookie Jar。Secret 内容不得进入日志、report、evidence 文本或 `sources`。登录态不可用时该游戏安全降级为 `insufficient`，不回退其他平台。
 
+如果 OpenCode/provider 明确返回 `403` / `FreeTierError` 等 provider 不可用错误，orchestrator 自动进入 `media-only` fallback：跳过事实修改与 child/review，不改 `data/games.json`，但仍使用固定 Bilibili 官方账号、确定性分类和 Cookie 刷新 `media-feed.json` 与媒体封面。其他程序错误不得使用该 fallback 掩盖。
+
 同一次官方空间读取同时产生两类结果：
 
 - evidence：送给 child-agent 做版本事实核验。

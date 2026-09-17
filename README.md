@@ -41,6 +41,7 @@ git commit / push
 - 每个 `child-agent` 只分析一个游戏，只能使用本轮 Playwright 实际读取的证据，只返回结构化 JSON，不写仓库。
 - `review-agent` 独立检查结构、来源、日期、变化证据和明显幻觉风险。
 - 某个游戏证据不足时安全降级：保留该游戏旧事实，继续审核其他游戏，不猜测数据。
+- 如果 AI provider 明确返回不可用的 403/FreeTierError，本轮自动降级为 `media-only`：不修改 `games.json` 事实，只继续刷新固定官号的媒体目录与封面，避免 PV 数据跟着模型网关一起停更。
 - 只有 review-agent 批准的可靠事实变化才会写入 `data/games.json`。
 - GitHub Actions 只允许提交 `data/games.json`、`data/media-feed.json` 与 `data/media/**`；没有变化时不创建空提交。
 
