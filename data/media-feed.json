@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-17T19:17:22.597Z",
+  "generated_at": "2026-09-17T19:35:55.200Z",
   "ui": {
     "page": {
       "title": "游戏资讯",
@@ -256,7 +256,7 @@
               "preview_start_at",
               "preview_live_url"
             ],
-            "checked_at": "2026-09-17T18:51:22.416Z"
+            "checked_at": "2026-09-17T19:33:48.694Z"
           },
           {
             "title": "崩坏：星穹铁道官方动态",
@@ -268,7 +268,16 @@
               "current_up_start_at",
               "current_up_end_at"
             ],
-            "checked_at": "2026-09-17T18:51:22.417Z"
+            "checked_at": "2026-09-17T19:33:48.695Z"
+          },
+          {
+            "title": "崩坏：星穹铁道官方动态",
+            "url": "https://www.bilibili.com/opus/1244047587382657065",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-09-17T19:33:48.695Z"
           },
           {
             "title": "崩坏：星穹铁道官方动态",
@@ -277,7 +286,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-09-17T18:51:22.417Z"
+            "checked_at": "2026-09-17T19:33:48.695Z"
           }
         ],
         "preview_images": [
@@ -460,7 +469,7 @@
               "preview_start_at",
               "preview_live_url"
             ],
-            "checked_at": "2026-09-17T19:16:08.681Z"
+            "checked_at": "2026-09-17T19:34:58.771Z"
           },
           {
             "title": "鸣潮官方动态",
@@ -472,17 +481,43 @@
               "current_up_start_at",
               "current_up_end_at"
             ],
-            "checked_at": "2026-09-17T19:16:08.681Z"
+            "checked_at": "2026-09-17T19:34:58.771Z"
           },
           {
             "title": "鸣潮官方动态",
-            "url": "https://www.bilibili.com/opus/1246274109191487496",
+            "url": "https://www.bilibili.com/opus/1248237757510189074",
             "type": "official_community",
             "claims": [
-              "current_version",
-              "current_up_characters"
+              "current_version"
             ],
-            "checked_at": "2026-09-17T19:16:08.682Z"
+            "checked_at": "2026-09-17T19:34:58.771Z"
+          },
+          {
+            "title": "鸣潮官方动态",
+            "url": "https://www.bilibili.com/opus/1248222387957137417",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-09-17T19:34:58.772Z"
+          },
+          {
+            "title": "鸣潮官方动态",
+            "url": "https://www.bilibili.com/opus/1248114062446821376",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-09-17T19:34:58.772Z"
+          },
+          {
+            "title": "鸣潮官方动态",
+            "url": "https://www.bilibili.com/opus/1248871694675738658",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-09-17T19:34:58.772Z"
           },
           {
             "title": "鸣潮官方动态",
@@ -492,7 +527,17 @@
               "current_version",
               "current_up_characters"
             ],
-            "checked_at": "2026-09-17T19:16:08.682Z"
+            "checked_at": "2026-09-17T19:34:58.772Z"
+          },
+          {
+            "title": "鸣潮官方动态",
+            "url": "https://www.bilibili.com/opus/1246274109191487496",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "current_up_characters"
+            ],
+            "checked_at": "2026-09-17T19:34:58.772Z"
           },
           {
             "title": "鸣潮官方动态",
@@ -502,34 +547,7 @@
               "current_version",
               "current_up_characters"
             ],
-            "checked_at": "2026-09-17T19:16:08.682Z"
-          },
-          {
-            "title": "鸣潮官方动态",
-            "url": "https://www.bilibili.com/opus/1248237757510189074",
-            "type": "official_community",
-            "claims": [
-              "current_version"
-            ],
-            "checked_at": "2026-09-17T19:16:08.681Z"
-          },
-          {
-            "title": "鸣潮官方动态",
-            "url": "https://www.bilibili.com/opus/1248222387957137417",
-            "type": "official_community",
-            "claims": [
-              "current_version"
-            ],
-            "checked_at": "2026-09-17T19:16:08.681Z"
-          },
-          {
-            "title": "鸣潮官方动态",
-            "url": "https://www.bilibili.com/opus/1248114062446821376",
-            "type": "official_community",
-            "claims": [
-              "current_version"
-            ],
-            "checked_at": "2026-09-17T19:16:08.682Z"
+            "checked_at": "2026-09-17T19:34:58.772Z"
           },
           {
             "title": "《鸣潮》先约电台EP3.6——景燃《三叩首》",
@@ -538,7 +556,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-09-17T19:16:08.682Z"
+            "checked_at": "2026-09-17T19:34:58.772Z"
           }
         ],
         "preview_images": [
@@ -580,16 +598,7 @@
               "current_version",
               "current_up_characters"
             ],
-            "checked_at": "2026-09-17T11:37:18.476Z"
-          },
-          {
-            "title": "明日方舟：终末地官方动态",
-            "url": "https://www.bilibili.com/opus/1243336340836188166",
-            "type": "official_community",
-            "claims": [
-              "current_version"
-            ],
-            "checked_at": "2026-09-17T11:37:18.476Z"
+            "checked_at": "2026-09-17T19:35:30.493Z"
           },
           {
             "title": "明日方舟：终末地官方动态",
@@ -598,7 +607,17 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-09-17T11:37:18.476Z"
+            "checked_at": "2026-09-17T19:35:30.493Z"
+          },
+          {
+            "title": "明日方舟：终末地官方动态",
+            "url": "https://www.bilibili.com/opus/1242943503767437320",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "current_up_characters"
+            ],
+            "checked_at": "2026-09-17T19:35:30.493Z"
           }
         ],
         "preview_images": [],
@@ -639,19 +658,7 @@
               "preview_start_at",
               "preview_live_url"
             ],
-            "checked_at": "2026-09-17T19:17:22.596Z"
-          },
-          {
-            "title": "《异环》1.4版本前瞻特别节目回顾",
-            "url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "next_version",
-              "preview_status",
-              "preview_replay_url"
-            ],
-            "checked_at": "2026-09-17T19:17:22.595Z"
+            "checked_at": "2026-09-17T19:35:55.200Z"
           },
           {
             "title": "《异环》1.4版本前瞻特别节目回顾",
@@ -663,7 +670,31 @@
               "preview_status",
               "preview_replay_url"
             ],
-            "checked_at": "2026-09-17T19:17:22.595Z"
+            "checked_at": "2026-09-17T19:35:55.199Z"
+          },
+          {
+            "title": "《异环》1.4版本前瞻特别节目回顾",
+            "url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "next_version",
+              "preview_status",
+              "preview_replay_url"
+            ],
+            "checked_at": "2026-09-17T19:35:55.199Z"
+          },
+          {
+            "title": "《异环》1.4版本前瞻特别节目回顾",
+            "url": "https://www.bilibili.com/opus/1248647143052279848",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "next_version",
+              "preview_status",
+              "preview_replay_url"
+            ],
+            "checked_at": "2026-09-17T19:35:55.199Z"
           },
           {
             "title": "《异环》1.4前瞻特别节目 | 情报回顾",
@@ -675,7 +706,7 @@
               "preview_status",
               "preview_replay_url"
             ],
-            "checked_at": "2026-09-17T19:17:22.596Z"
+            "checked_at": "2026-09-17T19:35:55.199Z"
           },
           {
             "title": "《异环》1.4版本PV「祷歌为谁而诵」",
@@ -685,7 +716,27 @@
               "current_version",
               "next_version"
             ],
-            "checked_at": "2026-09-17T19:17:22.597Z"
+            "checked_at": "2026-09-17T19:35:55.200Z"
+          },
+          {
+            "title": "《异环》1.4版本PV「祷歌为谁而诵」",
+            "url": "https://www.bilibili.com/opus/1248871696789667861",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "next_version"
+            ],
+            "checked_at": "2026-09-17T19:35:55.200Z"
+          },
+          {
+            "title": "《异环》1.4版本PV「祷歌为谁而诵」",
+            "url": "https://www.bilibili.com/video/BV1jWej6hET5/",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "next_version"
+            ],
+            "checked_at": "2026-09-17T19:35:55.200Z"
           }
         ],
         "preview_images": [
@@ -801,7 +852,7 @@
         "description": "可以是为了理想，也可以是为了生存，艺术并不需要高尚的理由。\n希望被注视，希望被铭记，也不过是私心的一种。\n \n中文CV：\n沃雅妮莎——苏婉\n\n日文CV：\n沃雅妮莎——伊藤加奈惠\n\n《原神》bilibili服下载地址： https://www.biligame.com/detail/?id=103496",
         "version": null,
         "bvid": "BV13Xew6LE7T",
-        "published_at": "2026-09-17T04:00:10Z",
+        "published_at": "2026-09-17T04:00:10.000Z",
         "duration": "11:53",
         "url": "https://www.bilibili.com/video/BV13Xew6LE7T/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV13Xew6LE7T",
@@ -821,7 +872,7 @@
         "description": "我们在哪儿？欢声笑语在耳边回响。\n好多好玩的地方，拉着我的手不放。\n尽情享受吧，特地为你施展，让你微笑的咒语\n永远，永远不会完。\n\n《异环》1.4版本「祷歌为谁而诵」将于9月24日版本更新后开启！",
         "version": "1.4",
         "bvid": "BV1jWej6hET5",
-        "published_at": "2026-09-17T03:00:01Z",
+        "published_at": "2026-09-17T03:00:01.000Z",
         "duration": "07:28",
         "url": "https://www.bilibili.com/video/BV1jWej6hET5/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1jWej6hET5",
@@ -841,7 +892,7 @@
         "description": "《异环》1.4版本「祷歌为谁而诵」将于9月24日版本更新后开启！\n1.4版本前瞻特别节目现已结束，感谢各位鉴定师的收看~",
         "version": "1.4",
         "bvid": "BV1Lxej6FEhv",
-        "published_at": "2026-09-16T12:10:00Z",
+        "published_at": "2026-09-16T12:10:00.000Z",
         "duration": "43:21",
         "url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1Lxej6FEhv",
@@ -861,7 +912,7 @@
         "description": "按照薇斯纳的理论，游戏玩得好的聪明人，更容易解决工作上的难题。\n借由这种说辞，她从身负的职责中获得了无尽的乐趣。\n\n中文CV：\n薇斯纳——龟娘\n达妮卡——朱婧\n\n日文CV：\n薇斯纳——平野绫\n达妮卡——原由实\n\n《原神》bilibili服下载地址： https://www.biligame.com/detail/?id=103496",
         "version": null,
         "bvid": "BV1sjen6QEQ7",
-        "published_at": "2026-09-16T04:00:10Z",
+        "published_at": "2026-09-16T04:00:10.000Z",
         "duration": "10:54",
         "url": "https://www.bilibili.com/video/BV1sjen6QEQ7/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1sjen6QEQ7",
@@ -881,7 +932,7 @@
         "description": "月高高，月遥遥。\n谁把人间偷瞧。\n灯火摇，岁月好。\n心事谁知晓。\n\n中文CV\n心：菊花花\n玉珏（奶奶）：林美玉\n玉玥（孙女）：胡影佳\n\n日文CV\n心：能登麻美子\n玉珏（奶奶）：下田岑易\n玉玥（孙女）：高岸美里亚\n\n英文CV\n心：Suzie Yeung\n玉珏（奶奶）：Haruka Abe\n玉玥（孙女）：Hanako Footman\n\n韩文CV\n心：소연\n玉珏（奶奶）：장희라\n玉玥（孙女）：김수영",
         "version": null,
         "bvid": "BV1WAec6fE5N",
-        "published_at": "2026-09-16T03:00:10Z",
+        "published_at": "2026-09-16T03:00:10.000Z",
         "duration": "24:58",
         "url": "https://www.bilibili.com/video/BV1WAec6fE5N/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1WAec6fE5N",
@@ -901,7 +952,7 @@
         "description": "《原神》7.1版本「往冥府的安魂歌」将于2026年9月23日上线。\n感谢各位旅行者的支持与陪伴，我们将为大家带来更多7.1版本的最新消息~\n \n本次兑换码将于2026年9月15日12:00:00失效，记得尽快兑换哦~\n\n《原神》bilibili服下载地址： https://www.biligame.com/detail/?id=103496",
         "version": "7.1",
         "bvid": "BV1znY96NEvn",
-        "published_at": "2026-09-12T13:25:00Z",
+        "published_at": "2026-09-12T13:25:00.000Z",
         "duration": "59:46",
         "url": "https://www.bilibili.com/video/BV1znY96NEvn/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1znY96NEvn",
@@ -921,7 +972,7 @@
         "description": "清气澄余滓，桂华秋皎洁。漆黑的「噩运」纵然会肆虐一时，但人类的意志与智慧不会因此轻易屈服...\n\n*奇偶妆容及动作仅供搭配参考，最终请以实机表现为准。",
         "version": "7.1",
         "bvid": "BV1EmYV6WEbF",
-        "published_at": "2026-09-12T13:20:01Z",
+        "published_at": "2026-09-12T13:20:01.000Z",
         "duration": "01:07",
         "url": "https://www.bilibili.com/video/BV1EmYV6WEbF/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1EmYV6WEbF",
@@ -941,7 +992,7 @@
         "description": "死神的国度由规则铸就，那规则不可为凡人左右。\n她的门前站着心怀爱或恨的人，那爱与恨，也必不能为死亡所困。\n \n中文CV：\n安娜丝塔夏·费奥多罗夫娜·雪奈茨娜娅——刘校妤\n「丑角」皮耶罗——符冲\n达妮卡——朱婧\n空——鹿喑\n薇斯纳——龟娘\n沃雅妮莎——苏婉\n「黄金」莱茵多特——狄菲菲\n「死之执政」若娜瓦——Selene\n戴因斯雷布——孙晔\n\n日文CV：\n安娜丝塔夏·费奥多罗夫娜·雪奈茨娜娅——户松遥\n「丑角」皮耶罗——间宫康弘\n达妮卡——原由实\n空——堀江瞬\n薇斯纳——平野绫\n沃雅妮莎——伊藤加奈惠\n「黄金",
         "version": "7.1",
         "bvid": "BV1yuY96rEL7",
-        "published_at": "2026-09-12T13:15:01Z",
+        "published_at": "2026-09-12T13:15:01.000Z",
         "duration": "16:55",
         "url": "https://www.bilibili.com/video/BV1yuY96rEL7/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1yuY96rEL7",
@@ -961,7 +1012,7 @@
         "description": "「砂金先生，您…您真的不介意播放全片吗？」\n \n中文CV：\n砂金•戏浪——杨超然\n女开拓者——陈婷婷\n ‌\n日文CV：\n砂金•戏浪——河西健吾\n女开拓者——石川由依\n ‌\n英文CV：\n砂金•戏浪——Camden Sutkowski\n女开拓者——Chloe Eves\n ‌\n韩文CV：\n砂金•戏浪——박준원\n女开拓者——김하루",
         "version": null,
         "bvid": "BV1yjYx6AEp7",
-        "published_at": "2026-09-10T04:00:13Z",
+        "published_at": "2026-09-10T04:00:13.000Z",
         "duration": "07:19",
         "url": "https://www.bilibili.com/video/BV1yjYx6AEp7/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1yjYx6AEp7",
@@ -981,7 +1032,7 @@
         "description": "一次赌上性命的升迁，一场暗藏机锋的晚宴，一条听后即焚的密令……\n暗流涌动的公司深水区，「石心誓环」亦不能免于风暴——\n谎言固然危险，真相也能引火烧身，当撕去伪装，谁又能笑到最后？\n \n中文CV：\n翡翠——张若瑜\n龙晶——洪海天\n欧泊——Kinsen\n砂金——杨超然\n波提欧——彭博\n姬子——林簌\n飞霄——叶知秋\n银枝——梁达伟\n真理医生——桑毓泽\n ‌\n日文CV：\n翡翠——三石琴乃\n龙晶——上坂堇\n欧泊——岸尾大辅\n砂金——河西健吾\n波提欧——小西克幸\n姬子——田中理惠\n飞霄——小松未可子\n银枝——立花慎之",
         "version": null,
         "bvid": "BV1sAbL6tEEC",
-        "published_at": "2026-09-06T04:00:21Z",
+        "published_at": "2026-09-06T04:00:21.000Z",
         "duration": "16:06",
         "url": "https://www.bilibili.com/video/BV1sAbL6tEEC/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1sAbL6tEEC",
@@ -1001,7 +1052,7 @@
         "description": "用画笔染上今晚的月色，\n与你相遇的时光，\n会让梦想变为何种色彩？\n\n「前辈，请您和我一起……完成这幅画吧。」\n\n埃莉诺CV \n中：施丛昊\n日：花岩香奈",
         "version": null,
         "bvid": "BV1M4tq6tEXu",
-        "published_at": "2026-09-05T03:00:06Z",
+        "published_at": "2026-09-05T03:00:06.000Z",
         "duration": "02:42",
         "url": "https://www.bilibili.com/video/BV1M4tq6tEXu/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1M4tq6tEXu",
@@ -1021,7 +1072,7 @@
         "description": "向往自由的那位大小姐，在前辈的指引与闺蜜们的帮助下，瞒着家人继续追梦；而就在梦想即将启航之际，一场突如其来的失踪事件，让她不得不鼓起勇气、挺身而出……\n\n限时活动「奋斗吧！大小姐的旅人修炼手册！」，09月08日正式开启！",
         "version": null,
         "bvid": "BV1N4td6gE6b",
-        "published_at": "2026-09-04T03:00:06Z",
+        "published_at": "2026-09-04T03:00:06.000Z",
         "duration": "03:19",
         "url": "https://www.bilibili.com/video/BV1N4td6gE6b/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1N4td6gE6b",
@@ -1041,7 +1092,7 @@
         "description": "超自然都市开放世界RPG《异环》全新版本「雾中朔望星回」现已开启！立刻下载>>>https://www.biligame.com/detail/?id=111795\n\n「宇宙像一个电台，每个生命都有独属于自己的电波频段……」\n「……不论是人、异象、还是我的宠物小贞，都不例外。」\n「哈？！臭小鬼！你说谁是宠物？！」",
         "version": null,
         "bvid": "BV1jVtt6LEjP",
-        "published_at": "2026-09-02T03:00:01Z",
+        "published_at": "2026-09-02T03:00:01.000Z",
         "duration": "13:14",
         "url": "https://www.bilibili.com/video/BV1jVtt6LEjP/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1jVtt6LEjP",
@@ -1061,7 +1112,7 @@
         "description": "《崩坏3》9.0版本「曙梦向明」即将开启！\n主线第二部终章「从此，拥抱未来」、主题活动「舰舰与许愿树秘闻」、全新服装重磅来袭，敬请期待！\n \n配音演员：\n寻梦者——张若瑜\n蕾耶拉——张若瑜\n松雀——赵爽\n赫丽娅——溯浔\n科拉莉——可可味\n希娜狄雅——孙艳琦\n符华——Mace",
         "version": "9.0",
         "bvid": "BV1abNd6bE6L",
-        "published_at": "2026-07-18T10:00:13Z",
+        "published_at": "2026-07-18T10:00:13.000Z",
         "duration": "02:03",
         "url": "https://www.bilibili.com/video/BV1abNd6bE6L/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1abNd6bE6L",

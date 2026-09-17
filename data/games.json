@@ -174,7 +174,7 @@
             "preview_start_at",
             "preview_live_url"
           ],
-          "checked_at": "2026-09-17T18:51:22.416Z"
+          "checked_at": "2026-09-17T19:33:48.694Z"
         },
         {
           "title": "崩坏：星穹铁道官方动态",
@@ -186,7 +186,16 @@
             "current_up_start_at",
             "current_up_end_at"
           ],
-          "checked_at": "2026-09-17T18:51:22.417Z"
+          "checked_at": "2026-09-17T19:33:48.695Z"
+        },
+        {
+          "title": "崩坏：星穹铁道官方动态",
+          "url": "https://www.bilibili.com/opus/1244047587382657065",
+          "type": "official_community",
+          "claims": [
+            "current_version"
+          ],
+          "checked_at": "2026-09-17T19:33:48.695Z"
         },
         {
           "title": "崩坏：星穹铁道官方动态",
@@ -195,7 +204,7 @@
           "claims": [
             "current_version"
           ],
-          "checked_at": "2026-09-17T18:51:22.417Z"
+          "checked_at": "2026-09-17T19:33:48.695Z"
         }
       ],
       "preview_images": [
@@ -375,7 +384,7 @@
             "preview_start_at",
             "preview_live_url"
           ],
-          "checked_at": "2026-09-17T19:16:08.681Z"
+          "checked_at": "2026-09-17T19:34:58.771Z"
         },
         {
           "title": "鸣潮官方动态",
@@ -387,17 +396,43 @@
             "current_up_start_at",
             "current_up_end_at"
           ],
-          "checked_at": "2026-09-17T19:16:08.681Z"
+          "checked_at": "2026-09-17T19:34:58.771Z"
         },
         {
           "title": "鸣潮官方动态",
-          "url": "https://www.bilibili.com/opus/1246274109191487496",
+          "url": "https://www.bilibili.com/opus/1248237757510189074",
           "type": "official_community",
           "claims": [
-            "current_version",
-            "current_up_characters"
+            "current_version"
           ],
-          "checked_at": "2026-09-17T19:16:08.682Z"
+          "checked_at": "2026-09-17T19:34:58.771Z"
+        },
+        {
+          "title": "鸣潮官方动态",
+          "url": "https://www.bilibili.com/opus/1248222387957137417",
+          "type": "official_community",
+          "claims": [
+            "current_version"
+          ],
+          "checked_at": "2026-09-17T19:34:58.772Z"
+        },
+        {
+          "title": "鸣潮官方动态",
+          "url": "https://www.bilibili.com/opus/1248114062446821376",
+          "type": "official_community",
+          "claims": [
+            "current_version"
+          ],
+          "checked_at": "2026-09-17T19:34:58.772Z"
+        },
+        {
+          "title": "鸣潮官方动态",
+          "url": "https://www.bilibili.com/opus/1248871694675738658",
+          "type": "official_community",
+          "claims": [
+            "current_version"
+          ],
+          "checked_at": "2026-09-17T19:34:58.772Z"
         },
         {
           "title": "鸣潮官方动态",
@@ -407,7 +442,17 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-09-17T19:16:08.682Z"
+          "checked_at": "2026-09-17T19:34:58.772Z"
+        },
+        {
+          "title": "鸣潮官方动态",
+          "url": "https://www.bilibili.com/opus/1246274109191487496",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_up_characters"
+          ],
+          "checked_at": "2026-09-17T19:34:58.772Z"
         },
         {
           "title": "鸣潮官方动态",
@@ -417,34 +462,7 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-09-17T19:16:08.682Z"
-        },
-        {
-          "title": "鸣潮官方动态",
-          "url": "https://www.bilibili.com/opus/1248237757510189074",
-          "type": "official_community",
-          "claims": [
-            "current_version"
-          ],
-          "checked_at": "2026-09-17T19:16:08.681Z"
-        },
-        {
-          "title": "鸣潮官方动态",
-          "url": "https://www.bilibili.com/opus/1248222387957137417",
-          "type": "official_community",
-          "claims": [
-            "current_version"
-          ],
-          "checked_at": "2026-09-17T19:16:08.681Z"
-        },
-        {
-          "title": "鸣潮官方动态",
-          "url": "https://www.bilibili.com/opus/1248114062446821376",
-          "type": "official_community",
-          "claims": [
-            "current_version"
-          ],
-          "checked_at": "2026-09-17T19:16:08.682Z"
+          "checked_at": "2026-09-17T19:34:58.772Z"
         },
         {
           "title": "《鸣潮》先约电台EP3.6——景燃《三叩首》",
@@ -453,7 +471,7 @@
           "claims": [
             "current_version"
           ],
-          "checked_at": "2026-09-17T19:16:08.682Z"
+          "checked_at": "2026-09-17T19:34:58.772Z"
         }
       ],
       "preview_images": [
@@ -494,16 +512,7 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-09-17T11:37:18.476Z"
-        },
-        {
-          "title": "明日方舟：终末地官方动态",
-          "url": "https://www.bilibili.com/opus/1243336340836188166",
-          "type": "official_community",
-          "claims": [
-            "current_version"
-          ],
-          "checked_at": "2026-09-17T11:37:18.476Z"
+          "checked_at": "2026-09-17T19:35:30.493Z"
         },
         {
           "title": "明日方舟：终末地官方动态",
@@ -512,7 +521,17 @@
           "claims": [
             "current_version"
           ],
-          "checked_at": "2026-09-17T11:37:18.476Z"
+          "checked_at": "2026-09-17T19:35:30.493Z"
+        },
+        {
+          "title": "明日方舟：终末地官方动态",
+          "url": "https://www.bilibili.com/opus/1242943503767437320",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_up_characters"
+          ],
+          "checked_at": "2026-09-17T19:35:30.493Z"
         }
       ],
       "preview_images": []
@@ -552,19 +571,7 @@
             "preview_start_at",
             "preview_live_url"
           ],
-          "checked_at": "2026-09-17T19:17:22.596Z"
-        },
-        {
-          "title": "《异环》1.4版本前瞻特别节目回顾",
-          "url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
-          "type": "official_community",
-          "claims": [
-            "current_version",
-            "next_version",
-            "preview_status",
-            "preview_replay_url"
-          ],
-          "checked_at": "2026-09-17T19:17:22.595Z"
+          "checked_at": "2026-09-17T19:35:55.200Z"
         },
         {
           "title": "《异环》1.4版本前瞻特别节目回顾",
@@ -576,7 +583,31 @@
             "preview_status",
             "preview_replay_url"
           ],
-          "checked_at": "2026-09-17T19:17:22.595Z"
+          "checked_at": "2026-09-17T19:35:55.199Z"
+        },
+        {
+          "title": "《异环》1.4版本前瞻特别节目回顾",
+          "url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "next_version",
+            "preview_status",
+            "preview_replay_url"
+          ],
+          "checked_at": "2026-09-17T19:35:55.199Z"
+        },
+        {
+          "title": "《异环》1.4版本前瞻特别节目回顾",
+          "url": "https://www.bilibili.com/opus/1248647143052279848",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "next_version",
+            "preview_status",
+            "preview_replay_url"
+          ],
+          "checked_at": "2026-09-17T19:35:55.199Z"
         },
         {
           "title": "《异环》1.4前瞻特别节目 | 情报回顾",
@@ -588,7 +619,7 @@
             "preview_status",
             "preview_replay_url"
           ],
-          "checked_at": "2026-09-17T19:17:22.596Z"
+          "checked_at": "2026-09-17T19:35:55.199Z"
         },
         {
           "title": "《异环》1.4版本PV「祷歌为谁而诵」",
@@ -598,7 +629,27 @@
             "current_version",
             "next_version"
           ],
-          "checked_at": "2026-09-17T19:17:22.597Z"
+          "checked_at": "2026-09-17T19:35:55.200Z"
+        },
+        {
+          "title": "《异环》1.4版本PV「祷歌为谁而诵」",
+          "url": "https://www.bilibili.com/opus/1248871696789667861",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "next_version"
+          ],
+          "checked_at": "2026-09-17T19:35:55.200Z"
+        },
+        {
+          "title": "《异环》1.4版本PV「祷歌为谁而诵」",
+          "url": "https://www.bilibili.com/video/BV1jWej6hET5/",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "next_version"
+          ],
+          "checked_at": "2026-09-17T19:35:55.200Z"
         }
       ],
       "preview_images": [
