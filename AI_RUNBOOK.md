@@ -1,69 +1,102 @@
 # ChatGPT Scheduled Maintenance Runbook
 
-This repository is maintained primarily by a ChatGPT scheduled task using the built-in GitHub connector. GitHub Actions remains a deterministic validation/manual fallback. The scheduled task must not depend on AgentDock, the user's computer, or any local path.
+本仓库采用**纯 AI 驱动维护**。唯一维护执行者是 ChatGPT 定时任务，唯一仓库操作方式是 ChatGPT 自带 GitHub 连接器。
+
+仓库**故意不包含** Python tracker、collector、adapter、tests 或 GitHub Actions。未来维护任务不得重新引入这些旧链路，除非用户明确要求改变架构。
+
+禁止依赖 AgentDock、用户电脑、本地路径、git CLI、本地 clone、服务器常驻进程或其他外部执行环境。
 
 ## Mission
 
-Keep `data/games.json` accurate and compatible with the existing frontend for all supported games. Do not merely rerun the collector: independently detect stale facts, source-format changes, expired banners, newly announced previews/releases, and broken parsers, then repair the code and regenerate the data.
+直接维护 `data/games.json`，保证 9 个游戏的数据准确、完整、可追溯，并保持现有前端字段向后兼容。
 
-Supported games:
+支持游戏：
 
-- 原神 (`genshin`)
-- 崩坏：星穹铁道 (`starrail`)
-- 崩坏3 (`honkai3`)
-- 绝区零 (`zzz`)
-- 鸣潮 (`wuwa`)
-- 明日方舟：终末地 (`endfield`)
-- 异环 (`yh`)
-- 蔚蓝档案（日服） (`bluearchive_jp`)
-- 星塔旅人（国服） (`stellasora_cn`)
+- 原神
+- 崩坏：星穹铁道
+- 崩坏3
+- 绝区零
+- 鸣潮
+- 明日方舟：终末地
+- 异环
+- 蔚蓝档案（日服）
+- 星塔旅人（国服）
 
-## Daily execution procedure
+## 每轮执行流程
 
-1. Use the ChatGPT GitHub connector to reread the repository default branch and its latest commit. Read at least `README.md`, `AI_RUNBOOK.md`, `data/games.json`, `src/`, `tests/`, and `.github/workflows/`. Never substitute AgentDock, a local clone, git CLI, or the user's computer for connector access.
-2. Independently audit public information for every supported game. Prefer official game websites, official APIs, official community/news posts, and official authenticated social accounts. Search the web when needed. Check at minimum:
-   - current version/update and actual start time;
-   - next version/update and whether its date is confirmed or inferred;
-   - preview/special-program announcement/publication state;
-   - current version headline content;
-   - current UP/banner characters and exact start/end times.
-3. Maintain each game's `sources` array. Every source entry must contain `title`, non-empty `url`, `type` (`official_api`, `official`, `official_community`, or `secondary`), non-empty `claims`, and ISO 8601 `checked_at`. Record only URLs actually used to verify the run; deduplicate identical URLs. Prefer official sources and do not add filler links.
-4. Compare audited facts with adapter source code and the generated `data/games.json`. Pay special attention to hard-coded values in `src/main.py` and adapters. Expired banner data, historical content presented as current, a newly announced preview missed by the parser, or a collector that erases `sources` counts as a defect even if collection otherwise appears healthy.
-5. When facts or source formats changed, fix the adapter/parser or narrowly scoped fallback source-of-truth through the GitHub connector. Prefer durable parsing over one-off hard-coding. A hard-coded value is allowed only when backed by a current source and clearly scoped to that release. Never invent a launch date, banner, character, or preview state.
-6. Add/update regression tests for parser bugs, version transitions, `sources` preservation/validation, stale banners, version-number ordering, and collection safety whenever practical. Preserve all existing frontend fields and their types; `sources` is additive.
-7. Validate the final JSON before publishing:
-   - exactly 9 supported games are present;
-   - no supported game was silently dropped;
-   - all legacy top-level fields remain present;
-   - every game has a valid `sources` array;
-   - source URLs are non-empty and `checked_at` parses as ISO 8601;
-   - confirmed facts are not replaced by weaker estimates;
-   - current version start dates are not in the future;
-   - day counters are never negative;
-   - expired banners do not remain populated as though current;
-   - a future preview never becomes the current release by accident;
-   - `3.9` sorts before `3.10`;
-   - a partial collector failure cannot overwrite the last complete JSON.
-8. Before writing, reread the latest default-branch head. If the remote changed during the run, incorporate only compatible changes; never force-push and never overwrite unrelated parallel work.
-9. Review the final diff and exclude temporary files, logs, credentials, caches, or environment-specific artifacts.
-10. Use GitHub Actions/CI when the connector exposes the required action. If direct workflow dispatch is unavailable, rely on push-triggered CI for source/test/data changes and inspect its actual run/status. Do not claim tests ran when no execution environment was available.
-11. Only after validation succeeds, create a meaningful commit and fast-forward the default branch through the GitHub connector. If no substantive change exists, do not manufacture an empty commit.
-12. Report all nine games, main source URLs, changed facts/code, tests/CI results, commit hash, push status, and remaining uncertainty.
+1. 使用 GitHub 连接器重新读取默认分支最新状态，至少读取 `README.md`、`AI_RUNBOOK.md`、`data/games.json`，并记录当前 HEAD。禁止使用旧缓存直接写回。
+2. 联网独立核验全部 9 个游戏。每个游戏至少检查：
+   - 当前版本；
+   - 当前版本实际开始时间；
+   - 下一版本；
+   - 下一版本上线时间或预计时间；
+   - 前瞻/直播状态；
+   - 当前版本主要内容；
+   - 当前 UP / 卡池角色；
+   - 卡池开始时间；
+   - 卡池结束时间。
+3. 信源优先级：官方 API / 官网 > 官方公告 / 官方社区 > 官方认证账号 > 可靠二级来源。不得使用社区猜测覆盖官方信息。
+4. 直接修改 `data/games.json`。不要寻找或运行 collector，因为仓库不存在 collector。
+5. 每个游戏维护 `sources` 数组。每条来源必须包含：
+   - `title`；
+   - 非空 `url`；
+   - `type`：`official_api`、`official`、`official_community`、`secondary` 之一；
+   - 非空 `claims`；
+   - 可解析的 ISO 8601 `checked_at`。
+6. 只记录本轮真正用于核验的 URL；同一 URL 不重复。某个来源本轮没有成功核验时，不要刷新它的 `checked_at` 来伪装为已验证。
+7. 根据已核实日期重新计算天数类字段；天数不得为负。日期跨日、跨月、跨年和时区必须按来源所在地/服务器语义处理。
+8. 重点防止以下错误：
+   - `3.9` 与 `3.10` 按字符串错误排序；
+   - 前瞻版本覆盖当前版本；
+   - 直播日期被当作上线日期；
+   - 卡池已结束仍显示当前角色；
+   - 已进入第二期却继续显示第一期角色；
+   - 未官宣版本被历史周期标成“确认”；
+   - 旧版本日期被复用于新版本；
+   - WAF / 429 / 临时网络错误导致错误清空数据；
+   - 某一游戏核验失败后把完整 JSON 覆盖为残缺数据。
+9. 如果某个游戏本轮无法获得足够可靠的新证据：保留它上一次已验证的数据和原有来源，不要编造，也不要假装本轮已核验成功；在最终报告中明确说明。
+10. 提交前做逻辑验证：
+    - `games` 中恰好有 9 个目标游戏；
+    - 原有前端字段全部保留；
+    - 每个游戏都有合法 `sources`；
+    - URL 非空；
+    - ISO 日期可解析；
+    - 天数不为负；
+    - 已结束卡池不伪装成进行中；
+    - 当前版本不会被未来前瞻覆盖；
+    - 预计时间与官方确认时间语义明确区分。
+11. 写入前再次读取默认分支 HEAD 与 `data/games.json`。如果远端在本轮过程中发生变化，只整合兼容修改；不得 force push，不得覆盖无关并行改动。
+12. 仅在存在实质变化时通过 GitHub 连接器提交并推送。通常只需要改 `data/games.json`；只有维护规则本身变化时才修改文档。
+13. 最终报告必须包含：9 个游戏逐项核验结果、主要信源、修改内容、未确认项、commit hash 和 push 状态。
 
-## Evidence and confidence rules
+## 数据契约
 
-- Prefer official sources. Third-party wikis, aggregators, Reddit, search snippets, and fan posts may help discovery but must not override an available official source.
-- Distinguish confirmed dates from estimates. Existing cycle logic may remain as an explicit estimate, but must never be described as official confirmation.
-- Do not treat a preview/live-stream date as the version launch date.
-- If official sources disagree or are temporarily unreachable, preserve the last known-good verified data rather than replacing it with a guess.
-- Never publish partial collection results after one adapter fails.
-- Never change the JSON contract merely to make collection easier; this repository feeds an existing frontend.
+每个游戏继续保留现有前端字段，包括但不限于：
 
-## Repository roles
+- `game_name`
+- `current_version`
+- `current_content`
+- `current_version_days`
+- `next_version`
+- `next_content`
+- `preview_status`
+- `days_to_next_version`
+- `current_up_characters`
+- `current_up_start_at`
+- `current_up_end_at`
+- `current_up_days_remaining`
+- `sources`
 
-- `src/games/*.py`: source-specific collectors/parsers.
-- `src/main.py`: normalization, compatibility fields, source metadata, and limited fallbacks.
-- `tests/`: regression protection for parsing and collection safety.
-- `data/games.json`: generated publication artifact, not the sole source of truth.
-- `.github/workflows/collect.yml`: manual fallback collector.
-- `.github/workflows/ci.yml`: push/PR regression validation for collector/data changes.
+`sources` 是正式数据契约的一部分，不得静默删除。
+
+## 架构约束
+
+以下目录/文件在纯 AI 架构中不应存在：
+
+- `src/`
+- `tests/`
+- `.github/workflows/`
+- Python tracker / adapter / parser
+
+不要因为“需要验证”而自动重建它们。验证由 AI 对数据结构、日期、来源和 GitHub diff 的直接检查完成。
