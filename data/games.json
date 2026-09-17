@@ -14,10 +14,10 @@
         "薇斯纳、沃雅妮莎"
       ],
       "preview_status": "已发布",
-      "preview_title": null,
-      "preview_start_at": null,
-      "preview_live_url": null,
-      "preview_replay_url": null,
+      "preview_title": "《原神》7.1版本「往冥府的安魂歌」前瞻特别节目",
+      "preview_start_at": "2026-09-12T20:00:00+08:00",
+      "preview_live_url": "https://live.bilibili.com/21987615",
+      "preview_replay_url": "https://www.bilibili.com/video/BV1znY96NEvn/",
       "days_to_next_version": 6,
       "current_up_characters": [
         "菲林斯",
@@ -33,12 +33,70 @@
           "type": "official_community",
           "claims": [
             "next_version",
+            "preview_status",
+            "preview_title",
+            "preview_replay_url"
+          ],
+          "checked_at": "2026-09-17T11:35:23.641Z"
+        },
+        {
+          "title": "原神官方动态",
+          "url": "https://www.bilibili.com/opus/1245176354215821411",
+          "type": "official_community",
+          "claims": [
+            "preview_status",
+            "preview_title",
+            "preview_start_at",
+            "preview_live_url"
+          ],
+          "checked_at": "2026-09-17T11:35:23.641Z"
+        },
+        {
+          "title": "原神官方动态",
+          "url": "https://www.bilibili.com/opus/1247177845456764953",
+          "type": "official_community",
+          "claims": [
+            "next_version",
             "preview_status"
           ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
+          "checked_at": "2026-09-17T11:35:23.641Z"
+        },
+        {
+          "title": "原神官方动态",
+          "url": "https://www.bilibili.com/opus/1247775189520875526",
+          "type": "official_community",
+          "claims": [
+            "next_version",
+            "next_content"
+          ],
+          "checked_at": "2026-09-17T11:35:23.642Z"
+        },
+        {
+          "title": "原神官方动态",
+          "url": "https://www.bilibili.com/opus/1247866672298065921",
+          "type": "official_community",
+          "claims": [
+            "next_version",
+            "next_content"
+          ],
+          "checked_at": "2026-09-17T11:35:23.642Z"
+        },
+        {
+          "title": "原神官方动态",
+          "url": "https://www.bilibili.com/opus/1248144986200866822",
+          "type": "official_community",
+          "claims": [
+            "next_version"
+          ],
+          "checked_at": "2026-09-17T11:35:23.642Z"
         }
       ],
-      "preview_images": []
+      "preview_images": [
+        "https://game-version-tracker.pages.dev/media/genshin/1247177845456764953/01.png",
+        "https://game-version-tracker.pages.dev/media/genshin/1247177845456764953/02.png",
+        "https://game-version-tracker.pages.dev/media/genshin/1247177845456764953/03.png",
+        "https://game-version-tracker.pages.dev/media/genshin/1247177845456764953/04.png"
+      ]
     },
     {
       "game_name": "崩坏：星穹铁道",
@@ -52,9 +110,9 @@
       "next_version": "4.6",
       "next_content": [],
       "preview_status": "已官宣待发布",
-      "preview_title": null,
-      "preview_start_at": null,
-      "preview_live_url": null,
+      "preview_title": "4.6版本「月升之前，与兽共舞」前瞻特别节目",
+      "preview_start_at": "2026-09-20T19:30:00+08:00",
+      "preview_live_url": "http://live.bilibili.com/27263119",
       "preview_replay_url": null,
       "days_to_next_version": 11,
       "current_up_characters": [
@@ -64,8 +122,45 @@
       "current_up_start_at": "2026-09-12T12:00:00+08:00",
       "current_up_end_at": "2026-09-28T03:59:00+08:00",
       "current_up_days_remaining": 11,
-      "sources": [],
-      "preview_images": []
+      "sources": [
+        {
+          "title": "崩坏：星穹铁道官方动态",
+          "url": "https://www.bilibili.com/opus/1247866687345131575",
+          "type": "official_community",
+          "claims": [
+            "next_version",
+            "preview_status",
+            "preview_title",
+            "preview_start_at",
+            "preview_live_url"
+          ],
+          "checked_at": "2026-09-17T11:35:38.379Z"
+        },
+        {
+          "title": "崩坏：星穹铁道官方动态",
+          "url": "https://www.bilibili.com/opus/1246320484110303233",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_up_characters",
+            "current_up_start_at",
+            "current_up_end_at"
+          ],
+          "checked_at": "2026-09-17T11:35:38.380Z"
+        },
+        {
+          "title": "崩坏：星穹铁道官方动态",
+          "url": "https://www.bilibili.com/opus/1244047587382657065",
+          "type": "official_community",
+          "claims": [
+            "current_version"
+          ],
+          "checked_at": "2026-09-17T11:35:38.379Z"
+        }
+      ],
+      "preview_images": [
+        "https://game-version-tracker.pages.dev/media/starrail/1247866687345131575/01.jpg"
+      ]
     },
     {
       "game_name": "崩坏3",
@@ -78,19 +173,60 @@
       ],
       "current_version_days": 56,
       "next_version": "9.1",
-      "next_content": [],
-      "preview_status": "已发布",
-      "preview_title": null,
-      "preview_start_at": null,
-      "preview_live_url": null,
+      "next_content": [
+        "全新S级角色寻梦者「时序之律者」",
+        "主线第二部后日谈「海正用火的声音歌唱」",
+        "主题活动「相遇♪回忆玩具小屋」"
+      ],
+      "preview_status": "已官宣待发布",
+      "preview_title": "《崩坏3》十周年庆典特别节目",
+      "preview_start_at": "2026-09-19T19:30:00+08:00",
+      "preview_live_url": "https://live.bilibili.com/1319882",
       "preview_replay_url": null,
       "days_to_next_version": 7,
       "current_up_characters": [],
       "current_up_start_at": null,
       "current_up_end_at": null,
       "current_up_days_remaining": null,
-      "sources": [],
-      "preview_images": []
+      "sources": [
+        {
+          "title": "崩坏3官方动态",
+          "url": "https://www.bilibili.com/opus/1248237866975232022",
+          "type": "official_community",
+          "claims": [
+            "next_version",
+            "next_content",
+            "preview_status",
+            "preview_title",
+            "preview_start_at",
+            "preview_live_url"
+          ],
+          "checked_at": "2026-09-17T11:36:00.932Z"
+        },
+        {
+          "title": "崩坏3官方动态",
+          "url": "https://www.bilibili.com/opus/1226345020712288272",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_content"
+          ],
+          "checked_at": "2026-09-17T11:36:00.933Z"
+        },
+        {
+          "title": "《崩坏3》全新S级角色寻梦者「时序之律者」预告",
+          "url": "https://www.bilibili.com/video/BV1URtJ65EUi/",
+          "type": "official_community",
+          "claims": [
+            "next_version",
+            "next_content"
+          ],
+          "checked_at": "2026-09-17T11:36:00.932Z"
+        }
+      ],
+      "preview_images": [
+        "https://game-version-tracker.pages.dev/media/honkai3/1248237866975232022/01.png"
+      ]
     },
     {
       "game_name": "绝区零",
@@ -116,7 +252,39 @@
       "current_up_start_at": "2026-09-09T11:00:00+08:00",
       "current_up_end_at": "2026-09-30T11:59:00+08:00",
       "current_up_days_remaining": 13,
-      "sources": [],
+      "sources": [
+        {
+          "title": "绝区零官方动态",
+          "url": "https://www.bilibili.com/opus/1245903013258723330",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_up_characters",
+            "current_content"
+          ],
+          "checked_at": "2026-09-17T11:36:24.798Z"
+        },
+        {
+          "title": "绝区零官方动态",
+          "url": "https://www.bilibili.com/opus/1246011246430388226",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_up_characters"
+          ],
+          "checked_at": "2026-09-17T11:36:24.797Z"
+        },
+        {
+          "title": "绝区零官方动态",
+          "url": "https://www.bilibili.com/opus/1246289560334237721",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_content"
+          ],
+          "checked_at": "2026-09-17T11:36:24.798Z"
+        }
+      ],
       "preview_images": []
     },
     {
@@ -146,7 +314,7 @@
       "current_up_days_remaining": 12,
       "sources": [
         {
-          "title": "《鸣潮》3.7版本前瞻通讯开播预告",
+          "title": "鸣潮官方动态",
           "url": "https://www.bilibili.com/opus/1247016279533944960",
           "type": "official_community",
           "claims": [
@@ -156,31 +324,54 @@
             "preview_start_at",
             "preview_live_url"
           ],
-          "checked_at": "2026-09-17T18:28:14+08:00"
+          "checked_at": "2026-09-17T11:36:48.732Z"
         },
         {
-          "title": "《鸣潮》3.6版本官方动态（景燃）",
+          "title": "鸣潮官方动态",
+          "url": "https://www.bilibili.com/opus/1245906878755504151",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_up_characters",
+            "current_up_start_at",
+            "current_up_end_at"
+          ],
+          "checked_at": "2026-09-17T11:36:48.733Z"
+        },
+        {
+          "title": "鸣潮官方动态",
           "url": "https://www.bilibili.com/opus/1246274109191487496",
           "type": "official_community",
           "claims": [
             "current_version",
-            "current_content",
-            "banner"
+            "current_up_characters"
           ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
+          "checked_at": "2026-09-17T11:36:48.734Z"
         },
         {
-          "title": "《鸣潮》3.6版本官方动态（绯雪）",
+          "title": "鸣潮官方动态",
           "url": "https://www.bilibili.com/opus/1246645589513338950",
           "type": "official_community",
           "claims": [
             "current_version",
-            "banner"
+            "current_up_characters"
           ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
+          "checked_at": "2026-09-17T11:36:48.734Z"
+        },
+        {
+          "title": "鸣潮官方动态",
+          "url": "https://www.bilibili.com/opus/1246011246464991238",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_up_characters"
+          ],
+          "checked_at": "2026-09-17T11:36:48.734Z"
         }
       ],
-      "preview_images": []
+      "preview_images": [
+        "https://game-version-tracker.pages.dev/media/wuwa/1247016279533944960/01.jpg"
+      ]
     },
     {
       "game_name": "明日方舟：终末地",
@@ -207,7 +398,36 @@
       "current_up_start_at": "2026-09-02T12:00:00+08:00",
       "current_up_end_at": "2026-09-30T11:59:00+08:00",
       "current_up_days_remaining": 13,
-      "sources": [],
+      "sources": [
+        {
+          "title": "明日方舟：终末地官方动态",
+          "url": "https://www.bilibili.com/opus/1243328998550798341",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_up_characters"
+          ],
+          "checked_at": "2026-09-17T11:37:18.476Z"
+        },
+        {
+          "title": "明日方舟：终末地官方动态",
+          "url": "https://www.bilibili.com/opus/1243336340836188166",
+          "type": "official_community",
+          "claims": [
+            "current_version"
+          ],
+          "checked_at": "2026-09-17T11:37:18.476Z"
+        },
+        {
+          "title": "明日方舟：终末地官方动态",
+          "url": "https://www.bilibili.com/opus/1248516071385726995",
+          "type": "official_community",
+          "claims": [
+            "current_version"
+          ],
+          "checked_at": "2026-09-17T11:37:18.476Z"
+        }
+      ],
       "preview_images": []
     },
     {
@@ -246,20 +466,39 @@
             "preview_start_at",
             "preview_live_url"
           ],
-          "checked_at": "2026-09-17T18:45:00+08:00"
+          "checked_at": "2026-09-17T11:37:35.635Z"
         },
         {
           "title": "《异环》1.4版本前瞻特别节目回顾",
           "url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
           "type": "official_community",
           "claims": [
+            "current_version",
+            "next_version",
             "preview_status",
             "preview_replay_url"
           ],
-          "checked_at": "2026-09-17T18:45:00+08:00"
+          "checked_at": "2026-09-17T11:37:35.634Z"
+        },
+        {
+          "title": "《异环》1.4前瞻特别节目 | 情报回顾",
+          "url": "https://www.bilibili.com/opus/1248642343433666584",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "next_version",
+            "preview_status",
+            "preview_replay_url"
+          ],
+          "checked_at": "2026-09-17T11:37:35.634Z"
         }
       ],
-      "preview_images": []
+      "preview_images": [
+        "https://game-version-tracker.pages.dev/media/yh/1248642341258919952/01.jpg",
+        "https://game-version-tracker.pages.dev/media/yh/1248642341258919952/02.jpg",
+        "https://game-version-tracker.pages.dev/media/yh/1248642341258919952/03.jpg",
+        "https://game-version-tracker.pages.dev/media/yh/1248642341258919952/04.jpg"
+      ]
     },
     {
       "game_name": "星塔旅人（国服）",
@@ -284,7 +523,50 @@
       "current_up_start_at": "2026-09-08T17:00:00+08:00",
       "current_up_end_at": "2026-09-29T10:59:00+08:00",
       "current_up_days_remaining": 12,
-      "sources": [],
+      "sources": [
+        {
+          "title": "星塔旅人官方动态",
+          "url": "https://www.bilibili.com/opus/1245625002202497058",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_content",
+            "current_up_characters",
+            "current_up_end_at"
+          ],
+          "checked_at": "2026-09-17T11:38:09.066Z"
+        },
+        {
+          "title": "星塔旅人官方动态",
+          "url": "https://www.bilibili.com/opus/1245625225490464776",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_content"
+          ],
+          "checked_at": "2026-09-17T11:38:09.066Z"
+        },
+        {
+          "title": "星塔旅人官方动态",
+          "url": "https://www.bilibili.com/opus/1244519174793855032",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_content"
+          ],
+          "checked_at": "2026-09-17T11:38:09.067Z"
+        },
+        {
+          "title": "星塔旅人官方动态",
+          "url": "https://www.bilibili.com/opus/1245624761625608195",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "current_content"
+          ],
+          "checked_at": "2026-09-17T11:38:09.067Z"
+        }
+      ],
       "preview_images": []
     }
   ]
