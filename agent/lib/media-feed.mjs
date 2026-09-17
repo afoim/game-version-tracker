@@ -178,7 +178,7 @@ export function buildMediaFeed({ dataset, mediaByGame, baseUrl, generatedAt = nu
           title: '版本状态',
           description: '当前版本、下版本、前瞻、官方影像与当期 UP',
           props: {
-            columns: { base: 1, md: 2, xl: 4 },
+            columns: { base: 1, md: 2, xl: 2 },
             show_preview: true,
             show_up: true,
             show_sources: true,

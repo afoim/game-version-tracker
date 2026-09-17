@@ -94,7 +94,7 @@ test('builds server-driven feed with ui, real data and media resources', () => {
   assert.equal(feed.schema_version, 2);
   assert.equal(feed.ui.sections.length, 1);
   assert.equal(feed.ui.sections[0].component, 'game_status_grid');
-  assert.equal(feed.ui.sections[0].props.columns.xl, 4);
+  assert.equal(feed.ui.sections[0].props.columns.xl, 2);
   assert.equal(feed.ui.sections[0].props.embedded_media.source, 'media.items');
   assert.equal(feed.ui.sections[0].props.embedded_media.limit_per_game, 4);
   assert.deepEqual(feed.ui.sections[0].props.embedded_media.categories, [
