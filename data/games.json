@@ -28,17 +28,6 @@
       "current_up_days_remaining": 5,
       "sources": [
         {
-          "title": "HoYoLAB official community API",
-          "url": "https://bbs-api-os.hoyolab.com/community/post/wapi",
-          "type": "official_api",
-          "claims": [
-            "current_version",
-            "current_version_start",
-            "preview_status"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        },
-        {
           "title": "《原神》7.1版本「往冥府的安魂歌」前瞻特别节目",
           "url": "https://www.bilibili.com/video/BV1znY96NEvn/",
           "type": "official_community",
@@ -47,17 +36,9 @@
             "preview_status"
           ],
           "checked_at": "2026-09-17T15:05:51+08:00"
-        },
-        {
-          "title": "原神 7.0 版本第二期活动祈愿",
-          "url": "https://www.sina.cn/news/detail/5338307702558236.html",
-          "type": "official_community",
-          "claims": [
-            "banner"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
         }
-      ]
+      ],
+      "preview_images": []
     },
     {
       "game_name": "崩坏：星穹铁道",
@@ -83,46 +64,8 @@
       "current_up_start_at": "2026-09-12T12:00:00+08:00",
       "current_up_end_at": "2026-09-28T03:59:00+08:00",
       "current_up_days_remaining": 11,
-      "sources": [
-        {
-          "title": "HoYoLAB official community API",
-          "url": "https://bbs-api-os.hoyolab.com/community/post/wapi",
-          "type": "official_api",
-          "claims": [
-            "current_version",
-            "current_version_start"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        },
-        {
-          "title": "4.5版本活动跃迁（其二）",
-          "url": "https://www.taptap.cn/moment/846770765180174809",
-          "type": "official_community",
-          "claims": [
-            "banner"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        },
-        {
-          "title": "4.6版本「月升之前，与兽共舞」前瞻特别节目预告",
-          "url": "https://www.taptap.cn/moment/848576715130145834",
-          "type": "official_community",
-          "claims": [
-            "next_version",
-            "preview_status"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        },
-        {
-          "title": "Version 4.5 update details mirror (source: HoYoverse)",
-          "url": "https://honkai.gg/version-4-5-to-roll-the-stars-in-astropolis-update-details/",
-          "type": "secondary",
-          "claims": [
-            "next_version"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        }
-      ]
+      "sources": [],
+      "preview_images": []
     },
     {
       "game_name": "崩坏3",
@@ -146,29 +89,8 @@
       "current_up_start_at": null,
       "current_up_end_at": null,
       "current_up_days_remaining": null,
-      "sources": [
-        {
-          "title": "《崩坏3》官方网站",
-          "url": "https://bh3.mihoyo.com/",
-          "type": "official",
-          "claims": [
-            "current_version",
-            "current_version_start",
-            "current_content"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        },
-        {
-          "title": "《崩坏3》9.1版本「时序之律者」官方预告",
-          "url": "https://www.sina.cn/news/detail/5338268690548185.html",
-          "type": "official_community",
-          "claims": [
-            "next_version",
-            "preview_status"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        }
-      ]
+      "sources": [],
+      "preview_images": []
     },
     {
       "game_name": "绝区零",
@@ -194,28 +116,8 @@
       "current_up_start_at": "2026-09-09T11:00:00+08:00",
       "current_up_end_at": "2026-09-30T11:59:00+08:00",
       "current_up_days_remaining": 13,
-      "sources": [
-        {
-          "title": "HoYoLAB official community API",
-          "url": "https://bbs-api-os.hoyolab.com/community/post/wapi",
-          "type": "official_api",
-          "claims": [
-            "current_version",
-            "current_version_start",
-            "preview_status"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        },
-        {
-          "title": "Zenless Zone Zero Version 3.2 Phase I Signal Search",
-          "url": "https://zenless.hoyoverse.com/m/fr-fr/news/165979",
-          "type": "official",
-          "claims": [
-            "banner"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        }
-      ]
+      "sources": [],
+      "preview_images": []
     },
     {
       "game_name": "鸣潮",
@@ -229,9 +131,9 @@
       "next_version": "3.7",
       "next_content": [],
       "preview_status": "已官宣待发布",
-      "preview_title": null,
-      "preview_start_at": null,
-      "preview_live_url": null,
+      "preview_title": "《鸣潮》3.7版本前瞻通讯",
+      "preview_start_at": "2026-09-19T19:00:00+08:00",
+      "preview_live_url": "https://live.bilibili.com/27354807",
       "preview_replay_url": null,
       "days_to_next_version": 14,
       "current_up_characters": [
@@ -244,16 +146,17 @@
       "current_up_days_remaining": 12,
       "sources": [
         {
-          "title": "《鸣潮》TapTap 官方论坛",
-          "url": "https://www.taptap.cn/app/234280/topic?type=official",
+          "title": "《鸣潮》3.7版本前瞻通讯开播预告",
+          "url": "https://www.bilibili.com/opus/1247016279533944960",
           "type": "official_community",
           "claims": [
-            "current_version",
             "next_version",
             "preview_status",
-            "banner"
+            "preview_title",
+            "preview_start_at",
+            "preview_live_url"
           ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
+          "checked_at": "2026-09-17T18:28:14+08:00"
         },
         {
           "title": "《鸣潮》3.6版本官方动态（景燃）",
@@ -276,7 +179,8 @@
           ],
           "checked_at": "2026-09-17T15:05:51+08:00"
         }
-      ]
+      ],
+      "preview_images": []
     },
     {
       "game_name": "明日方舟：终末地",
@@ -303,20 +207,8 @@
       "current_up_start_at": "2026-09-02T12:00:00+08:00",
       "current_up_end_at": "2026-09-30T11:59:00+08:00",
       "current_up_days_remaining": 13,
-      "sources": [
-        {
-          "title": "「雪凇幽梦」版本更新说明",
-          "url": "https://endfield.hypergryph.com/news/2653",
-          "type": "official",
-          "claims": [
-            "current_version",
-            "current_version_start",
-            "current_content",
-            "banner"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        }
-      ]
+      "sources": [],
+      "preview_images": []
     },
     {
       "game_name": "异环",
@@ -332,8 +224,8 @@
       "preview_status": "已发布",
       "preview_title": "《异环》1.4版本「祷歌为谁而诵」前瞻特别节目",
       "preview_start_at": "2026-09-16T19:30:00+08:00",
-      "preview_live_url": null,
-      "preview_replay_url": "https://www.youtube.com/watch?v=boXt6AVFOHI",
+      "preview_live_url": "https://live.bilibili.com/1890951177",
+      "preview_replay_url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
       "days_to_next_version": 7,
       "current_up_characters": [
         "灵可",
@@ -345,94 +237,29 @@
       "sources": [
         {
           "title": "《异环》1.4版本前瞻特别节目丨开播预告",
-          "url": "https://www.taptap.cn/moment/847148349596372316",
+          "url": "https://www.bilibili.com/opus/1246366880450478133",
           "type": "official_community",
           "claims": [
             "next_version",
             "preview_status",
             "preview_title",
-            "preview_start_at"
+            "preview_start_at",
+            "preview_live_url"
           ],
-          "checked_at": "2026-09-17T10:08:37.930Z"
+          "checked_at": "2026-09-17T18:45:00+08:00"
         },
         {
-          "title": "『NTE』Ver.1.4予告番組",
-          "url": "https://www.youtube.com/watch?v=boXt6AVFOHI",
+          "title": "《异环》1.4版本前瞻特别节目回顾",
+          "url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
           "type": "official_community",
           "claims": [
+            "preview_status",
             "preview_replay_url"
           ],
-          "checked_at": "2026-09-17T10:08:37.930Z"
-        },
-        {
-          "title": "《异环》1.4版本前瞻特别节目 | 情报回顾",
-          "url": "https://yh.wanmei.com/news/gamebroad/20260916/264201.html",
-          "type": "official",
-          "claims": [
-            "next_version",
-            "preview_status"
-          ],
-          "checked_at": "2026-09-17T18:04:22+08:00"
-        },
-        {
-          "title": "「全频带漫游中！」限定棋盘",
-          "url": "https://www.taptap.cn/moment/843817957036392944",
-          "type": "official_community",
-          "claims": [
-            "banner"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        },
-        {
-          "title": "限定S级角色「浔」返场",
-          "url": "https://www.taptap.cn/moment/843878663509246370",
-          "type": "official_community",
-          "claims": [
-            "banner"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
+          "checked_at": "2026-09-17T18:45:00+08:00"
         }
-      ]
-    },
-    {
-      "game_name": "蔚蓝档案（日服）",
-      "current_version": "2026/09/09 更新",
-      "current_content": [
-        "主线剧情更新",
-        "活动内容更新"
       ],
-      "current_version_days": 8,
-      "next_version": "2026/09/23 更新（预计）",
-      "next_content": [],
-      "preview_status": "未官宣",
-      "preview_title": null,
-      "preview_start_at": null,
-      "preview_live_url": null,
-      "preview_replay_url": null,
-      "days_to_next_version": 6,
-      "current_up_characters": [
-        "霞（水着）",
-        "圣娅（水着）",
-        "莲见（水着）",
-        "萌绘（水着）",
-        "吹雪（水着）"
-      ],
-      "current_up_start_at": "2026-09-09T17:00:00+09:00",
-      "current_up_end_at": "2026-09-23T10:59:00+09:00",
-      "current_up_days_remaining": 6,
-      "sources": [
-        {
-          "title": "ブルーアーカイブ公式ニュース API",
-          "url": "https://api-web.bluearchive.jp/api/news",
-          "type": "official_api",
-          "claims": [
-            "current_version",
-            "current_version_start",
-            "current_content"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        }
-      ]
+      "preview_images": []
     },
     {
       "game_name": "星塔旅人（国服）",
@@ -457,29 +284,8 @@
       "current_up_start_at": "2026-09-08T17:00:00+08:00",
       "current_up_end_at": "2026-09-29T10:59:00+08:00",
       "current_up_days_remaining": 12,
-      "sources": [
-        {
-          "title": "《星塔旅人》TapTap 官方页",
-          "url": "https://www.taptap.cn/app/733498",
-          "type": "official_community",
-          "claims": [
-            "current_version",
-            "current_content",
-            "banner"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        },
-        {
-          "title": "《星塔旅人》TapTap 官方论坛",
-          "url": "https://www.taptap.cn/app/733498/topic",
-          "type": "official_community",
-          "claims": [
-            "current_content",
-            "banner"
-          ],
-          "checked_at": "2026-09-17T15:05:51+08:00"
-        }
-      ]
+      "sources": [],
+      "preview_images": []
     }
   ]
 }

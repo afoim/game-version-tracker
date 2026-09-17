@@ -6,7 +6,6 @@ export const GAME_NAMES = [
   '鸣潮',
   '明日方舟：终末地',
   '异环',
-  '蔚蓝档案（日服）',
   '星塔旅人（国服）',
 ];
 
@@ -25,6 +24,11 @@ export function validateGame(game, { evidenceUrls = null, requireEvidenceSources
   for (const key of ['preview_title', 'preview_start_at', 'preview_live_url', 'preview_replay_url']) {
     assert(game[key] === null || typeof game[key] === 'string', `${game.game_name}.${key} 必须是字符串或 null`);
   }
+  assert(Array.isArray(game.preview_images), `${game.game_name}.preview_images 必须是数组`);
+  assert(
+    game.preview_images.every((value) => typeof value === 'string' && /^https?:\/\//.test(value)),
+    `${game.game_name}.preview_images 只能包含 HTTP(S) URL`,
+  );
   if (game.preview_start_at !== null) {
     assert(Number.isFinite(Date.parse(game.preview_start_at)), `${game.game_name}.preview_start_at 必须是有效日期或 null`);
   }
@@ -78,6 +82,7 @@ export function validateDataset(dataset) {
 function factView(game) {
   const clone = structuredClone(game);
   delete clone.sources;
+  delete clone.preview_images;
   return clone;
 }
 
@@ -87,14 +92,12 @@ export function hasMeaningfulChange(before, after) {
 
 export function validateAssignments(assignments) {
   assert(Array.isArray(assignments), 'main-agent assignments 必须是数组');
-  assert(assignments.length === GAME_NAMES.length, 'main-agent 必须分配全部 9 个游戏');
+  assert(assignments.length === GAME_NAMES.length, `main-agent 必须分配全部 ${GAME_NAMES.length} 个游戏`);
   const names = assignments.map((item) => item?.game_name);
   assert(new Set(names).size === GAME_NAMES.length, 'main-agent 分配存在重复或缺失');
   for (const name of GAME_NAMES) assert(names.includes(name), `main-agent 未分配: ${name}`);
   for (const item of assignments) {
     assert(typeof item.objective === 'string' && item.objective.length > 0, `${item.game_name} 缺少 objective`);
-    assert(Array.isArray(item.queries) && item.queries.length >= 1, `${item.game_name} 至少需要 1 个搜索查询`);
-    assert(item.queries.every((q) => typeof q === 'string' && q.length > 0), `${item.game_name} queries 非法`);
   }
   return true;
 }
@@ -142,10 +145,17 @@ export function collectReviewIssues({ currentDataset, proposedDataset, childResu
         issues.push(`${gameName}: child-agent 标记 verified，但没有本轮 Playwright 成功读取的外部来源`);
       }
       const evidenceUrls = new Set(evidence.map((item) => item.url));
+      const evidenceByUrl = new Map(evidence.map((item) => [item.url, item]));
       try {
         validateGame(reviewCandidate, { evidenceUrls, requireEvidenceSources: true });
       } catch (error) {
         issues.push(`${gameName}: ${error.message}`);
+      }
+      for (const source of reviewCandidate.sources || []) {
+        const item = evidenceByUrl.get(source.url);
+        if (!String(item?.discovered_by || '').startsWith('bilibili-official:')) {
+          issues.push(`${gameName}: 来源不是固定 Bilibili 官方账号 evidence: ${source.url}`);
+        }
       }
     } else if (child.verification_status === 'insufficient') {
       // Evidence can legitimately be unavailable or too weak for a single game.

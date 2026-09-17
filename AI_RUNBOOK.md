@@ -1,6 +1,6 @@
 # AI_RUNBOOK
 
-本仓库由 `.github/workflows/ai-tracker.yml` 定时维护 `data/games.json`。
+本仓库由 `.github/workflows/ai-tracker.yml` 定时维护 `data/games.json` 与 `data/media/**`。
 
 ## 执行链
 
@@ -8,15 +8,15 @@
 GitHub Actions
   -> main-agent
   -> Playwright search-worker
-  -> 9 个 child-agent
+  -> 8 个 child-agent
   -> review-agent
-  -> approved 后写 data/games.json
+  -> approved 后写 data/games.json + data/media/**
   -> git commit / push
 ```
 
 ## main-agent
 
-main-agent 读取当前 `data/games.json`，必须为以下 9 个游戏各生成一个独立任务，不得遗漏或重复：
+main-agent 读取当前 `data/games.json`，必须为以下 8 个游戏各生成一个独立任务，不得遗漏或重复：
 
 1. 原神
 2. 崩坏：星穹铁道
@@ -25,26 +25,19 @@ main-agent 读取当前 `data/games.json`，必须为以下 9 个游戏各生成
 5. 鸣潮
 6. 明日方舟：终末地
 7. 异环
-8. 蔚蓝档案（日服）
-9. 星塔旅人（国服）
+8. 星塔旅人（国服）
 
-main-agent 只负责拆分核验目标和生成搜索查询，不直接修改仓库。
+main-agent 只负责拆分核验目标，不直接修改仓库，也不生成搜索查询。
 
 ## search-worker
 
-搜索与网页读取由 Playwright 完成，AI 不自行联网。
+网页读取由 Playwright 完成，AI 不自行联网。search-worker 不使用 Bing、DuckDuckGo 或其他搜索引擎。
 
-每个游戏优先核验：
+每个游戏只读取程序内固定白名单中的 Bilibili 官方账号空间。Playwright 打开官方账号的动态页，截获 Bilibili 页面自身发出的、带 WBI 签名的 `/x/polymer/web-dynamic/v1/feed/space` 请求，并从最近动态与官方视频中挑选与当前版本、下一版本、前瞻和卡池最相关的 evidence。
 
-- 官方 API / 官方网站
-- 官方公告 / 官方社区
-- 下一版本前瞻/特别节目的官宣时间、官方直播地址，以及节目结束后的官方录播/回放
-- 现有 `sources`
-- 公开搜索发现的可靠页面
+不会使用官网、TapTap、微博、HoYoLAB、YouTube、新闻站或第三方搬运作为新一轮事实来源。历史非 Bilibili `sources` 仅作为旧数据留存，待该游戏下一次 verified 后由 Bilibili 官方来源替换。
 
-Playwright 读取正文和可用的网络 JSON，并把本轮真实证据交给对应 child-agent。无论 main-agent 是否主动生成相关查询，search-worker 都会为每个游戏追加前瞻开播时间与官方录播查询；从官方公告发现 Bilibili / YouTube / Twitch 等视频链接时允许继续读取对应官方视频页。
-
-Bilibili 页面若触发 412 / 风控，优先尝试公开视频 API 元数据；仓库若配置了 `BILIBILI_COOKIE` Actions Secret，则运行时仅将其注入 `.bilibili.com` Cookie Jar 作为页面抓取兜底。Secret 内容不得进入日志、report、evidence 文本或 `sources`。
+Bilibili 页面/API 若触发 412 / -352 风控，可通过 `BILIBILI_COOKIE` Actions Secret 注入 `.bilibili.com` Cookie Jar。Secret 内容不得进入日志、report、evidence 文本或 `sources`。登录态不可用时该游戏安全降级为 `insufficient`，不回退其他平台。
 
 ## child-agent
 
@@ -63,12 +56,11 @@ Bilibili 页面若触发 412 / 风控，优先尝试公开视频 API 元数据�
 
 前瞻字段：
 
-- `preview_title`: 官方节目标题，未知为 `null`。
-- `preview_start_at`: 带时区 ISO 8601 开播时间，未知为 `null`。
-- `preview_live_url`: 官方直播/预约页，未知为 `null`。
-- `preview_replay_url`: 节目结束后可观看的官方完整录播/回放，未知为 `null`；不得使用第三方搬运、解说或切片。
-- 官方 YouTube Live 在结束后原链接直接成为 VOD 时，`preview_live_url` 与 `preview_replay_url` 可以相同。
-- `preview_status=已发布` 不代表前瞻核验结束；仍必须尝试寻找官方录播。
+- `preview_title`: Bilibili 官方账号发布的节目标题。
+- `preview_start_at`: Bilibili 官方动态公布的带时区 ISO 8601 开播时间。
+- `preview_live_url`: Bilibili 官方直播间或预约页。
+- `preview_replay_url`: Bilibili 官方账号发布的完整录播/回放；不得使用第三方搬运、解说、切片或其他平台视频。
+- `preview_status=已发布` 不代表前瞻核验结束；仍必须尝试寻找 Bilibili 官方录播。
 
 ## review-agent
 
@@ -76,11 +68,11 @@ review-agent 独立检查整轮候选结果，不修改仓库。
 
 必须检查：
 
-- 9 个游戏是否完整且没有重复。
+- 8 个游戏是否完整且没有重复。
 - JSON 和必填字段是否合法。
-- 已核验候选的 `sources` 是否来自本轮 Playwright 真实读取的 URL。
+- 已核验候选的 `sources` 是否来自本轮 Playwright 真实读取、且 `discovered_by` 为 `bilibili-official:*` 的固定官方账号 evidence。
 - 日期、日期顺序和剩余天数是否合理。
-- 前瞻开播时间是否有时区、是否误当版本上线日期；录播链接是否确为官方账号。
+- 前瞻开播时间是否有时区、是否误当版本上线日期；录播链接是否确为 Bilibili 官方账号。
 - 已结束卡池是否错误地继续显示为当前 UP。
 - 所有事实变化是否有 evidence 支持。
 - 是否存在明显幻觉、来源与结论不匹配或把推测写成确认。
@@ -91,14 +83,14 @@ review-agent 独立检查整轮候选结果，不修改仓库。
 
 ## 写入和提交
 
-orchestrator 只把 `verified` 且存在实质事实变化的候选合并进最终数据。
+orchestrator 合并 `verified` 的可靠事实变化；同时允许在事实不变时把历史多源 `sources` 一次性迁移成 Bilibili 官方来源。
 
 - 未变化游戏不刷新 `sources/checked_at`，避免仅因核验时间产生空提交。
 - `insufficient` 游戏完整保留旧数据。
 - review-agent 未批准时不得写 `data/games.json`。
 - review-agent 批准后才允许写入。
 - Action 在提交前再次运行数据校验。
-- Action 只接受 `data/games.json` 的 tracked diff；发现其他 tracked 文件变化立即失败。
+- Action 只接受 `data/games.json` 与 `data/media/**` 的数据变更；`data/` 下出现其他变化立即失败。
 - 没有数据变化时不 commit。
 - 有变化时使用 `github-actions[bot]` commit，并在 push 前 fetch/rebase 最新 `master`；禁止 force push。
 

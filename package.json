@@ -6,7 +6,8 @@
   "scripts": {
     "agent": "node agent/main.mjs",
     "agent:dry": "node agent/main.mjs --dry-run",
-    "validate": "node agent/validate-data.mjs"
+    "validate": "node agent/validate-data.mjs",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "opencode-ai": "1.18.12",
