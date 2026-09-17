@@ -1,9 +1,7 @@
-name: Collect game versions
+name: Collect game versions (manual fallback)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 3 * * *"
 
 permissions:
   contents: write
