@@ -179,6 +179,15 @@ function buildPreviewMediaPlan(dataset, evidenceByGame, verifiedGames) {
   const plan = [];
   for (const game of dataset.games) {
     if (!verifiedGames.has(game.game_name)) continue;
+    if (
+      !game.preview_title &&
+      !game.preview_start_at &&
+      !game.preview_live_url &&
+      !game.preview_replay_url
+    ) {
+      game.preview_images = [];
+      continue;
+    }
     const account = BILIBILI_OFFICIAL_ACCOUNTS[game.game_name];
     if (!account) continue;
     const previewEvidence = (evidenceByGame[game.game_name] || []).filter(
@@ -304,6 +313,17 @@ function normalizeChildResult(result, gameName, currentGame, evidence) {
   result.candidate = guard.candidate;
   if (guard.reverted.length) {
     result.notes.push(`前瞻字段缺少对应 Bilibili 官方前瞻 evidence，保留旧值: ${guard.reverted.join('、')}`);
+  }
+
+  if (result.candidate.preview_start_at) {
+    const previewTime = Date.parse(result.candidate.preview_start_at);
+    if (Number.isFinite(previewTime)) {
+      const normalizedStatus = previewTime > Date.now() ? '已官宣待发布' : '已发布';
+      if (result.candidate.preview_status !== normalizedStatus) {
+        result.candidate.preview_status = normalizedStatus;
+        result.notes.push(`按已核验开播时间校正前瞻状态为${normalizedStatus}`);
+      }
+    }
   }
 
   const evidenceUrls = new Set(evidence.map((item) => item.url));

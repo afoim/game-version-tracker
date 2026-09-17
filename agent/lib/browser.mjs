@@ -102,7 +102,7 @@ function dynamicTimestamp(item) {
 function previewRelated(text, currentGame) {
   if (!/前瞻|特别节目|特別番組|通讯|直播|生放送|予告番組|回放|录播|情报回顾|情報/i.test(text)) return false;
   const anchors = versionAnchors(currentGame?.next_version);
-  if (!anchors.length) return true;
+  if (!anchors.length) return false;
   const haystack = text.toLowerCase();
   return anchors.some((anchor) => haystack.includes(anchor.toLowerCase()));
 }
