@@ -19,7 +19,7 @@
           "columns": {
             "base": 1,
             "md": 2,
-            "xl": 4
+            "xl": 2
           },
           "show_preview": true,
           "show_up": true,
