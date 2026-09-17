@@ -96,6 +96,10 @@ test('builds server-driven feed with ui, real data and media resources', () => {
     'promotional_pv',
   ]);
   assert.equal(feed.data.games[0].current_version, '1.3');
+  assert.equal(
+    feed.data.games[0].icon_url,
+    'https://game-version-tracker.pages.dev/media/game-icons/yh.ico',
+  );
   assert.equal(feed.media.items.length, 2);
   assert.deepEqual(
     feed.media.items.map((item) => item.category),

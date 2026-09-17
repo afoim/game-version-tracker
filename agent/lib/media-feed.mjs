@@ -6,6 +6,17 @@ const CATEGORY_LABELS = {
   promotional_pv: '宣传影像',
 };
 
+const GAME_ICON_FILES = {
+  原神: 'genshin.ico',
+  '崩坏：星穹铁道': 'starrail.ico',
+  崩坏3: 'honkai3.ico',
+  绝区零: 'zzz.ico',
+  鸣潮: 'wuwa.ico',
+  '明日方舟：终末地': 'endfield.png',
+  异环: 'yh.ico',
+  '星塔旅人（国服）': 'stellasora.webp',
+};
+
 export const MEDIA_CATEGORIES = Object.freeze(Object.keys(CATEGORY_LABELS));
 
 function assert(condition, message) {
@@ -190,7 +201,12 @@ export function buildMediaFeed({ dataset, mediaByGame, baseUrl, generatedAt = nu
       },
     },
     data: {
-      games: structuredClone(dataset.games),
+      games: structuredClone(dataset.games).map((game) => ({
+        ...game,
+        icon_url: GAME_ICON_FILES[game.game_name]
+          ? `${normalizedBaseUrl}/media/game-icons/${GAME_ICON_FILES[game.game_name]}`
+          : null,
+      })),
     },
     media: {
       categories: MEDIA_CATEGORIES.map((id) => ({ id, label: CATEGORY_LABELS[id] })),
@@ -227,6 +243,10 @@ export function validateMediaFeed(feed) {
     }
   }
   assert(Array.isArray(feed.data?.games), 'media-feed.data.games 必须是数组');
+  for (const game of feed.data.games) {
+    assert(typeof game.game_name === 'string' && game.game_name, 'media-feed game_name 非法');
+    assert(typeof game.icon_url === 'string' && /^https?:\/\//.test(game.icon_url), `${game.game_name} icon_url 非法`);
+  }
   assert(Array.isArray(feed.media?.items), 'media-feed.media.items 必须是数组');
   const ids = new Set();
   for (const item of feed.media.items) {
