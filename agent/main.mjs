@@ -2,7 +2,7 @@ import { appendFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { BILIBILI_OFFICIAL_ACCOUNTS, createEvidenceCollector } from './lib/browser.mjs';
 import { extractJson } from './lib/json.mjs';
-import { buildMediaFeed, validateMediaFeed } from './lib/media-feed.mjs';
+import { buildFeedGames, buildMediaFeed, validateMediaFeed } from './lib/media-feed.mjs';
 import { createLlmRunner } from './lib/opencode.mjs';
 import {
   GAME_NAMES,
@@ -553,7 +553,7 @@ async function main() {
     if (approved && !dryRun) {
       mediaResults = await materializePreviewMedia(proposedDataset, mediaPlan);
       validateDataset(proposedDataset);
-      mediaFeed.data.games = structuredClone(proposedDataset.games);
+      mediaFeed.data.games = buildFeedGames(proposedDataset.games, PUBLIC_DATA_BASE_URL);
       mediaCatalogResults = await materializeMediaCovers(mediaFeed, mediaCoverPlan);
       validateMediaFeed(mediaFeed);
     }

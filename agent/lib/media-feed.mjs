@@ -19,6 +19,16 @@ const GAME_ICON_FILES = {
 
 export const MEDIA_CATEGORIES = Object.freeze(Object.keys(CATEGORY_LABELS));
 
+export function buildFeedGames(games, baseUrl) {
+  const normalizedBaseUrl = String(baseUrl).replace(/\/$/, '');
+  return structuredClone(games).map((game) => ({
+    ...game,
+    icon_url: GAME_ICON_FILES[game.game_name]
+      ? `${normalizedBaseUrl}/media/game-icons/${GAME_ICON_FILES[game.game_name]}`
+      : null,
+  }));
+}
+
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
@@ -201,12 +211,7 @@ export function buildMediaFeed({ dataset, mediaByGame, baseUrl, generatedAt = nu
       },
     },
     data: {
-      games: structuredClone(dataset.games).map((game) => ({
-        ...game,
-        icon_url: GAME_ICON_FILES[game.game_name]
-          ? `${normalizedBaseUrl}/media/game-icons/${GAME_ICON_FILES[game.game_name]}`
-          : null,
-      })),
+      games: buildFeedGames(dataset.games, normalizedBaseUrl),
     },
     media: {
       categories: MEDIA_CATEGORIES.map((id) => ({ id, label: CATEGORY_LABELS[id] })),
