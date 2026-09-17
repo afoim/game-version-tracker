@@ -50,6 +50,9 @@ export function summarizeDynamicBody(value, accountLabel = '') {
   if (!picked) return label ? `${label} · Bilibili` : 'Bilibili 动态';
   const normalized = picked
     .replace(/^【([^】]{2,40})】\s*/u, '$1 · ')
+    .replace(/#\s*([^#\n]{1,40}?)\s*#/gu, '$1 · ')
+    .replace(/#+/g, ' ')
+    .replace(/(?:\s*·\s*){2,}/g, ' · ')
     .replace(/^[\s#｜|·•]+|[\s#｜|·•]+$/gu, '')
     .replace(/\s+/g, ' ')
     .trim();

@@ -32,6 +32,7 @@ test('dynamic body fallback produces concise source titles instead of generic of
     '「月之一」版本活动祈愿即将开启，旅行者可关注后续角色与武器信息。',
   );
   assert.equal(summarizeDynamicBody('原神\n09-18 12:00\n新版本现已开放！', '原神'), '新版本现已开放！');
+  assert.equal(summarizeDynamicBody('鸣潮3.6版本# #鸣潮景燃#', '鸣潮'), '鸣潮3.6版本 · 鸣潮景燃');
 });
 
 test('dataset tracks exactly 8 games and contains preview image metadata', async () => {
