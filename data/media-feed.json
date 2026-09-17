@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-17T18:53:26.449Z",
+  "generated_at": "2026-09-17T19:17:22.597Z",
   "ui": {
     "page": {
       "title": "游戏资讯",
@@ -10,43 +10,11 @@
     },
     "sections": [
       {
-        "id": "official-media",
-        "component": "media_grid",
-        "source": "media.items",
-        "title": "官方影像",
-        "description": "由各游戏 Bilibili 官方账号直接发布",
-        "props": {
-          "show_filters": true,
-          "categories": [
-            "version_pv",
-            "character_pv",
-            "preview_program",
-            "short_film",
-            "promotional_pv"
-          ],
-          "category_order": [
-            "version_pv",
-            "character_pv",
-            "preview_program",
-            "short_film",
-            "promotional_pv"
-          ],
-          "columns": {
-            "base": 1,
-            "md": 2,
-            "xl": 3
-          },
-          "limit": 24,
-          "media_aspect_ratio": "16:9",
-          "empty_text": "暂未获取到符合规则的官方影像"
-        }
-      },
-      {
         "id": "game-status",
         "component": "game_status_grid",
         "source": "data.games",
         "title": "版本状态",
-        "description": "当前版本、下版本、前瞻与当期 UP",
+        "description": "当前版本、下版本、前瞻、官方影像与当期 UP",
         "props": {
           "columns": {
             "base": 1,
@@ -55,7 +23,24 @@
           },
           "show_preview": true,
           "show_up": true,
-          "show_sources": true
+          "show_sources": true,
+          "embedded_media": {
+            "source": "media.items",
+            "position": "after_preview",
+            "categories": [
+              "version_pv",
+              "character_pv",
+              "preview_program",
+              "short_film",
+              "promotional_pv"
+            ],
+            "limit_per_game": 2,
+            "layout": "featured_compact",
+            "show_category": true,
+            "show_duration": true,
+            "show_player": true,
+            "empty_behavior": "hide"
+          }
         }
       }
     ],
@@ -133,7 +118,7 @@
               "preview_start_at",
               "preview_live_url"
             ],
-            "checked_at": "2026-09-17T18:50:59.925Z"
+            "checked_at": "2026-09-17T19:14:13.997Z"
           },
           {
             "title": "《原神》7.1版本「往冥府的安魂歌」前瞻特别节目",
@@ -145,7 +130,7 @@
               "preview_title",
               "preview_replay_url"
             ],
-            "checked_at": "2026-09-17T18:50:59.925Z"
+            "checked_at": "2026-09-17T19:14:13.997Z"
           },
           {
             "title": "原神官方动态",
@@ -156,7 +141,7 @@
               "preview_status",
               "preview_title"
             ],
-            "checked_at": "2026-09-17T18:50:59.925Z"
+            "checked_at": "2026-09-17T19:14:13.997Z"
           },
           {
             "title": "《原神》7.1版本「往冥府的安魂歌」前瞻特别节目",
@@ -168,7 +153,7 @@
               "preview_title",
               "preview_replay_url"
             ],
-            "checked_at": "2026-09-17T18:50:59.925Z"
+            "checked_at": "2026-09-17T19:14:13.997Z"
           },
           {
             "title": "原神官方动态",
@@ -178,7 +163,7 @@
               "next_version",
               "next_content"
             ],
-            "checked_at": "2026-09-17T18:50:59.926Z"
+            "checked_at": "2026-09-17T19:14:13.998Z"
           },
           {
             "title": "原神官方动态",
@@ -188,7 +173,7 @@
               "next_version",
               "next_content"
             ],
-            "checked_at": "2026-09-17T18:50:59.926Z"
+            "checked_at": "2026-09-17T19:14:13.998Z"
           },
           {
             "title": "原神官方动态",
@@ -197,7 +182,7 @@
             "claims": [
               "next_version"
             ],
-            "checked_at": "2026-09-17T18:50:59.926Z"
+            "checked_at": "2026-09-17T19:14:13.998Z"
           },
           {
             "title": "原神官方动态",
@@ -206,7 +191,25 @@
             "claims": [
               "next_version"
             ],
-            "checked_at": "2026-09-17T18:50:59.926Z"
+            "checked_at": "2026-09-17T19:14:13.998Z"
+          },
+          {
+            "title": "原神官方动态",
+            "url": "https://www.bilibili.com/opus/1247182484046610435",
+            "type": "official_community",
+            "claims": [
+              "next_version"
+            ],
+            "checked_at": "2026-09-17T19:14:13.998Z"
+          },
+          {
+            "title": "原神官方动态",
+            "url": "https://www.bilibili.com/opus/1247178618579189761",
+            "type": "official_community",
+            "claims": [
+              "next_version"
+            ],
+            "checked_at": "2026-09-17T19:14:13.998Z"
           }
         ],
         "preview_images": [
@@ -453,7 +456,7 @@
               "preview_start_at",
               "preview_live_url"
             ],
-            "checked_at": "2026-09-17T11:36:48.732Z"
+            "checked_at": "2026-09-17T19:16:08.681Z"
           },
           {
             "title": "鸣潮官方动态",
@@ -465,7 +468,7 @@
               "current_up_start_at",
               "current_up_end_at"
             ],
-            "checked_at": "2026-09-17T11:36:48.733Z"
+            "checked_at": "2026-09-17T19:16:08.681Z"
           },
           {
             "title": "鸣潮官方动态",
@@ -475,7 +478,7 @@
               "current_version",
               "current_up_characters"
             ],
-            "checked_at": "2026-09-17T11:36:48.734Z"
+            "checked_at": "2026-09-17T19:16:08.682Z"
           },
           {
             "title": "鸣潮官方动态",
@@ -485,7 +488,7 @@
               "current_version",
               "current_up_characters"
             ],
-            "checked_at": "2026-09-17T11:36:48.734Z"
+            "checked_at": "2026-09-17T19:16:08.682Z"
           },
           {
             "title": "鸣潮官方动态",
@@ -495,7 +498,43 @@
               "current_version",
               "current_up_characters"
             ],
-            "checked_at": "2026-09-17T11:36:48.734Z"
+            "checked_at": "2026-09-17T19:16:08.682Z"
+          },
+          {
+            "title": "鸣潮官方动态",
+            "url": "https://www.bilibili.com/opus/1248237757510189074",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-09-17T19:16:08.681Z"
+          },
+          {
+            "title": "鸣潮官方动态",
+            "url": "https://www.bilibili.com/opus/1248222387957137417",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-09-17T19:16:08.681Z"
+          },
+          {
+            "title": "鸣潮官方动态",
+            "url": "https://www.bilibili.com/opus/1248114062446821376",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-09-17T19:16:08.682Z"
+          },
+          {
+            "title": "《鸣潮》先约电台EP3.6——景燃《三叩首》",
+            "url": "https://www.bilibili.com/opus/1245918515943178368",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-09-17T19:16:08.682Z"
           }
         ],
         "preview_images": [
@@ -594,7 +633,7 @@
               "preview_start_at",
               "preview_live_url"
             ],
-            "checked_at": "2026-09-17T18:53:26.449Z"
+            "checked_at": "2026-09-17T19:17:22.596Z"
           },
           {
             "title": "《异环》1.4版本前瞻特别节目回顾",
@@ -606,7 +645,19 @@
               "preview_status",
               "preview_replay_url"
             ],
-            "checked_at": "2026-09-17T18:53:26.448Z"
+            "checked_at": "2026-09-17T19:17:22.595Z"
+          },
+          {
+            "title": "《异环》1.4版本前瞻特别节目回顾",
+            "url": "https://www.bilibili.com/opus/1248642341258919952",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "next_version",
+              "preview_status",
+              "preview_replay_url"
+            ],
+            "checked_at": "2026-09-17T19:17:22.595Z"
           },
           {
             "title": "《异环》1.4前瞻特别节目 | 情报回顾",
@@ -618,7 +669,17 @@
               "preview_status",
               "preview_replay_url"
             ],
-            "checked_at": "2026-09-17T18:53:26.448Z"
+            "checked_at": "2026-09-17T19:17:22.596Z"
+          },
+          {
+            "title": "《异环》1.4版本PV「祷歌为谁而诵」",
+            "url": "https://www.bilibili.com/opus/1248872663196106769",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "next_version"
+            ],
+            "checked_at": "2026-09-17T19:17:22.597Z"
           }
         ],
         "preview_images": [
