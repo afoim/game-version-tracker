@@ -34,7 +34,7 @@
               "short_film",
               "promotional_pv"
             ],
-            "limit_per_game": 2,
+            "limit_per_game": 4,
             "layout": "featured_compact",
             "show_category": true,
             "show_duration": true,
@@ -984,26 +984,6 @@
         }
       },
       {
-        "id": "genshin:BV1yuY96rEL7",
-        "game_name": "原神",
-        "category": "version_pv",
-        "category_label": "版本 PV",
-        "title": "《原神》7.1版本PV：「往冥府的安魂歌」",
-        "description": "死神的国度由规则铸就，那规则不可为凡人左右。\n她的门前站着心怀爱或恨的人，那爱与恨，也必不能为死亡所困。\n \n中文CV：\n安娜丝塔夏·费奥多罗夫娜·雪奈茨娜娅——刘校妤\n「丑角」皮耶罗——符冲\n达妮卡——朱婧\n空——鹿喑\n薇斯纳——龟娘\n沃雅妮莎——苏婉\n「黄金」莱茵多特——狄菲菲\n「死之执政」若娜瓦——Selene\n戴因斯雷布——孙晔\n\n日文CV：\n安娜丝塔夏·费奥多罗夫娜·雪奈茨娜娅——户松遥\n「丑角」皮耶罗——间宫康弘\n达妮卡——原由实\n空——堀江瞬\n薇斯纳——平野绫\n沃雅妮莎——伊藤加奈惠\n「黄金",
-        "version": "7.1",
-        "bvid": "BV1yuY96rEL7",
-        "published_at": "2026-09-12T13:15:01.000Z",
-        "duration": "16:55",
-        "url": "https://www.bilibili.com/video/BV1yuY96rEL7/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1yuY96rEL7",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/genshin/BV1yuY96rEL7.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "401742377",
-          "dynamic_url": "https://www.bilibili.com/opus/1247174755211018291"
-        }
-      },
-      {
         "id": "starrail:BV1yjYx6AEp7",
         "game_name": "崩坏：星穹铁道",
         "category": "character_pv",
@@ -1021,6 +1001,26 @@
           "platform": "bilibili",
           "official_mid": "1340190821",
           "dynamic_url": "https://www.bilibili.com/opus/1246289614033911865"
+        }
+      },
+      {
+        "id": "wuwa:BV1uMbg6SEnL",
+        "game_name": "鸣潮",
+        "category": "promotional_pv",
+        "category_label": "宣传影像",
+        "title": "《鸣潮》共鸣者「景燃」PV | “问神”",
+        "description": "“真神假神……庸人自扰。”\n\n中文CV\n景燃：秦且歌\n山猫妖：魏泽浛\n\n日文CV\n景燃：河西健吾\n山猫妖：野坂尚也\n\n英文CV\n景燃：Vincent Lai\n山猫妖：Ewan Black\n\n韩文CV\n景燃：이경태\n山猫妖：김단",
+        "version": null,
+        "bvid": "BV1uMbg6SEnL",
+        "published_at": "2026-09-08T03:00:00.000Z",
+        "duration": "18:06",
+        "url": "https://www.bilibili.com/video/BV1uMbg6SEnL/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1uMbg6SEnL",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/wuwa/BV1uMbg6SEnL.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1955897084",
+          "dynamic_url": null
         }
       },
       {
@@ -1064,6 +1064,26 @@
         }
       },
       {
+        "id": "zzz:BV1wote6gEQ1",
+        "game_name": "绝区零",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《绝区零》克拉蕾角色展示 | 不想培训，但攻略已写好",
+        "description": "家主大人！\n家主大人！\n家主大人！\n家主大人！\n家主大人！\n家主大人！\n\n「你们有完没完啊！」\n\n克拉蕾CV\n中：柳知萧\n日：植田佳奈\n\n洛克茜CV\n中：刘一蕾\n日：赤﨑千夏\n\n—— 欢迎来到罗斯凯利法！——\n▼《绝区零》3.2版本「她与她的隐秘往事」将于9月9日上线！\n版本期间，参与活动可免费领取妄想天使全新时装！\nbilibili安卓端下载地址：https://www.biligame.com/detail/?id=108434 \nbilibiliPC端下载地址：https://www.biligam",
+        "version": null,
+        "bvid": "BV1wote6gEQ1",
+        "published_at": "2026-09-04T04:00:00.000Z",
+        "duration": "11:46",
+        "url": "https://www.bilibili.com/video/BV1wote6gEQ1/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1wote6gEQ1",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1wote6gEQ1.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1636034895",
+          "dynamic_url": null
+        }
+      },
+      {
         "id": "stellasora:BV1N4td6gE6b",
         "game_name": "星塔旅人（国服）",
         "category": "promotional_pv",
@@ -1104,6 +1124,286 @@
         }
       },
       {
+        "id": "endfield:BV1GH4k6VEwF",
+        "game_name": "明日方舟：终末地",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《明日方舟：终末地》干员战斗演示 - 提弗洛斯",
+        "description": "预言并非注定，结局该是我们自己书写。",
+        "version": null,
+        "bvid": "BV1GH4k6VEwF",
+        "published_at": "2026-08-31T03:00:06.000Z",
+        "duration": "01:00",
+        "url": "https://www.bilibili.com/video/BV1GH4k6VEwF/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1GH4k6VEwF",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1GH4k6VEwF.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1265652806",
+          "dynamic_url": "https://www.bilibili.com/opus/1242563270332645400"
+        }
+      },
+      {
+        "id": "zzz:BV13ntA6eERt",
+        "game_name": "绝区零",
+        "category": "preview_program",
+        "category_label": "版本前瞻",
+        "title": "《绝区零》3.2 版本「她与她的隐秘往事」前瞻特别节目",
+        "description": "《绝区零》3.2 版本「她与她的隐秘往事」将于9月9日正式上线，全新S级代理人「克拉蕾」、「洛克茜」即将登场！\n\n本次特别节目中的一切人物、故事、设定仅为节目包装，均与《绝区零》原作无关，展示画面与奖励等均为开发中内容，实际内容请以正式上线为准。\n另外，本次特别节目中的兑换码将于8月30日 23:59:59失效，记得尽快兑换哦~\n配音演员：刘雨轩、刘一蕾、柳知萧\n\n—— 欢迎来到罗斯凯利法！——\n▼《绝区零》3.2版本「她与她的隐秘往事」将于9月9日上线！\n版本期间，参与活动可免费领取妄想天使全新时装！",
+        "version": "3.2",
+        "bvid": "BV13ntA6eERt",
+        "published_at": "2026-08-28T12:15:00.000Z",
+        "duration": "35:46",
+        "url": "https://www.bilibili.com/video/BV13ntA6eERt/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV13ntA6eERt",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV13ntA6eERt.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1636034895",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "zzz:BV1vRtA6gE5m",
+        "game_name": "绝区零",
+        "category": "version_pv",
+        "category_label": "版本 PV",
+        "title": "《绝区零》3.2版本PV | 她与她的隐秘往事",
+        "description": "那时，我尚未意识到，从那张嘴里吐出的每一句话，究竟意味着什么。\n只是从那具酷似故人的假身上，看到了风暴聚拢的预兆…\n\n—— 欢迎来到罗斯凯利法！——\n▼《绝区零》3.2版本「她与她的隐秘往事」将于9月9日上线！\n版本期间，参与活动可免费领取妄想天使全新时装！\nbilibili安卓端下载地址：https://www.biligame.com/detail/?id=108434 \nbilibiliPC端下载地址：https://www.biligame.com/detail/?id=111210",
+        "version": "3.2",
+        "bvid": "BV1vRtA6gE5m",
+        "published_at": "2026-08-28T12:10:00.000Z",
+        "duration": "23:34",
+        "url": "https://www.bilibili.com/video/BV1vRtA6gE5m/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1vRtA6gE5m",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1vRtA6gE5m.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1636034895",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "starrail:BV1oyhM6AETw",
+        "game_name": "崩坏：星穹铁道",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《崩坏：星穹铁道》知更鸟•晴歌角色PV——「追赶风的方向」",
+        "description": "风将吹向何方，谁也捉摸不透。\n气球又会系着我去哪漫游？\n \n中文CV：\n知更鸟•晴歌——钱琛 / 歌：Chevy\n男开拓者——秦且歌\n三月七——诺亚\n ‌\n日文CV：\n知更鸟•晴歌——名冢佳织 / 歌：Chevy\n男开拓者——榎木淳弥\n三月七——小仓唯\n ‌\n英文CV：\n知更鸟•晴歌——Alice Himora / Song vocals: Chevy\n男开拓者——Shaun Mendum\n三月七——Skyler Davenport\n ‌\n韩文CV：\n知更鸟•晴歌——신온유/ 노래: Chevy\n男开拓者",
+        "version": null,
+        "bvid": "BV1oyhM6AETw",
+        "published_at": "2026-08-25T04:04:33.000Z",
+        "duration": "08:49",
+        "url": "https://www.bilibili.com/video/BV1oyhM6AETw/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1oyhM6AETw",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/starrail/BV1oyhM6AETw.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1340190821",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "endfield:BV1JmhA6oEDM",
+        "game_name": "明日方舟：终末地",
+        "category": "promotional_pv",
+        "category_label": "宣传影像",
+        "title": "《明日方舟：终末地》× 优衣库UTme!「自由开拓，定格今夏」合作宣传PV",
+        "description": "自在随心，焕装待发。\n终末地携手优衣库UTme!，邀管理员一起，定格夏日潮流。",
+        "version": null,
+        "bvid": "BV1JmhA6oEDM",
+        "published_at": "2026-08-25T03:00:00.000Z",
+        "duration": "01:05",
+        "url": "https://www.bilibili.com/video/BV1JmhA6oEDM/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1JmhA6oEDM",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1JmhA6oEDM.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1265652806",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "endfield:BV1BW8q6jEDo",
+        "game_name": "明日方舟：终末地",
+        "category": "version_pv",
+        "category_label": "版本 PV",
+        "title": "《明日方舟：终末地》「雪凇幽梦」版本PV",
+        "description": "积雪吞没所有足印，坠入一片霭霭的迷雾。\n请融化梦境之门上的冰霜，于迷途中醒来。",
+        "version": null,
+        "bvid": "BV1BW8q6jEDo",
+        "published_at": "2026-08-21T11:35:00.000Z",
+        "duration": "18:25",
+        "url": "https://www.bilibili.com/video/BV1BW8q6jEDo/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1BW8q6jEDo",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1BW8q6jEDo.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1265652806",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "endfield:BV1VQ8i6uEr4",
+        "game_name": "明日方舟：终末地",
+        "category": "preview_program",
+        "category_label": "版本前瞻",
+        "title": "《明日方舟：终末地》「雪凇幽梦」版本前瞻预告",
+        "description": "《明日方舟：终末地》「雪凇幽梦」版本前瞻预告节目现已公开。\n为了感谢管理员对《明日方舟：终末地》的支持，我们已通过游戏内邮件发放嵌晶玉×1000，折金票×10000，初级认知载体×8，武器检查套组×4。\n发放时间：2026/08/21 19:30（UTC+8）\n发放条件：2026/09/04 19:30（UTC+8）前登录游戏\n发放说明：奖励将通过【邮件】发送，开启【邮箱】功能后可领取，邮件有效期为14天，请管理员及时领取\n未来我们会在官方自媒体账号陆续更新《明日方舟：终末地》「雪凇幽梦」版本的相关信息与",
+        "version": null,
+        "bvid": "BV1VQ8i6uEr4",
+        "published_at": "2026-08-21T11:30:00.000Z",
+        "duration": "44:28",
+        "url": "https://www.bilibili.com/video/BV1VQ8i6uEr4/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1VQ8i6uEr4",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1VQ8i6uEr4.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1265652806",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "starrail:BV1Vj8K6DEFM",
+        "game_name": "崩坏：星穹铁道",
+        "category": "promotional_pv",
+        "category_label": "宣传影像",
+        "title": "《崩坏：星穹铁道》千星纪游PV——「众声之外」",
+        "description": "万千声音曾试图将她描述，为她命名。\n当所有的喧嚣都归于寂静，她听见了来自胸膛深处的共鸣。\n \n中文CV：\n知更鸟——钱琛\n星期日——徐翔\n翡翠——张若瑜\n \n日文CV：\n知更鸟——名冢佳织\n星期日——大冢刚央\n翡翠——三石琴乃\n \n英文CV：\n知更鸟——Alice Himora\n星期日——Griffin Puatu\n翡翠——Faye Mata\n \n韩文CV：\n知更鸟——신온유\n星期日——강성우\n翡翠——김순미",
+        "version": null,
+        "bvid": "BV1Vj8K6DEFM",
+        "published_at": "2026-08-21T04:00:00.000Z",
+        "duration": "17:38",
+        "url": "https://www.bilibili.com/video/BV1Vj8K6DEFM/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1Vj8K6DEFM",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/starrail/BV1Vj8K6DEFM.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1340190821",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "wuwa:BV1GFbk6LEVm",
+        "game_name": "鸣潮",
+        "category": "promotional_pv",
+        "category_label": "宣传影像",
+        "title": "《鸣潮》共鸣者「清宵」PV | 修行",
+        "description": "“玄方地界，还需要镇玄司骑。”\n“这……也是我的修行。”\n\n中文CV\n清宵：姜贺\n卜灵：张晔\n\n日文CV\n清宵：生天目仁美\n卜灵：千本木彩花\n\n英文CV\n清宵：Kirsty Rider\n卜灵：Elizabeth Chu\n\n韩文CV\n清宵：박리나\n卜灵：이이로",
+        "version": null,
+        "bvid": "BV1GFbk6LEVm",
+        "published_at": "2026-08-18T03:00:00.000Z",
+        "duration": "17:30",
+        "url": "https://www.bilibili.com/video/BV1GFbk6LEVm/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1GFbk6LEVm",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/wuwa/BV1GFbk6LEVm.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1955897084",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "zzz:BV1Qfb86LEC5",
+        "game_name": "绝区零",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《绝区零》希格莉德角色PV | 小马希莉",
+        "description": "无论面对何人，战士都绝不可犹豫！\n无论身处何地，战士都绝不可失仪！\n英姿神骏，横扫千军！\n\n希格莉德CV\n中：贺若帆\n日：甲斐田裕子\n\n—— 欢迎来到罗斯凯利法！——\n▼ 《绝区零》二周年版本「漫长的告别」现已上线！\n限定S级代理人虚狩「蕾米埃尔」&「爱芮」现已加入调频&复刻。\n版本期间，登录可领限定S级代理人&音擎5选1以及1600菲林，参与签到共计可领取加密母带×20，参与活动还可免费领取露西时装「公主假日」。\nbilibili安卓端下载地址：https://www.biligame.com/deta",
+        "version": null,
+        "bvid": "BV1Qfb86LEC5",
+        "published_at": "2026-08-17T04:00:00.000Z",
+        "duration": "13:28",
+        "url": "https://www.bilibili.com/video/BV1Qfb86LEC5/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1Qfb86LEC5",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1Qfb86LEC5.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1636034895",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "stellasora:BV1PQgw6kELu",
+        "game_name": "星塔旅人（国服）",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《星塔旅人》花铃角色PV ——「蟹了一大跳！」",
+        "description": "欸？！你怎么就这么晕过去啦！\n真没办法……看你吓得那么厉害，我就和你一起回去吧！\n\n花铃CV \n中：花玲\n日：小仓唯",
+        "version": null,
+        "bvid": "BV1PQgw6kELu",
+        "published_at": "2026-08-15T03:00:00.000Z",
+        "duration": "04:38",
+        "url": "https://www.bilibili.com/video/BV1PQgw6kELu/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1PQgw6kELu",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/stellasora/BV1PQgw6kELu.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "3546645778139206",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "stellasora:BV1Nrgn6wEyc",
+        "game_name": "星塔旅人（国服）",
+        "category": "promotional_pv",
+        "category_label": "宣传影像",
+        "title": "《星塔旅人》「欢歌劲浪 · 闪耀假日惊涛探险！」限时活动PV",
+        "description": "书接上回，海风呼啸、浪花飞溅，但奔向星塔的好奇心，还是一路引导着“那位少女”来到了大海——尽管交给专业的“航海旅人”来搞定剩下的事吧！\n限时活动「欢歌劲浪 · 闪耀假日惊涛探险！」，08月18日正式开启！更多版本信息可关注官方后续社媒动态~",
+        "version": null,
+        "bvid": "BV1Nrgn6wEyc",
+        "published_at": "2026-08-14T03:30:00.000Z",
+        "duration": "02:48",
+        "url": "https://www.bilibili.com/video/BV1Nrgn6wEyc/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1Nrgn6wEyc",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/stellasora/BV1Nrgn6wEyc.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "3546645778139206",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "yh:BV1y1uq6zEud",
+        "game_name": "异环",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《异环》残虹角色PV丨惑心谲影",
+        "description": "「这世界并非只有光鲜的一面，在属于弱肉强食的阴影里，曾有许多双眼睛觊觎着伊南娜的财富。」\n「而我所做的，就是将她的对手清理干净……当然，大多也是她的同类。」\n静谧的庄园里，一支佣兵小队趁着夜色悄然潜入，一场针对庄园主人的猎杀即将开始。\n然而，刀口舔血的猎手们全然不知……在她的猎场里，他们才是猎物。",
+        "version": null,
+        "bvid": "BV1y1uq6zEud",
+        "published_at": "2026-08-12T03:00:00.000Z",
+        "duration": "17:05",
+        "url": "https://www.bilibili.com/video/BV1y1uq6zEud/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1y1uq6zEud",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/yh/BV1y1uq6zEud.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "3546636978489848",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "wuwa:BV1Jcub6BEqB",
+        "game_name": "鸣潮",
+        "category": "version_pv",
+        "category_label": "版本 PV",
+        "title": "《鸣潮》3.6版本PV | 蜃云灯影，凡尘剑心",
+        "description": "玄方城……在飞行？\n欢迎来到我们的玄方城，或者说，云梭。",
+        "version": "3.6",
+        "bvid": "BV1Jcub6BEqB",
+        "published_at": "2026-08-07T11:55:00.000Z",
+        "duration": "42:10",
+        "url": "https://www.bilibili.com/video/BV1Jcub6BEqB/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1Jcub6BEqB",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/wuwa/BV1Jcub6BEqB.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1955897084",
+          "dynamic_url": null
+        }
+      },
+      {
         "id": "honkai3:BV1abNd6bE6L",
         "game_name": "崩坏3",
         "category": "version_pv",
@@ -1121,6 +1421,66 @@
           "platform": "bilibili",
           "official_mid": "27534330",
           "dynamic_url": "https://www.bilibili.com/opus/1226343785850470434"
+        }
+      },
+      {
+        "id": "honkai3:BV15MGi6oEFp",
+        "game_name": "崩坏3",
+        "category": "preview_program",
+        "category_label": "版本前瞻",
+        "title": "《崩坏3》V8.9「羽落万生」特别节目录像",
+        "description": "本次节目中，配音演员唐雅菁、hanser一同揭秘了8.9版本的全新内容，带来全新S级角色「愈生佑翎」、主题活动「极限时速：外卖行者」以及新服装的情报！同时，配音演员闫夜桥、孙艳琦做客洛星大冒险，带来主线第二部第十三章「一朵玫瑰的屈膝礼」的最新情报~",
+        "version": null,
+        "bvid": "BV15MGi6oEFp",
+        "published_at": "2026-05-23T12:30:00.000Z",
+        "duration": "23:49",
+        "url": "https://www.bilibili.com/video/BV15MGi6oEFp/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV15MGi6oEFp",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/honkai3/BV15MGi6oEFp.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "27534330",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "honkai3:BV1oeLt6mEBE",
+        "game_name": "崩坏3",
+        "category": "version_pv",
+        "category_label": "版本 PV",
+        "title": "《崩坏3》8.9版本「羽落万生」宣传PV",
+        "description": "《崩坏3》8.9版本「羽落万生」即将开启！全新S级角色希儿·芙乐艾「愈生佑翎」登场！\n还有主线第二部第十三章「一朵玫瑰的屈膝礼」、主题活动「极限时速：外卖行者」、全新服装重磅来袭，敬请期待！\n \n配音演员：\n希娜狄雅——孙艳琦\n薇塔——闫夜桥\n希儿·芙乐艾——唐雅菁",
+        "version": "8.9",
+        "bvid": "BV1oeLt6mEBE",
+        "published_at": "2026-05-23T12:00:00.000Z",
+        "duration": "02:07",
+        "url": "https://www.bilibili.com/video/BV1oeLt6mEBE/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1oeLt6mEBE",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/honkai3/BV1oeLt6mEBE.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "27534330",
+          "dynamic_url": null
+        }
+      },
+      {
+        "id": "honkai3:BV17xXbBCEKT",
+        "game_name": "崩坏3",
+        "category": "version_pv",
+        "category_label": "版本 PV",
+        "title": "《崩坏3》8.8版本「数海游云」宣传PV",
+        "description": "《崩坏3》8.8版本「数海游云」即将开启！\n主线第二部第十二章「与我不曾知晓的你」、主题活动「数海计划·论文危机」、全新服装重磅来袭，敬请期待！\n \n配音演员：\n蕾耶拉——张若瑜\n娜赫拉——刘十四\n寻梦者——张若瑜\n科拉莉——可可味\n游云——静宸\n布洛妮娅——hanser",
+        "version": "8.8",
+        "bvid": "BV17xXbBCEKT",
+        "published_at": "2026-03-28T10:00:00.000Z",
+        "duration": "01:51",
+        "url": "https://www.bilibili.com/video/BV17xXbBCEKT/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV17xXbBCEKT",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/honkai3/BV17xXbBCEKT.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "27534330",
+          "dynamic_url": null
         }
       }
     ]
