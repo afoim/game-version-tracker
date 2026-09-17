@@ -1,8 +1,9 @@
 import { chromium } from 'playwright';
 
 const MAX_PAGE_TEXT = Number(process.env.AGENT_MAX_PAGE_TEXT || 7000);
-const MAX_EVIDENCE = Number(process.env.AGENT_MAX_EVIDENCE || 4);
-const NAV_TIMEOUT = Number(process.env.AGENT_NAV_TIMEOUT_MS || 20000);
+const MAX_EVIDENCE = Number(process.env.AGENT_MAX_EVIDENCE || 5);
+const NAV_TIMEOUT = Number(process.env.AGENT_NAV_TIMEOUT_MS || 15000);
+const MAX_EXISTING_EVIDENCE = Number(process.env.AGENT_MAX_EXISTING_EVIDENCE || 2);
 
 function cleanText(value) {
   return String(value ?? '')
@@ -129,28 +130,38 @@ export async function createEvidenceCollector() {
   }
 
   async function collect(assignment, currentGame) {
-    const candidates = [];
-    for (const source of currentGame.sources || []) {
-      if (source?.url) candidates.push({ url: source.url, discoveredBy: 'existing_source' });
-    }
-
-    for (const query of (assignment.queries || []).slice(0, 3)) {
-      const results = await search(query);
-      for (const result of results.slice(0, 3)) {
-        candidates.push({ url: result.url, discoveredBy: `search:${query}` });
-      }
-    }
-
     const seen = new Set();
     const evidence = [];
-    for (const candidate of candidates) {
+
+    async function addEvidence(candidate) {
       const normalized = normalizeUrl(candidate.url);
-      if (!normalized || seen.has(normalized)) continue;
+      if (!normalized || seen.has(normalized) || evidence.length >= MAX_EVIDENCE) return;
       seen.add(normalized);
       const item = await fetchPage(normalized, candidate.discoveredBy);
       if (item) evidence.push(item);
-      if (evidence.length >= MAX_EVIDENCE) break;
     }
+
+    for (const source of (currentGame.sources || []).slice(0, MAX_EXISTING_EVIDENCE)) {
+      if (source?.url) await addEvidence({ url: source.url, discoveredBy: 'existing_source' });
+    }
+
+    const queries = (assignment.queries || []).slice(0, 3);
+    const searchGroups = await Promise.all(
+      queries.map(async (query) => ({ query, results: await search(query) })),
+    );
+
+    // Prefer at least one discovery result from each AI-generated query before
+    // filling remaining slots. This keeps discovery broad without serially
+    // waiting on every search result.
+    for (let rank = 0; rank < 3 && evidence.length < MAX_EVIDENCE; rank += 1) {
+      for (const group of searchGroups) {
+        const result = group.results[rank];
+        if (!result) continue;
+        await addEvidence({ url: result.url, discoveredBy: `search:${group.query}` });
+        if (evidence.length >= MAX_EVIDENCE) break;
+      }
+    }
+
     return evidence;
   }
 

@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 const MODEL_ID = process.env.AGENT_MODEL || 'muse-spark-1.3-contributor-free';
-const PROVIDER_ID = 'opencode-tracker';
+const PROVIDER_ID = 'opencode';
 const BASE_URL = process.env.OPENCODE_ZEN_BASE_URL || 'https://opencode.ai/zen/v1';
 const API_KEY = process.env.OPENCODE_API_KEY || 'public';
 const CALL_TIMEOUT_MS = Number(process.env.AGENT_LLM_TIMEOUT_MS || 240000);
@@ -41,10 +41,11 @@ function parseEvents(stdout) {
     }
   }
 
-  const text = events
-    .filter((event) => event.type === 'text' && typeof event.part?.text === 'string')
-    .map((event) => event.part.text)
-    .join('');
+  const textEvents = events.filter((event) => event.type === 'text' && typeof event.part?.text === 'string');
+  // With -f, OpenCode may emit a short commentary text before using its file-read
+  // tool, then emit the actual answer in a later step. Only the last text event
+  // is the completed answer we asked for.
+  const text = textEvents.at(-1)?.part?.text ?? '';
   const cliSessionId = events.find((event) => event.sessionID)?.sessionID ?? null;
   return { events, text, cliSessionId };
 }
@@ -54,18 +55,11 @@ function createConfig(gatewaySession) {
     $schema: 'https://opencode.ai/config.json',
     provider: {
       [PROVIDER_ID]: {
-        npm: '@ai-sdk/openai',
-        name: 'OpenCode Zen - Game Version Tracker',
         options: {
           baseURL: BASE_URL,
           apiKey: API_KEY,
           headers: {
             'x-opencode-session': gatewaySession,
-          },
-        },
-        models: {
-          [MODEL_ID]: {
-            name: 'Muse Spark 1.3 Contributor Free',
           },
         },
       },
@@ -105,6 +99,10 @@ export async function createLlmRunner() {
         },
         windowsHide: true,
         shell: false,
+        // OpenCode reads stdin when it is an open pipe. Node's default spawn()
+        // keeps that pipe open, causing headless CI calls to wait forever even
+        // though the prompt was supplied by -f. Close stdin explicitly.
+        stdio: ['ignore', 'pipe', 'pipe'],
       });
 
       let stdout = '';
