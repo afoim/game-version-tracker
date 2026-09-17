@@ -1,8 +1,6 @@
 # Game Version Tracker
 
-纯 AI 驱动的游戏版本数据仓库。日常维护由 ChatGPT 定时任务完成：使用 ChatGPT 自带 GitHub 连接器读写仓库，并通过公开 Web 来源核验数据。
-
-唯一发布数据文件：`data/games.json`。
+由 GitHub Actions 定时运行的 AI Agent 游戏版本维护仓库。唯一发布数据文件是 `data/games.json`。
 
 ## 维护游戏
 
@@ -16,33 +14,87 @@
 8. 蔚蓝档案（日服）
 9. 星塔旅人（国服）
 
-## 一轮维护必须完整跑完
+## 架构
 
-定时任务必须在**同一轮执行**中完成以下流程，禁止提前返回：
+```text
+GitHub Actions
+    |
+    v
+main-agent
+    |
+    +---- child-agent × 9
+    |         |
+    |         v
+    |    search-worker / Playwright
+    |
+    v
+review-agent
+    |
+    v
+approved ? data/games.json : 保留旧数据
+    |
+    v
+git commit / push
+```
 
-1. 读取默认分支最新 `README.md`、`AI_RUNBOOK.md`、`data/games.json` 和 HEAD。
-2. 逐个核验全部 9 个游戏。每个游戏都必须实际打开至少一个外部来源；搜索摘要、旧 `sources`、模型记忆不算核验。
-3. 某个游戏核验失败时，保留旧数据、记录失败原因，然后**继续下一个游戏**。单个来源或单个游戏失败不能结束整轮。
-4. 只有 9 个游戏全部完成至少一次外部核验尝试后，才能判断是否需要修改 `data/games.json`。
-5. 有可靠变化则更新完整 JSON；没有可靠证据就不猜测、不覆盖旧值。
-6. 写入前检查完整性并重新读取远端最新状态，禁止覆盖并行修改，禁止 force push。
-7. 最终报告必须列出全部 9 个游戏的核验结果、主要来源 URL、变化情况，以及 commit/push 状态。
+- `main-agent` 读取当前数据并为全部 9 个游戏生成独立核验任务。
+- `search-worker` 使用 Playwright 打开现有来源、公开搜索结果、官网页面及可发现的网络 JSON；搜索/抓取与 AI 分离。
+- 每个 `child-agent` 只分析一个游戏，只能使用本轮 Playwright 实际读取的证据，只返回结构化 JSON，不写仓库。
+- `review-agent` 独立检查结构、来源、日期、变化证据和明显幻觉风险。
+- 某个游戏证据不足时安全降级：保留该游戏旧事实，继续审核其他游戏，不猜测数据。
+- 只有 review-agent 批准的可靠事实变化才会写入 `data/games.json`。
+- GitHub Actions 只允许提交 `data/games.json`；没有变化时不创建空提交。
 
-只有 GitHub 或公开 Web 能力整体不可用、导致任务客观无法继续时，才允许提前结束，并必须明确报告平台级阻塞。
+## AI
+
+OpenCode Zen：
+
+- endpoint: `https://opencode.ai/zen/v1`
+- model: `muse-spark-1.3-contributor-free`
+- API key: `public`
+- 每次 Action 使用动态请求会话：`game-version-tracker-${github.run_id}`
+
+Agent 编排、证据约束和审核逻辑位于 `agent/`。OpenCode 负责模型 transport，Playwright 负责网络读取，模型本身不执行搜索。
+
+## GitHub Actions
+
+工作流：`.github/workflows/ai-tracker.yml`
+
+支持：
+
+- `schedule`：每天自动执行。
+- `workflow_dispatch`：手动执行。
+- 手动执行可选择 `dry_run=true`，完整运行 Agent 流程但不写入/提交数据。
+- 缓存 npm `node_modules` 和 Playwright Chromium。
+- 每轮上传 `agent-output/report.json` 作为 Action artifact。
+
+手动运行正式维护：
+
+```bash
+gh workflow run ai-tracker.yml --ref master
+```
+
+手动 dry-run：
+
+```bash
+gh workflow run ai-tracker.yml --ref master -f dry_run=true
+```
+
+查看运行：
+
+```bash
+gh run list --workflow ai-tracker.yml
+gh run view <run-id> --log
+```
 
 ## 数据规则
 
-- 保留现有前端字段和完整 9 个游戏，不提交残缺 JSON。
-- `sources` 只记录本轮实际读取并用于核验的来源。
-- 来源优先级：官方 API / 官网 > 官方公告 / 官方社区 / 官方认证账号 > 可靠二级来源。
-- 每条来源保留 `title`、`url`、`type`、`claims`、`checked_at`。
-- 只有本轮真正成功读取的来源才能刷新 `checked_at`。
-- 未确认日期必须保留“预计 / 未确认”语义；前瞻/直播日期不能当作版本上线日期。
-- 已结束卡池不能继续显示为当前 UP。
-- 没有实质变化时不要创建空提交。
+- 永远保留完整 9 个游戏和现有前端字段。
+- 事实变化必须有本轮真实读取的来源支持。
+- `sources` 中的来源包含 `title`、`url`、`type`、`claims`、`checked_at`。
+- `type` 仅使用 `official_api`、`official`、`official_community`、`secondary`。
+- 未确认日期保持“预计 / 未确认”语义；前瞻日期不能冒充版本上线日期。
+- 已结束卡池不能继续作为当前 UP。
+- 证据不足时保留旧值，而不是让模型猜测。
 
-详细执行步骤见 `AI_RUNBOOK.md`。
-
-## 架构约束
-
-这是纯 AI 维护仓库。不要寻找、创建或运行 Python tracker、collector、adapter、tests、GitHub Actions，也不要依赖 AgentDock、用户电脑、本地路径、git CLI 或常驻服务器。
+详细 Agent 行为见 `AI_RUNBOOK.md`。
