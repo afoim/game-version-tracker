@@ -38,8 +38,6 @@ function allowedResult(url) {
   try {
     const parsed = new URL(url);
     const host = parsed.hostname.toLowerCase();
-    // Bing wraps external results in /ck/a redirect links. Keep those search
-    // candidates so Playwright can follow them to the actual source page.
     if ((host === 'bing.com' || host === 'www.bing.com') && parsed.pathname.startsWith('/ck/a')) {
       return true;
     }
@@ -72,6 +70,33 @@ function isSearchEngineUrl(raw) {
   }
 }
 
+function decodeXml(value) {
+  return String(value ?? '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+async function searchBingRss(context, query) {
+  const response = await context.request.get(
+    `https://www.bing.com/search?format=rss&q=${encodeURIComponent(query)}`,
+    { timeout: NAV_TIMEOUT },
+  );
+  if (!response.ok()) return [];
+  const xml = await response.text();
+  const rows = [];
+  for (const match of xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)) {
+    const block = match[1];
+    const title = decodeXml(block.match(/<title>([\s\S]*?)<\/title>/i)?.[1]);
+    const url = normalizeUrl(decodeXml(block.match(/<link>([\s\S]*?)<\/link>/i)?.[1]));
+    if (url && allowedResult(url)) rows.push({ title, url });
+    if (rows.length >= 8) break;
+  }
+  return rows;
+}
+
 async function searchBing(page, query) {
   await page.goto(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, {
     waitUntil: 'domcontentloaded',
@@ -98,6 +123,26 @@ async function searchDuckDuckGo(page, query) {
     .filter((row) => row.url && allowedResult(row.url));
 }
 
+function looksBlocked(text) {
+  const blockText = text.slice(0, 1200).toLowerCase();
+  return (
+    blockText.includes('access denied') ||
+    blockText.includes('verify you are human') ||
+    blockText.includes('captcha') ||
+    blockText.includes('请求被拒绝') ||
+    blockText.includes('访问被拒绝')
+  );
+}
+
+function stripHtml(raw) {
+  return cleanText(
+    String(raw ?? '')
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<[^>]+>/g, ' '),
+  );
+}
+
 export async function createEvidenceCollector() {
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
@@ -110,10 +155,16 @@ export async function createEvidenceCollector() {
     const page = await context.newPage();
     try {
       try {
+        const results = await searchBingRss(context, query);
+        if (results.length) return results;
+      } catch {
+        // Fall through to browser-rendered search surfaces.
+      }
+      try {
         const results = await searchBing(page, query);
         if (results.length) return results;
       } catch {
-        // Fall through to the second public search surface.
+        // Fall through to DuckDuckGo.
       }
       return await searchDuckDuckGo(page, query);
     } catch {
@@ -126,45 +177,58 @@ export async function createEvidenceCollector() {
   async function fetchPage(url, discoveredBy = 'direct') {
     const page = await context.newPage();
     try {
-      const response = await page.goto(url, {
-        waitUntil: 'domcontentloaded',
-        timeout: NAV_TIMEOUT,
-      });
-      // Static pages are available immediately; hydrated official game sites can
-      // need a few seconds before article text appears.
-      await page
-        .waitForFunction(() => (document.body?.innerText || '').trim().length >= 80, null, { timeout: 5000 })
-        .catch(() => {});
-      const status = response?.status() ?? null;
-      const title = cleanText(await page.title());
-      const text = cleanText(await page.locator('body').innerText({ timeout: 5000 }).catch(() => ''));
-      const finalUrl = normalizeUrl(page.url()) || normalizeUrl(url);
-      const blockText = text.slice(0, 1200).toLowerCase();
-      const looksBlocked =
-        blockText.includes('access denied') ||
-        blockText.includes('verify you are human') ||
-        blockText.includes('captcha') ||
-        blockText.includes('请求被拒绝') ||
-        blockText.includes('访问被拒绝');
-      if (
-        !finalUrl ||
-        isSearchEngineUrl(finalUrl) ||
-        text.length < 80 ||
-        looksBlocked ||
-        (status !== null && status >= 400)
-      ) {
+      try {
+        const response = await page.goto(url, {
+          waitUntil: 'domcontentloaded',
+          timeout: NAV_TIMEOUT,
+        });
+        await page
+          .waitForFunction(() => (document.body?.innerText || '').trim().length >= 80, null, { timeout: 5000 })
+          .catch(() => {});
+        const status = response?.status() ?? null;
+        const title = cleanText(await page.title());
+        const text = cleanText(await page.locator('body').innerText({ timeout: 5000 }).catch(() => ''));
+        const finalUrl = normalizeUrl(page.url()) || normalizeUrl(url);
+        if (
+          finalUrl &&
+          !isSearchEngineUrl(finalUrl) &&
+          text.length >= 80 &&
+          !looksBlocked(text) &&
+          (status === null || status < 400)
+        ) {
+          return {
+            title: title || finalUrl,
+            url: finalUrl,
+            text: text.slice(0, MAX_PAGE_TEXT),
+            http_status: status,
+            checked_at: new Date().toISOString(),
+            discovered_by: discoveredBy,
+          };
+        }
+      } catch {
+        // Try Playwright's APIRequestContext below.
+      }
+
+      try {
+        const response = await context.request.get(url, { timeout: NAV_TIMEOUT });
+        const status = response.status();
+        if (status >= 400) return null;
+        const raw = await response.text();
+        const contentType = response.headers()['content-type'] || '';
+        const text = contentType.includes('text/html') ? stripHtml(raw) : cleanText(raw);
+        const finalUrl = normalizeUrl(response.url()) || normalizeUrl(url);
+        if (!finalUrl || isSearchEngineUrl(finalUrl) || text.length < 80 || looksBlocked(text)) return null;
+        return {
+          title: finalUrl,
+          url: finalUrl,
+          text: text.slice(0, MAX_PAGE_TEXT),
+          http_status: status,
+          checked_at: new Date().toISOString(),
+          discovered_by: `${discoveredBy}:request-fallback`,
+        };
+      } catch {
         return null;
       }
-      return {
-        title: title || finalUrl,
-        url: finalUrl,
-        text: text.slice(0, MAX_PAGE_TEXT),
-        http_status: status,
-        checked_at: new Date().toISOString(),
-        discovered_by: discoveredBy,
-      };
-    } catch {
-      return null;
     } finally {
       await page.close().catch(() => {});
     }
@@ -191,9 +255,6 @@ export async function createEvidenceCollector() {
       queries.map(async (query) => ({ query, results: await search(query) })),
     );
 
-    // Prefer at least one discovery result from each AI-generated query before
-    // filling remaining slots. This keeps discovery broad without serially
-    // waiting on every search result.
     for (let rank = 0; rank < 3 && evidence.length < MAX_EVIDENCE; rank += 1) {
       for (const group of searchGroups) {
         const result = group.results[rank];

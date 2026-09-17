@@ -1,7 +1,5 @@
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
-import os from 'node:os';
 import path from 'node:path';
 
 const MODEL_ID = process.env.AGENT_MODEL || 'muse-spark-1.3-contributor-free';
@@ -41,11 +39,10 @@ function parseEvents(stdout) {
     }
   }
 
-  const textEvents = events.filter((event) => event.type === 'text' && typeof event.part?.text === 'string');
-  // With -f, OpenCode may emit a short commentary text before using its file-read
-  // tool, then emit the actual answer in a later step. Only the last text event
-  // is the completed answer we asked for.
-  const text = textEvents.at(-1)?.part?.text ?? '';
+  const text = events
+    .filter((event) => event.type === 'text' && typeof event.part?.text === 'string')
+    .map((event) => event.part.text)
+    .join('\n');
   const cliSessionId = events.find((event) => event.sessionID)?.sessionID ?? null;
   return { events, text, cliSessionId };
 }
@@ -69,14 +66,11 @@ function createConfig(gatewaySession) {
 }
 
 export async function createLlmRunner() {
-  const runtimeDir = await mkdtemp(path.join(os.tmpdir(), 'game-version-agent-llm-'));
   const binary = localBinary();
   const gatewaySession = resolveGatewaySession();
   const configContent = JSON.stringify(createConfig(gatewaySession));
 
   async function run(prompt, options = {}) {
-    const promptPath = path.join(runtimeDir, `prompt-${Date.now()}-${Math.random().toString(36).slice(2)}.txt`);
-    await writeFile(promptPath, String(prompt), 'utf8');
     const args = [
       'run',
       '--pure',
@@ -84,32 +78,24 @@ export async function createLlmRunner() {
       'json',
       '-m',
       `${PROVIDER_ID}/${options.model || MODEL_ID}`,
-      'Read the attached UTF-8 text file as the complete task. Follow it exactly and return only the requested answer.',
-      '-f',
-      promptPath,
     ];
 
     return new Promise((resolve, reject) => {
       const child = spawn(binary, args, {
-        // Keep OpenCode inside the checked-out repository. Running it from an
-        // empty temp project can stall while it tries to initialize project
-        // state. The prompt itself remains in a disposable temp directory.
+        // Keep OpenCode inside the checked-out repository so its built-in Zen
+        // provider initializes exactly as it does in normal CLI usage.
         cwd: process.cwd(),
         env: {
           ...process.env,
           NO_COLOR: '1',
           OPENCODE_DISABLE_LSP_DOWNLOAD: 'true',
-          // Override only this invocation. This preserves OpenCode's built-in
-          // free-tier transport while explicitly pinning Zen and injecting the
-          // GitHub-run-scoped session header required by this project.
+          // Override only this invocation. The free model remains invoked from
+          // inside OpenCode while Zen and the run-scoped session are explicit.
           OPENCODE_CONFIG_CONTENT: configContent,
         },
         windowsHide: true,
         shell: false,
-        // OpenCode reads stdin when it is an open pipe. Node's default spawn()
-        // keeps that pipe open, causing headless CI calls to wait forever even
-        // though the prompt was supplied by -f. Close stdin explicitly.
-        stdio: ['ignore', 'pipe', 'pipe'],
+        stdio: ['pipe', 'pipe', 'pipe'],
       });
 
       let stdout = '';
@@ -128,14 +114,16 @@ export async function createLlmRunner() {
       });
       child.on('error', (error) => {
         clearTimeout(timer);
-        rm(promptPath, { force: true }).catch(() => {});
         reject(error);
       });
       child.on('close', (code) => {
         clearTimeout(timer);
-        rm(promptPath, { force: true }).catch(() => {});
         if (killed) {
-          reject(new Error(`OpenCode 调用超时 (${options.timeoutMs || CALL_TIMEOUT_MS}ms)`));
+          reject(
+            new Error(
+              `OpenCode 调用超时 (${options.timeoutMs || CALL_TIMEOUT_MS}ms). stderr=${stderr.slice(-1200)} stdout=${stdout.slice(-1200)}`,
+            ),
+          );
           return;
         }
         if (code !== 0) {
@@ -149,11 +137,16 @@ export async function createLlmRunner() {
         }
         resolve({ ...parsed, stdout, stderr });
       });
+
+      // `opencode run` accepts its message from stdin. Closing stdin immediately
+      // after the complete prompt avoids both the old CI deadlock and the `-f`
+      // attachment/tool-read commentary that can corrupt structured JSON output.
+      child.stdin.end(String(prompt), 'utf8');
     });
   }
 
   async function close() {
-    await rm(runtimeDir, { recursive: true, force: true });
+    // Kept for the runner interface; there is no persistent process or temp dir.
   }
 
   return {
