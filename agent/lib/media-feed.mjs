@@ -147,32 +147,27 @@ export function buildMediaFeed({ dataset, mediaByGame, baseUrl, generatedAt = nu
       },
       sections: [
         {
-          id: 'official-media',
-          component: 'media_grid',
-          source: 'media.items',
-          title: '官方影像',
-          description: '由各游戏 Bilibili 官方账号直接发布',
-          props: {
-            show_filters: true,
-            categories: MEDIA_CATEGORIES,
-            category_order: ['version_pv', 'character_pv', 'preview_program', 'short_film', 'promotional_pv'],
-            columns: { base: 1, md: 2, xl: 3 },
-            limit: 24,
-            media_aspect_ratio: '16:9',
-            empty_text: '暂未获取到符合规则的官方影像',
-          },
-        },
-        {
           id: 'game-status',
           component: 'game_status_grid',
           source: 'data.games',
           title: '版本状态',
-          description: '当前版本、下版本、前瞻与当期 UP',
+          description: '当前版本、下版本、前瞻、官方影像与当期 UP',
           props: {
             columns: { base: 1, md: 2, xl: 3 },
             show_preview: true,
             show_up: true,
             show_sources: true,
+            embedded_media: {
+              source: 'media.items',
+              position: 'after_preview',
+              categories: ['version_pv', 'character_pv', 'preview_program', 'short_film', 'promotional_pv'],
+              limit_per_game: 2,
+              layout: 'featured_compact',
+              show_category: true,
+              show_duration: true,
+              show_player: true,
+              empty_behavior: 'hide',
+            },
           },
         },
       ],
@@ -218,6 +213,18 @@ export function validateMediaFeed(feed) {
     assert(typeof section.id === 'string' && section.id, 'media-feed section.id 非法');
     assert(components.has(section.component), `未知 UI component: ${section.component}`);
     assert(typeof section.source === 'string' && section.source, `section ${section.id} source 非法`);
+    if (section.component === 'game_status_grid' && section.props?.embedded_media) {
+      const embedded = section.props.embedded_media;
+      assert(embedded.source === 'media.items', `${section.id}.embedded_media.source 非法`);
+      assert(
+        Number.isInteger(embedded.limit_per_game) && embedded.limit_per_game > 0 && embedded.limit_per_game <= 8,
+        `${section.id}.embedded_media.limit_per_game 非法`,
+      );
+      assert(
+        Array.isArray(embedded.categories) && embedded.categories.every((id) => MEDIA_CATEGORIES.includes(id)),
+        `${section.id}.embedded_media.categories 非法`,
+      );
+    }
   }
   assert(Array.isArray(feed.data?.games), 'media-feed.data.games 必须是数组');
   assert(Array.isArray(feed.media?.items), 'media-feed.media.items 必须是数组');

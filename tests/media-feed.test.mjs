@@ -84,8 +84,17 @@ test('builds server-driven feed with ui, real data and media resources', () => {
 
   validateMediaFeed(feed);
   assert.equal(feed.schema_version, 2);
-  assert.equal(feed.ui.sections[0].component, 'media_grid');
-  assert.equal(feed.ui.sections[1].component, 'game_status_grid');
+  assert.equal(feed.ui.sections.length, 1);
+  assert.equal(feed.ui.sections[0].component, 'game_status_grid');
+  assert.equal(feed.ui.sections[0].props.embedded_media.source, 'media.items');
+  assert.equal(feed.ui.sections[0].props.embedded_media.limit_per_game, 2);
+  assert.deepEqual(feed.ui.sections[0].props.embedded_media.categories, [
+    'version_pv',
+    'character_pv',
+    'preview_program',
+    'short_film',
+    'promotional_pv',
+  ]);
   assert.equal(feed.data.games[0].current_version, '1.3');
   assert.equal(feed.media.items.length, 2);
   assert.deepEqual(

@@ -48,9 +48,9 @@ Bilibili 页面/API 若触发 412 / -352 风控，可通过 `BILIBILI_COOKIE` Ac
 
 `media-feed.json` schema v2 顶层固定为：
 
-- `ui`：服务端驱动页面 section、组件类型、顺序、筛选项和组件 props。
+- `ui`：服务端驱动页面 section、组件类型、顺序和组件 props。当前生产 Feed 只下发 `game_status_grid` 主 section，并通过 `props.embedded_media` 把官方媒体嵌入对应游戏卡片。
 - `data`：真实游戏数据。
-- `media`：官方视频与封面资源。
+- `media`：官方视频与封面资源；前端按 `game_name` 与 `embedded_media` 规则过滤到各自游戏卡片。
 
 ## child-agent
 

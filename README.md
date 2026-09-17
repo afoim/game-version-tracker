@@ -52,7 +52,7 @@ git commit / push
 - `data`：真实游戏版本数据，当前直接包含完整 `games` 数据。
 - `media`：从固定 Bilibili 官方账号动态中提取的官方视频资源。
 
-当前 UI 组件协议包括 `media_grid` 与 `game_status_grid`。前端只负责解释这些组件，不自行决定“先展示 PV 还是版本状态”。
+当前生产 UI 只下发一个 `game_status_grid` 主 section，版本状态卡始终是页面主体；官方版本 PV、角色 PV、前瞻节目等媒体通过 `props.embedded_media` 嵌入对应游戏卡片内部。前端只负责解释该配置，不自行决定媒体位置和数量。`media_grid` 解释器仍保留用于协议兼容，但生产 Feed 不再把它作为独立首屏 section。
 
 官方视频采用确定性标题分类，不由模型自由判断：
 
