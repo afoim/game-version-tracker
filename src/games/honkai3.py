@@ -7,6 +7,15 @@ import urllib.request
 URL = "https://bh3.mihoyo.com/"
 UTC8 = dt.timezone(dt.timedelta(hours=8))
 
+# Scoped official preview evidence. It applies only while 9.0 is current and therefore
+# cannot leak into a later version after the adapter advances.
+VERIFIED_PREVIEWS = {
+    "9.0": {
+        "next_version": "9.1",
+        "published_at": dt.datetime(2026, 9, 3, 19, 0, tzinfo=UTC8),
+    }
+}
+
 
 class Honkai3Adapter:
     slug = "honkai3"
@@ -30,9 +39,17 @@ class Honkai3Adapter:
         next_version = f"{major}.{minor + 1}"
         now = dt.datetime.now(UTC8)
 
+        verified_preview = VERIFIED_PREVIEWS.get(version)
+        preview_published = bool(
+            verified_preview
+            and verified_preview["next_version"] == next_version
+            and verified_preview["published_at"] <= now
+        )
+
         return {
             "game": self.slug,
             "name": self.name,
+            "collected_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
             "current": {
                 "version": version,
                 "start_at": start.isoformat(),
@@ -50,5 +67,8 @@ class Honkai3Adapter:
                 "days_remaining": max(0, (expected.date() - now.date()).days),
                 "content": [],
             },
-            "preview": {"announced": False},
+            "preview": {
+                "announced": preview_published,
+                "published": preview_published,
+            },
         }

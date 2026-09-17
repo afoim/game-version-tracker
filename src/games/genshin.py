@@ -28,6 +28,7 @@ def _strip_html(value: str) -> str:
 def _iso(ts: dt.datetime) -> str:
     return ts.isoformat(timespec="seconds")
 
+
 class GenshinAdapter:
     slug = "genshin"
     name = "原神"
@@ -70,6 +71,7 @@ class GenshinAdapter:
         dm = DURATION_RE.search(maintenance_text)
         estimated_hours = int(dm.group(1)) if dm else 5
         current_start = maintenance_start + dt.timedelta(hours=estimated_hours)
+
         next_preview = None
         for item in info:
             post = item.get("post", {})
@@ -82,6 +84,7 @@ class GenshinAdapter:
             version_tuple = tuple(map(int, m.group(1).split(".")))
             if version_tuple > current_version_tuple and (next_preview is None or version_tuple < next_preview[0]):
                 next_preview = (version_tuple, post)
+
         next_version = None
         if next_preview:
             next_version_tuple, preview_meta = next_preview
@@ -91,26 +94,35 @@ class GenshinAdapter:
             pm = PREVIEW_RE.search(preview_text)
             preview_scheduled_at = None
             if pm:
-                preview_local = dt.datetime.strptime(" ".join(pm.groups()), "%m/%d/%Y %I:%M %p").replace(tzinfo=dt.timezone(dt.timedelta(hours=-4)))
+                preview_local = dt.datetime.strptime(" ".join(pm.groups()), "%m/%d/%Y %I:%M %p").replace(
+                    tzinfo=dt.timezone(dt.timedelta(hours=-4))
+                )
                 preview_scheduled_at = preview_local.astimezone(UTC8).isoformat(timespec="seconds")
+            now = dt.datetime.now(UTC8)
+            published = bool(
+                preview_scheduled_at
+                and dt.datetime.fromisoformat(preview_scheduled_at).astimezone(UTC8) <= now
+            )
             preview_state = {
                 "announced": True,
-                "published": False,
+                "published": published,
                 "title": preview_meta.get("subject"),
                 "post_id": str(preview_meta.get("post_id")),
                 "url": f"https://www.hoyolab.com/article/{preview_meta.get('post_id')}",
-                "announcement_at": dt.datetime.fromtimestamp(preview_meta["created_at"], dt.timezone.utc).isoformat(timespec="seconds"),
+                "announcement_at": dt.datetime.fromtimestamp(
+                    preview_meta["created_at"], dt.timezone.utc
+                ).isoformat(timespec="seconds"),
                 "scheduled_at": preview_scheduled_at,
                 "raw_excerpt": preview_text[:500],
             }
         else:
             preview_state = {"announced": False, "published": False}
+
         expected_next = current_start + dt.timedelta(days=42)
         return {
             "game": self.slug,
             "name": self.name,
             "collected_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-            "source": {"name": "HoYoLAB official community API", "api": API},
             "current": {
                 "version": current_version,
                 "maintenance_start": _iso(maintenance_start),
@@ -118,15 +130,13 @@ class GenshinAdapter:
                 "start_at_note": f"官方公告维护预计 {estimated_hours} 小时；start_at 为维护开始时间加预计时长",
                 "source_post_id": str(maintenance_meta["post_id"]),
                 "source_title": maintenance_meta.get("subject"),
-                "confidence": "official_estimate"
+                "confidence": "official_estimate",
             },
             "next": {
                 "version": next_version,
                 "expected_start_at": _iso(expected_next),
                 "confirmed": False,
-                "confidence": "inferred_42d"
+                "confidence": "inferred_42d",
             },
-            "preview": preview_state
+            "preview": preview_state,
         }
-
-
