@@ -79,6 +79,59 @@ function decodeXml(value) {
     .replace(/&#39;/g, "'");
 }
 
+function baseDomain(raw) {
+  try {
+    const labels = new URL(raw).hostname.toLowerCase().split('.').filter(Boolean);
+    return labels.length >= 2 ? labels.slice(-2).join('.') : labels[0] || '';
+  } catch {
+    return '';
+  }
+}
+
+function gameAnchor(gameName) {
+  return String(gameName).replace(/[（(].*?[）)]/g, '').trim().toLowerCase();
+}
+
+function looksBlocked(text) {
+  const blockText = text.slice(0, 1200).toLowerCase();
+  return (
+    blockText.includes('access denied') ||
+    blockText.includes('verify you are human') ||
+    blockText.includes('captcha') ||
+    blockText.includes('请求被拒绝') ||
+    blockText.includes('访问被拒绝')
+  );
+}
+
+function stripHtml(raw) {
+  return cleanText(
+    String(raw ?? '')
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<[^>]+>/g, ' '),
+  );
+}
+
+function isRelevantSearchEvidence(item, assignment, knownDomains) {
+  if (!item) return false;
+  if (knownDomains.has(baseDomain(item.url))) return true;
+
+  const haystack = `${item.title}\n${item.url}\n${item.text.slice(0, 2500)}`.toLowerCase();
+  const anchors = [gameAnchor(assignment.game_name)];
+  const prefix = 'search:';
+  const discoveredBy = String(item.discovered_by || '');
+  const query = discoveredBy.startsWith(prefix) ? discoveredBy.slice(prefix.length) : '';
+
+  for (const token of query.split(/\s+/)) {
+    const normalized = token.replace(/["'“”‘’]/g, '').trim().toLowerCase();
+    if (!normalized || /^\d+(?:[./-]\d+)*$/.test(normalized)) continue;
+    if (['版本', '公告', '更新', '活动', '当前', '官方', 'news', 'update'].includes(normalized)) continue;
+    if (normalized.length >= 4) anchors.push(normalized);
+  }
+
+  return anchors.some((anchor) => anchor && haystack.includes(anchor));
+}
+
 async function searchBingRss(context, query) {
   const response = await context.request.get(
     `https://www.bing.com/search?format=rss&q=${encodeURIComponent(query)}`,
@@ -121,26 +174,6 @@ async function searchDuckDuckGo(page, query) {
   return rows
     .map((row) => ({ ...row, url: unwrapDuckDuckGo(row.url) }))
     .filter((row) => row.url && allowedResult(row.url));
-}
-
-function looksBlocked(text) {
-  const blockText = text.slice(0, 1200).toLowerCase();
-  return (
-    blockText.includes('access denied') ||
-    blockText.includes('verify you are human') ||
-    blockText.includes('captcha') ||
-    blockText.includes('请求被拒绝') ||
-    blockText.includes('访问被拒绝')
-  );
-}
-
-function stripHtml(raw) {
-  return cleanText(
-    String(raw ?? '')
-      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
-      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
-      .replace(/<[^>]+>/g, ' '),
-  );
 }
 
 export async function createEvidenceCollector() {
@@ -237,30 +270,58 @@ export async function createEvidenceCollector() {
   async function collect(assignment, currentGame) {
     const seen = new Set();
     const evidence = [];
+    const knownDomains = new Set(
+      (currentGame.sources || [])
+        .filter((source) => source?.url && source.type !== 'secondary')
+        .map((source) => baseDomain(source.url))
+        .filter(Boolean),
+    );
 
-    async function addEvidence(candidate) {
+    async function addEvidence(candidate, requireRelevant = false) {
       const normalized = normalizeUrl(candidate.url);
       if (!normalized || seen.has(normalized) || evidence.length >= MAX_EVIDENCE) return;
       seen.add(normalized);
       const item = await fetchPage(normalized, candidate.discoveredBy);
-      if (item) evidence.push(item);
+      if (!item) return;
+      if (requireRelevant && !isRelevantSearchEvidence(item, assignment, knownDomains)) return;
+      evidence.push(item);
     }
 
     for (const source of (currentGame.sources || []).slice(0, MAX_EXISTING_EVIDENCE)) {
       if (source?.url) await addEvidence({ url: source.url, discoveredBy: 'existing_source' });
     }
 
-    const queries = (assignment.queries || []).slice(0, 3);
+    const currentVersion = String(currentGame.current_version || '').replace(/[^\p{L}\p{N}./:-]+/gu, ' ').trim();
+    const domainQueries = [...knownDomains]
+      .slice(0, 2)
+      .map((domain) => `site:${domain} ${assignment.game_name} ${currentVersion}`.trim());
+    const queries = [...domainQueries, ...(assignment.queries || [])].slice(0, 5);
     const searchGroups = await Promise.all(
       queries.map(async (query) => ({ query, results: await search(query) })),
     );
 
-    for (let rank = 0; rank < 3 && evidence.length < MAX_EVIDENCE; rank += 1) {
+    for (let rank = 0; rank < 4 && evidence.length < MAX_EVIDENCE; rank += 1) {
       for (const group of searchGroups) {
         const result = group.results[rank];
         if (!result) continue;
-        await addEvidence({ url: result.url, discoveredBy: `search:${group.query}` });
+        await addEvidence({ url: result.url, discoveredBy: `search:${group.query}` }, true);
         if (evidence.length >= MAX_EVIDENCE) break;
+      }
+    }
+
+    if (evidence.length === 0) {
+      for (const domain of [...knownDomains].slice(0, 2)) {
+        const fallbackUrls = [
+          `https://${domain}/`,
+          `https://www.${domain}/`,
+          `https://${domain}/news`,
+          `https://www.${domain}/news`,
+        ];
+        for (const url of fallbackUrls) {
+          await addEvidence({ url, discoveredBy: `official-domain-fallback:${domain}` });
+          if (evidence.length > 0) break;
+        }
+        if (evidence.length > 0) break;
       }
     }
 

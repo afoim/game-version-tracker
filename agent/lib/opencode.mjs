@@ -50,6 +50,13 @@ function parseEvents(stdout) {
 function createConfig(gatewaySession) {
   return {
     $schema: 'https://opencode.ai/config.json',
+    // Model calls are reasoning-only. Search is owned by Playwright and all
+    // repository writes are owned by the orchestrator after review approval.
+    // Denying every OpenCode tool makes that separation enforceable instead of
+    // relying only on the child/reviewer prompts.
+    permission: {
+      '*': 'deny',
+    },
     provider: {
       [PROVIDER_ID]: {
         options: {
