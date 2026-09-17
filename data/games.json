@@ -28,18 +28,6 @@
       "current_up_days_remaining": 5,
       "sources": [
         {
-          "title": "《原神》7.1版本「往冥府的安魂歌」前瞻特别节目",
-          "url": "https://www.bilibili.com/video/BV1znY96NEvn/",
-          "type": "official_community",
-          "claims": [
-            "next_version",
-            "preview_status",
-            "preview_title",
-            "preview_replay_url"
-          ],
-          "checked_at": "2026-09-17T11:35:23.641Z"
-        },
-        {
           "title": "原神官方动态",
           "url": "https://www.bilibili.com/opus/1245176354215821411",
           "type": "official_community",
@@ -49,7 +37,19 @@
             "preview_start_at",
             "preview_live_url"
           ],
-          "checked_at": "2026-09-17T11:35:23.641Z"
+          "checked_at": "2026-09-17T18:50:59.925Z"
+        },
+        {
+          "title": "《原神》7.1版本「往冥府的安魂歌」前瞻特别节目",
+          "url": "https://www.bilibili.com/opus/1247177327925788688",
+          "type": "official_community",
+          "claims": [
+            "next_version",
+            "preview_status",
+            "preview_title",
+            "preview_replay_url"
+          ],
+          "checked_at": "2026-09-17T18:50:59.925Z"
         },
         {
           "title": "原神官方动态",
@@ -57,9 +57,22 @@
           "type": "official_community",
           "claims": [
             "next_version",
-            "preview_status"
+            "preview_status",
+            "preview_title"
           ],
-          "checked_at": "2026-09-17T11:35:23.641Z"
+          "checked_at": "2026-09-17T18:50:59.925Z"
+        },
+        {
+          "title": "《原神》7.1版本「往冥府的安魂歌」前瞻特别节目",
+          "url": "https://www.bilibili.com/video/BV1znY96NEvn/",
+          "type": "official_community",
+          "claims": [
+            "next_version",
+            "preview_status",
+            "preview_title",
+            "preview_replay_url"
+          ],
+          "checked_at": "2026-09-17T18:50:59.925Z"
         },
         {
           "title": "原神官方动态",
@@ -69,7 +82,7 @@
             "next_version",
             "next_content"
           ],
-          "checked_at": "2026-09-17T11:35:23.642Z"
+          "checked_at": "2026-09-17T18:50:59.926Z"
         },
         {
           "title": "原神官方动态",
@@ -79,7 +92,7 @@
             "next_version",
             "next_content"
           ],
-          "checked_at": "2026-09-17T11:35:23.642Z"
+          "checked_at": "2026-09-17T18:50:59.926Z"
         },
         {
           "title": "原神官方动态",
@@ -88,7 +101,16 @@
           "claims": [
             "next_version"
           ],
-          "checked_at": "2026-09-17T11:35:23.642Z"
+          "checked_at": "2026-09-17T18:50:59.926Z"
+        },
+        {
+          "title": "原神官方动态",
+          "url": "https://www.bilibili.com/opus/1248518648329404423",
+          "type": "official_community",
+          "claims": [
+            "next_version"
+          ],
+          "checked_at": "2026-09-17T18:50:59.926Z"
         }
       ],
       "preview_images": [
@@ -134,7 +156,7 @@
             "preview_start_at",
             "preview_live_url"
           ],
-          "checked_at": "2026-09-17T11:35:38.379Z"
+          "checked_at": "2026-09-17T18:51:22.416Z"
         },
         {
           "title": "崩坏：星穹铁道官方动态",
@@ -146,16 +168,16 @@
             "current_up_start_at",
             "current_up_end_at"
           ],
-          "checked_at": "2026-09-17T11:35:38.380Z"
+          "checked_at": "2026-09-17T18:51:22.417Z"
         },
         {
           "title": "崩坏：星穹铁道官方动态",
-          "url": "https://www.bilibili.com/opus/1244047587382657065",
+          "url": "https://www.bilibili.com/opus/1248887156508721153",
           "type": "official_community",
           "claims": [
             "current_version"
           ],
-          "checked_at": "2026-09-17T11:35:38.379Z"
+          "checked_at": "2026-09-17T18:51:22.417Z"
         }
       ],
       "preview_images": [
@@ -262,7 +284,7 @@
             "current_up_characters",
             "current_content"
           ],
-          "checked_at": "2026-09-17T11:36:24.798Z"
+          "checked_at": "2026-09-17T18:52:08.307Z"
         },
         {
           "title": "绝区零官方动态",
@@ -272,17 +294,28 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-09-17T11:36:24.797Z"
+          "checked_at": "2026-09-17T18:52:08.306Z"
         },
         {
           "title": "绝区零官方动态",
-          "url": "https://www.bilibili.com/opus/1246289560334237721",
+          "url": "https://www.bilibili.com/opus/1247773901040123911",
           "type": "official_community",
           "claims": [
             "current_version",
+            "current_up_characters",
             "current_content"
           ],
-          "checked_at": "2026-09-17T11:36:24.798Z"
+          "checked_at": "2026-09-17T18:52:08.306Z"
+        },
+        {
+          "title": "绝区零官方动态",
+          "url": "https://www.bilibili.com/opus/1245188642098380838",
+          "type": "official_community",
+          "claims": [
+            "current_version",
+            "next_version"
+          ],
+          "checked_at": "2026-09-17T18:52:08.306Z"
         }
       ],
       "preview_images": []
@@ -461,12 +494,11 @@
           "type": "official_community",
           "claims": [
             "next_version",
-            "preview_status",
             "preview_title",
             "preview_start_at",
             "preview_live_url"
           ],
-          "checked_at": "2026-09-17T11:37:35.635Z"
+          "checked_at": "2026-09-17T18:53:26.449Z"
         },
         {
           "title": "《异环》1.4版本前瞻特别节目回顾",
@@ -478,7 +510,7 @@
             "preview_status",
             "preview_replay_url"
           ],
-          "checked_at": "2026-09-17T11:37:35.634Z"
+          "checked_at": "2026-09-17T18:53:26.448Z"
         },
         {
           "title": "《异环》1.4前瞻特别节目 | 情报回顾",
@@ -490,7 +522,7 @@
             "preview_status",
             "preview_replay_url"
           ],
-          "checked_at": "2026-09-17T11:37:35.634Z"
+          "checked_at": "2026-09-17T18:53:26.448Z"
         }
       ],
       "preview_images": [
