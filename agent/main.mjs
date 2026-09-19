@@ -1,6 +1,7 @@
 import { appendFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { BILIBILI_OFFICIAL_ACCOUNTS, createEvidenceCollector } from './lib/browser.mjs';
+import { downloadImage } from './lib/download-image.mjs';
 import { extractJson } from './lib/json.mjs';
 import { buildFeedGames, buildMediaFeed, validateMediaFeed } from './lib/media-feed.mjs';
 import { createLlmRunner } from './lib/opencode.mjs';
@@ -245,20 +246,7 @@ async function materializePreviewMedia(dataset, plan) {
 
     for (const item of entry.items) {
       try {
-        const url = new URL(item.remote_url);
-        if (!url.hostname.endsWith('hdslb.com')) throw new Error('非 Bilibili CDN 图片');
-        const response = await fetch(item.remote_url, {
-          headers: {
-            Referer: 'https://www.bilibili.com/',
-            'User-Agent':
-              'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/152.0.0.0 Safari/537.36',
-          },
-        });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const bytes = Buffer.from(await response.arrayBuffer());
-        if (!bytes.length || bytes.length > 15 * 1024 * 1024) {
-          throw new Error(`图片大小异常: ${bytes.length}`);
-        }
+        const bytes = await downloadImage(item.remote_url);
         const target = path.join(ROOT, 'data', ...item.relative_path.split('/'));
         await mkdir(path.dirname(target), { recursive: true });
         await writeFile(target, bytes);
@@ -355,20 +343,7 @@ async function materializeMediaCovers(feed, plan) {
     const mediaItem = byId.get(item.id);
     if (!mediaItem) continue;
     try {
-      const url = new URL(item.remote_url);
-      if (!url.hostname.endsWith('hdslb.com')) throw new Error('非 Bilibili CDN 图片');
-      const response = await fetch(item.remote_url, {
-        headers: {
-          Referer: 'https://www.bilibili.com/',
-          'User-Agent':
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/152.0.0.0 Safari/537.36',
-        },
-      });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const bytes = Buffer.from(await response.arrayBuffer());
-      if (!bytes.length || bytes.length > 15 * 1024 * 1024) {
-        throw new Error(`封面大小异常: ${bytes.length}`);
-      }
+      const bytes = await downloadImage(item.remote_url);
       const target = path.join(ROOT, 'data', ...item.relative_path.split('/'));
       await mkdir(path.dirname(target), { recursive: true });
       await writeFile(target, bytes);
