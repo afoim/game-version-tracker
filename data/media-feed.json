@@ -1132,7 +1132,7 @@
         "description": "预言并非注定，结局该是我们自己书写。",
         "version": null,
         "bvid": "BV1GH4k6VEwF",
-        "published_at": "2026-08-31T03:00:06.000Z",
+        "published_at": "2026-08-31T03:00:00.000Z",
         "duration": "01:00",
         "url": "https://www.bilibili.com/video/BV1GH4k6VEwF/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1GH4k6VEwF",
@@ -1140,7 +1140,7 @@
         "source": {
           "platform": "bilibili",
           "official_mid": "1265652806",
-          "dynamic_url": "https://www.bilibili.com/opus/1242563270332645400"
+          "dynamic_url": null
         }
       },
       {
