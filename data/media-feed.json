@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-19T13:10:01.000Z",
+  "generated_at": "2026-09-22T04:00:10.000Z",
   "ui": {
     "page": {
       "title": "游戏资讯",
@@ -844,6 +844,106 @@
     ],
     "items": [
       {
+        "id": "genshin:BV1BqhB6nEdN",
+        "game_name": "原神",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《原神》角色预告-「沃雅妮莎：此夜共沦」",
+        "description": "向高天祈祷，再向远海寄托愁思。\n高天或许不语，但波浪会带给你回信，如一声水妖的咏叹。\n\n中文CV：\n沃雅妮莎——苏婉\n\n日文CV：\n沃雅妮莎——伊藤加奈惠\n\n《原神》bilibili服下载地址： https://www.biligame.com/detail/?id=103496",
+        "version": null,
+        "bvid": "BV1BqhB6nEdN",
+        "published_at": "2026-09-22T04:00:10.000Z",
+        "duration": "11:52",
+        "url": "https://www.bilibili.com/video/BV1BqhB6nEdN/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1BqhB6nEdN",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/genshin/BV1BqhB6nEdN.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "401742377",
+          "dynamic_url": "https://www.bilibili.com/opus/1250742623243599897"
+        }
+      },
+      {
+        "id": "genshin:BV16Leq64Ei3",
+        "game_name": "原神",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《原神》角色预告-「薇斯纳：春之晨舞」",
+        "description": "不必在意司令官的地位，也不必恪守贵族的矜持。\n享受盛夜的舞曲，接下来便是黎明。\n\n中文CV：\n薇斯纳——龟娘\n\n日文CV：\n薇斯纳——平野绫\n\n《原神》bilibili服下载地址： https://www.biligame.com/detail/?id=103496",
+        "version": null,
+        "bvid": "BV16Leq64Ei3",
+        "published_at": "2026-09-21T04:00:10.000Z",
+        "duration": "13:02",
+        "url": "https://www.bilibili.com/video/BV16Leq64Ei3/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV16Leq64Ei3",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/genshin/BV16Leq64Ei3.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "401742377",
+          "dynamic_url": "https://www.bilibili.com/opus/1250371538067128329"
+        }
+      },
+      {
+        "id": "yh:BV1iWej6hEe6",
+        "game_name": "异环",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《异环》黑羽角色PV丨「魔女」的工作",
+        "description": "超自然都市开放世界RPG《异环》全新版本「祷歌为谁而诵」将于9月24日版本更新后开启！立刻下载>>>https://www.biligame.com/detail/?id=111795\n\n「啊，请您不要哭泣，请您不要哀伤。\n您的噩梦将消弭于虚无，您的忧虑将驱散于星光。\n您的悲戚将被欢笑所替代，您的眼泪将为重逢而流淌。」",
+        "version": null,
+        "bvid": "BV1iWej6hEe6",
+        "published_at": "2026-09-21T03:00:01.000Z",
+        "duration": "12:48",
+        "url": "https://www.bilibili.com/video/BV1iWej6hEe6/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1iWej6hEe6",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/yh/BV1iWej6hEe6.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "3546636978489848",
+          "dynamic_url": "https://www.bilibili.com/opus/1250356037494505476"
+        }
+      },
+      {
+        "id": "starrail:BV1wXeq6wEGR",
+        "game_name": "崩坏：星穹铁道",
+        "category": "preview_program",
+        "category_label": "版本前瞻",
+        "title": "《崩坏：星穹铁道》4.6版本「月升之前，与兽共舞」前瞻特别节目",
+        "description": "《崩坏：星穹铁道》4.6版本「月升之前，与兽共舞」将于2026年9月28日上线，感谢开拓者的支持与陪伴~\n本次特别节目中的一切人物、故事、设定仅为节目包装，均与《崩坏：星穹铁道》原作无关，展示画面与奖励等均为研发中内容，非最终上线版本，请以上线版本为准。\n\n亲爱的开拓者，本次特别节目中的兑换码将于2026年9月21日23:59:59失效，记得尽快兑换哦~",
+        "version": "4.6",
+        "bvid": "BV1wXeq6wEGR",
+        "published_at": "2026-09-20T12:30:04.000Z",
+        "duration": "31:24",
+        "url": "https://www.bilibili.com/video/BV1wXeq6wEGR/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1wXeq6wEGR",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/starrail/BV1wXeq6wEGR.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1340190821",
+          "dynamic_url": "https://www.bilibili.com/opus/1250131853104381987"
+        }
+      },
+      {
+        "id": "starrail:BV1rhei64EVA",
+        "game_name": "崩坏：星穹铁道",
+        "category": "version_pv",
+        "category_label": "版本 PV",
+        "title": "《崩坏：星穹铁道》4.6版本PV：「月升之前，与兽共舞」",
+        "description": "蠢动于幽暗的兽再度开口，索求一位神明作为祭品。在月亮重新升起前，唯有智者的血方能平息它的饥渴……\n \n※本视频包含部分开发中内容，实际内容请以正式上线为准\n \n中文CV：\n归寂——张胡子\n亚婆离——武向彤\n真珠——苏婉\n灯塔——薛倞\n不死途——张沛\n朽叶——李蝉妃\n虚照——子音\n ‌\n日文CV：\n归寂——花轮英司\n亚婆离——丸山梦乃\n真珠——安野希世乃\n灯塔——入江直树\n不死途——子安武人\n朽叶——小林优\n虚照——户松遥\n ‌\n英文CV：\n归寂——Joe Hernandez\n亚婆离——Katiana Sa",
+        "version": "4.6",
+        "bvid": "BV1rhei64EVA",
+        "published_at": "2026-09-20T12:00:15.000Z",
+        "duration": "16:00",
+        "url": "https://www.bilibili.com/video/BV1rhei64EVA/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1rhei64EVA",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/starrail/BV1rhei64EVA.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1340190821",
+          "dynamic_url": "https://www.bilibili.com/opus/1250124169423618130"
+        }
+      },
+      {
         "id": "honkai3:BV1aLeb6sEC5",
         "game_name": "崩坏3",
         "category": "preview_program",
@@ -1044,46 +1144,6 @@
         }
       },
       {
-        "id": "genshin:BV1znY96NEvn",
-        "game_name": "原神",
-        "category": "preview_program",
-        "category_label": "版本前瞻",
-        "title": "《原神》7.1版本「往冥府的安魂歌」前瞻特别节目",
-        "description": "《原神》7.1版本「往冥府的安魂歌」将于2026年9月23日上线。\n感谢各位旅行者的支持与陪伴，我们将为大家带来更多7.1版本的最新消息~\n \n本次兑换码将于2026年9月15日12:00:00失效，记得尽快兑换哦~\n\n《原神》bilibili服下载地址： https://www.biligame.com/detail/?id=103496",
-        "version": "7.1",
-        "bvid": "BV1znY96NEvn",
-        "published_at": "2026-09-12T13:25:00.000Z",
-        "duration": "59:46",
-        "url": "https://www.bilibili.com/video/BV1znY96NEvn/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1znY96NEvn",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/genshin/BV1znY96NEvn.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "401742377",
-          "dynamic_url": "https://www.bilibili.com/opus/1247177327925788688"
-        }
-      },
-      {
-        "id": "genshin:BV1EmYV6WEbF",
-        "game_name": "原神",
-        "category": "version_pv",
-        "category_label": "版本 PV",
-        "title": "《原神》千星奇域 - 7.1版本传说套装PV - 桂影霄练",
-        "description": "清气澄余滓，桂华秋皎洁。漆黑的「噩运」纵然会肆虐一时，但人类的意志与智慧不会因此轻易屈服...\n\n*奇偶妆容及动作仅供搭配参考，最终请以实机表现为准。",
-        "version": "7.1",
-        "bvid": "BV1EmYV6WEbF",
-        "published_at": "2026-09-12T13:20:01.000Z",
-        "duration": "01:07",
-        "url": "https://www.bilibili.com/video/BV1EmYV6WEbF/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1EmYV6WEbF",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/genshin/BV1EmYV6WEbF.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "401742377",
-          "dynamic_url": "https://www.bilibili.com/opus/1247176043691769873"
-        }
-      },
-      {
         "id": "starrail:BV1yjYx6AEp7",
         "game_name": "崩坏：星穹铁道",
         "category": "character_pv",
@@ -1172,7 +1232,7 @@
         "description": "向往自由的那位大小姐，在前辈的指引与闺蜜们的帮助下，瞒着家人继续追梦；而就在梦想即将启航之际，一场突如其来的失踪事件，让她不得不鼓起勇气、挺身而出……\n\n限时活动「奋斗吧！大小姐的旅人修炼手册！」，09月08日正式开启！",
         "version": null,
         "bvid": "BV1N4td6gE6b",
-        "published_at": "2026-09-04T03:00:06.000Z",
+        "published_at": "2026-09-04T03:00:00.000Z",
         "duration": "03:19",
         "url": "https://www.bilibili.com/video/BV1N4td6gE6b/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1N4td6gE6b",
@@ -1180,7 +1240,7 @@
         "source": {
           "platform": "bilibili",
           "official_mid": "3546645778139206",
-          "dynamic_url": "https://www.bilibili.com/opus/1244047610979811366"
+          "dynamic_url": null
         }
       },
       {
@@ -1264,26 +1324,6 @@
         }
       },
       {
-        "id": "starrail:BV1oyhM6AETw",
-        "game_name": "崩坏：星穹铁道",
-        "category": "character_pv",
-        "category_label": "角色 PV",
-        "title": "《崩坏：星穹铁道》知更鸟•晴歌角色PV——「追赶风的方向」",
-        "description": "风将吹向何方，谁也捉摸不透。\n气球又会系着我去哪漫游？\n \n中文CV：\n知更鸟•晴歌——钱琛 / 歌：Chevy\n男开拓者——秦且歌\n三月七——诺亚\n ‌\n日文CV：\n知更鸟•晴歌——名冢佳织 / 歌：Chevy\n男开拓者——榎木淳弥\n三月七——小仓唯\n ‌\n英文CV：\n知更鸟•晴歌——Alice Himora / Song vocals: Chevy\n男开拓者——Shaun Mendum\n三月七——Skyler Davenport\n ‌\n韩文CV：\n知更鸟•晴歌——신온유/ 노래: Chevy\n男开拓者",
-        "version": null,
-        "bvid": "BV1oyhM6AETw",
-        "published_at": "2026-08-25T04:04:33.000Z",
-        "duration": "08:49",
-        "url": "https://www.bilibili.com/video/BV1oyhM6AETw/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1oyhM6AETw",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/starrail/BV1oyhM6AETw.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "1340190821",
-          "dynamic_url": null
-        }
-      },
-      {
         "id": "endfield:BV1JmhA6oEDM",
         "game_name": "明日方舟：终末地",
         "category": "promotional_pv",
@@ -1344,26 +1384,6 @@
         }
       },
       {
-        "id": "starrail:BV1Vj8K6DEFM",
-        "game_name": "崩坏：星穹铁道",
-        "category": "promotional_pv",
-        "category_label": "宣传影像",
-        "title": "《崩坏：星穹铁道》千星纪游PV——「众声之外」",
-        "description": "万千声音曾试图将她描述，为她命名。\n当所有的喧嚣都归于寂静，她听见了来自胸膛深处的共鸣。\n \n中文CV：\n知更鸟——钱琛\n星期日——徐翔\n翡翠——张若瑜\n \n日文CV：\n知更鸟——名冢佳织\n星期日——大冢刚央\n翡翠——三石琴乃\n \n英文CV：\n知更鸟——Alice Himora\n星期日——Griffin Puatu\n翡翠——Faye Mata\n \n韩文CV：\n知更鸟——신온유\n星期日——강성우\n翡翠——김순미",
-        "version": null,
-        "bvid": "BV1Vj8K6DEFM",
-        "published_at": "2026-08-21T04:00:00.000Z",
-        "duration": "17:38",
-        "url": "https://www.bilibili.com/video/BV1Vj8K6DEFM/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1Vj8K6DEFM",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/starrail/BV1Vj8K6DEFM.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "1340190821",
-          "dynamic_url": null
-        }
-      },
-      {
         "id": "zzz:BV1Qfb86LEC5",
         "game_name": "绝区零",
         "category": "character_pv",
@@ -1420,26 +1440,6 @@
         "source": {
           "platform": "bilibili",
           "official_mid": "3546645778139206",
-          "dynamic_url": null
-        }
-      },
-      {
-        "id": "yh:BV1y1uq6zEud",
-        "game_name": "异环",
-        "category": "character_pv",
-        "category_label": "角色 PV",
-        "title": "《异环》残虹角色PV丨惑心谲影",
-        "description": "「这世界并非只有光鲜的一面，在属于弱肉强食的阴影里，曾有许多双眼睛觊觎着伊南娜的财富。」\n「而我所做的，就是将她的对手清理干净……当然，大多也是她的同类。」\n静谧的庄园里，一支佣兵小队趁着夜色悄然潜入，一场针对庄园主人的猎杀即将开始。\n然而，刀口舔血的猎手们全然不知……在她的猎场里，他们才是猎物。",
-        "version": null,
-        "bvid": "BV1y1uq6zEud",
-        "published_at": "2026-08-12T03:00:00.000Z",
-        "duration": "17:05",
-        "url": "https://www.bilibili.com/video/BV1y1uq6zEud/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1y1uq6zEud",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/yh/BV1y1uq6zEud.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "3546636978489848",
           "dynamic_url": null
         }
       },
