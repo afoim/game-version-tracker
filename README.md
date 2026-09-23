@@ -74,7 +74,7 @@ Bilibili 动态若有明确标题，`sources[].title` 直接使用官方标题�
 OpenAI 兼容中转（AcoFork LLM）：
 
 - endpoint: `https://api-llm.acofork.com/v1`
-- model: `deepseek-v4-1-flash-260910`
+- model: `deepseek-v4-flash-260713`
 - API key: `AF_LLM_API_KEY` Actions Secret
 - 每次 Action 使用动态请求会话：`game-version-tracker-${github.run_id}`
 

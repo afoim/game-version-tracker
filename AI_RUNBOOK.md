@@ -114,7 +114,7 @@ orchestrator 合并 `verified` 的可靠事实变化；同时允许在事实不�
 
 - provider: `acofork`（`@ai-sdk/openai-compatible`）
 - endpoint: `https://api-llm.acofork.com/v1`
-- model: `deepseek-v4-1-flash-260910`
+- model: `deepseek-v4-flash-260713`
 - API key: `AF_LLM_API_KEY` Actions Secret
 - `x-opencode-session`: `game-version-tracker-${github.run_id}`（仅 `opencode` provider 使用）
 

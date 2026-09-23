@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
-const MODEL_ID = process.env.AGENT_MODEL || 'deepseek-v4-1-flash-260910';
+const MODEL_ID = process.env.AGENT_MODEL || 'deepseek-v4-flash-260713';
 const PROVIDER_ID = process.env.AGENT_PROVIDER_ID || 'opencode';
 const PROVIDER_NPM = process.env.AGENT_PROVIDER_NPM || '';
 const PROVIDER_NAME = process.env.AGENT_PROVIDER_NAME || PROVIDER_ID;

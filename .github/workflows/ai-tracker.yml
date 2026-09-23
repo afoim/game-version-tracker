@@ -21,10 +21,10 @@ concurrency:
 jobs:
   track:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     env:
       AGENT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'true' || 'false' }}
-      AGENT_MODEL: deepseek-v4-1-flash-260910
+      AGENT_MODEL: deepseek-v4-flash-260713
       AGENT_PROVIDER_ID: acofork
       AGENT_PROVIDER_NPM: '@ai-sdk/openai-compatible'
       AGENT_PROVIDER_NAME: AcoFork LLM
