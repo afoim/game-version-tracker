@@ -110,14 +110,17 @@ orchestrator 合并 `verified` 的可靠事实变化；同时允许在事实不�
 - 没有数据变化时不 commit。
 - 有变化时使用 `github-actions[bot]` commit，并在 push 前 fetch/rebase 最新 `master`；禁止 force push。
 
-## OpenCode Zen
+## AI provider
 
-- endpoint: `https://opencode.ai/zen/v1`
-- model: `muse-spark-1.3-contributor-free`
-- API key: `public`
-- `x-opencode-session`: `game-version-tracker-${github.run_id}`
+- provider: `acofork`（`@ai-sdk/openai-compatible`）
+- endpoint: `https://api-llm.acofork.com/v1`
+- model: `deepseek-v4-1-flash-260910`
+- API key: `AF_LLM_API_KEY` Actions Secret
+- `x-opencode-session`: `game-version-tracker-${github.run_id}`（仅 `opencode` provider 使用）
 
-每次 workflow run 使用自己的动态 session，不使用固定值。
+provider、endpoint、model 与密钥全部由 `AGENT_PROVIDER_*` / `AGENT_LLM_*` 环境变量注入，OpenCode 只作为模型 transport。每次 workflow run 使用自己的动态 session，不使用固定值。
+
+provider 不可用时仍会降级为 `media-only`，但 workflow 会在提交后检查 `agent-output/report.json`，自动降级、缺少报告或未配置 `AF_LLM_API_KEY` 都会让 Action 失败，避免版本事实静默停更。
 
 ## 手动验证
 

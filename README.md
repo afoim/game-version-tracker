@@ -41,7 +41,7 @@ git commit / push
 - 每个 `child-agent` 只分析一个游戏，只能使用本轮 Playwright 实际读取的证据，只返回结构化 JSON，不写仓库。
 - `review-agent` 独立检查结构、来源、日期、变化证据和明显幻觉风险。
 - 某个游戏证据不足时安全降级：保留该游戏旧事实，继续审核其他游戏，不猜测数据。
-- 如果 AI provider 明确返回不可用的 403/FreeTierError，本轮自动降级为 `media-only`：不修改 `games.json` 事实，只继续刷新固定官号的媒体目录与封面，避免 PV 数据跟着模型网关一起停更。
+- 如果 AI provider 明确返回不可用的 403/FreeTierError，本轮自动降级为 `media-only`：不修改 `games.json` 事实，只继续刷新固定官号的媒体目录与封面，避免 PV 数据跟着模型网关一起停更；该降级会让 workflow 最终失败，不会静默通过。
 - 只有 review-agent 批准的可靠事实变化才会写入 `data/games.json`。
 - GitHub Actions 只允许提交 `data/games.json`、`data/media-feed.json` 与 `data/media/**`；没有变化时不创建空提交。
 
@@ -71,14 +71,20 @@ Bilibili 动态若有明确标题，`sources[].title` 直接使用官方标题�
 
 ## AI
 
-OpenCode Zen：
+OpenAI 兼容中转（AcoFork LLM）：
 
-- endpoint: `https://opencode.ai/zen/v1`
-- model: `muse-spark-1.3-contributor-free`
-- API key: `public`
+- endpoint: `https://api-llm.acofork.com/v1`
+- model: `deepseek-v4-1-flash-260910`
+- API key: `AF_LLM_API_KEY` Actions Secret
 - 每次 Action 使用动态请求会话：`game-version-tracker-${github.run_id}`
 
-Agent 编排、证据约束和审核逻辑位于 `agent/`。OpenCode 负责模型 transport，Playwright 负责网络读取，模型本身不执行搜索。
+OpenCode 只作为模型 transport：provider、endpoint、model 与密钥由 `AGENT_PROVIDER_*` / `AGENT_LLM_*` 环境变量注入，不再依赖已对程序化调用关闭的 OpenCode Zen 免费额度。Playwright 负责网络读取，模型本身不执行搜索。
+
+Agent 编排、证据约束和审核逻辑位于 `agent/`。
+
+### 版本停更保护
+
+AI provider 不可用时，orchestrator 会降级为 `media-only` 并继续刷新媒体，但 `games.json` 版本事实不会更新。为避免这种「媒体照常、版本静默停更」被当成成功，workflow 会在提交后检查 `agent-output/report.json`：一旦本轮发生自动 `media-only` 降级，或缺少报告，或 `AF_LLM_API_KEY` 未配置，Action 直接失败并给出明确原因。
 
 ## GitHub Actions
 

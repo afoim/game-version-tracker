@@ -2,10 +2,13 @@ import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
-const MODEL_ID = process.env.AGENT_MODEL || 'muse-spark-1.3-contributor-free';
-const PROVIDER_ID = 'opencode';
-const BASE_URL = process.env.OPENCODE_ZEN_BASE_URL || 'https://opencode.ai/zen/v1';
-const API_KEY = process.env.OPENCODE_API_KEY || 'public';
+const MODEL_ID = process.env.AGENT_MODEL || 'deepseek-v4-1-flash-260910';
+const PROVIDER_ID = process.env.AGENT_PROVIDER_ID || 'opencode';
+const PROVIDER_NPM = process.env.AGENT_PROVIDER_NPM || '';
+const PROVIDER_NAME = process.env.AGENT_PROVIDER_NAME || PROVIDER_ID;
+const BASE_URL =
+  process.env.AGENT_LLM_BASE_URL || process.env.OPENCODE_ZEN_BASE_URL || 'https://opencode.ai/zen/v1';
+const API_KEY = process.env.AGENT_LLM_API_KEY || process.env.OPENCODE_API_KEY || 'public';
 const CALL_TIMEOUT_MS = Number(process.env.AGENT_LLM_TIMEOUT_MS || 240000);
 
 function resolveGatewaySession() {
@@ -48,6 +51,20 @@ function parseEvents(stdout) {
 }
 
 function createConfig(gatewaySession) {
+  const provider = {
+    options: {
+      baseURL: BASE_URL,
+      apiKey: API_KEY,
+    },
+  };
+  if (PROVIDER_NPM) {
+    provider.npm = PROVIDER_NPM;
+    provider.name = PROVIDER_NAME;
+    provider.models = { [MODEL_ID]: { name: MODEL_ID } };
+  }
+  if (PROVIDER_ID === 'opencode') {
+    provider.options.headers = { 'x-opencode-session': gatewaySession };
+  }
   return {
     $schema: 'https://opencode.ai/config.json',
     // Model calls are reasoning-only. Search is owned by Playwright and all
@@ -58,15 +75,7 @@ function createConfig(gatewaySession) {
       '*': 'deny',
     },
     provider: {
-      [PROVIDER_ID]: {
-        options: {
-          baseURL: BASE_URL,
-          apiKey: API_KEY,
-          headers: {
-            'x-opencode-session': gatewaySession,
-          },
-        },
-      },
+      [PROVIDER_ID]: provider,
     },
     model: `${PROVIDER_ID}/${MODEL_ID}`,
   };
