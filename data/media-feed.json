@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-22T04:00:10.000Z",
+  "generated_at": "2026-09-23T04:00:26.000Z",
   "ui": {
     "page": {
       "title": "游戏资讯",
@@ -844,6 +844,66 @@
     ],
     "items": [
       {
+        "id": "starrail:BV1yvhW6sEzi",
+        "game_name": "崩坏：星穹铁道",
+        "category": "promotional_pv",
+        "category_label": "宣传影像",
+        "title": "《崩坏：星穹铁道》即兴巡演PV——「至此，已成艺术」",
+        "description": "楼主[匿名]：画成这样…可以接稿吗？\nID[Jade]：每日审美积累已达成\nID[点石成金]：稿子有点熟悉啊，你不会是……\nID[扑满保护协会名誉会长]：下次让账账做模特好不好~\nID[龙颜大悦]：这就是你在半夜敲我门的原因？\nID[高清条形码]：我用最简单最直接最不绕弯子的方式告诉你：老师，你是我的神！\n \n中文CV：\n真珠——苏婉\n托帕——陆敏悦\n砂金——杨超然\n龙晶——洪海天\n虚照——子音\n ‌\n日文CV：\n真珠——安野希世乃\n托帕——南条爱乃\n砂金——河西健吾\n龙晶——上坂堇\n虚照——户松遥\n ‌",
+        "version": null,
+        "bvid": "BV1yvhW6sEzi",
+        "published_at": "2026-09-23T04:00:26.000Z",
+        "duration": "12:18",
+        "url": "https://www.bilibili.com/video/BV1yvhW6sEzi/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1yvhW6sEzi",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/starrail/BV1yvhW6sEzi.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1340190821",
+          "dynamic_url": "https://www.bilibili.com/opus/1251113777123819560"
+        }
+      },
+      {
+        "id": "endfield:BV1DEhH6tEBA",
+        "game_name": "明日方舟：终末地",
+        "category": "promotional_pv",
+        "category_label": "宣传影像",
+        "title": "奈雪的茶 ×《明日方舟：终末地》「果韵香迎，心意同行」合作宣传PV",
+        "description": "鲜果入杯，沁香萦回。\n终末地携手@奈雪的茶 ，邀管理员共赴这场清爽惬意的午间茶歇。\n联动合作现已开启，更多活动详情，请关注奈雪的茶官方自媒体账号。",
+        "version": null,
+        "bvid": "BV1DEhH6tEBA",
+        "published_at": "2026-09-23T03:00:06.000Z",
+        "duration": "01:34",
+        "url": "https://www.bilibili.com/video/BV1DEhH6tEBA/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1DEhH6tEBA",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1DEhH6tEBA.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1265652806",
+          "dynamic_url": "https://www.bilibili.com/opus/1251098229295022134"
+        }
+      },
+      {
+        "id": "yh:BV1jWej6hEVt",
+        "game_name": "异环",
+        "category": "short_film",
+        "category_label": "动画短片",
+        "title": "《异环》黑羽角色短片丨救世主的祭宴",
+        "description": "超自然都市开放世界RPG《异环》全新版本「祷歌为谁而诵」将于9月24日版本更新后开启！立刻下载>>>https://www.biligame.com/detail/?id=111795\n离巢的雏鸟……是时候回来了。",
+        "version": null,
+        "bvid": "BV1jWej6hEVt",
+        "published_at": "2026-09-23T03:00:00.000Z",
+        "duration": "12:47",
+        "url": "https://www.bilibili.com/video/BV1jWej6hEVt/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1jWej6hEVt",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/yh/BV1jWej6hEVt.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "3546636978489848",
+          "dynamic_url": "https://www.bilibili.com/opus/1251098203547238416"
+        }
+      },
+      {
         "id": "genshin:BV1BqhB6nEdN",
         "game_name": "原神",
         "category": "character_pv",
@@ -1112,7 +1172,7 @@
         "description": "按照薇斯纳的理论，游戏玩得好的聪明人，更容易解决工作上的难题。\n借由这种说辞，她从身负的职责中获得了无尽的乐趣。\n\n中文CV：\n薇斯纳——龟娘\n达妮卡——朱婧\n\n日文CV：\n薇斯纳——平野绫\n达妮卡——原由实\n\n《原神》bilibili服下载地址： https://www.biligame.com/detail/?id=103496",
         "version": null,
         "bvid": "BV1sjen6QEQ7",
-        "published_at": "2026-09-16T04:00:10.000Z",
+        "published_at": "2026-09-16T04:00:00.000Z",
         "duration": "10:54",
         "url": "https://www.bilibili.com/video/BV1sjen6QEQ7/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1sjen6QEQ7",
@@ -1120,7 +1180,7 @@
         "source": {
           "platform": "bilibili",
           "official_mid": "401742377",
-          "dynamic_url": "https://www.bilibili.com/opus/1248516112183721990"
+          "dynamic_url": null
         }
       },
       {
@@ -1161,26 +1221,6 @@
           "platform": "bilibili",
           "official_mid": "1340190821",
           "dynamic_url": "https://www.bilibili.com/opus/1246289614033911865"
-        }
-      },
-      {
-        "id": "starrail:BV1sAbL6tEEC",
-        "game_name": "崩坏：星穹铁道",
-        "category": "promotional_pv",
-        "category_label": "宣传影像",
-        "title": "《崩坏：星穹铁道》千星纪游PV——「深水区」",
-        "description": "一次赌上性命的升迁，一场暗藏机锋的晚宴，一条听后即焚的密令……\n暗流涌动的公司深水区，「石心誓环」亦不能免于风暴——\n谎言固然危险，真相也能引火烧身，当撕去伪装，谁又能笑到最后？\n \n中文CV：\n翡翠——张若瑜\n龙晶——洪海天\n欧泊——Kinsen\n砂金——杨超然\n波提欧——彭博\n姬子——林簌\n飞霄——叶知秋\n银枝——梁达伟\n真理医生——桑毓泽\n ‌\n日文CV：\n翡翠——三石琴乃\n龙晶——上坂堇\n欧泊——岸尾大辅\n砂金——河西健吾\n波提欧——小西克幸\n姬子——田中理惠\n飞霄——小松未可子\n银枝——立花慎之",
-        "version": null,
-        "bvid": "BV1sAbL6tEEC",
-        "published_at": "2026-09-06T04:00:21.000Z",
-        "duration": "16:06",
-        "url": "https://www.bilibili.com/video/BV1sAbL6tEEC/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1sAbL6tEEC",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/starrail/BV1sAbL6tEEC.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "1340190821",
-          "dynamic_url": "https://www.bilibili.com/opus/1244805307679375382"
         }
       },
       {
@@ -1241,26 +1281,6 @@
           "platform": "bilibili",
           "official_mid": "3546645778139206",
           "dynamic_url": null
-        }
-      },
-      {
-        "id": "yh:BV1jVtt6LEjP",
-        "game_name": "异环",
-        "category": "character_pv",
-        "category_label": "角色 PV",
-        "title": "《异环》灵可角色PV丨宇宙的频段",
-        "description": "超自然都市开放世界RPG《异环》全新版本「雾中朔望星回」现已开启！立刻下载>>>https://www.biligame.com/detail/?id=111795\n\n「宇宙像一个电台，每个生命都有独属于自己的电波频段……」\n「……不论是人、异象、还是我的宠物小贞，都不例外。」\n「哈？！臭小鬼！你说谁是宠物？！」",
-        "version": null,
-        "bvid": "BV1jVtt6LEjP",
-        "published_at": "2026-09-02T03:00:01.000Z",
-        "duration": "13:14",
-        "url": "https://www.bilibili.com/video/BV1jVtt6LEjP/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1jVtt6LEjP",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/yh/BV1jVtt6LEjP.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "3546636978489848",
-          "dynamic_url": "https://www.bilibili.com/opus/1243305419218092034"
         }
       },
       {
@@ -1357,26 +1377,6 @@
         "url": "https://www.bilibili.com/video/BV1BW8q6jEDo/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1BW8q6jEDo",
         "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1BW8q6jEDo.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "1265652806",
-          "dynamic_url": null
-        }
-      },
-      {
-        "id": "endfield:BV1VQ8i6uEr4",
-        "game_name": "明日方舟：终末地",
-        "category": "preview_program",
-        "category_label": "版本前瞻",
-        "title": "《明日方舟：终末地》「雪凇幽梦」版本前瞻预告",
-        "description": "《明日方舟：终末地》「雪凇幽梦」版本前瞻预告节目现已公开。\n为了感谢管理员对《明日方舟：终末地》的支持，我们已通过游戏内邮件发放嵌晶玉×1000，折金票×10000，初级认知载体×8，武器检查套组×4。\n发放时间：2026/08/21 19:30（UTC+8）\n发放条件：2026/09/04 19:30（UTC+8）前登录游戏\n发放说明：奖励将通过【邮件】发送，开启【邮箱】功能后可领取，邮件有效期为14天，请管理员及时领取\n未来我们会在官方自媒体账号陆续更新《明日方舟：终末地》「雪凇幽梦」版本的相关信息与",
-        "version": null,
-        "bvid": "BV1VQ8i6uEr4",
-        "published_at": "2026-08-21T11:30:00.000Z",
-        "duration": "44:28",
-        "url": "https://www.bilibili.com/video/BV1VQ8i6uEr4/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1VQ8i6uEr4",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1VQ8i6uEr4.jpg",
         "source": {
           "platform": "bilibili",
           "official_mid": "1265652806",
