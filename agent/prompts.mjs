@@ -76,11 +76,6 @@ ${json(evidenceForModel)}
 - preview_status=已发布 时也要继续寻找 preview_replay_url，不能只写已发布就结束核验。
 - preview_images 由 orchestrator 根据 Bilibili 官方前瞻动态配图自动发布；child-agent 必须原样保留当前值，不得自行增加、删除或改写。
 
-日期字段规则：
-- current_version_days：当前版本已上线的天数（当前版本上线当天为 0），按版本上线日到今天的自然日计算。
-- days_to_next_version：从现在到下一版本上线的天数，必须是非负整数。官方已公布下一版本上线日期时按该日期计算；尚未公布时按当前版本上线日加该游戏常规版本周期估算，或沿用上一轮推算值并随时间递减，绝不能用 0 占位（除非下一版本确实在当天上线）。
-- 若本轮只确认了新版本已上线、但未确认下一版本上线日期，仍必须把 days_to_next_version 更新为对下一版本的合理估算，而不是沿用已经归零的旧值。
-
 来源规则：
 - candidate.sources 只能包含上面 evidence 中本轮真实读取成功、且 discovered_by 以 bilibili-official: 开头的 URL；不要保留旧的官网、TapTap、HoYoLAB、新闻站或其他平台来源。
 - url 和 checked_at 必须逐字复制对应 evidence。
