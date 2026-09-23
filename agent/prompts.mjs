@@ -42,6 +42,8 @@ search-worker 不使用搜索引擎，也不读取官网、TapTap、微博、You
 }`;
 }
 
+const CHILD_EVIDENCE_TEXT_LIMIT = Number(process.env.AGENT_CHILD_EVIDENCE_TEXT_LIMIT || 2600);
+
 export function childPrompt({ assignment, currentGame, evidence }) {
   const evidenceForModel = evidence.map((item) => ({
     title: item.title,
@@ -50,7 +52,7 @@ export function childPrompt({ assignment, currentGame, evidence }) {
     discovered_by: item.discovered_by,
     http_status: item.http_status,
     preview_related: Boolean(item.preview_related),
-    text: item.text,
+    text: String(item.text || '').slice(0, CHILD_EVIDENCE_TEXT_LIMIT),
   }));
 
   return `你是 Game Version Tracker 的 child-agent，只负责一个游戏：${assignment.game_name}。

@@ -102,6 +102,20 @@ export function validateAssignments(assignments) {
   return true;
 }
 
+// current_up_days_remaining is a pure function of the stored absolute
+// current_up_end_at, so refresh it deterministically instead of trusting the
+// model to recount it. This keeps the countdown from going stale whenever a
+// child-agent verifies a game without otherwise changing its facts.
+export function refreshDerivedDays(game, now = Date.now()) {
+  if (game.current_up_end_at) {
+    const end = Date.parse(game.current_up_end_at);
+    if (Number.isFinite(end)) {
+      game.current_up_days_remaining = Math.max(0, Math.ceil((end - now) / 86400000));
+    }
+  }
+  return game;
+}
+
 function parseDate(value) {
   if (value === null) return null;
   const time = Date.parse(value);
@@ -176,20 +190,25 @@ export function collectReviewIssues({ currentDataset, proposedDataset, childResu
       issues.push(`${gameName}: 非法 verification_status=${child.verification_status || 'unknown'}`);
     }
 
-    const start = parseDate(reviewCandidate.current_up_start_at);
-    const end = parseDate(reviewCandidate.current_up_end_at);
-    if (Number.isNaN(start)) issues.push(`${gameName}: current_up_start_at 不是有效日期`);
-    if (Number.isNaN(end)) issues.push(`${gameName}: current_up_end_at 不是有效日期`);
-    if (Number.isFinite(start) && Number.isFinite(end) && end <= start) {
-      issues.push(`${gameName}: 当前 UP 结束时间不晚于开始时间`);
-    }
-    if (reviewCandidate.current_up_characters.length > 0 && Number.isFinite(end) && end < now - 60 * 60 * 1000) {
-      issues.push(`${gameName}: 当前 UP 已明显结束但仍保留角色`);
-    }
-    if (Number.isFinite(end) && reviewCandidate.current_up_days_remaining !== null) {
-      const expected = Math.max(0, Math.ceil((end - now) / 86400000));
-      if (Math.abs(reviewCandidate.current_up_days_remaining - expected) > 1) {
-        issues.push(`${gameName}: current_up_days_remaining=${reviewCandidate.current_up_days_remaining} 与结束时间推算值 ${expected} 明显不一致`);
+    // Date/UP checks only apply to this round's verified candidates. An
+    // insufficient game intentionally keeps byte-for-byte old data; its
+    // pre-existing staleness must not block reliable updates for other games.
+    if (verified) {
+      const start = parseDate(reviewCandidate.current_up_start_at);
+      const end = parseDate(reviewCandidate.current_up_end_at);
+      if (Number.isNaN(start)) issues.push(`${gameName}: current_up_start_at 不是有效日期`);
+      if (Number.isNaN(end)) issues.push(`${gameName}: current_up_end_at 不是有效日期`);
+      if (Number.isFinite(start) && Number.isFinite(end) && end <= start) {
+        issues.push(`${gameName}: 当前 UP 结束时间不晚于开始时间`);
+      }
+      if (reviewCandidate.current_up_characters.length > 0 && Number.isFinite(end) && end < now - 60 * 60 * 1000) {
+        issues.push(`${gameName}: 当前 UP 已明显结束但仍保留角色`);
+      }
+      if (Number.isFinite(end) && reviewCandidate.current_up_days_remaining !== null) {
+        const expected = Math.max(0, Math.ceil((end - now) / 86400000));
+        if (Math.abs(reviewCandidate.current_up_days_remaining - expected) > 1) {
+          issues.push(`${gameName}: current_up_days_remaining=${reviewCandidate.current_up_days_remaining} 与结束时间推算值 ${expected} 明显不一致`);
+        }
       }
     }
 

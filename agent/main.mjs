@@ -9,6 +9,7 @@ import {
   GAME_NAMES,
   collectReviewIssues,
   hasMeaningfulChange,
+  refreshDerivedDays,
   validateAssignments,
   validateDataset,
   validateGame,
@@ -36,9 +37,11 @@ function isProviderUnavailableError(error) {
   return /FreeTierError|free tier can only be used from within OpenCode|statusCode.?403/i.test(message);
 }
 
+const LLM_ATTEMPTS = Math.max(2, Number(process.env.AGENT_LLM_ATTEMPTS || 3));
+
 async function callJson(runner, role, prompt) {
   let lastError;
-  for (let attempt = 1; attempt <= 2; attempt += 1) {
+  for (let attempt = 1; attempt <= LLM_ATTEMPTS; attempt += 1) {
     try {
       const suffix = attempt === 1 ? '' : '\n\n上一次输出无法被程序解析。现在只输出严格 JSON，不要任何额外文字。';
       const response = await runner.run(`${prompt}${suffix}`);
@@ -321,6 +324,7 @@ function normalizeChildResult(result, gameName, currentGame, evidence) {
     }
   }
 
+  refreshDerivedDays(result.candidate);
   const evidenceUrls = new Set(evidence.map((item) => item.url));
   validateGame(result.candidate, { evidenceUrls, requireEvidenceSources: true });
   return {

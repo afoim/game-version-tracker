@@ -30,6 +30,8 @@ jobs:
       AGENT_PROVIDER_NAME: AcoFork LLM
       AGENT_LLM_BASE_URL: https://api-llm.acofork.com/v1
       AGENT_LLM_API_KEY: ${{ secrets.AF_LLM_API_KEY }}
+      AGENT_LLM_TIMEOUT_MS: '300000'
+      AGENT_LLM_ATTEMPTS: '3'
       AGENT_SESSION_ID: game-version-tracker-${{ github.run_id }}
       BILIBILI_COOKIE: ${{ secrets.BILIBILI_COOKIE }}
 
