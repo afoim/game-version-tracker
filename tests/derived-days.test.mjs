@@ -117,3 +117,17 @@ test('verified games still reject an expired UP that keeps characters', () => {
 
   assert.ok(issues.some((issue) => issue.includes('原神: 当前 UP 已明显结束但仍保留角色')));
 });
+
+
+test('verified candidates reject a next version that has already become current', () => {
+  const currentDataset = makeDataset();
+  const proposedDataset = structuredClone(currentDataset);
+  proposedDataset.games[0].next_version = proposedDataset.games[0].current_version;
+  const childResults = GAME_NAMES.map((name, index) => ({
+    game_name: name, verification_status: index === 0 ? 'verified' : 'insufficient',
+    changed: index === 0, candidate: proposedDataset.games[index], notes: [],
+  }));
+  const issues = collectReviewIssues({ currentDataset, proposedDataset, childResults,
+    evidenceByGame: {}, now: NOW });
+  assert.ok(issues.some((issue) => issue.includes('next_version') && issue.includes('current_version')));
+});

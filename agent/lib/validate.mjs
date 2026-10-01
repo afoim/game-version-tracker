@@ -155,6 +155,9 @@ export function collectReviewIssues({ currentDataset, proposedDataset, childResu
     const reviewCandidate = verified ? child.candidate : currentGame;
 
     if (verified) {
+      if (reviewCandidate.next_version === reviewCandidate.current_version && reviewCandidate.next_version !== '暂未公布') {
+        issues.push(`${gameName}: next_version 与 current_version 相同，版本滚动未完成`);
+      }
       if (evidence.length === 0) {
         issues.push(`${gameName}: child-agent 标记 verified，但没有本轮 Playwright 成功读取的外部来源`);
       }

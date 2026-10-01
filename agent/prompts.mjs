@@ -57,6 +57,7 @@ export function childPrompt({ assignment, currentGame, evidence }) {
 
   return `你是 Game Version Tracker 的 child-agent，只负责一个游戏：${assignment.game_name}。
 main-agent 给你的命令：${assignment.objective}
+当前核验时间：${new Date().toISOString()}
 
 你没有仓库写权限，不允许修改文件、不允许 commit、不允许 push，也不允许自行联网。你只能分析下面由 Playwright search-worker 从该游戏固定 Bilibili 官方账号动态/视频中读取到的 evidence。
 
@@ -67,6 +68,8 @@ ${json(currentGame)}
 ${json(evidenceForModel)}
 
 任务：核验当前版本、主要内容、下一版本、前瞻状态、前瞻标题、前瞻直播开始时间、官方直播地址、官方录播/回放地址、当前 UP/卡池，以及现有日期/剩余天数字段。只有 evidence 明确支持时才改变事实；证据不足的事实字段保持原值。禁止使用模型记忆补事实，禁止猜日期，禁止把前瞻日期当版本上线日期，已经结束的卡池不能继续作为当前 UP。
+
+版本滚动必须在 candidate 中完整完成，不能让 orchestrator 猜测：旧 next_version 已上线时不能仍作为 next_version。没有官方下一版本信息时使用“暂未公布”、next_content=[]、days_to_next_version=0（未知），不能推算版本号或发布日期。当前内容必须属于当前版本；旧前瞻若已成为当前版本，应清除旧前瞻字段并使用“未官宣”，不要当成下一版本前瞻。current_version_days 应按 evidence 明确的上线日期及当前时间计算，未知时保留旧值。已经结束且没有新卡池证据时清空 current_up_characters，并保留已知起止日期；不得猜新角色。
 
 前瞻字段规则：
 - preview_title：Bilibili 官方账号发布的前瞻/特别节目标题；没有可靠标题时保持原值。

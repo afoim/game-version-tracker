@@ -143,7 +143,9 @@ function previewValueSupported(field, value, item) {
 function enforceBilibiliEvidence(currentGame, candidate, evidence) {
   const officialEvidence = evidence.filter((item) => String(item.discovered_by || '').startsWith('bilibili-official:'));
   const officialUrls = new Set(officialEvidence.map((item) => item.url));
-  const previewUrls = new Set(officialEvidence.filter((item) => item.preview_related === true).map((item) => item.url));
+  const previewUrls = new Set(officialEvidence.filter((item) =>
+    /前瞻|特别节目|通讯|直播|回放|录播/.test(`${item.title}\n${item.text}`),
+  ).map((item) => item.url));
   const evidenceByUrl = new Map(officialEvidence.map((item) => [item.url, item]));
   const next = structuredClone(candidate);
   const reverted = [];
@@ -508,6 +510,7 @@ async function runMediaOnlyFallback({ currentDataset, runner, reason }) {
 
 async function main() {
   await mkdir(OUTPUT_DIR, { recursive: true });
+  await rm(REPORT_PATH, { force: true });
   const currentDataset = JSON.parse(await readFile(DATA_PATH, 'utf8'));
   validateDataset(currentDataset);
 
@@ -592,68 +595,97 @@ async function main() {
     await collector.close();
     collector = null;
 
-    const proposedDataset = structuredClone(currentDataset);
-    const changedGames = [];
-    const sourceMigratedGames = [];
-    const verifiedGames = new Set();
-    for (const gameName of GAME_NAMES) {
-      const currentGame = currentDataset.games.find((game) => game.game_name === gameName);
-      const result = childResults.find((item) => item.game_name === gameName);
-      if (!result || result.verification_status !== 'verified') continue;
-      verifiedGames.add(gameName);
-      const factChanged = hasMeaningfulChange(currentGame, result.candidate);
-      const sourcesChanged = hasMeaningfulSourceChange(currentGame, result.candidate);
-      if (!factChanged && !sourcesChanged) continue;
-      const index = proposedDataset.games.findIndex((game) => game.game_name === gameName);
-      proposedDataset.games[index] = result.candidate;
-      if (factChanged) changedGames.push(gameName);
-      if (sourcesChanged) sourceMigratedGames.push(gameName);
-    }
-    const sourceTitleChanges = refreshSourceTitles(proposedDataset, sourceTitlesByGame);
-    const mediaPlan = buildPreviewMediaPlan(proposedDataset, evidenceByGame, verifiedGames);
-    const { feed: mediaFeed, coverPlan: mediaCoverPlan } = buildMediaFeed({
-      dataset: proposedDataset,
-      mediaByGame,
-      baseUrl: PUBLIC_DATA_BASE_URL,
-    });
-    validateDataset(proposedDataset);
-    validateMediaFeed(mediaFeed);
+    let proposedDataset, changedGames, sourceMigratedGames, sourceTitleChanges;
+    let mediaPlan, mediaFeed, mediaCoverPlan, mechanicalIssues;
+    let allVerified, allChildrenReturned, insufficientGames, reviewCall, review, approved;
+    const reviewAttempts = [];
+    for (let reviewAttempt = 1; reviewAttempt <= 3; reviewAttempt += 1) {
+      proposedDataset = structuredClone(currentDataset);
+      changedGames = [];
+      sourceMigratedGames = [];
+      const verifiedGames = new Set();
+      for (const gameName of GAME_NAMES) {
+        const currentGame = currentDataset.games.find((game) => game.game_name === gameName);
+        const result = childResults.find((item) => item.game_name === gameName);
+        if (!result || result.verification_status !== 'verified') continue;
+        verifiedGames.add(gameName);
+        const factChanged = hasMeaningfulChange(currentGame, result.candidate);
+        const sourcesChanged = hasMeaningfulSourceChange(currentGame, result.candidate);
+        if (!factChanged && !sourcesChanged) continue;
+        const index = proposedDataset.games.findIndex((game) => game.game_name === gameName);
+        proposedDataset.games[index] = result.candidate;
+        if (factChanged) changedGames.push(gameName);
+        if (sourcesChanged) sourceMigratedGames.push(gameName);
+      }
+      sourceTitleChanges = refreshSourceTitles(proposedDataset, sourceTitlesByGame);
+      mediaPlan = buildPreviewMediaPlan(proposedDataset, evidenceByGame, verifiedGames);
+      ({ feed: mediaFeed, coverPlan: mediaCoverPlan } = buildMediaFeed({
+        dataset: proposedDataset,
+        mediaByGame,
+        baseUrl: PUBLIC_DATA_BASE_URL,
+      }));
+      validateDataset(proposedDataset);
+      validateMediaFeed(mediaFeed);
 
-    const mechanicalIssues = collectReviewIssues({
-      currentDataset,
-      proposedDataset,
-      childResults,
-      evidenceByGame,
-    });
-    const allVerified = GAME_NAMES.every((gameName) => {
-      const child = childResults.find((item) => item.game_name === gameName);
-      return child?.verification_status === 'verified' && (evidenceByGame[gameName] || []).length > 0;
-    });
-    const allChildrenReturned = GAME_NAMES.every((gameName) => {
-      const child = childReport.find((item) => item.game_name === gameName);
-      return child && child.cli_session;
-    });
-    const insufficientGames = childReport
-      .filter((item) => item.verification_status === 'insufficient')
-      .map((item) => item.game_name);
-
-    log(
-      `child-agent 调用完整=${allChildrenReturned}；all_verified=${allVerified}；` +
-        `安全降级=${insufficientGames.length ? insufficientGames.join('、') : '无'}；启动独立 review-agent…`,
-    );
-    const reviewCall = await callJson(
-      runner,
-      'review-agent',
-      reviewPrompt({
+      mechanicalIssues = collectReviewIssues({
         currentDataset,
         proposedDataset,
         childResults,
-        evidenceSummary: evidenceSummary(evidenceByGame),
-        mechanicalIssues,
-      }),
-    );
-    const review = reviewCall.value;
-    const approved = review?.approved === true && allChildrenReturned && mechanicalIssues.length === 0;
+        evidenceByGame,
+      });
+      allVerified = GAME_NAMES.every((gameName) => {
+        const child = childResults.find((item) => item.game_name === gameName);
+        return child?.verification_status === 'verified' && (evidenceByGame[gameName] || []).length > 0;
+      });
+      allChildrenReturned = GAME_NAMES.every((gameName) => {
+        const child = childReport.find((item) => item.game_name === gameName);
+        return child && child.cli_session;
+      });
+      insufficientGames = childReport
+        .filter((item) => item.verification_status === 'insufficient')
+        .map((item) => item.game_name);
+
+      log(
+        `child-agent 调用完整=${allChildrenReturned}；all_verified=${allVerified}；` +
+          `安全降级=${insufficientGames.length ? insufficientGames.join('、') : '无'}；启动独立 review-agent…`,
+      );
+      reviewCall = await callJson(
+        runner,
+        'review-agent',
+        reviewPrompt({
+          currentDataset,
+          proposedDataset,
+          childResults,
+          evidenceSummary: evidenceSummary(evidenceByGame),
+          mechanicalIssues,
+        }),
+      );
+      review = reviewCall.value;
+      approved = review?.approved === true && allChildrenReturned && mechanicalIssues.length === 0
+        && verifiedGames.size > 0 && mediaFeed.media.items.length > 0;
+      reviewAttempts.push({ attempt: reviewAttempt, approved, mechanical_issues: mechanicalIssues, review });
+      if (approved || reviewAttempt === 3) break;
+      const feedback = JSON.stringify({ mechanicalIssues, review });
+      log(`审核第 ${reviewAttempt} 轮拒绝，向子任务反馈并重新核验…`);
+      for (const gameName of GAME_NAMES) {
+        const index = childResults.findIndex((item) => item.game_name === gameName);
+        if (childResults[index]?.verification_status !== 'verified') continue;
+        const currentGame = currentDataset.games.find((game) => game.game_name === gameName);
+        try {
+          const corrected = await callJson(runner, `repair:${gameName}`, childPrompt({
+            assignment: assignments.find((item) => item.game_name === gameName),
+            currentGame,
+            evidence: evidenceByGame[gameName],
+          }) + `\n独立审核反馈：${feedback}\n上次候选：${JSON.stringify(childResults[index])}\n只修复本游戏相关问题，必须直接返回完整修正结果；无法可靠修复时返回 insufficient 并保留原始数据。`);
+          const result = normalizeChildResult(corrected.value, gameName, currentGame, evidenceByGame[gameName]);
+          childResults[index] = result;
+          childReport[index] = { ...childReport[index], verification_status: result.verification_status,
+            meaningful_change: result.changed, cli_session: corrected.cliSessionId, notes: result.notes };
+        } catch (error) {
+          log(`${gameName} 修正失败: ${error.message}`);
+        }
+      }
+    }
     let mediaResults = [];
     let mediaCatalogResults = [];
     if (approved && !dryRun) {
@@ -672,6 +704,7 @@ async function main() {
       provider: runner.provider,
       endpoint: runner.baseUrl,
       gateway_session: runner.gatewaySession,
+      review_attempts: reviewAttempts,
       main_cli_session: planCall.cliSessionId,
       review_cli_session: reviewCall.cliSessionId,
       dry_run: dryRun,
