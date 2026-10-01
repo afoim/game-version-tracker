@@ -639,7 +639,7 @@ async function main() {
       });
       allChildrenReturned = GAME_NAMES.every((gameName) => {
         const child = childReport.find((item) => item.game_name === gameName);
-        return child && child.cli_session;
+        return child && childResults.some((item) => item.game_name === gameName);
       });
       insufficientGames = childReport
         .filter((item) => item.verification_status === 'insufficient')
@@ -661,6 +661,8 @@ async function main() {
         }),
       );
       review = reviewCall.value;
+      if (verifiedGames.size === 0) mechanicalIssues.push('本轮没有任何游戏完成有效事实核验');
+      if (mediaFeed.media.items.length === 0) mechanicalIssues.push('本轮没有读取到可发布的官方媒体');
       approved = review?.approved === true && allChildrenReturned && mechanicalIssues.length === 0
         && verifiedGames.size > 0 && mediaFeed.media.items.length > 0;
       reviewAttempts.push({ attempt: reviewAttempt, approved, mechanical_issues: mechanicalIssues, review });
