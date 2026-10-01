@@ -544,6 +544,7 @@ async function main() {
     const sourceTitlesByGame = {};
     const childResults = [];
     const childReport = [];
+    const childTasks = [];
 
     for (let index = 0; index < GAME_NAMES.length; index += 1) {
       const gameName = GAME_NAMES[index];
@@ -561,17 +562,18 @@ async function main() {
           `${officialMedia.length} 条官方视频；启动 child-agent…`,
       );
 
-      try {
-        const childCall = await callJson(runner, `child-agent:${gameName}`, childPrompt({ assignment, currentGame, evidence }));
-        const result = normalizeChildResult(childCall.value, gameName, currentGame, evidence);
-        childResults.push(result);
-        childReport.push({
-          game_name: gameName,
-          verification_status: result.verification_status,
-          evidence_count: evidence.length,
-          meaningful_change: result.changed,
-          cli_session: childCall.cliSessionId,
-          notes: result.notes,
+      childTasks.push(async () => {
+        try {
+          const childCall = await callJson(runner, `child-agent:${gameName}`, childPrompt({ assignment, currentGame, evidence }));
+          const result = normalizeChildResult(childCall.value, gameName, currentGame, evidence);
+          childResults.push(result);
+          childReport.push({
+            game_name: gameName,
+            verification_status: result.verification_status,
+            evidence_count: evidence.length,
+            meaningful_change: result.changed,
+            cli_session: childCall.cliSessionId,
+            notes: result.notes,
         });
       } catch (error) {
         childResults.push({
@@ -590,10 +592,15 @@ async function main() {
           notes: [`child-agent 失败: ${error.message}`],
         });
       }
+      });
     }
 
     await collector.close();
     collector = null;
+    // Bound independent model calls while keeping browser collection sequential.
+    for (let index = 0; index < childTasks.length; index += 4) {
+      await Promise.all(childTasks.slice(index, index + 4).map((task) => task()));
+    }
 
     let proposedDataset, changedGames, sourceMigratedGames, sourceTitleChanges;
     let mediaPlan, mediaFeed, mediaCoverPlan, mechanicalIssues;
