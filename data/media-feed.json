@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-01T18:06:08.224Z",
+  "generated_at": "2026-10-01T18:13:38.764Z",
   "ui": {
     "page": {
       "title": "游戏资讯",
@@ -215,7 +215,7 @@
         "next_version": "暂未公布",
         "next_content": [],
         "preview_status": "已发布",
-        "preview_title": "4.6版本「月升之前，与兽共舞」前瞻特别节目",
+        "preview_title": "《崩坏：星穹铁道》4.6版本「月升之前，与兽共舞」前瞻特别节目",
         "preview_start_at": "2026-09-20T19:30:00+08:00",
         "preview_live_url": "http://live.bilibili.com/27263119",
         "preview_replay_url": "https://www.bilibili.com/video/BV1wXeq6wEGR/",
@@ -232,7 +232,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-01T18:05:37.411Z"
+            "checked_at": "2026-10-01T18:12:53.336Z"
           },
           {
             "title": "月升之前与兽共舞 · 角色前瞻 | 真珠",
@@ -242,7 +242,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-01T18:05:37.412Z"
+            "checked_at": "2026-10-01T18:12:53.336Z"
           },
           {
             "title": "《崩坏：星穹铁道》4.6版本「月升之前，与兽共舞」前瞻特别节目",
@@ -253,7 +253,7 @@
               "preview_title",
               "preview_replay"
             ],
-            "checked_at": "2026-10-01T18:05:37.412Z"
+            "checked_at": "2026-10-01T18:12:53.336Z"
           },
           {
             "title": "《崩坏：星穹铁道》4.6版本「月升之前，与兽共舞」前瞻特别节目",
@@ -264,7 +264,7 @@
               "preview_title",
               "preview_replay"
             ],
-            "checked_at": "2026-10-01T18:05:37.412Z"
+            "checked_at": "2026-10-01T18:12:53.336Z"
           },
           {
             "title": "《崩坏：星穹铁道》4.6版本「月升之前，与兽共舞」前瞻特别节目回顾长图",
@@ -274,7 +274,7 @@
               "current_version",
               "preview_status"
             ],
-            "checked_at": "2026-10-01T18:05:37.412Z"
+            "checked_at": "2026-10-01T18:12:53.337Z"
           },
           {
             "title": "关注并转发本条动态，帕姆将于9月30日抽取10位幸运开拓者各获得「随机角色周边」一份。",
@@ -283,7 +283,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-01T18:05:37.412Z"
+            "checked_at": "2026-10-01T18:12:53.337Z"
           },
           {
             "title": "《崩坏：星穹铁道》真珠角色PV——「如何描绘一种希望」",
@@ -293,7 +293,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-01T18:05:37.412Z"
+            "checked_at": "2026-10-01T18:12:53.337Z"
           },
           {
             "title": "月升之前与兽共舞 · 阿哈的回答",
@@ -302,7 +302,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-01T18:05:37.412Z"
+            "checked_at": "2026-10-01T18:12:53.337Z"
           },
           {
             "title": "月升之前与兽共舞 · 强敌侦察狸记 | 「堕神之血•亚婆离」",
@@ -311,7 +311,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-01T18:05:37.413Z"
+            "checked_at": "2026-10-01T18:12:53.338Z"
           },
           {
             "title": "月升之前与兽共舞 · 欢迎来到千星城 | 生研院事故大揭秘",
@@ -320,7 +320,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-01T18:05:37.413Z"
+            "checked_at": "2026-10-01T18:12:53.338Z"
           }
         ],
         "preview_images": [
@@ -364,7 +364,7 @@
               "preview_start_at",
               "preview_live_url"
             ],
-            "checked_at": "2026-10-01T17:56:14.216Z"
+            "checked_at": "2026-10-01T18:13:00.900Z"
           },
           {
             "title": "《崩坏3》十周年庆典特别节目录像",
@@ -374,7 +374,7 @@
               "current_content",
               "preview_replay_url"
             ],
-            "checked_at": "2026-10-01T17:56:14.216Z"
+            "checked_at": "2026-10-01T18:13:00.900Z"
           },
           {
             "title": "《崩坏3》十周年庆典特别节目录像",
@@ -384,7 +384,16 @@
               "current_content",
               "preview_replay_url"
             ],
-            "checked_at": "2026-10-01T17:56:14.216Z"
+            "checked_at": "2026-10-01T18:13:00.900Z"
+          },
+          {
+            "title": "★《崩坏3》9.1版本「时序照新」宣传PV 现已发布★",
+            "url": "https://www.bilibili.com/opus/1249760944020520968",
+            "type": "official_community",
+            "claims": [
+              "current_content"
+            ],
+            "checked_at": "2026-10-01T18:13:00.900Z"
           },
           {
             "title": "★《崩坏3》9.1版本维护通知、新活动预告★",
@@ -394,16 +403,16 @@
               "current_version",
               "current_version_days"
             ],
-            "checked_at": "2026-10-01T17:56:14.217Z"
+            "checked_at": "2026-10-01T18:13:00.902Z"
           },
           {
-            "title": "★《崩坏3》9.1版本「时序照新」宣传PV 现已发布★",
-            "url": "https://www.bilibili.com/opus/1249760944020520968",
+            "title": "全新S级角色「时序之律者」、主线第二部后日谈「海正用火的声音歌唱」、主题活动「相遇♪回忆玩具小屋」、周年系列福…",
+            "url": "https://www.bilibili.com/opus/1249765906874105904",
             "type": "official_community",
             "claims": [
               "current_content"
             ],
-            "checked_at": "2026-10-01T17:56:14.216Z"
+            "checked_at": "2026-10-01T18:13:00.901Z"
           }
         ],
         "preview_images": [
@@ -444,9 +453,9 @@
             "type": "official_community",
             "claims": [
               "current_version",
-              "current_content"
+              "current_up_characters"
             ],
-            "checked_at": "2026-10-01T17:56:22.013Z"
+            "checked_at": "2026-10-01T18:13:08.548Z"
           },
           {
             "title": "「跛脚乌鸦奇探录」活动说明",
@@ -457,7 +466,7 @@
               "current_content",
               "current_up_characters"
             ],
-            "checked_at": "2026-10-01T17:56:22.014Z"
+            "checked_at": "2026-10-01T18:13:08.548Z"
           },
           {
             "title": "她与她的隐秘往事丨3.2版本内容一览（下期）",
@@ -468,7 +477,7 @@
               "current_content",
               "current_up_characters"
             ],
-            "checked_at": "2026-10-01T17:56:22.014Z"
+            "checked_at": "2026-10-01T18:13:08.548Z"
           },
           {
             "title": "3.2版本限时频段（下期）",
@@ -478,7 +487,7 @@
               "current_version",
               "current_up_characters"
             ],
-            "checked_at": "2026-10-01T17:56:22.014Z"
+            "checked_at": "2026-10-01T18:13:08.548Z"
           },
           {
             "title": "《绝区零》洛克茜角色PV | 发条骑士",
@@ -486,9 +495,10 @@
             "type": "official_community",
             "claims": [
               "current_version",
-              "current_content"
+              "current_content",
+              "current_up_characters"
             ],
-            "checked_at": "2026-10-01T17:56:22.014Z"
+            "checked_at": "2026-10-01T18:13:08.549Z"
           },
           {
             "title": "《绝区零》洛克茜角色PV | 发条骑士",
@@ -496,9 +506,10 @@
             "type": "official_community",
             "claims": [
               "current_version",
-              "current_content"
+              "current_content",
+              "current_up_characters"
             ],
-            "checked_at": "2026-10-01T17:56:22.014Z"
+            "checked_at": "2026-10-01T18:13:08.549Z"
           },
           {
             "title": "《绝区零》洛克茜角色PV | 发条骑士",
@@ -506,9 +517,10 @@
             "type": "official_community",
             "claims": [
               "current_version",
-              "current_content"
+              "current_content",
+              "current_up_characters"
             ],
-            "checked_at": "2026-10-01T17:56:22.014Z"
+            "checked_at": "2026-10-01T18:13:08.549Z"
           },
           {
             "title": "▼《绝区零》3.2版本「她与她的隐秘往事」现已上线！",
@@ -516,9 +528,10 @@
             "type": "official_community",
             "claims": [
               "current_version",
-              "current_content"
+              "current_content",
+              "current_up_characters"
             ],
-            "checked_at": "2026-10-01T17:56:22.014Z"
+            "checked_at": "2026-10-01T18:13:08.549Z"
           },
           {
             "title": "本次活动将于10月3日上午11:00开奖，请关注官方动态消息。",
@@ -528,16 +541,17 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-01T17:56:22.015Z"
+            "checked_at": "2026-10-01T18:13:08.549Z"
           },
           {
             "title": "▼ 关注@绝区零 并转发本条动态，我们将随机抽取10位绳匠送出「随机角色立牌*1」。",
             "url": "https://www.bilibili.com/opus/1251952558477410304",
             "type": "official_community",
             "claims": [
-              "current_version"
+              "current_version",
+              "current_content"
             ],
-            "checked_at": "2026-10-01T17:56:22.015Z"
+            "checked_at": "2026-10-01T18:13:08.549Z"
           }
         ],
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/zzz.ico"
@@ -916,24 +930,15 @@
         "current_up_days_remaining": 19,
         "sources": [
           {
-            "title": "《星塔旅人》「遥远的塔」主线更新纪念活动PV现已发布！",
-            "url": "https://www.bilibili.com/opus/1251944664284528672",
+            "title": "一周年特别直播即将开启！",
+            "url": "https://www.bilibili.com/opus/1253788573198450693",
             "type": "official_community",
             "claims": [
-              "current_version",
-              "current_content"
+              "preview_status",
+              "preview_title",
+              "preview_start_at"
             ],
-            "checked_at": "2026-10-01T17:44:46.713Z"
-          },
-          {
-            "title": "「空白的稚梦」限时招募活动现已开启！",
-            "url": "https://www.bilibili.com/opus/1253418003442171943",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_content"
-            ],
-            "checked_at": "2026-10-01T17:44:46.713Z"
+            "checked_at": "2026-10-01T18:13:38.763Z"
           },
           {
             "title": "「沐于温情笑意中」限时招募活动现已开启，活动期间，全新5星旅人「艾蕾」招募概率提升！",
@@ -946,38 +951,7 @@
               "current_up_start_at",
               "current_up_end_at"
             ],
-            "checked_at": "2026-10-01T17:44:46.713Z"
-          },
-          {
-            "title": "一周年特别直播即将开启！",
-            "url": "https://www.bilibili.com/opus/1253788573198450693",
-            "type": "official_community",
-            "claims": [
-              "preview_status",
-              "preview_title",
-              "preview_start_at"
-            ],
-            "checked_at": "2026-10-01T17:44:46.713Z"
-          },
-          {
-            "title": "✧09月29日维护更新结束",
-            "url": "https://www.bilibili.com/opus/1253417488054484995",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_content"
-            ],
-            "checked_at": "2026-10-01T17:44:46.713Z"
-          },
-          {
-            "title": "✧「月华窃梦人」活动说明",
-            "url": "https://www.bilibili.com/opus/1253332447707267090",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_content"
-            ],
-            "checked_at": "2026-10-01T17:44:46.713Z"
+            "checked_at": "2026-10-01T18:13:38.763Z"
           },
           {
             "title": "✧一周年特别直播开启确认",
@@ -988,7 +962,47 @@
               "preview_title",
               "preview_start_at"
             ],
-            "checked_at": "2026-10-01T17:44:46.713Z"
+            "checked_at": "2026-10-01T18:13:38.764Z"
+          },
+          {
+            "title": "《星塔旅人》「遥远的塔」主线更新纪念活动PV现已发布！",
+            "url": "https://www.bilibili.com/opus/1251944664284528672",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "current_content"
+            ],
+            "checked_at": "2026-10-01T18:13:38.764Z"
+          },
+          {
+            "title": "「空白的稚梦」限时招募活动现已开启！",
+            "url": "https://www.bilibili.com/opus/1253418003442171943",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "current_content"
+            ],
+            "checked_at": "2026-10-01T18:13:38.764Z"
+          },
+          {
+            "title": "✧09月29日维护更新结束",
+            "url": "https://www.bilibili.com/opus/1253417488054484995",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "current_content"
+            ],
+            "checked_at": "2026-10-01T18:13:38.764Z"
+          },
+          {
+            "title": "✧「月华窃梦人」活动说明",
+            "url": "https://www.bilibili.com/opus/1253332447707267090",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "current_content"
+            ],
+            "checked_at": "2026-10-01T18:13:38.764Z"
           },
           {
             "title": "《星塔旅人》09月29日维护更新说明",
@@ -997,16 +1011,14 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-01T17:44:46.714Z"
+            "checked_at": "2026-10-01T18:13:38.764Z"
           },
           {
             "title": "「联合讨伐」第11赛季关卡挑战即将在 2026/09/29 22:59 截止，届时您将不能开启关卡挑战，请魔王…",
             "url": "https://www.bilibili.com/opus/1252961362507726848",
             "type": "official_community",
-            "claims": [
-              "current_version"
-            ],
-            "checked_at": "2026-10-01T17:44:46.714Z"
+            "claims": [],
+            "checked_at": "2026-10-01T18:13:38.764Z"
           },
           {
             "title": "✧主线剧情第九章「遥远的塔」更新预告",
@@ -1016,7 +1028,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-01T17:44:46.714Z"
+            "checked_at": "2026-10-01T18:13:38.764Z"
           }
         ],
         "preview_images": [],
