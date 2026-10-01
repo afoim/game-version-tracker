@@ -144,22 +144,13 @@
       "current_up_days_remaining": 0,
       "sources": [
         {
-          "title": "关注并转发本条动态，帕姆将于9月30日抽取10位幸运开拓者各获得「随机角色周边」一份。",
-          "url": "https://www.bilibili.com/opus/1251144602057965664",
-          "type": "official_community",
-          "claims": [
-            "current_version"
-          ],
-          "checked_at": "2026-10-01T17:56:06.502Z"
-        },
-        {
           "title": "4.6版本哔哩哔哩「崩坏：星穹铁道创作者激励计划」即将上线！",
           "url": "https://www.bilibili.com/opus/1252946018760130569",
           "type": "official_community",
           "claims": [
             "current_version"
           ],
-          "checked_at": "2026-10-01T17:56:06.502Z"
+          "checked_at": "2026-10-01T18:05:37.411Z"
         },
         {
           "title": "月升之前与兽共舞 · 角色前瞻 | 真珠",
@@ -169,34 +160,48 @@
             "current_version",
             "current_content"
           ],
-          "checked_at": "2026-10-01T17:56:06.502Z"
+          "checked_at": "2026-10-01T18:05:37.412Z"
         },
         {
           "title": "《崩坏：星穹铁道》4.6版本「月升之前，与兽共舞」前瞻特别节目",
           "url": "https://www.bilibili.com/opus/1250131853104381987",
           "type": "official_community",
           "claims": [
-            "current_version"
+            "current_version",
+            "preview_title",
+            "preview_replay"
           ],
-          "checked_at": "2026-10-01T17:56:06.502Z"
+          "checked_at": "2026-10-01T18:05:37.412Z"
         },
         {
           "title": "《崩坏：星穹铁道》4.6版本「月升之前，与兽共舞」前瞻特别节目",
           "url": "https://www.bilibili.com/video/BV1wXeq6wEGR/",
           "type": "official_community",
           "claims": [
-            "current_version"
+            "current_version",
+            "preview_title",
+            "preview_replay"
           ],
-          "checked_at": "2026-10-01T17:56:06.502Z"
+          "checked_at": "2026-10-01T18:05:37.412Z"
         },
         {
           "title": "《崩坏：星穹铁道》4.6版本「月升之前，与兽共舞」前瞻特别节目回顾长图",
           "url": "https://www.bilibili.com/opus/1250130549568176183",
           "type": "official_community",
           "claims": [
+            "current_version",
+            "preview_status"
+          ],
+          "checked_at": "2026-10-01T18:05:37.412Z"
+        },
+        {
+          "title": "关注并转发本条动态，帕姆将于9月30日抽取10位幸运开拓者各获得「随机角色周边」一份。",
+          "url": "https://www.bilibili.com/opus/1251144602057965664",
+          "type": "official_community",
+          "claims": [
             "current_version"
           ],
-          "checked_at": "2026-10-01T17:56:06.502Z"
+          "checked_at": "2026-10-01T18:05:37.412Z"
         },
         {
           "title": "《崩坏：星穹铁道》真珠角色PV——「如何描绘一种希望」",
@@ -206,7 +211,7 @@
             "current_version",
             "current_content"
           ],
-          "checked_at": "2026-10-01T17:56:06.502Z"
+          "checked_at": "2026-10-01T18:05:37.412Z"
         },
         {
           "title": "月升之前与兽共舞 · 阿哈的回答",
@@ -215,7 +220,7 @@
           "claims": [
             "current_version"
           ],
-          "checked_at": "2026-10-01T17:56:06.503Z"
+          "checked_at": "2026-10-01T18:05:37.412Z"
         },
         {
           "title": "月升之前与兽共舞 · 强敌侦察狸记 | 「堕神之血•亚婆离」",
@@ -224,7 +229,7 @@
           "claims": [
             "current_version"
           ],
-          "checked_at": "2026-10-01T17:56:06.503Z"
+          "checked_at": "2026-10-01T18:05:37.413Z"
         },
         {
           "title": "月升之前与兽共舞 · 欢迎来到千星城 | 生研院事故大揭秘",
@@ -233,7 +238,7 @@
           "claims": [
             "current_version"
           ],
-          "checked_at": "2026-10-01T17:56:06.503Z"
+          "checked_at": "2026-10-01T18:05:37.413Z"
         }
       ],
       "preview_images": [
@@ -480,9 +485,12 @@
           "type": "official_community",
           "claims": [
             "current_version",
-            "current_content"
+            "current_content",
+            "preview_status",
+            "preview_title",
+            "preview_replay_url"
           ],
-          "checked_at": "2026-10-01T17:56:29.707Z"
+          "checked_at": "2026-10-01T18:06:00.551Z"
         },
         {
           "title": "鸣潮3.7版本",
@@ -492,7 +500,7 @@
             "current_version",
             "current_content"
           ],
-          "checked_at": "2026-10-01T17:56:29.708Z"
+          "checked_at": "2026-10-01T18:06:00.551Z"
         },
         {
           "title": "鸣潮3.7版本",
@@ -500,9 +508,9 @@
           "type": "official_community",
           "claims": [
             "current_version",
-            "current_content"
+            "preview_live_url"
           ],
-          "checked_at": "2026-10-01T17:56:29.708Z"
+          "checked_at": "2026-10-01T18:06:00.552Z"
         },
         {
           "title": "鸣潮3.7版本 · 鸣潮心",
@@ -512,7 +520,7 @@
             "current_version",
             "current_content"
           ],
-          "checked_at": "2026-10-01T17:56:29.708Z"
+          "checked_at": "2026-10-01T18:06:00.552Z"
         },
         {
           "title": "鸣潮3.7版本 · 鸣潮心",
@@ -522,7 +530,7 @@
             "current_version",
             "current_content"
           ],
-          "checked_at": "2026-10-01T17:56:29.708Z"
+          "checked_at": "2026-10-01T18:06:00.552Z"
         },
         {
           "title": "《鸣潮》3.7版本开场动画 | 梦枢心相由心生",
@@ -532,7 +540,7 @@
             "current_version",
             "current_content"
           ],
-          "checked_at": "2026-10-01T17:56:29.708Z"
+          "checked_at": "2026-10-01T18:06:00.552Z"
         },
         {
           "title": "《鸣潮》3.7版本开场动画 | 梦枢心相由心生",
@@ -542,7 +550,7 @@
             "current_version",
             "current_content"
           ],
-          "checked_at": "2026-10-01T17:56:29.708Z"
+          "checked_at": "2026-10-01T18:06:00.552Z"
         },
         {
           "title": "鸣潮3.7版本 · 鸣潮心 · 互动抽奖",
@@ -552,7 +560,7 @@
             "current_version",
             "current_content"
           ],
-          "checked_at": "2026-10-01T17:56:29.709Z"
+          "checked_at": "2026-10-01T18:06:00.552Z"
         },
         {
           "title": "「镜锁妄世，心照红尘」3.7版本内容说明",
@@ -560,9 +568,10 @@
           "type": "official_community",
           "claims": [
             "current_version",
-            "current_content"
+            "current_content",
+            "current_up"
           ],
-          "checked_at": "2026-10-01T17:56:29.709Z"
+          "checked_at": "2026-10-01T18:06:00.552Z"
         },
         {
           "title": "鸣潮3.7版本",
@@ -572,7 +581,7 @@
             "current_version",
             "current_up"
           ],
-          "checked_at": "2026-10-01T17:56:29.709Z"
+          "checked_at": "2026-10-01T18:06:00.552Z"
         }
       ],
       "preview_images": [
@@ -617,7 +626,7 @@
             "preview_start_at",
             "preview_live_url"
           ],
-          "checked_at": "2026-10-01T17:56:37.376Z"
+          "checked_at": "2026-10-01T18:06:08.223Z"
         },
         {
           "title": "2026/10/01 12:00（服务器时间） - 版本更新维护前",
@@ -627,7 +636,7 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-10-01T17:56:37.376Z"
+          "checked_at": "2026-10-01T18:06:08.224Z"
         },
         {
           "title": "「陵水渡秋」限时签到活动",
@@ -637,7 +646,7 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-10-01T17:56:37.377Z"
+          "checked_at": "2026-10-01T18:06:08.224Z"
         },
         {
           "title": "「跑者运动会」活动介绍",
@@ -647,7 +656,7 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-10-01T17:56:37.377Z"
+          "checked_at": "2026-10-01T18:06:08.224Z"
         },
         {
           "title": "▼ 「雪凇幽梦」版本现已开启！",
@@ -657,7 +666,7 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-10-01T17:56:37.377Z"
+          "checked_at": "2026-10-01T18:06:08.224Z"
         },
         {
           "title": "▼ 「雪凇幽梦」版本现已开启！",
@@ -667,7 +676,7 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-10-01T17:56:37.377Z"
+          "checked_at": "2026-10-01T18:06:08.224Z"
         },
         {
           "title": "关注@明日方舟终末地 并转发此动态，我们将于10月25日 抽取10位管理员送出【明日方舟：终末地-角色亚克力立…",
@@ -677,17 +686,16 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-10-01T17:56:37.377Z"
+          "checked_at": "2026-10-01T18:06:08.224Z"
         },
         {
           "title": "随着「雪凇幽梦」版本开启，我们关注到了大家对版本新内容的许多讨论，十分感谢大家长期以来的喜爱与探讨。",
           "url": "https://www.bilibili.com/opus/1251577524033421353",
           "type": "official_community",
           "claims": [
-            "current_version",
-            "current_up_characters"
+            "current_version"
           ],
-          "checked_at": "2026-10-01T17:56:37.377Z"
+          "checked_at": "2026-10-01T18:06:08.224Z"
         },
         {
           "title": "▼ 「雪凇幽梦」版本现已开启！",
@@ -698,7 +706,7 @@
             "current_up_characters",
             "current_content"
           ],
-          "checked_at": "2026-10-01T17:56:37.377Z"
+          "checked_at": "2026-10-01T18:06:08.224Z"
         },
         {
           "title": "▼//「绚丽异彩」重构寻访 1 已开启！",
@@ -708,7 +716,7 @@
             "current_version",
             "current_up_characters"
           ],
-          "checked_at": "2026-10-01T17:56:37.377Z"
+          "checked_at": "2026-10-01T18:06:08.224Z"
         }
       ],
       "preview_images": [
