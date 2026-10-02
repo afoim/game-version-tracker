@@ -41,9 +41,11 @@ export function validateGame(game, { evidenceUrls = null, requireEvidenceSources
     assert(Array.isArray(game[key]), `${game.game_name}.${key} 必须是数组`);
     assert(game[key].every((value) => typeof value === 'string'), `${game.game_name}.${key} 只能包含字符串`);
   }
-  for (const key of ['current_version_days', 'days_to_next_version']) {
-    assert(Number.isInteger(game[key]) && game[key] >= 0, `${game.game_name}.${key} 必须是非负整数`);
-  }
+  assert(Number.isInteger(game.current_version_days) && game.current_version_days >= 0,
+    `${game.game_name}.current_version_days 必须是非负整数`);
+  assert(game.days_to_next_version === null ||
+    (Number.isInteger(game.days_to_next_version) && game.days_to_next_version >= 0),
+    `${game.game_name}.days_to_next_version 必须是非负整数或 null`);
   for (const key of ['current_up_start_at', 'current_up_end_at']) {
     assert(game[key] === null || typeof game[key] === 'string', `${game.game_name}.${key} 必须是字符串或 null`);
   }

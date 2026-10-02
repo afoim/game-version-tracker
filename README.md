@@ -138,6 +138,7 @@ GitHub Actions 出口可能触发 Bilibili 412 / 风控。可在仓库 Actions S
 - `sources` 中的来源包含 `title`、`url`、`type`、`claims`、`checked_at`。
 - 新核验产生的 `sources.type` 固定为 `official_community`。
 - 未确认日期保持“预计 / 未确认”语义。
+- `days_to_next_version` 在官方版本更新时间未知时为 `null`，即使已官宣版本名或前瞻时间也不例外；明确版本更新时间后才使用非负整数，`0` 仅表示当天更新。
 - 已结束卡池不能继续作为当前 UP。
 - 证据不足时保留旧值，而不是让模型猜测。
 

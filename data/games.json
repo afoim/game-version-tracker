@@ -15,7 +15,7 @@
       "preview_start_at": "2026-09-12T20:00:00+08:00",
       "preview_live_url": "https://live.bilibili.com/21987615",
       "preview_replay_url": "https://www.bilibili.com/video/BV1znY96NEvn/",
-      "days_to_next_version": 0,
+      "days_to_next_version": null,
       "current_up_characters": [
         "薇斯纳",
         "沃雅妮莎"
@@ -137,7 +137,7 @@
       "preview_start_at": "2026-09-20T19:30:00+08:00",
       "preview_live_url": "http://live.bilibili.com/27263119",
       "preview_replay_url": "https://www.bilibili.com/video/BV1wXeq6wEGR/",
-      "days_to_next_version": 0,
+      "days_to_next_version": null,
       "current_up_characters": [],
       "current_up_start_at": "2026-09-12T12:00:00+08:00",
       "current_up_end_at": "2026-09-28T03:59:00+08:00",
@@ -264,7 +264,7 @@
       "preview_start_at": "2026-09-19T19:30:00+08:00",
       "preview_live_url": "https://live.bilibili.com/1319882",
       "preview_replay_url": "https://www.bilibili.com/video/BV1aLeb6sEC5/",
-      "days_to_next_version": 0,
+      "days_to_next_version": null,
       "current_up_characters": [],
       "current_up_start_at": null,
       "current_up_end_at": null,
@@ -353,7 +353,7 @@
       "preview_start_at": null,
       "preview_live_url": null,
       "preview_replay_url": null,
-      "days_to_next_version": 0,
+      "days_to_next_version": null,
       "current_up_characters": [
         "洛克茜",
         "普罗米娅"
@@ -487,7 +487,7 @@
       "preview_start_at": "2026-09-19T19:00:00+08:00",
       "preview_live_url": "https://live.bilibili.com/27354807",
       "preview_replay_url": "https://www.bilibili.com/video/BV1Xoeb6xE8y/",
-      "days_to_next_version": 0,
+      "days_to_next_version": null,
       "current_up_characters": [],
       "current_up_start_at": "2026-09-30T11:00:00+08:00",
       "current_up_end_at": "2026-10-22T09:59:00+08:00",
@@ -621,7 +621,7 @@
       "preview_start_at": "2026-10-06T19:30:00+08:00",
       "preview_live_url": "https://live.bilibili.com/1921300321",
       "preview_replay_url": null,
-      "days_to_next_version": 0,
+      "days_to_next_version": null,
       "current_up_characters": [
         "伊冯"
       ],
@@ -751,7 +751,7 @@
       "preview_start_at": "2026-09-16T19:30:00+08:00",
       "preview_live_url": "https://live.bilibili.com/1890951177",
       "preview_replay_url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
-      "days_to_next_version": 0,
+      "days_to_next_version": null,
       "current_up_characters": [],
       "current_up_start_at": "2026-09-03T11:00:00+08:00",
       "current_up_end_at": "2026-09-24T05:59:00+08:00",
@@ -833,7 +833,7 @@
       "preview_start_at": "2026-10-18T19:00:00+08:00",
       "preview_live_url": null,
       "preview_replay_url": null,
-      "days_to_next_version": 0,
+      "days_to_next_version": null,
       "current_up_characters": [
         "艾蕾"
       ],

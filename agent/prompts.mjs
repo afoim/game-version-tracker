@@ -69,7 +69,7 @@ ${json(evidenceForModel)}
 
 任务：核验当前版本、主要内容、下一版本、前瞻状态、前瞻标题、前瞻直播开始时间、官方直播地址、官方录播/回放地址、当前 UP/卡池，以及现有日期/剩余天数字段。只有 evidence 明确支持时才改变事实；证据不足的事实字段保持原值。禁止使用模型记忆补事实，禁止猜日期，禁止把前瞻日期当版本上线日期，已经结束的卡池不能继续作为当前 UP。
 
-版本滚动必须在 candidate 中完整完成，不能让 orchestrator 猜测：旧 next_version 已上线时不能仍作为 next_version。没有官方下一版本信息时使用“暂未公布”、next_content=[]、days_to_next_version=0（未知），不能推算版本号或发布日期。当前内容必须属于当前版本；旧前瞻若已成为当前版本，应清除旧前瞻字段并使用“未官宣”，不要当成下一版本前瞻。current_version_days 应按 evidence 明确的上线日期及当前时间计算，未知时保留旧值。已经结束且没有新卡池证据时清空 current_up_characters，并保留已知起止日期；不得猜新角色。
+版本滚动必须在 candidate 中完整完成，不能让 orchestrator 猜测：旧 next_version 已上线时不能仍作为 next_version。没有官方下一版本信息时使用“暂未公布”、next_content=[]、days_to_next_version=null（未知），不能推算版本号或发布日期。即使已官宣下一版本名称，只要官方尚未明确版本更新时间，days_to_next_version 也必须为 null；前瞻开播时间不能用于更新倒计时。只有官方版本更新时间明确时才返回非负整数，0 仅表示明确于当天更新，不能表示未知。当前内容必须属于当前版本；旧前瞻若已成为当前版本，应清除旧前瞻字段并使用“未官宣”，不要当成下一版本前瞻。current_version_days 应按 evidence 明确的上线日期及当前时间计算，未知时保留旧值。已经结束且没有新卡池证据时清空 current_up_characters，并保留已知起止日期；不得猜新角色。
 
 前瞻字段规则：
 - preview_title：Bilibili 官方账号发布的前瞻/特别节目标题；没有可靠标题时保持原值。
@@ -106,6 +106,7 @@ export function reviewPrompt({ currentDataset, proposedDataset, childResults, ev
 2. 必填字段是否存在且类型合理。
 3. 对 verification_status=verified 的 child-agent，candidate.sources 必须都对应本轮 Playwright 实际读取成功、且 discovered_by 以 bilibili-official: 开头的 Bilibili 官方账号 evidence；不允许出现其他数据源。
 4. 日期是否可解析、顺序是否合理、前瞻时间是否被误写成版本上线时间、当前卡池是否已经明显过期、剩余天数是否明显不合理。
+   days_to_next_version=null 表示官方版本更新时间未知，是合法值；已官宣版本名称或前瞻时间不代表版本更新时间明确，不得要求用 0 或前瞻日期替代 null。0 仅用于明确当天更新。
 5. 所有事实变化都必须由固定 Bilibili 官方账号 evidence 支持；发现明显幻觉、把推测写成确认、来源与结论不匹配时必须拒绝。
 6. verification_status=insufficient 是允许的安全降级：说明 Bilibili 官方账号证据不足。此时该游戏必须保留 currentDataset 的旧事实，不能因为证据不足而猜测或改值；它本身不应导致整批拒绝。
 7. preview_images 是 orchestrator 从前瞻相关 Bilibili 官方动态配图生成的发布元数据，不由 child-agent 自行推断，不作为事实幻觉判断依据。
