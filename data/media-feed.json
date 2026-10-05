@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-04T05:48:17.314Z",
+  "generated_at": "2026-10-05T05:33:56.688Z",
   "ui": {
     "page": {
       "title": "游戏资讯",
@@ -88,7 +88,7 @@
           "薇斯纳",
           "沃雅妮莎"
         ],
-        "current_version_days": 11,
+        "current_version_days": 12,
         "next_version": "暂未公布",
         "next_content": [],
         "preview_status": "已发布",
@@ -103,7 +103,7 @@
         ],
         "current_up_start_at": "2026-09-23T11:00:00+08:00",
         "current_up_end_at": "2026-10-13T17:59:00+08:00",
-        "current_up_days_remaining": 10,
+        "current_up_days_remaining": 9,
         "sources": [
           {
             "title": "旅行者们大家好~哔哩哔哩《原神》7.1版本创作者激励计划更多话题赛道即将开启。",
@@ -112,7 +112,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:25.321Z"
+            "checked_at": "2026-10-05T05:33:03.159Z"
           },
           {
             "title": "原神7.1版本",
@@ -125,16 +125,17 @@
               "current_up_start_at",
               "current_up_end_at"
             ],
-            "checked_at": "2026-10-04T05:47:25.322Z"
+            "checked_at": "2026-10-05T05:33:03.160Z"
           },
           {
             "title": "「往冥府的安魂歌」7.1版本更新说明",
             "url": "https://www.bilibili.com/opus/1251036364630130726",
             "type": "official_community",
             "claims": [
-              "current_version"
+              "current_version",
+              "current_version_days"
             ],
-            "checked_at": "2026-10-04T05:47:25.322Z"
+            "checked_at": "2026-10-05T05:33:03.160Z"
           },
           {
             "title": "亲爱的旅行者，「绮衣珍赏·晴暖」活动即将开启，参与获得自选奇偶装扮套装「午后蜜果」一套。",
@@ -143,7 +144,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:25.323Z"
+            "checked_at": "2026-10-05T05:33:03.160Z"
           },
           {
             "title": "〓活动颂愿-2介绍〓",
@@ -152,7 +153,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:25.323Z"
+            "checked_at": "2026-10-05T05:33:03.160Z"
           },
           {
             "title": "活动期间，旅行者可以通过「暄霁霄练」活动颂愿/「霄练纪游」/千星商城获得心仪的奇偶装扮！",
@@ -161,25 +162,25 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:25.323Z"
+            "checked_at": "2026-10-05T05:33:03.161Z"
           },
           {
-            "title": "原神7.1版本 · 原神逐月节",
-            "url": "https://www.bilibili.com/opus/1250743097791348737",
-            "type": "official_community",
-            "claims": [
-              "current_version"
-            ],
-            "checked_at": "2026-10-04T05:47:25.323Z"
-          },
-          {
-            "title": "「听闻城中近日有『飞贼』作乱…？",
-            "url": "https://www.bilibili.com/opus/1254454722666954756",
+            "title": "《原神》过场动画-「摩拉游戏」",
+            "url": "https://www.bilibili.com/opus/1255566696093057105",
             "type": "official_community",
             "claims": [
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:47:25.323Z"
+            "checked_at": "2026-10-05T05:33:03.161Z"
+          },
+          {
+            "title": "《原神》过场动画-「摩拉游戏」",
+            "url": "https://www.bilibili.com/video/BV1HWaJ6uEpx/",
+            "type": "official_community",
+            "claims": [
+              "current_content"
+            ],
+            "checked_at": "2026-10-05T05:33:03.161Z"
           },
           {
             "title": "「煦风欢舞时」祈愿、「涌浪叙歌」祈愿以及「神铸赋形」祈愿现已开启。",
@@ -189,14 +190,16 @@
               "current_content",
               "current_up_characters"
             ],
-            "checked_at": "2026-10-04T05:47:25.323Z"
+            "checked_at": "2026-10-05T05:33:03.161Z"
           },
           {
-            "title": "《原神》六周年主题曲《风的来信》",
-            "url": "https://www.bilibili.com/opus/1252969134287749140",
+            "title": "「听闻城中近日有『飞贼』作乱…？",
+            "url": "https://www.bilibili.com/opus/1254454722666954756",
             "type": "official_community",
-            "claims": [],
-            "checked_at": "2026-10-04T05:47:25.323Z"
+            "claims": [
+              "current_content"
+            ],
+            "checked_at": "2026-10-05T05:33:03.161Z"
           }
         ],
         "preview_images": [
@@ -225,13 +228,43 @@
         "current_up_days_remaining": 0,
         "sources": [
           {
+            "title": "● 4.7版本登录游戏即可领取纪念道具「这样就能把你捧在手心啦」。",
+            "url": "https://www.bilibili.com/opus/1254453530783121424",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "next_version"
+            ],
+            "checked_at": "2026-10-05T05:33:10.825Z"
+          },
+          {
+            "title": "「乐子神智取米哈游」第一话 | 棋局",
+            "url": "https://www.bilibili.com/opus/1254453487869100073",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "next_version"
+            ],
+            "checked_at": "2026-10-05T05:33:10.825Z"
+          },
+          {
+            "title": "「乐子神智取米哈游」第一话 | 棋局",
+            "url": "https://www.bilibili.com/video/BV1NBaR6mEay/",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "next_version"
+            ],
+            "checked_at": "2026-10-05T05:33:10.825Z"
+          },
+          {
             "title": "4.6版本哔哩哔哩「崩坏：星穹铁道创作者激励计划」即将上线！",
             "url": "https://www.bilibili.com/opus/1252946018760130569",
             "type": "official_community",
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-02T05:31:16.670Z"
+            "checked_at": "2026-10-05T05:33:10.825Z"
           },
           {
             "title": "月升之前与兽共舞 · 角色前瞻 | 真珠",
@@ -241,7 +274,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-02T05:31:16.670Z"
+            "checked_at": "2026-10-05T05:33:10.826Z"
           },
           {
             "title": "关注并转发本条动态，帕姆将于9月30日抽取10位幸运开拓者各获得「随机角色周边」一份。",
@@ -250,7 +283,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-02T05:31:16.670Z"
+            "checked_at": "2026-10-05T05:33:10.826Z"
           },
           {
             "title": "《崩坏：星穹铁道》真珠角色PV——「如何描绘一种希望」",
@@ -260,34 +293,16 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-02T05:31:16.670Z"
+            "checked_at": "2026-10-05T05:33:10.826Z"
           },
           {
-            "title": "● 4.7版本登录游戏即可领取纪念道具「这样就能把你捧在手心啦」。",
-            "url": "https://www.bilibili.com/opus/1254453530783121424",
+            "title": "月升之前与兽共舞 · 「帕姆展览馆 | 月升之前，与兽共舞」",
+            "url": "https://www.bilibili.com/opus/1255566689655848964",
             "type": "official_community",
             "claims": [
-              "next_version"
+              "current_version"
             ],
-            "checked_at": "2026-10-02T05:31:16.670Z"
-          },
-          {
-            "title": "「乐子神智取米哈游」第一话 | 棋局",
-            "url": "https://www.bilibili.com/opus/1254453487869100073",
-            "type": "official_community",
-            "claims": [
-              "next_version"
-            ],
-            "checked_at": "2026-10-02T05:31:16.670Z"
-          },
-          {
-            "title": "「乐子神智取米哈游」第一话 | 棋局",
-            "url": "https://www.bilibili.com/video/BV1NBaR6mEay/",
-            "type": "official_community",
-            "claims": [
-              "next_version"
-            ],
-            "checked_at": "2026-10-02T05:31:16.670Z"
+            "checked_at": "2026-10-05T05:33:10.826Z"
           },
           {
             "title": "月升之前与兽共舞 · 阿哈的回答",
@@ -296,7 +311,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-02T05:31:16.671Z"
+            "checked_at": "2026-10-05T05:33:10.826Z"
           },
           {
             "title": "月升之前与兽共舞 · 强敌侦察狸记 | 「堕神之血•亚婆离」",
@@ -305,16 +320,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-02T05:31:16.671Z"
-          },
-          {
-            "title": "月升之前与兽共舞 · 欢迎来到千星城 | 生研院事故大揭秘",
-            "url": "https://www.bilibili.com/opus/1253324716765085737",
-            "type": "official_community",
-            "claims": [
-              "current_version"
-            ],
-            "checked_at": "2026-10-02T05:31:16.671Z"
+            "checked_at": "2026-10-05T05:33:10.827Z"
           }
         ],
         "preview_images": [
@@ -356,7 +362,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:47:40.130Z"
+            "checked_at": "2026-10-05T05:33:18.545Z"
           },
           {
             "title": "《崩坏3》十周年庆典特别节目录像",
@@ -367,7 +373,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:47:40.130Z"
+            "checked_at": "2026-10-05T05:33:18.545Z"
           },
           {
             "title": "★《崩坏3》十周年庆典特别节目预告★",
@@ -381,7 +387,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:47:40.130Z"
+            "checked_at": "2026-10-05T05:33:18.546Z"
           },
           {
             "title": "★《崩坏3》9.1版本「时序照新」宣传PV 现已发布★",
@@ -391,17 +397,40 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:47:40.130Z"
+            "checked_at": "2026-10-05T05:33:18.546Z"
+          },
+          {
+            "title": "专辑分别收录20首、9首崩坏系列原声音乐，包括8.6-9.1版本以来的PV和关卡内歌曲，以及既往崩坏3服装PV…",
+            "url": "https://www.bilibili.com/opus/1255566689698840585",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-10-05T05:33:18.546Z"
+          },
+          {
+            "title": "活动期间，舰长拨打以下指定电话号码，即可收听本次周年特别通讯的内容哦~",
+            "url": "https://www.bilibili.com/opus/1250340573486776339",
+            "type": "official_community",
+            "claims": [],
+            "checked_at": "2026-10-05T05:33:18.546Z"
+          },
+          {
+            "title": "十周年特别通讯即将开启，庆典现场期待你的连线~",
+            "url": "https://www.bilibili.com/opus/1250004649014984711",
+            "type": "official_community",
+            "claims": [],
+            "checked_at": "2026-10-05T05:33:18.546Z"
           },
           {
             "title": "全新S级角色「时序之律者」、主线第二部后日谈「海正用火的声音歌唱」、主题活动「相遇♪回忆玩具小屋」、周年系列福…",
             "url": "https://www.bilibili.com/opus/1249765906874105904",
             "type": "official_community",
             "claims": [
-              "current_content",
-              "current_version"
+              "current_version",
+              "current_content"
             ],
-            "checked_at": "2026-10-04T05:47:40.130Z"
+            "checked_at": "2026-10-05T05:33:18.546Z"
           },
           {
             "title": "炽愿吉星」全新服装「月咏星谣」登场，9.1版本更新后~11月6日12:00期间，舰长可通过参与「周年累消」活动…",
@@ -410,7 +439,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:40.131Z"
+            "checked_at": "2026-10-05T05:33:18.547Z"
           },
           {
             "title": "9.1版本更新后~10月16日12:00期间，可通过参与「镌刻于黎明的誓约」服装补给获取服装「誓予破晓」。",
@@ -419,17 +448,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:40.131Z"
-          },
-          {
-            "title": "★《崩坏3》9.1版本维护通知、新活动预告★",
-            "url": "https://www.bilibili.com/opus/1250742582391078912",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_version_days"
-            ],
-            "checked_at": "2026-10-04T05:47:40.131Z"
+            "checked_at": "2026-10-05T05:33:18.547Z"
           }
         ],
         "preview_images": [
@@ -447,12 +466,14 @@
           "新活动玩法"
         ],
         "current_version_days": 14,
-        "next_version": "暂未公布",
-        "next_content": [],
-        "preview_status": "未官宣",
-        "preview_title": null,
-        "preview_start_at": null,
-        "preview_live_url": null,
+        "next_version": "3.3",
+        "next_content": [
+          "菲欧妮、赛维里安"
+        ],
+        "preview_status": "已官宣待发布",
+        "preview_title": "《绝区零》3.3版本「重返天空的旅程」前瞻特别节目预告",
+        "preview_start_at": "2026-10-09T19:30:00+08:00",
+        "preview_live_url": "https://live.bilibili.com/32805602",
         "preview_replay_url": null,
         "days_to_next_version": null,
         "current_up_characters": [
@@ -461,60 +482,21 @@
         ],
         "current_up_start_at": "2026-09-30T12:00:00+08:00",
         "current_up_end_at": "2026-10-20T14:59:00+08:00",
-        "current_up_days_remaining": 17,
+        "current_up_days_remaining": 16,
         "preview_images": [],
         "sources": [
           {
-            "title": "养成指南上新丨洛克茜养成材料预告",
-            "url": "https://www.bilibili.com/opus/1249644788758609943",
+            "title": "《绝区零》3.3版本「重返天空的旅程」前瞻特别节目预告",
+            "url": "https://www.bilibili.com/opus/1255566764866011209",
             "type": "official_community",
             "claims": [
-              "current_version",
-              "current_up_characters"
+              "next_version",
+              "preview_status",
+              "preview_title",
+              "preview_start_at",
+              "preview_live_url"
             ],
-            "checked_at": "2026-10-04T05:47:47.637Z"
-          },
-          {
-            "title": "本次活动将于10月11日上午11:00开奖，请关注官方动态消息。",
-            "url": "https://www.bilibili.com/opus/1255195641027493969",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_up_characters"
-            ],
-            "checked_at": "2026-10-04T05:47:47.637Z"
-          },
-          {
-            "title": "▼《绝区零》3.2版本「她与她的隐秘往事」现已上线！",
-            "url": "https://www.bilibili.com/opus/1254453434173620230",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_up_characters"
-            ],
-            "checked_at": "2026-10-04T05:47:47.637Z"
-          },
-          {
-            "title": "「跛脚乌鸦奇探录」活动说明",
-            "url": "https://www.bilibili.com/opus/1254117990746554369",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_content",
-              "current_up_characters"
-            ],
-            "checked_at": "2026-10-04T05:47:47.637Z"
-          },
-          {
-            "title": "她与她的隐秘往事丨3.2版本内容一览（下期）",
-            "url": "https://www.bilibili.com/opus/1253715129269223425",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_content",
-              "current_up_characters"
-            ],
-            "checked_at": "2026-10-04T05:47:47.637Z"
+            "checked_at": "2026-10-05T05:33:26.190Z"
           },
           {
             "title": "3.2版本限时频段（下期）",
@@ -526,47 +508,49 @@
               "current_up_start_at",
               "current_up_end_at"
             ],
-            "checked_at": "2026-10-04T05:47:47.638Z"
+            "checked_at": "2026-10-05T05:33:26.190Z"
           },
           {
-            "title": "《绝区零》洛克茜角色PV | 发条骑士",
-            "url": "https://www.bilibili.com/opus/1253340262376144951",
+            "title": "她与她的隐秘往事丨3.2版本内容一览（下期）",
+            "url": "https://www.bilibili.com/opus/1253715129269223425",
             "type": "official_community",
             "claims": [
               "current_version",
+              "current_content",
               "current_up_characters"
             ],
-            "checked_at": "2026-10-04T05:47:47.638Z"
-          },
-          {
-            "title": "《绝区零》洛克茜角色PV | 发条骑士",
-            "url": "https://www.bilibili.com/opus/1253340288163774471",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_up_characters"
-            ],
-            "checked_at": "2026-10-04T05:47:47.638Z"
-          },
-          {
-            "title": "《绝区零》洛克茜角色PV | 发条骑士",
-            "url": "https://www.bilibili.com/video/BV1Qka76JEWQ/",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_up_characters"
-            ],
-            "checked_at": "2026-10-04T05:47:47.638Z"
+            "checked_at": "2026-10-05T05:33:26.190Z"
           },
           {
             "title": "▼《绝区零》3.2版本「她与她的隐秘往事」现已上线！",
-            "url": "https://www.bilibili.com/opus/1252598008260853765",
+            "url": "https://www.bilibili.com/opus/1254453434173620230",
             "type": "official_community",
             "claims": [
               "current_version",
               "current_up_characters"
             ],
-            "checked_at": "2026-10-04T05:47:47.638Z"
+            "checked_at": "2026-10-05T05:33:26.189Z"
+          },
+          {
+            "title": "「跛脚乌鸦奇探录」活动说明",
+            "url": "https://www.bilibili.com/opus/1254117990746554369",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "current_content",
+              "current_up_characters"
+            ],
+            "checked_at": "2026-10-05T05:33:26.189Z"
+          },
+          {
+            "title": "本次活动将于10月11日上午11:00开奖，请关注官方动态消息。",
+            "url": "https://www.bilibili.com/opus/1255195641027493969",
+            "type": "official_community",
+            "claims": [
+              "current_version",
+              "current_up_characters"
+            ],
+            "checked_at": "2026-10-05T05:33:26.189Z"
           }
         ],
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/zzz.ico"
@@ -579,7 +563,7 @@
           "梦枢心相由心生",
           "玄方终章"
         ],
-        "current_version_days": 4,
+        "current_version_days": 5,
         "next_version": "暂未公布",
         "next_content": [],
         "preview_status": "已发布",
@@ -591,7 +575,7 @@
         "current_up_characters": [],
         "current_up_start_at": "2026-09-30T11:00:00+08:00",
         "current_up_end_at": "2026-10-22T09:59:00+08:00",
-        "current_up_days_remaining": 18,
+        "current_up_days_remaining": 17,
         "sources": [
           {
             "title": "鸣潮3.7版本 · 鸣潮3.7版本前瞻 · 互动抽奖",
@@ -605,7 +589,7 @@
               "preview_replay_url",
               "current_version_days"
             ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
+            "checked_at": "2026-10-05T05:33:33.811Z"
           },
           {
             "title": "鸣潮3.7版本",
@@ -615,7 +599,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
+            "checked_at": "2026-10-05T05:33:33.811Z"
           },
           {
             "title": "鸣潮3.7版本",
@@ -627,7 +611,25 @@
               "preview_live_url",
               "current_version_days"
             ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
+            "checked_at": "2026-10-05T05:33:33.811Z"
+          },
+          {
+            "title": "鸣潮3.7版本 · 鸣潮心",
+            "url": "https://www.bilibili.com/opus/1255566689645363217",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-10-05T05:33:33.811Z"
+          },
+          {
+            "title": "鸣潮3.7版本 · 鸣潮心 · 互动抽奖",
+            "url": "https://www.bilibili.com/opus/1255551277168852996",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-10-05T05:33:33.811Z"
           },
           {
             "title": "鸣潮3.7版本 · 鸣潮朝月会特别演出",
@@ -636,67 +638,43 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
+            "checked_at": "2026-10-05T05:33:33.811Z"
           },
           {
             "title": "鸣潮3.7版本",
             "url": "https://www.bilibili.com/opus/1255187873573896210",
             "type": "official_community",
             "claims": [
-              "current_version",
-              "current_content"
+              "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
+            "checked_at": "2026-10-05T05:33:33.811Z"
           },
           {
             "title": "《鸣潮》剧情动画 | 朝月喜事",
             "url": "https://www.bilibili.com/opus/1255180183407689780",
             "type": "official_community",
             "claims": [
-              "current_version",
-              "current_content"
+              "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
+            "checked_at": "2026-10-05T05:33:33.811Z"
           },
           {
             "title": "《鸣潮》剧情动画 | 朝月喜事",
             "url": "https://www.bilibili.com/video/BV1bEHq63EB6/",
             "type": "official_community",
             "claims": [
-              "current_version",
-              "current_content"
+              "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
+            "checked_at": "2026-10-05T05:33:33.811Z"
           },
           {
             "title": "《鸣潮》过场动画 | 心声·心生",
             "url": "https://www.bilibili.com/opus/1254809106814861348",
             "type": "official_community",
             "claims": [
-              "current_version",
-              "current_content"
+              "current_version"
             ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
-          },
-          {
-            "title": "《鸣潮》过场动画 | 心声·心生",
-            "url": "https://www.bilibili.com/video/BV1CcHa6EEwV/",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_content"
-            ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
-          },
-          {
-            "title": "鸣潮3.7版本",
-            "url": "https://www.bilibili.com/opus/1254530743589142534",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_content"
-            ],
-            "checked_at": "2026-10-04T05:47:55.057Z"
+            "checked_at": "2026-10-05T05:33:33.811Z"
           }
         ],
         "preview_images": [
@@ -732,6 +710,30 @@
         "current_up_days_remaining": null,
         "sources": [
           {
+            "title": "“当年承蒙您的恩情，我始终未忘。今日重逢，总算能好好叙旧了。”《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
+            "url": "https://www.bilibili.com/opus/1255289279913918484",
+            "type": "official_community",
+            "claims": [
+              "next_version",
+              "preview_status",
+              "preview_title",
+              "preview_start_at"
+            ],
+            "checked_at": "2026-10-05T05:33:41.449Z"
+          },
+          {
+            "title": "“当年承蒙您的恩情，我始终未忘。今日重逢，总算能好好叙旧了。”《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
+            "url": "https://www.bilibili.com/video/BV1s1HL6VERi/",
+            "type": "official_community",
+            "claims": [
+              "next_version",
+              "preview_status",
+              "preview_title",
+              "preview_start_at"
+            ],
+            "checked_at": "2026-10-05T05:33:41.449Z"
+          },
+          {
             "title": "烟火生缘，缘聚一堂。《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
             "url": "https://www.bilibili.com/opus/1254919599186509824",
             "type": "official_community",
@@ -741,7 +743,7 @@
               "preview_title",
               "preview_start_at"
             ],
-            "checked_at": "2026-10-04T05:48:02.456Z"
+            "checked_at": "2026-10-05T05:33:41.449Z"
           },
           {
             "title": "烟火生缘，缘聚一堂。《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
@@ -753,7 +755,7 @@
               "preview_title",
               "preview_start_at"
             ],
-            "checked_at": "2026-10-04T05:48:02.456Z"
+            "checked_at": "2026-10-05T05:33:41.449Z"
           },
           {
             "title": "《明日方舟：终末地》「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
@@ -766,7 +768,19 @@
               "preview_start_at",
               "preview_live_url"
             ],
-            "checked_at": "2026-10-04T05:48:02.456Z"
+            "checked_at": "2026-10-05T05:33:41.449Z"
+          },
+          {
+            "title": "《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
+            "url": "https://www.bilibili.com/opus/1255566885097832452",
+            "type": "official_community",
+            "claims": [
+              "next_version",
+              "preview_status",
+              "preview_title",
+              "preview_start_at"
+            ],
+            "checked_at": "2026-10-05T05:33:41.449Z"
           },
           {
             "title": "《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
@@ -778,7 +792,7 @@
               "preview_title",
               "preview_start_at"
             ],
-            "checked_at": "2026-10-04T05:48:02.456Z"
+            "checked_at": "2026-10-05T05:33:41.449Z"
           },
           {
             "title": "《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
@@ -790,7 +804,7 @@
               "preview_title",
               "preview_start_at"
             ],
-            "checked_at": "2026-10-04T05:48:02.456Z"
+            "checked_at": "2026-10-05T05:33:41.449Z"
           },
           {
             "title": "「影拓丰碑 - 幽影刻形」系列更新说明",
@@ -801,7 +815,7 @@
               "current_content",
               "current_up_characters"
             ],
-            "checked_at": "2026-10-04T05:48:02.456Z"
+            "checked_at": "2026-10-05T05:33:41.449Z"
           },
           {
             "title": "2026/10/01 12:00（服务器时间） - 版本更新维护前",
@@ -811,44 +825,14 @@
               "current_version",
               "current_up_characters"
             ],
-            "checked_at": "2026-10-04T05:48:02.457Z"
-          },
-          {
-            "title": "「陵水渡秋」限时签到活动",
-            "url": "https://www.bilibili.com/opus/1253711263781879828",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_up_characters"
-            ],
-            "checked_at": "2026-10-04T05:48:02.457Z"
-          },
-          {
-            "title": "「跑者运动会」活动介绍",
-            "url": "https://www.bilibili.com/opus/1252969093474025481",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_up_characters"
-            ],
-            "checked_at": "2026-10-04T05:48:02.457Z"
-          },
-          {
-            "title": "▼ 「雪凇幽梦」版本现已开启！",
-            "url": "https://www.bilibili.com/opus/1252226923131568136",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_up_characters"
-            ],
-            "checked_at": "2026-10-04T05:48:02.457Z"
+            "checked_at": "2026-10-05T05:33:41.449Z"
           }
         ],
         "preview_images": [
-          "https://game-version-tracker.pages.dev/media/endfield/1254919599186509824/01.jpg",
-          "https://game-version-tracker.pages.dev/media/endfield/1254919599186509824/02.jpg",
-          "https://game-version-tracker.pages.dev/media/endfield/1254919599186509824/03.png",
-          "https://game-version-tracker.pages.dev/media/endfield/1254919599186509824/04.png"
+          "https://game-version-tracker.pages.dev/media/endfield/1255289279913918484/01.jpg",
+          "https://game-version-tracker.pages.dev/media/endfield/1255289279913918484/02.jpg",
+          "https://game-version-tracker.pages.dev/media/endfield/1255289279913918484/03.jpg",
+          "https://game-version-tracker.pages.dev/media/endfield/1255289279913918484/04.png"
         ],
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/endfield.png"
       },
@@ -858,7 +842,7 @@
         "current_content": [
           "黑羽"
         ],
-        "current_version_days": 10,
+        "current_version_days": 11,
         "next_version": "暂未公布",
         "next_content": [],
         "preview_status": "已发布",
@@ -879,7 +863,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
+            "checked_at": "2026-10-05T05:33:49.068Z"
           },
           {
             "title": "《异环》黑羽角色PV丨「魔女」的工作",
@@ -889,7 +873,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
+            "checked_at": "2026-10-05T05:33:49.068Z"
           },
           {
             "title": "《异环》黑羽角色PV丨「魔女」的工作",
@@ -899,7 +883,16 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
+            "checked_at": "2026-10-05T05:33:49.068Z"
+          },
+          {
+            "title": "海特洛特别资讯 | Exe",
+            "url": "https://www.bilibili.com/opus/1255551227812380675",
+            "type": "official_community",
+            "claims": [
+              "current_version"
+            ],
+            "checked_at": "2026-10-05T05:33:49.068Z"
           },
           {
             "title": "海特洛特别资讯 | 曳尔沐",
@@ -908,7 +901,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
+            "checked_at": "2026-10-05T05:33:49.068Z"
           },
           {
             "title": "异环黑羽 · 异环",
@@ -918,7 +911,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
+            "checked_at": "2026-10-05T05:33:49.068Z"
           },
           {
             "title": "拾光切片丨黑羽",
@@ -928,7 +921,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
+            "checked_at": "2026-10-05T05:33:49.068Z"
           },
           {
             "title": "异环×罗森联动活动即将开启！",
@@ -937,7 +930,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
+            "checked_at": "2026-10-05T05:33:49.068Z"
           },
           {
             "title": "海特洛之声丨猫头音!!!!集结！",
@@ -946,7 +939,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
+            "checked_at": "2026-10-05T05:33:49.069Z"
           },
           {
             "title": "感谢鉴定师们对同人创作的热情支持~[打call][打call][打call]",
@@ -955,16 +948,7 @@
             "claims": [
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
-          },
-          {
-            "title": "异环×罗森丨秋日环游 美味食刻",
-            "url": "https://www.bilibili.com/opus/1252955729673846786",
-            "type": "official_community",
-            "claims": [
-              "current_version"
-            ],
-            "checked_at": "2026-10-04T05:48:09.899Z"
+            "checked_at": "2026-10-05T05:33:49.069Z"
           }
         ],
         "preview_images": [
@@ -985,7 +969,7 @@
           "新活动：遥远的塔（主线更新纪念活动）",
           "新活动：月华窃梦人"
         ],
-        "current_version_days": 5,
+        "current_version_days": 6,
         "next_version": "暂未公布",
         "next_content": [],
         "preview_status": "已官宣待发布",
@@ -999,40 +983,46 @@
         ],
         "current_up_start_at": "2026-09-29T17:00:00+08:00",
         "current_up_end_at": "2026-10-20T10:59:00+08:00",
-        "current_up_days_remaining": 16,
+        "current_up_days_remaining": 15,
         "sources": [
           {
             "title": "「沐于温情笑意中」限时招募活动现已开启，活动期间，全新5星旅人「艾蕾」招募概率提升！",
             "url": "https://www.bilibili.com/opus/1253417745748328451",
             "type": "official_community",
             "claims": [
-              "current_version",
-              "current_content",
               "current_up_characters",
               "current_up_start_at",
               "current_up_end_at"
             ],
-            "checked_at": "2026-10-04T05:48:17.313Z"
+            "checked_at": "2026-10-05T05:33:56.686Z"
           },
           {
             "title": "「空白的稚梦」限时招募活动现已开启！",
             "url": "https://www.bilibili.com/opus/1253418003442171943",
             "type": "official_community",
             "claims": [
-              "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:48:17.313Z"
+            "checked_at": "2026-10-05T05:33:56.687Z"
           },
           {
             "title": "✧「月华窃梦人」活动说明",
             "url": "https://www.bilibili.com/opus/1253332447707267090",
             "type": "official_community",
             "claims": [
+              "current_content"
+            ],
+            "checked_at": "2026-10-05T05:33:56.687Z"
+          },
+          {
+            "title": "《星塔旅人》「遥远的塔」主线更新纪念活动PV现已发布！",
+            "url": "https://www.bilibili.com/opus/1251944664284528672",
+            "type": "official_community",
+            "claims": [
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:48:17.313Z"
+            "checked_at": "2026-10-05T05:33:56.687Z"
           },
           {
             "title": "一周年特别直播即将开启！",
@@ -1043,17 +1033,7 @@
               "preview_title",
               "preview_start_at"
             ],
-            "checked_at": "2026-10-04T05:48:17.313Z"
-          },
-          {
-            "title": "《星塔旅人》「遥远的塔」主线更新纪念活动PV现已发布！",
-            "url": "https://www.bilibili.com/opus/1251944664284528672",
-            "type": "official_community",
-            "claims": [
-              "current_version",
-              "current_content"
-            ],
-            "checked_at": "2026-10-04T05:48:17.313Z"
+            "checked_at": "2026-10-05T05:33:56.687Z"
           },
           {
             "title": "✧一周年特别直播开启确认",
@@ -1064,7 +1044,7 @@
               "preview_title",
               "preview_start_at"
             ],
-            "checked_at": "2026-10-04T05:48:17.313Z"
+            "checked_at": "2026-10-05T05:33:56.687Z"
           },
           {
             "title": "✧「猎影合围Beta」活动说明",
@@ -1073,16 +1053,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:48:17.313Z"
-          },
-          {
-            "title": "「猎影合围Beta」第二赛季即将在 2026/10/01 03:59 截止，届时将更新悬赏目标并重置您的围猎等…",
-            "url": "https://www.bilibili.com/opus/1253425219002957825",
-            "type": "official_community",
-            "claims": [
-              "current_version"
-            ],
-            "checked_at": "2026-10-04T05:48:17.313Z"
+            "checked_at": "2026-10-05T05:33:56.687Z"
           },
           {
             "title": "✧09月29日维护更新结束",
@@ -1092,7 +1063,7 @@
               "current_version",
               "current_content"
             ],
-            "checked_at": "2026-10-04T05:48:17.314Z"
+            "checked_at": "2026-10-05T05:33:56.687Z"
           },
           {
             "title": "《星塔旅人》09月29日维护更新说明",
@@ -1101,7 +1072,7 @@
             "claims": [
               "current_version"
             ],
-            "checked_at": "2026-10-04T05:48:17.314Z"
+            "checked_at": "2026-10-05T05:33:56.688Z"
           }
         ],
         "preview_images": [],
@@ -1133,6 +1104,26 @@
       }
     ],
     "items": [
+      {
+        "id": "endfield:BV1s1HL6VERi",
+        "game_name": "明日方舟：终末地",
+        "category": "preview_program",
+        "category_label": "版本前瞻",
+        "title": "“当年承蒙您的恩情，我始终未忘。今日重逢，总算能好好叙旧了。”《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
+        "description": "“当年承蒙您的恩情，我始终未忘。今日重逢，总算能好好叙旧了。”\n\n《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目即将于10月6日19:30播出。",
+        "version": null,
+        "bvid": "BV1s1HL6VERi",
+        "published_at": "2026-10-04T10:03:31.000Z",
+        "duration": "00:11",
+        "url": "https://www.bilibili.com/video/BV1s1HL6VERi/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1s1HL6VERi",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1s1HL6VERi.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1265652806",
+          "dynamic_url": "https://www.bilibili.com/opus/1255289279913918484"
+        }
+      },
       {
         "id": "endfield:BV1S3Hv6MENJ",
         "game_name": "明日方舟：终末地",
@@ -1710,26 +1701,6 @@
         "source": {
           "platform": "bilibili",
           "official_mid": "1636034895",
-          "dynamic_url": null
-        }
-      },
-      {
-        "id": "endfield:BV1JmhA6oEDM",
-        "game_name": "明日方舟：终末地",
-        "category": "promotional_pv",
-        "category_label": "宣传影像",
-        "title": "《明日方舟：终末地》× 优衣库UTme!「自由开拓，定格今夏」合作宣传PV",
-        "description": "自在随心，焕装待发。\n终末地携手优衣库UTme!，邀管理员一起，定格夏日潮流。",
-        "version": null,
-        "bvid": "BV1JmhA6oEDM",
-        "published_at": "2026-08-25T03:00:00.000Z",
-        "duration": "01:05",
-        "url": "https://www.bilibili.com/video/BV1JmhA6oEDM/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1JmhA6oEDM",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1JmhA6oEDM.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "1265652806",
           "dynamic_url": null
         }
       },
