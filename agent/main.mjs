@@ -712,7 +712,8 @@ async function main() {
           const result = normalizeChildResult(corrected.value, gameName, currentGame, evidenceByGame[gameName]);
           childResults[index] = result;
           childReport[index] = { ...childReport[index], verification_status: result.verification_status,
-            meaningful_change: result.changed, cli_session: corrected.cliSessionId, notes: result.notes };
+            meaningful_change: result.changed, cli_session: corrected.cliSessionId, notes: result.notes,
+            claim_evidence: result.claim_evidence || [] };
         } catch (error) {
           log(`${gameName} 修正失败: ${error.message}`);
         }
