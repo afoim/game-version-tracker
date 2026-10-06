@@ -625,7 +625,8 @@ async function main() {
         verifiedGames.add(gameName);
         const factChanged = hasMeaningfulChange(currentGame, result.candidate);
         const sourcesChanged = hasMeaningfulSourceChange(currentGame, result.candidate);
-        if (!factChanged && !sourcesChanged) continue;
+        // A successful re-read must advance checked_at even when facts and
+        // source URLs are identical. Do not make verified data look stale.
         const index = proposedDataset.games.findIndex((game) => game.game_name === gameName);
         proposedDataset.games[index] = result.candidate;
         if (factChanged) changedGames.push(gameName);
