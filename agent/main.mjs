@@ -615,6 +615,7 @@ async function main() {
       });
     }
 
+    const collectionDiagnostics = structuredClone(collector.diagnostics);
     await collector.close();
     collector = null;
     // Bound independent model calls while keeping browser collection sequential.
@@ -777,7 +778,7 @@ async function main() {
       review,
       children: childReport,
       evidence: evidenceSummary(evidenceByGame),
-      collection_diagnostics: collector.diagnostics,
+      collection_diagnostics: collectionDiagnostics,
       proposed_dataset: proposedDataset,
     };
     if (!dryRun && approved) {
