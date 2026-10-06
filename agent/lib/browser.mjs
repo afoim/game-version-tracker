@@ -104,7 +104,7 @@ function collectStrings(value, output = [], seen = new Set(), depth = 0) {
   if (depth > 9 || value === null || value === undefined) return output;
   if (typeof value === 'string') {
     const text = cleanText(value);
-    if (text && text.length <= 1600 && !seen.has(text)) {
+    if (text && !seen.has(text)) {
       seen.add(text);
       output.push(text);
     }
@@ -122,12 +122,16 @@ function collectStrings(value, output = [], seen = new Set(), depth = 0) {
   return output;
 }
 
-function dynamicText(item) {
+export function dynamicText(item) {
   const author = item?.modules?.module_author;
+  const dynamic = item?.modules?.module_dynamic;
+  const primary = [dynamic?.desc?.text, dynamic?.major?.opus?.title,
+    dynamic?.major?.opus?.summary?.text].filter(value => typeof value === 'string' && value.trim());
   return cleanText([
     author?.name,
     author?.pub_time,
-    ...collectStrings(item?.modules?.module_dynamic),
+    ...primary,
+    ...collectStrings(dynamic).filter(value => !primary.includes(value)),
   ].filter(Boolean).join('\n')).slice(0, MAX_PAGE_TEXT);
 }
 

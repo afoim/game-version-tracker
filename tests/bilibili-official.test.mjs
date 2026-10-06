@@ -1,7 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { BILIBILI_OFFICIAL_ACCOUNTS, summarizeDynamicBody, selectEvidenceEntries } from '../agent/lib/browser.mjs';
+import { BILIBILI_OFFICIAL_ACCOUNTS, summarizeDynamicBody, selectEvidenceEntries, dynamicText } from '../agent/lib/browser.mjs';
+
+test('long announcement body is retained ahead of incidental metadata', () => {
+  const body = '公告正文'.repeat(500) + '\n结束时间：2026/11/10 15:00';
+  const text = dynamicText({ modules: { module_dynamic: { noise: '无关'.repeat(3000), major: { opus: { title: '活动公告', summary: { text: body } } } } } });
+  assert.ok(text.includes(body));
+  assert.ok(text.indexOf('结束时间') < text.indexOf('无关'));
+  assert.ok(text.length <= 7000);
+});
 
 test('new announcements survive stale-version ranking without duplicate entries', () => {
   const entries = Array.from({ length: 40 }, (_, i) => ({ item: { id_str: String(i) }, timestamp: i, score: 100 - i }));
