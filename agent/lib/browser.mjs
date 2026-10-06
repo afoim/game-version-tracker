@@ -255,8 +255,10 @@ export async function createEvidenceCollector() {
   if (bilibiliCookies.length) await context.addCookies(bilibiliCookies);
   const feedCache = new Map();
   const videoFeedCache = new Map();
+  const diagnostics = {};
 
   async function captureBilibiliFeed(account) {
+    const diagnostic = diagnostics[account.label] = { pages: 0, items: 0, http_statuses: [], api_codes: [] };
     const page = await context.newPage();
     const itemsById = new Map();
     const pending = new Set();
@@ -266,10 +268,13 @@ export async function createEvidenceCollector() {
           const url = new URL(response.url());
           if (!url.hostname.endsWith('bilibili.com') ||
               url.pathname !== '/x/polymer/web-dynamic/v1/feed/space' ||
-              url.searchParams.get('host_mid') !== String(account.mid) ||
-              response.status() >= 400) return;
+              url.searchParams.get('host_mid') !== String(account.mid)) return;
+          diagnostic.http_statuses.push(response.status());
+          if (response.status() >= 400) return;
           const payload = await response.json().catch(() => null);
+          if (payload) diagnostic.api_codes.push(payload.code);
           if (payload?.code !== 0 || !Array.isArray(payload?.data?.items)) return;
+          diagnostic.pages += 1;
           for (const item of payload.data.items) {
             const id = String(item?.id_str || item?.id || '');
             if (id) itemsById.set(id, item);
@@ -303,9 +308,12 @@ export async function createEvidenceCollector() {
             headers: { Referer: `https://space.bilibili.com/${account.mid}/dynamic` },
           })
           .catch(() => null);
+        if (response) diagnostic.http_statuses.push(response.status());
         if (response?.ok()) {
           const payload = await response.json().catch(() => null);
+          if (payload) diagnostic.api_codes.push(payload.code);
           if (payload?.code === 0 && Array.isArray(payload?.data?.items)) {
+            diagnostic.pages += 1;
             for (const item of payload.data.items) {
               const id = String(item?.id_str || item?.id || '');
               if (id) itemsById.set(id, item);
@@ -313,6 +321,7 @@ export async function createEvidenceCollector() {
           }
         }
       }
+      diagnostic.items = itemsById.size;
       return [...itemsById.values()];
     } finally {
       page.off('response', onResponse);
@@ -501,6 +510,7 @@ export async function createEvidenceCollector() {
   }
 
   return {
+    diagnostics,
     collect: (_assignment, currentGame) => collectBilibiliOfficialEvidence(currentGame),
     collectMedia: (currentGame) => collectBilibiliOfficialMedia(currentGame),
     collectSourceTitles: (currentGame) => collectBilibiliOfficialSourceTitles(currentGame),

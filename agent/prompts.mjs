@@ -42,13 +42,14 @@ search-worker 不使用搜索引擎，也不读取官网、TapTap、微博、You
 }`;
 }
 
-const CHILD_EVIDENCE_TEXT_LIMIT = Number(process.env.AGENT_CHILD_EVIDENCE_TEXT_LIMIT || 2600);
+const CHILD_EVIDENCE_TEXT_LIMIT = Number(process.env.AGENT_CHILD_EVIDENCE_TEXT_LIMIT || 7000);
 
 export function childPrompt({ assignment, currentGame, evidence }) {
   const evidenceForModel = evidence.map((item) => ({
     title: item.title,
     url: item.url,
     checked_at: item.checked_at,
+    published_at: item.published_at || null,
     discovered_by: item.discovered_by,
     http_status: item.http_status,
     preview_related: Boolean(item.preview_related),
@@ -80,6 +81,7 @@ ${json(evidenceForModel)}
 - preview_images 由 orchestrator 根据 Bilibili 官方前瞻动态配图自动发布；child-agent 必须原样保留当前值，不得自行增加、删除或改写。
 
 来源规则：
+- published_at 是动态发布时间，checked_at 是本次读取时间，两者都不能直接当作版本上线或卡池开始时间；“更新后”也不等于动态发布当天更新。
 - candidate.sources 只能包含上面 evidence 中本轮真实读取成功、且 discovered_by 以 bilibili-official: 开头的 URL；不要保留旧的官网、TapTap、HoYoLAB、新闻站或其他平台来源。
 - url 和 checked_at 必须逐字复制对应 evidence。
 - type 固定写 official_community。

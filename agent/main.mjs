@@ -752,6 +752,7 @@ async function main() {
       review,
       children: childReport,
       evidence: evidenceSummary(evidenceByGame),
+      collection_diagnostics: collector.diagnostics,
       proposed_dataset: proposedDataset,
     };
     if (!dryRun && approved) {
