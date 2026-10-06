@@ -138,6 +138,13 @@ export function collectClaimEvidenceIssues(before, child, evidence, now = Date.n
     const supported = (child.claim_evidence || []).some(claim => {
       const item = byUrl.get(claim?.url);
       const quote = typeof claim?.quote === 'string' ? claim.quote.trim() : '';
+      if (field === 'current_up_start_at' && after[field] !== null) {
+        // An exact timestamp must be in the quoted banner evidence itself;
+        // a version date or a maintenance clock cannot justify an opening time.
+        const clock = String(after[field]).match(/T(\d{2}):(\d{2})/);
+        if (!clock || !quote.includes(`${clock[1]}:${clock[2]}`) ||
+            /维护开始|更新开始|开始维护|进行.{0,8}维护/.test(quote)) return false;
+      }
       return claim?.field === field && quote.length >= 4 && item?.http_status === 200 &&
         String(item.discovered_by || '').startsWith('bilibili-official:') &&
         `${item.title || ''}\n${item.text || ''}`.includes(quote) &&
