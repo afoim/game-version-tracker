@@ -50,7 +50,7 @@ function parseEvents(stdout) {
   return { events, text, cliSessionId };
 }
 
-function createConfig(gatewaySession) {
+function createConfig(gatewaySession, webResearch) {
   const provider = {
     options: {
       baseURL: BASE_URL,
@@ -73,6 +73,17 @@ function createConfig(gatewaySession) {
     // relying only on the child/reviewer prompts.
     permission: {
       '*': 'deny',
+      ...(webResearch ? { websearch: 'allow', webfetch: {
+        '*': 'deny',
+        'https://*.mihoyo.com/*': 'allow',
+        'https://*.hoyoverse.com/*': 'allow',
+        'https://*.hoyolab.com/*': 'allow',
+        'https://*.kurogames.com/*': 'allow',
+        'https://*.gryphline.com/*': 'allow',
+        'https://*.hypergryph.com/*': 'allow',
+        'https://yh.wanmei.com/*': 'allow',
+        'https://stellasora.yostar.cn/*': 'allow',
+      } } : {}),
     },
     provider: {
       [PROVIDER_ID]: provider,
@@ -81,10 +92,10 @@ function createConfig(gatewaySession) {
   };
 }
 
-export async function createLlmRunner() {
+export async function createLlmRunner({ webResearch = false } = {}) {
   const binary = localBinary();
   const gatewaySession = resolveGatewaySession();
-  const configContent = JSON.stringify(createConfig(gatewaySession));
+  const configContent = JSON.stringify(createConfig(gatewaySession, webResearch));
 
   async function run(prompt, options = {}) {
     const args = [
@@ -105,6 +116,7 @@ export async function createLlmRunner() {
           ...process.env,
           NO_COLOR: '1',
           OPENCODE_DISABLE_LSP_DOWNLOAD: 'true',
+          ...(webResearch ? { OPENCODE_ENABLE_EXA: 'true' } : {}),
           // Override only this invocation. The free model remains invoked from
           // inside OpenCode while Zen and the run-scoped session are explicit.
           OPENCODE_CONFIG_CONTENT: configContent,

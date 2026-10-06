@@ -1,0 +1,41 @@
+name: Parallel Version Facts Research
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: game-version-tracker-version-facts
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      AGENT_MODEL: deepseek-v4-flash-260713
+      AGENT_PROVIDER_ID: acofork
+      AGENT_PROVIDER_NPM: '@ai-sdk/openai-compatible'
+      AGENT_PROVIDER_NAME: AcoFork LLM
+      AGENT_LLM_BASE_URL: https://api-llm.acofork.com/v1
+      AGENT_LLM_API_KEY: ${{ secrets.AF_LLM_API_KEY }}
+      AGENT_LLM_TIMEOUT_MS: '600000'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Research eight games concurrently
+        run: node agent/research-version-facts.mjs
+      - name: Save research for independent verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: version-facts-${{ github.run_id }}
+          path: agent-output/version-facts-research.json
+          if-no-files-found: warn
+          retention-days: 14
