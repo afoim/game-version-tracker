@@ -138,6 +138,10 @@ export function collectClaimEvidenceIssues(before, child, evidence, now = Date.n
     if (['sources', 'preview_images', 'current_up_days_remaining'].includes(field)) continue;
     if (JSON.stringify(before[field]) === JSON.stringify(after[field])) continue;
     if (field === 'current_version_days' && after[field] === null) continue;
+    if (field === 'current_version_days') {
+      const release = explicitReleaseDate(after.current_version, evidence);
+      if (release && elapsedReleaseDays(release.date, now) === after[field]) continue;
+    }
     if (field === 'current_up_characters' && after[field]?.length === 0 &&
         before.current_up_end_at && Date.parse(before.current_up_end_at) <= now) continue;
     const supported = (child.claim_evidence || []).some(claim => {

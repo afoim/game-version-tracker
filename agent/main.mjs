@@ -16,6 +16,7 @@ import {
 } from './lib/validate.mjs';
 import { childPrompt, mainPlanPrompt, reviewPrompt } from './prompts.mjs';
 import { canClearPreviousPreview } from './lib/preview-rollover.mjs';
+import { verifiedVersionAge } from './lib/release-date.mjs';
 
 const ROOT = process.cwd();
 const DATA_PATH = path.join(ROOT, 'data', 'games.json');
@@ -316,6 +317,7 @@ function normalizeChildResult(result, gameName, currentGame, evidence) {
 
   const guard = enforceBilibiliEvidence(currentGame, result.candidate, evidence);
   result.candidate = guard.candidate;
+  result.candidate.current_version_days = verifiedVersionAge(result.candidate.current_version, evidence);
   if (guard.reverted.length) {
     result.notes.push(`前瞻字段缺少对应 Bilibili 官方前瞻 evidence，保留旧值: ${guard.reverted.join('、')}`);
   }

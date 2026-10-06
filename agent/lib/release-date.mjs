@@ -32,3 +32,10 @@ export function elapsedReleaseDays(date, now = Date.now()) {
   const localDay = new Date(now + 8 * 3600000).toISOString().slice(0, 10);
   return Math.floor((Date.parse(`${localDay}T00:00:00Z`) - Date.parse(`${date}T00:00:00Z`)) / 86400000);
 }
+
+export function verifiedVersionAge(version, evidence, now = Date.now()) {
+  const release = explicitReleaseDate(version, evidence);
+  if (!release) return null;
+  const days = elapsedReleaseDays(release.date, now);
+  return days >= 0 ? days : null;
+}
