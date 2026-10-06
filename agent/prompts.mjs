@@ -59,6 +59,7 @@ export function childPrompt({ assignment, currentGame, evidence }) {
   return `你是 Game Version Tracker 的 child-agent，只负责一个游戏：${assignment.game_name}。
 main-agent 给你的命令：${assignment.objective}
 当前核验时间：${new Date().toISOString()}
+当前核验日期（北京时间 UTC+8）：${new Date(Date.now() + 8 * 3600000).toISOString().slice(0, 10)}。所有日历天数按北京时间日期相减，不按 UTC 日期、不含首尾重复计数；同一天上线为0天。
 
 你没有仓库写权限，不允许修改文件、不允许 commit、不允许 push，也不允许自行联网。你只能分析下面由 Playwright search-worker 从该游戏固定 Bilibili 官方账号动态/视频中读取到的 evidence。
 
@@ -73,6 +74,7 @@ ${json(evidenceForModel)}
 版本滚动必须在 candidate 中完整完成，不能让 orchestrator 猜测：旧 next_version 已上线时不能仍作为 next_version。没有官方下一版本信息时使用“暂未公布”、next_content=[]、days_to_next_version=null（未知），不能推算版本号或发布日期。即使已官宣下一版本名称，只要官方尚未明确版本更新时间，days_to_next_version 也必须为 null；前瞻开播时间不能用于更新倒计时。只有官方版本更新时间明确时才返回非负整数，0 仅表示明确于当天更新，不能表示未知。当前内容必须属于当前版本；旧前瞻若已成为当前版本，应清除旧前瞻字段并使用“未官宣”，不要当成下一版本前瞻。current_version_days 应按 evidence 明确的上线日期及当前时间计算，未知时保留旧值。已经结束且没有新卡池证据时清空 current_up_characters，并保留已知起止日期；不得猜新角色。
 
 前瞻字段规则：
+- 卡池开始时间不能用维护开始时刻代替。公告只写“版本更新后／维护结束后”而没有准确开放时刻时，current_up_start_at 必须为 null；不能沿用旧卡池的时间或自行假定11:00/12:00。
 - preview_title：Bilibili 官方账号发布的前瞻/特别节目标题；没有可靠标题时保持原值。
 - preview_start_at：Bilibili 官方动态公布的开播时间，必须写带时区的 ISO 8601，例如 2026-09-16T19:30:00+08:00；没有可靠时间时保持原值。
 - preview_live_url：Bilibili 官方直播间或官方预约页；没有可靠链接时保持原值。

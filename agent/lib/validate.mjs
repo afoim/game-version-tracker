@@ -185,6 +185,7 @@ export function collectReviewIssues({ currentDataset, proposedDataset, childResu
       const release = explicitReleaseDate(reviewCandidate.current_version, evidence);
       if (release) {
         const expected = elapsedReleaseDays(release.date, now);
+        if (expected < 0) issues.push(`${gameName}: 当前版本的官方上线日期 ${release.date} 尚未到来，不能作为已上线版本`);
         if (expected >= 0 && reviewCandidate.current_version_days !== expected) {
           issues.push(`${gameName}: current_version_days=${reviewCandidate.current_version_days} 与官方上线日期 ${release.date} 推算值 ${expected} 不一致`);
         }
