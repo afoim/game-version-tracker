@@ -16,6 +16,12 @@ test('changed facts require exact public evidence, not a fabricated citation', (
 
 const NOW = Date.parse('2026-09-23T12:00:00+08:00');
 
+test('unknown banner expiry clears a leftover countdown', () => {
+  const game = { current_up_end_at: null, current_up_days_remaining: 12 };
+  refreshDerivedDays(game);
+  assert.equal(game.current_up_days_remaining, null);
+});
+
 test('banner opening clock cannot be invented from maintenance or a release date', () => {
   const before = { game_name: '原神', current_up_start_at: null };
   const item = { url: 'https://www.bilibili.com/opus/1', title: '公告', text: '9月28日版本更新后开启\n更新开始时间：06:00\n跃迁时间：2026/09/28 12:00', http_status: 200, discovered_by: 'bilibili-official:401742377' };

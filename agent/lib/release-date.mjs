@@ -9,8 +9,9 @@ export function explicitReleaseDate(version, evidence) {
     const text = String(item.text || '');
     // A version update announcement explicitly anchors its calendar date. This
     // does not assert that servers opened at the maintenance start time.
-    const update = /更新公告/.test(item.title || '')
-      ? text.match(/【更新开始时间】\s*(\d{4})\/(\d{1,2})\/(\d{1,2})\s+\d{2}:\d{2}（UTC\+8）/)
+    const update = /更新公告|版本更新维护/.test(item.title || '')
+      ? (text.match(/【更新开始时间】\s*(\d{4})\/(\d{1,2})\/(\d{1,2})\s+\d{2}:\d{2}（UTC\+8）/) ||
+        text.match(/更新维护时间[：:]\s*(\d{4})年(\d{1,2})月(\d{1,2})日\d{2}:\d{2}/))
       : null;
     const lines = text.split('\n');
     if (update) lines.push(`将于${update[1]}年${update[2]}月${update[3]}日上线`);

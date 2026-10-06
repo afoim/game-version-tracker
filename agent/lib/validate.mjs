@@ -111,6 +111,10 @@ export function validateAssignments(assignments) {
 // model to recount it. This keeps the countdown from going stale whenever a
 // child-agent verifies a game without otherwise changing its facts.
 export function refreshDerivedDays(game, now = Date.now()) {
+  if (game.current_up_end_at === null) {
+    game.current_up_days_remaining = null;
+    return game;
+  }
   if (game.current_up_end_at) {
     const end = Date.parse(game.current_up_end_at);
     if (Number.isFinite(end)) {

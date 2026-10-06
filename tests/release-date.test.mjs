@@ -18,4 +18,7 @@ test('official version maintenance anchors the calendar day, not an invented ope
   assert.ok(e.text.includes(release.quote));
   assert.equal(elapsedReleaseDays(release.date, Date.parse('2026-10-07T06:00:00+08:00')), 28);
   assert.equal(explicitReleaseDate('3.2', [{ ...e, title: '3.2版本补偿说明' }]), null);
+  const wuwa = { ...e, title: '《鸣潮》3.7版本更新维护预告', text: '✦更新维护时间：2026年9月30日04:00 ~ 2026年9月30日11:00（UTC+8）\n✦预下载开启时间：2026年9月28日10:00（UTC+8）' };
+  assert.equal(explicitReleaseDate('3.7', [wuwa]).date, '2026-09-30');
+  assert.equal(elapsedReleaseDays('2026-09-30', Date.parse('2026-10-07T06:00:00+08:00')), 7);
 });
