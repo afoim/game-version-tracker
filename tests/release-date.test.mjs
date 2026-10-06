@@ -24,4 +24,8 @@ test('official version maintenance anchors the calendar day, not an invented ope
   const wuwa = { ...e, title: '《鸣潮》3.7版本更新维护预告', text: '✦更新维护时间：2026年9月30日04:00 ~ 2026年9月30日11:00（UTC+8）\n✦预下载开启时间：2026年9月28日10:00（UTC+8）' };
   assert.equal(explicitReleaseDate('3.7', [wuwa]).date, '2026-09-30');
   assert.equal(elapsedReleaseDays('2026-09-30', Date.parse('2026-10-07T06:00:00+08:00')), 7);
+  const dated = { ...e, title: '《星塔旅人》09月29日维护更新说明', text: '计划将于 2026年09月29日 11:00 进行维护更新' };
+  assert.equal(explicitReleaseDate('09/29 更新', [dated]).date, '2026-09-29');
+  assert.equal(explicitReleaseDate('09/08 更新', [dated]), null);
+  assert.equal(explicitReleaseDate('09/29 更新', [{ ...dated, text: '计划将于 2025年09月28日 11:00 进行维护更新' }]), null);
 });
