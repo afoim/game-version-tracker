@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
-      AGENT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'true' || 'false' }}
+      AGENT_DRY_RUN: ${{ (inputs.version_facts_only || (github.event_name == 'workflow_dispatch' && inputs.dry_run)) && 'true' || 'false' }}
       AGENT_EVIDENCE_ONLY: ${{ inputs.evidence_only && 'true' || 'false' }}
       AGENT_VERSION_FACTS_ONLY: ${{ inputs.version_facts_only && 'true' || 'false' }}
       AGENT_MODEL: deepseek-v4-flash-260713
