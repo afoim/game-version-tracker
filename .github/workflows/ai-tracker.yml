@@ -10,12 +10,17 @@ on:
         required: false
         type: boolean
         default: false
+      evidence_only:
+        description: Read-only collection audit without model calls or publication
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 concurrency:
-  group: game-version-tracker-ai
+  group: game-version-tracker-${{ inputs.evidence_only && 'evidence' || 'ai' }}
   cancel-in-progress: false
 
 jobs:
@@ -24,6 +29,7 @@ jobs:
     timeout-minutes: 120
     env:
       AGENT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'true' || 'false' }}
+      AGENT_EVIDENCE_ONLY: ${{ inputs.evidence_only && 'true' || 'false' }}
       AGENT_MODEL: deepseek-v4-flash-260713
       AGENT_PROVIDER_ID: acofork
       AGENT_PROVIDER_NPM: '@ai-sdk/openai-compatible'
@@ -79,7 +85,9 @@ jobs:
       - name: Run AI tracker
         shell: bash
         run: |
-          if [[ "$AGENT_DRY_RUN" == "true" ]]; then
+          if [[ "$AGENT_EVIDENCE_ONLY" == "true" ]]; then
+            node agent/collect-audit.mjs
+          elif [[ "$AGENT_DRY_RUN" == "true" ]]; then
             npm run agent:dry
           else
             npm run agent
@@ -116,7 +124,7 @@ jobs:
           fi
 
       - name: Commit and push approved data
-        if: steps.changes.outputs.changed == 'true' && env.AGENT_DRY_RUN != 'true'
+        if: steps.changes.outputs.changed == 'true' && env.AGENT_DRY_RUN != 'true' && env.AGENT_EVIDENCE_ONLY != 'true'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -130,7 +138,7 @@ jobs:
           git push origin HEAD:master
 
       - name: Guard against silent version staleness
-        if: always() && env.AGENT_DRY_RUN != 'true'
+        if: always() && env.AGENT_DRY_RUN != 'true' && env.AGENT_EVIDENCE_ONLY != 'true'
         shell: bash
         run: |
           if [[ ! -f agent-output/report.json ]]; then
