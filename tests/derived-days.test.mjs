@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GAME_NAMES, collectReviewIssues, collectClaimEvidenceIssues, refreshDerivedDays } from '../agent/lib/validate.mjs';
+import { GAME_NAMES, collectReviewIssues, collectClaimEvidenceIssues, refreshDerivedDays, validateGame } from '../agent/lib/validate.mjs';
+
+test('version age accepts unknown but rejects negative and nonnumeric ages', () => {
+  assert.equal(validateGame(makeGame('原神', { current_version_days: null })), true);
+  assert.equal(validateGame(makeGame('原神', { current_version_days: 0 })), true);
+  assert.throws(() => validateGame(makeGame('原神', { current_version_days: -1 })));
+  assert.throws(() => validateGame(makeGame('原神', { current_version_days: '未知' })));
+});
 
 test('changed facts require exact public evidence, not a fabricated citation', () => {
   const before = { game_name: '原神', current_version: '1.0' };

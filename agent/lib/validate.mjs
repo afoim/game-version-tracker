@@ -43,8 +43,8 @@ export function validateGame(game, { evidenceUrls = null, requireEvidenceSources
     assert(Array.isArray(game[key]), `${game.game_name}.${key} 必须是数组`);
     assert(game[key].every((value) => typeof value === 'string'), `${game.game_name}.${key} 只能包含字符串`);
   }
-  assert(Number.isInteger(game.current_version_days) && game.current_version_days >= 0,
-    `${game.game_name}.current_version_days 必须是非负整数`);
+  assert(game.current_version_days === null || (Number.isInteger(game.current_version_days) && game.current_version_days >= 0),
+    `${game.game_name}.current_version_days 必须是非负整数或 null`);
   assert(game.days_to_next_version === null ||
     (Number.isInteger(game.days_to_next_version) && game.days_to_next_version >= 0),
     `${game.game_name}.days_to_next_version 必须是非负整数或 null`);
@@ -137,6 +137,7 @@ export function collectClaimEvidenceIssues(before, child, evidence, now = Date.n
   for (const field of Object.keys(before)) {
     if (['sources', 'preview_images', 'current_up_days_remaining'].includes(field)) continue;
     if (JSON.stringify(before[field]) === JSON.stringify(after[field])) continue;
+    if (field === 'current_version_days' && after[field] === null) continue;
     if (field === 'current_up_characters' && after[field]?.length === 0 &&
         before.current_up_end_at && Date.parse(before.current_up_end_at) <= now) continue;
     const supported = (child.claim_evidence || []).some(claim => {
