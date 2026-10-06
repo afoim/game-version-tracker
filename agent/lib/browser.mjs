@@ -1,9 +1,9 @@
 import { chromium } from 'playwright';
 
 const MAX_PAGE_TEXT = Number(process.env.AGENT_MAX_PAGE_TEXT || 7000);
-const MAX_EVIDENCE = Number(process.env.AGENT_MAX_EVIDENCE || 10);
+const MAX_EVIDENCE = Number(process.env.AGENT_MAX_EVIDENCE || 24);
 const NAV_TIMEOUT = Number(process.env.AGENT_NAV_TIMEOUT_MS || 15000);
-const MAX_DYNAMIC_PAGES = Number(process.env.AGENT_MAX_DYNAMIC_PAGES || 3);
+const MAX_DYNAMIC_PAGES = Number(process.env.AGENT_MAX_DYNAMIC_PAGES || 8);
 
 export const BILIBILI_OFFICIAL_ACCOUNTS = {
   原神: { mid: '401742377', label: '原神', slug: 'genshin' },
@@ -157,7 +157,22 @@ function evidenceScore(text, currentGame, recencyIndex) {
   }
   if (/前瞻|特别节目|通讯|直播|回放|录播|情报回顾/.test(text)) score += 15;
   if (/版本|更新|维护|活动|角色|调频|跃迁|祈愿|寻访|招募|卡池|up/i.test(text)) score += 8;
+  if (/更新说明|更新公告|维护公告|版本更新|版本上线|版本现已|活动祈愿|跃迁活动|独家频段|限定寻访|召唤活动/.test(text)) score += 35;
   return score;
+}
+
+export function selectEvidenceEntries(entries, limit = MAX_EVIDENCE) {
+  const newest = [...entries].sort((a, b) => b.timestamp - a.timestamp);
+  const ranked = [...entries].sort((a, b) => b.score - a.score || b.timestamp - a.timestamp);
+  const picked = [], seen = new Set();
+  // Keep fresh announcements even when they no longer mention stored versions.
+  for (const entry of [...newest.slice(0, Math.max(1, Math.floor(limit / 3))), ...ranked]) {
+    const id = String(entry.item?.id_str || entry.item?.id || '');
+    if (!id || seen.has(id)) continue;
+    seen.add(id); picked.push(entry);
+    if (picked.length >= limit) break;
+  }
+  return picked;
 }
 
 function extractArchive(item) {
@@ -376,12 +391,11 @@ export async function createEvidenceCollector() {
 
     const evidence = [];
     const seenIds = new Set();
-    for (const entry of ranked) {
+    for (const entry of selectEvidenceEntries(ranked)) {
       const item = entry.item;
       const id = String(item?.id_str || item?.id || '');
       if (!id || seenIds.has(id)) continue;
       seenIds.add(id);
-      const archive = extractArchive(item);
       const isPreview = previewRelated(entry.text, currentGame);
       const images = extractImages(item);
       const checkedAt = new Date().toISOString();
@@ -396,19 +410,6 @@ export async function createEvidenceCollector() {
         preview_related: isPreview,
         images,
       });
-      if (archive && evidence.length < MAX_EVIDENCE) {
-        evidence.push({
-          title: archive.title,
-          url: `https://www.bilibili.com/video/${archive.bvid}/`,
-          text: cleanText(`${account.label}\n${archive.title}\n${archive.desc}\n${entry.text}`).slice(0, MAX_PAGE_TEXT),
-          http_status: 200,
-          checked_at: checkedAt,
-          discovered_by: `bilibili-official:${account.mid}:video`,
-          bilibili_dynamic_id: id,
-          preview_related: isPreview,
-          images: images.slice(0, 1),
-        });
-      }
       if (evidence.length >= MAX_EVIDENCE) break;
     }
     return evidence;

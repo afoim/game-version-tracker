@@ -512,6 +512,10 @@ async function main() {
   await mkdir(OUTPUT_DIR, { recursive: true });
   await rm(REPORT_PATH, { force: true });
   const currentDataset = JSON.parse(await readFile(DATA_PATH, 'utf8'));
+  const storedDataset = JSON.stringify(currentDataset);
+  // Derived countdowns are arithmetic, not newly inferred facts. Refresh even
+  // when this round cannot independently verify an otherwise unchanged game.
+  currentDataset.games.forEach(game => refreshDerivedDays(game));
   validateDataset(currentDataset);
 
   const runner = mediaOnly ? null : await createLlmRunner();
@@ -704,7 +708,7 @@ async function main() {
       mediaCatalogResults = await materializeMediaCovers(mediaFeed, mediaCoverPlan);
       validateMediaFeed(mediaFeed);
     }
-    const datasetChanged = JSON.stringify(currentDataset) !== JSON.stringify(proposedDataset);
+    const datasetChanged = storedDataset !== JSON.stringify(proposedDataset);
 
     const report = {
       started_from: process.env.GITHUB_SHA || null,

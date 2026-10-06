@@ -1,7 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { BILIBILI_OFFICIAL_ACCOUNTS, summarizeDynamicBody } from '../agent/lib/browser.mjs';
+import { BILIBILI_OFFICIAL_ACCOUNTS, summarizeDynamicBody, selectEvidenceEntries } from '../agent/lib/browser.mjs';
+
+test('new announcements survive stale-version ranking without duplicate entries', () => {
+  const entries = Array.from({ length: 40 }, (_, i) => ({ item: { id_str: String(i) }, timestamp: i, score: 100 - i }));
+  const selected = selectEvidenceEntries(entries, 24);
+  assert.equal(selected.length, 24);
+  assert.equal(new Set(selected.map(x => x.item.id_str)).size, 24);
+  for (let i = 32; i < 40; i++) assert.ok(selected.some(x => x.item.id_str === String(i)));
+  assert.ok(selected.some(x => x.item.id_str === '0'));
+});
 import { GAME_NAMES, validateDataset } from '../agent/lib/validate.mjs';
 
 const expectedMids = {
