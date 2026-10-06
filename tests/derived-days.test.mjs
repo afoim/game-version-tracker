@@ -88,7 +88,7 @@ test('refreshDerivedDays recomputes remaining days from the absolute UP end time
   assert.equal(expired.current_up_days_remaining, 0);
 
   const unknown = refreshDerivedDays({ current_up_end_at: null, current_up_days_remaining: 3 }, NOW);
-  assert.equal(unknown.current_up_days_remaining, 3);
+  assert.equal(unknown.current_up_days_remaining, null);
 });
 
 test('insufficient games keep stale data without blocking the batch', () => {
