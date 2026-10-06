@@ -707,9 +707,9 @@ async function main() {
       if (approved || reviewAttempt === 3) break;
       const feedback = JSON.stringify({ mechanicalIssues, review });
       log(`审核第 ${reviewAttempt} 轮拒绝，向子任务反馈并重新核验…`);
-      for (const gameName of GAME_NAMES) {
+      const repairGame = async (gameName) => {
         const index = childResults.findIndex((item) => item.game_name === gameName);
-        if (childResults[index]?.verification_status !== 'verified') continue;
+        if (childResults[index]?.verification_status !== 'verified') return;
         const currentGame = currentDataset.games.find((game) => game.game_name === gameName);
         try {
           const corrected = await callJson(runner, `repair:${gameName}`, childPrompt({
@@ -725,6 +725,11 @@ async function main() {
         } catch (error) {
           log(`${gameName} 修正失败: ${error.message}`);
         }
+      };
+      // Each repair owns one game's result. Keep the same bounded concurrency
+      // as initial verification; the next review waits for every repair.
+      for (let index = 0; index < GAME_NAMES.length; index += 4) {
+        await Promise.all(GAME_NAMES.slice(index, index + 4).map(repairGame));
       }
     }
     let mediaResults = [];
