@@ -75,6 +75,7 @@ ${json(evidenceForModel)}
 
 前瞻字段规则：
 - 卡池开始时间不能用维护开始时刻代替。公告只写“版本更新后／维护结束后”而没有准确开放时刻时，current_up_start_at 必须为 null；不能沿用旧卡池的时间或自行假定11:00/12:00。
+- current_up_characters 只包含角色，不包含武器、光锥、秘纹或常驻自选奖励。若当前并行角色卡池的结束时间不同，现有单个 current_up_end_at 无法表示它们：保留已确认的全部当前角色，current_up_end_at=null、current_up_days_remaining=null，不能选其中一个结束时间套给全部角色，也不能为凑一个倒计时漏掉其他仍在开放的角色。
 - preview_title：Bilibili 官方账号发布的前瞻/特别节目标题；没有可靠标题时保持原值。
 - preview_start_at：Bilibili 官方动态公布的开播时间，必须写带时区的 ISO 8601，例如 2026-09-16T19:30:00+08:00；没有可靠时间时保持原值。
 - preview_live_url：Bilibili 官方直播间或官方预约页；没有可靠链接时保持原值。
