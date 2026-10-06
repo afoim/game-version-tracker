@@ -564,6 +564,9 @@ async function main() {
       log(`[${index + 1}/${GAME_NAMES.length}] search-worker 读取 Bilibili 官方账号 ${gameName}…`);
       const evidence = await collector.collect(assignment, currentGame);
       evidenceByGame[gameName] = evidence;
+      // Date arithmetic does not depend on the model's ability to verify other
+      // fields. Even an insufficient child must not preserve an old age number.
+      currentGame.current_version_days = verifiedVersionAge(currentGame.current_version, evidence);
       const officialMedia = await collector.collectMedia(currentGame);
       const sourceTitles = await collector.collectSourceTitles(currentGame);
       mediaByGame[gameName] = officialMedia;
