@@ -164,6 +164,21 @@ export function collectClaimEvidenceIssues(before, child, evidence, now = Date.n
   return issues;
 }
 
+export function collectVerifiedCoverageIssues(child, evidence, now = Date.now()) {
+  if (child.verification_status !== 'verified') return [];
+  const candidate = child.candidate;
+  const missing = {};
+  for (const [field, value] of Object.entries(candidate)) {
+    if (['game_name', 'sources', 'preview_images', 'current_up_days_remaining'].includes(field)) continue;
+    if (value === null || value === '暂未公布' || value === '未官宣' || (Array.isArray(value) && value.length === 0)) continue;
+    // Mark every claimed known field as needing evidence, including facts
+    // copied unchanged from the previous run. The release age is independently
+    // covered by collectClaimEvidenceIssues' official-date calculation.
+    missing[field] = { unverified: true };
+  }
+  return collectClaimEvidenceIssues({ game_name: candidate.game_name, ...missing }, child, evidence, now);
+}
+
 export function collectReviewIssues({ currentDataset, proposedDataset, childResults, evidenceByGame, now = Date.now() }) {
   const issues = [];
 

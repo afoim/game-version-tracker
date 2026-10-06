@@ -87,6 +87,7 @@ ${json(evidenceForModel)}
 - 每个改动的事实字段必须在顶层 claim_evidence 中给出 {field,url,quote}，quote 必须逐字摘自对应 evidence 原文并足以支持该字段（不能用无关句子），candidate.sources 的同一 URL 的 claims 也必须包含该字段。倒计时 current_up_days_remaining 由程序计算，无需引用；已知结束时间后清空旧 UP 也无需引用。没有原文支持则保持旧值。
 - published_at 是动态发布时间，checked_at 是本次读取时间，两者都不能直接当作版本上线或卡池开始时间；“更新后”也不等于动态发布当天更新。
 - candidate.sources 只能包含上面 evidence 中本轮真实读取成功、且 discovered_by 以 bilibili-official: 开头的 URL；不要保留旧的官网、TapTap、HoYoLAB、新闻站或其他平台来源。
+- verified 不仅表示改动正确：所有仍声称已知的字段（包括原样保留的旧事实）都须在 claim_evidence 与 sources.claims 提供本轮对应原文。game_name、preview_images、程序计算的倒计时不需要引用；null、空数组和“暂未公布／未官宣”表示未知，不需要不存在的公告来证明。不能只引用发生变化的字段，再将整个游戏标为已核验。
 - url 和 checked_at 必须逐字复制对应 evidence。
 - type 固定写 official_community。
 - claims 只写该 Bilibili evidence 实际支持的字段。

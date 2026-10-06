@@ -1,6 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GAME_NAMES, collectReviewIssues, collectClaimEvidenceIssues, refreshDerivedDays, validateGame } from '../agent/lib/validate.mjs';
+import { GAME_NAMES, collectReviewIssues, collectClaimEvidenceIssues, collectVerifiedCoverageIssues, refreshDerivedDays, validateGame } from '../agent/lib/validate.mjs';
+
+test('verified status requires evidence even for unchanged known facts', () => {
+  const item = { url: 'https://www.bilibili.com/opus/1', title: '1.1版本', text: '1.1版本现已上线', http_status: 200, discovered_by: 'bilibili-official:401742377' };
+  const child = { verification_status: 'verified', candidate: { game_name: '原神', current_version: '1.1', next_version: '暂未公布', current_version_days: null, sources: [{ url: item.url, claims: ['current_version'] }] }, claim_evidence: [] };
+  assert.equal(collectVerifiedCoverageIssues(child, [item]).length, 1);
+  child.claim_evidence.push({ field: 'current_version', url: item.url, quote: '1.1版本现已上线' });
+  assert.deepEqual(collectVerifiedCoverageIssues(child, [item]), []);
+});
 
 test('version age accepts unknown but rejects negative and nonnumeric ages', () => {
   assert.equal(validateGame(makeGame('原神', { current_version_days: null })), true);

@@ -8,6 +8,7 @@ import { createLlmRunner } from './lib/opencode.mjs';
 import {
   GAME_NAMES,
   collectReviewIssues,
+  collectVerifiedCoverageIssues,
   hasMeaningfulChange,
   refreshDerivedDays,
   validateAssignments,
@@ -656,6 +657,8 @@ async function main() {
         childResults,
         evidenceByGame,
       });
+      mechanicalIssues.push(...childResults.flatMap(child =>
+        collectVerifiedCoverageIssues(child, evidenceByGame[child.game_name] || [])));
       allVerified = GAME_NAMES.every((gameName) => {
         const child = childResults.find((item) => item.game_name === gameName);
         return child?.verification_status === 'verified' && (evidenceByGame[gameName] || []).length > 0;
