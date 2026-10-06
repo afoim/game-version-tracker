@@ -69,12 +69,14 @@ jobs:
         run: npm ci
 
       - name: Cache Playwright Chromium
+        if: env.AGENT_VERSION_FACTS_ONLY != 'true'
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
 
       - name: Install Chromium system dependencies
+        if: env.AGENT_VERSION_FACTS_ONLY != 'true'
         run: npx playwright install --with-deps chromium
 
       - name: Validate current dataset
