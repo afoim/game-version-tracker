@@ -1,4 +1,5 @@
 import { chromium } from 'playwright';
+import { classifyOfficialMedia } from './media-feed.mjs';
 
 const MAX_PAGE_TEXT = Number(process.env.AGENT_MAX_PAGE_TEXT || 7000);
 const MAX_EVIDENCE = Number(process.env.AGENT_MAX_EVIDENCE || 24);
@@ -421,6 +422,27 @@ export async function createEvidenceCollector() {
         images,
       });
       if (evidence.length >= MAX_EVIDENCE) break;
+    }
+    // Upload descriptions can contain explicit release dates absent from recent
+    // dynamics. Read the actual video and verify its owner, not a search snippet.
+    const uploads = await getBilibiliVideoUploads(account);
+    const factVideos = uploads.filter(video => ['version_pv', 'preview_program'].includes(classifyOfficialMedia(video)))
+      .sort((a, b) => Number(b.created || 0) - Number(a.created || 0)).slice(0, 6);
+    for (const video of factVideos) {
+      const response = await context.request.get(`https://api.bilibili.com/x/web-interface/view?bvid=${encodeURIComponent(video.bvid)}`, {
+        timeout: NAV_TIMEOUT, headers: { Referer: `https://space.bilibili.com/${account.mid}/upload/video` },
+      }).catch(() => null);
+      if (!response?.ok()) continue;
+      const payload = await response.json().catch(() => null);
+      const data = payload?.code === 0 ? payload.data : null;
+      if (!data || String(data.owner?.mid) !== account.mid) continue;
+      const text = cleanText(`${data.title || ''}\n${data.desc || ''}`).slice(0, MAX_PAGE_TEXT);
+      evidence.push({ title: data.title, url: `https://www.bilibili.com/video/${data.bvid}/`, text,
+        http_status: 200, checked_at: new Date().toISOString(),
+        published_at: data.pubdate ? new Date(data.pubdate * 1000).toISOString() : null,
+        discovered_by: `bilibili-official:${account.mid}:video`,
+        preview_related: previewRelated(text, currentGame), images: [],
+      });
     }
     return evidence;
   }
