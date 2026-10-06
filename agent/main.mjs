@@ -45,17 +45,21 @@ const LLM_ATTEMPTS = Math.max(2, Number(process.env.AGENT_LLM_ATTEMPTS || 3));
 async function callJson(runner, role, prompt) {
   let lastError;
   for (let attempt = 1; attempt <= LLM_ATTEMPTS; attempt += 1) {
+    const startedAt = Date.now();
+    log(`${role} 第 ${attempt}/${LLM_ATTEMPTS} 次调用开始`);
     try {
       const suffix = attempt === 1 ? '' : '\n\n上一次输出无法被程序解析。现在只输出严格 JSON，不要任何额外文字。';
       const response = await runner.run(`${prompt}${suffix}`);
+      const value = extractJson(response.text);
+      log(`${role} 第 ${attempt} 次调用完成，耗时 ${((Date.now() - startedAt) / 1000).toFixed(1)} 秒`);
       return {
-        value: extractJson(response.text),
+        value,
         cliSessionId: response.cliSessionId,
         raw: response.text,
       };
     } catch (error) {
       lastError = error;
-      log(`${role} 第 ${attempt} 次调用失败: ${error.message}`);
+      log(`${role} 第 ${attempt} 次调用失败，耗时 ${((Date.now() - startedAt) / 1000).toFixed(1)} 秒: ${error.message}`);
     }
   }
   throw lastError;
