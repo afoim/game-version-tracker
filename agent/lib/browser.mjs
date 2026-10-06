@@ -165,9 +165,13 @@ function evidenceScore(text, currentGame, recencyIndex) {
 export function selectEvidenceEntries(entries, limit = MAX_EVIDENCE) {
   const newest = [...entries].sort((a, b) => b.timestamp - a.timestamp);
   const ranked = [...entries].sort((a, b) => b.score - a.score || b.timestamp - a.timestamp);
+  const pools = [
+    /祈愿|跃迁|频段|寻访|招募|唤取|检索|募集/,
+    /版本更新|更新说明|更新公告|维护公告|维护更新|前瞻|特别节目/,
+  ].flatMap(pattern => newest.filter(entry => pattern.test(entry.text || '')).slice(0, Math.max(1, Math.floor(limit / 6))));
   const picked = [], seen = new Set();
   // Keep fresh announcements even when they no longer mention stored versions.
-  for (const entry of [...newest.slice(0, Math.max(1, Math.floor(limit / 3))), ...ranked]) {
+  for (const entry of [...newest.slice(0, Math.max(1, Math.floor(limit / 3))), ...pools, ...ranked]) {
     const id = String(entry.item?.id_str || entry.item?.id || '');
     if (!id || seen.has(id)) continue;
     seen.add(id); picked.push(entry);
@@ -257,6 +261,7 @@ export async function createEvidenceCollector() {
   const feedCache = new Map();
   const videoFeedCache = new Map();
   const diagnostics = {};
+  const rawDynamics = {};
 
   async function captureBilibiliFeed(account) {
     const diagnostic = diagnostics[account.label] = { pages: 0, items: 0, http_statuses: [], api_codes: [] };
@@ -391,6 +396,11 @@ export async function createEvidenceCollector() {
     const account = BILIBILI_OFFICIAL_ACCOUNTS[currentGame.game_name];
     if (!account) return [];
     const items = await getBilibiliFeed(account);
+    rawDynamics[currentGame.game_name] = items.map(item => ({
+      url: `https://www.bilibili.com/opus/${item.id_str || item.id}`,
+      published_at: dynamicTimestamp(item) ? new Date(dynamicTimestamp(item) * 1000).toISOString() : null,
+      title: dynamicTitle(item, account), text: dynamicText(item),
+    }));
     const ranked = items
       .map((item, index) => {
         const text = dynamicText(item);
@@ -533,6 +543,7 @@ export async function createEvidenceCollector() {
 
   return {
     diagnostics,
+    rawDynamics,
     collect: (_assignment, currentGame) => collectBilibiliOfficialEvidence(currentGame),
     collectMedia: (currentGame) => collectBilibiliOfficialMedia(currentGame),
     collectSourceTitles: (currentGame) => collectBilibiliOfficialSourceTitles(currentGame),

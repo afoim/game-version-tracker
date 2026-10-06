@@ -18,6 +18,7 @@ try {
   await mkdir('agent-output', { recursive: true });
   await writeFile('agent-output/evidence-audit.json', JSON.stringify({
     collected_at: new Date().toISOString(), diagnostics: collector.diagnostics, evidence: results,
+    raw_dynamics: collector.rawDynamics,
   }, null, 2));
   await collector.close();
 }

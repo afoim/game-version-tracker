@@ -11,6 +11,15 @@ test('new announcements survive stale-version ranking without duplicate entries'
   for (let i = 32; i < 40; i++) assert.ok(selected.some(x => x.item.id_str === String(i)));
   assert.ok(selected.some(x => x.item.id_str === '0'));
 });
+
+test('banner and maintenance evidence survive unrelated high-ranking posts', () => {
+  const entries = Array.from({ length: 50 }, (_, i) => ({ item: { id_str: String(i) }, timestamp: i, score: i, text: '角色剧情' }));
+  entries[2].text = '限定唤取活动，获取概率提升';
+  entries[3].text = '版本更新说明';
+  const selected = selectEvidenceEntries(entries, 24);
+  assert.ok(selected.some(x => x.item.id_str === '2'));
+  assert.ok(selected.some(x => x.item.id_str === '3'));
+});
 import { GAME_NAMES, validateDataset } from '../agent/lib/validate.mjs';
 
 const expectedMids = {
