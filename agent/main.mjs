@@ -15,6 +15,7 @@ import {
   validateGame,
 } from './lib/validate.mjs';
 import { childPrompt, mainPlanPrompt, reviewPrompt } from './prompts.mjs';
+import { canClearPreviousPreview } from './lib/preview-rollover.mjs';
 
 const ROOT = process.cwd();
 const DATA_PATH = path.join(ROOT, 'data', 'games.json');
@@ -151,6 +152,7 @@ function enforceBilibiliEvidence(currentGame, candidate, evidence) {
   const evidenceByUrl = new Map(officialEvidence.map((item) => [item.url, item]));
   const next = structuredClone(candidate);
   const reverted = [];
+  const clearPreviousPreview = canClearPreviousPreview(currentGame, candidate, officialEvidence);
 
   next.preview_images = Array.isArray(currentGame.preview_images) ? currentGame.preview_images : [];
   next.sources = (next.sources || [])
@@ -158,6 +160,7 @@ function enforceBilibiliEvidence(currentGame, candidate, evidence) {
     .map((source) => ({ ...source, type: 'official_community' }));
 
   for (const field of PREVIEW_FIELDS) {
+    if (clearPreviousPreview) continue;
     if (JSON.stringify(next[field]) === JSON.stringify(currentGame[field])) continue;
     const supported = next.sources.some(
       (source) =>
