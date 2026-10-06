@@ -405,6 +405,7 @@ export async function createEvidenceCollector() {
         text: entry.text,
         http_status: 200,
         checked_at: checkedAt,
+        published_at: entry.timestamp ? new Date(entry.timestamp * 1000).toISOString() : null,
         discovered_by: `bilibili-official:${account.mid}:dynamic`,
         bilibili_dynamic_id: id,
         preview_related: isPreview,

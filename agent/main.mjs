@@ -71,6 +71,8 @@ function evidenceSummary(evidenceByGame) {
         preview_related: Boolean(item.preview_related),
         image_count: Array.isArray(item.images) ? item.images.length : 0,
         excerpt: item.text.slice(0, 2200),
+        text: item.text,
+        published_at: item.published_at || null,
       })),
     ]),
   );
