@@ -15,12 +15,17 @@ on:
         required: false
         type: boolean
         default: false
+      version_facts_only:
+        description: Eight parallel web research calls, audit only, no publication
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 concurrency:
-  group: game-version-tracker-${{ inputs.evidence_only && 'evidence' || 'ai' }}
+  group: game-version-tracker-${{ inputs.version_facts_only && 'version-facts' || inputs.evidence_only && 'evidence' || 'ai' }}
   cancel-in-progress: false
 
 jobs:
@@ -30,6 +35,7 @@ jobs:
     env:
       AGENT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'true' || 'false' }}
       AGENT_EVIDENCE_ONLY: ${{ inputs.evidence_only && 'true' || 'false' }}
+      AGENT_VERSION_FACTS_ONLY: ${{ inputs.version_facts_only && 'true' || 'false' }}
       AGENT_MODEL: deepseek-v4-flash-260713
       AGENT_PROVIDER_ID: acofork
       AGENT_PROVIDER_NPM: '@ai-sdk/openai-compatible'
@@ -85,7 +91,9 @@ jobs:
       - name: Run AI tracker
         shell: bash
         run: |
-          if [[ "$AGENT_EVIDENCE_ONLY" == "true" ]]; then
+          if [[ "$AGENT_VERSION_FACTS_ONLY" == "true" ]]; then
+            node agent/research-version-facts.mjs
+          elif [[ "$AGENT_EVIDENCE_ONLY" == "true" ]]; then
             node agent/collect-audit.mjs
           elif [[ "$AGENT_DRY_RUN" == "true" ]]; then
             npm run agent:dry
