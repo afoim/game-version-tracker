@@ -137,6 +137,7 @@ GitHub Actions 出口可能触发 Bilibili 412 / 风控。可在仓库 Actions S
 - `preview_start_at` 必须是带时区的 ISO 8601；前瞻日期不能冒充版本上线日期。
 - 节目结束后继续核验 Bilibili 官方账号录播/回放；第三方搬运、解说、切片或其他平台视频不能写入 `preview_replay_url`。
 - 事实变化必须有本轮真实读取的来源支持。
+- 事实改动须返回字段、来源 URL 和逐字原文引用，程序核对该引用确实存在于本轮官方证据并与来源 claims 一致；独立审核再检查引用是否真正支持结论，报告保留完整公开正文供人工复核。不把整轮 approved 等同于所有字段已经核验。
 - `sources` 中的来源包含 `title`、`url`、`type`、`claims`、`checked_at`。
 - 新核验产生的 `sources.type` 固定为 `official_community`。
 - 未确认日期保持“预计 / 未确认”语义。

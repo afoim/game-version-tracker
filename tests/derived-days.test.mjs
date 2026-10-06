@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GAME_NAMES, collectReviewIssues, refreshDerivedDays } from '../agent/lib/validate.mjs';
+import { GAME_NAMES, collectReviewIssues, collectClaimEvidenceIssues, refreshDerivedDays } from '../agent/lib/validate.mjs';
+
+test('changed facts require exact public evidence, not a fabricated citation', () => {
+  const before = { game_name: '原神', current_version: '1.0' };
+  const evidence = [{ url: 'https://www.bilibili.com/opus/1', title: '更新公告', text: '1.1版本现已上线', http_status: 200, discovered_by: 'bilibili-official:401742377:dynamic' }];
+  const child = { candidate: { ...before, current_version: '1.1', sources: [{ url: evidence[0].url, claims: ['current_version'] }] }, claim_evidence: [{ field: 'current_version', url: evidence[0].url, quote: '1.1版本现已上线' }] };
+  assert.deepEqual(collectClaimEvidenceIssues(before, child, evidence), []);
+  child.claim_evidence[0].quote = '1.2版本现已上线';
+  assert.equal(collectClaimEvidenceIssues(before, child, evidence).length, 1);
+  child.claim_evidence[0].quote = '1.1版本现已上线';
+  child.candidate.sources[0].claims = [];
+  assert.equal(collectClaimEvidenceIssues(before, child, evidence).length, 1);
+});
 
 const NOW = Date.parse('2026-09-23T12:00:00+08:00');
 

@@ -81,6 +81,7 @@ ${json(evidenceForModel)}
 - preview_images 由 orchestrator 根据 Bilibili 官方前瞻动态配图自动发布；child-agent 必须原样保留当前值，不得自行增加、删除或改写。
 
 来源规则：
+- 每个改动的事实字段必须在顶层 claim_evidence 中给出 {field,url,quote}，quote 必须逐字摘自对应 evidence 原文并足以支持该字段（不能用无关句子），candidate.sources 的同一 URL 的 claims 也必须包含该字段。倒计时 current_up_days_remaining 由程序计算，无需引用；已知结束时间后清空旧 UP 也无需引用。没有原文支持则保持旧值。
 - published_at 是动态发布时间，checked_at 是本次读取时间，两者都不能直接当作版本上线或卡池开始时间；“更新后”也不等于动态发布当天更新。
 - candidate.sources 只能包含上面 evidence 中本轮真实读取成功、且 discovered_by 以 bilibili-official: 开头的 URL；不要保留旧的官网、TapTap、HoYoLAB、新闻站或其他平台来源。
 - url 和 checked_at 必须逐字复制对应 evidence。
@@ -95,6 +96,7 @@ candidate 必须是该游戏完整对象，保留当前对象已有的全部前�
   "game_name": "${assignment.game_name}",
   "verification_status": "verified",
   "changed": false,
+  "claim_evidence": [],
   "candidate": { "game_name": "${assignment.game_name}" },
   "notes": ["简短核验结论"]
 }`;

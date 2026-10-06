@@ -124,6 +124,28 @@ function parseDate(value) {
   return Number.isFinite(time) ? time : Number.NaN;
 }
 
+export function collectClaimEvidenceIssues(before, child, evidence, now = Date.now()) {
+  const issues = [];
+  const after = child.candidate;
+  const byUrl = new Map(evidence.map(item => [item.url, item]));
+  for (const field of Object.keys(before)) {
+    if (['sources', 'preview_images', 'current_up_days_remaining'].includes(field)) continue;
+    if (JSON.stringify(before[field]) === JSON.stringify(after[field])) continue;
+    if (field === 'current_up_characters' && after[field]?.length === 0 &&
+        before.current_up_end_at && Date.parse(before.current_up_end_at) <= now) continue;
+    const supported = (child.claim_evidence || []).some(claim => {
+      const item = byUrl.get(claim?.url);
+      const quote = typeof claim?.quote === 'string' ? claim.quote.trim() : '';
+      return claim?.field === field && quote.length >= 4 && item?.http_status === 200 &&
+        String(item.discovered_by || '').startsWith('bilibili-official:') &&
+        `${item.title || ''}\n${item.text || ''}`.includes(quote) &&
+        after.sources?.some(source => source.url === claim.url && source.claims?.includes(field));
+    });
+    if (!supported) issues.push(`${before.game_name}: ${field} 变化缺少可复核的官方原文引用`);
+  }
+  return issues;
+}
+
 export function collectReviewIssues({ currentDataset, proposedDataset, childResults, evidenceByGame, now = Date.now() }) {
   const issues = [];
 
@@ -157,6 +179,7 @@ export function collectReviewIssues({ currentDataset, proposedDataset, childResu
     const reviewCandidate = verified ? child.candidate : currentGame;
 
     if (verified) {
+      issues.push(...collectClaimEvidenceIssues(currentGame, child, evidence, now));
       if (reviewCandidate.next_version === reviewCandidate.current_version && reviewCandidate.next_version !== '暂未公布') {
         issues.push(`${gameName}: next_version 与 current_version 相同，版本滚动未完成`);
       }

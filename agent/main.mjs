@@ -580,6 +580,7 @@ async function main() {
             meaningful_change: result.changed,
             cli_session: childCall.cliSessionId,
             notes: result.notes,
+            claim_evidence: result.claim_evidence || [],
         });
       } catch (error) {
         childResults.push({
