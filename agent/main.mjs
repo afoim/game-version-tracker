@@ -696,6 +696,13 @@ async function main() {
       approved = review?.approved === true && allChildrenReturned && mechanicalIssues.length === 0
         && verifiedGames.size > 0 && mediaFeed.media.items.length > 0;
       reviewAttempts.push({ attempt: reviewAttempt, approved, mechanical_issues: mechanicalIssues, review });
+      // Preserve public-source evidence and completed review work even if a
+      // later repair call or the workflow times out. This is never publication.
+      await writeFile(path.join(OUTPUT_DIR, `review-round-${reviewAttempt}.json`),
+        `${JSON.stringify({ attempt: reviewAttempt, checked_at: new Date().toISOString(),
+          approved, mechanical_issues: mechanicalIssues, review,
+          child_results: childResults, evidence: evidenceSummary(evidenceByGame),
+          proposed_dataset: proposedDataset }, null, 2)}\n`, 'utf8');
       if (approved || reviewAttempt === 3) break;
       const feedback = JSON.stringify({ mechanicalIssues, review });
       log(`审核第 ${reviewAttempt} 轮拒绝，向子任务反馈并重新核验…`);
