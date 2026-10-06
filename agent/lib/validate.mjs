@@ -1,3 +1,5 @@
+import { explicitReleaseDate, elapsedReleaseDays } from './release-date.mjs';
+
 export const GAME_NAMES = [
   '原神',
   '崩坏：星穹铁道',
@@ -180,6 +182,13 @@ export function collectReviewIssues({ currentDataset, proposedDataset, childResu
 
     if (verified) {
       issues.push(...collectClaimEvidenceIssues(currentGame, child, evidence, now));
+      const release = explicitReleaseDate(reviewCandidate.current_version, evidence);
+      if (release) {
+        const expected = elapsedReleaseDays(release.date, now);
+        if (expected >= 0 && reviewCandidate.current_version_days !== expected) {
+          issues.push(`${gameName}: current_version_days=${reviewCandidate.current_version_days} 与官方上线日期 ${release.date} 推算值 ${expected} 不一致`);
+        }
+      }
       if (reviewCandidate.next_version === reviewCandidate.current_version && reviewCandidate.next_version !== '暂未公布') {
         issues.push(`${gameName}: next_version 与 current_version 相同，版本滚动未完成`);
       }
