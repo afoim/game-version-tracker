@@ -29,6 +29,8 @@ main-agent 读取当前 `data/games.json`，必须为以下 8 个游戏各生成
 
 main-agent 只负责拆分核验目标，不直接修改仓库，也不生成搜索查询。
 
+验收须以真实官方证据逐字段复核，不能以 Actions 成功、整轮 approved 或某游戏 verified 代替所有字段准确。动态默认最多8页、24条去重证据，包含最新动态保底；最新6条官号版本PV/前瞻视频读取完整描述并校验 owner.mid。报告保留完整公开正文、采集HTTP/API状态与页数（不含Cookie），事实改动须给出字段级原文引用，机械验证引用存在，再独立审核其含义。
+
 ## search-worker
 
 网页读取由 Playwright 完成，AI 不自行联网。search-worker 不使用 Bing、DuckDuckGo 或其他搜索引擎。
