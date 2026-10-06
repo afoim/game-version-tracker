@@ -23,6 +23,12 @@ try {
 严格JSON：{"game_name":"${game}","current_version":"版本名称","current_release_date":null,"next_release_date":null,"next_release_kind":"estimate","cycle_days":42,"cycle_basis":"依据","historical_releases":[{"version":"版本","date":"YYYY-MM-DD","url":"来源"}],"current_content":["最多五项重点"],"sources":[{"url":"官方来源","quote":"实际原文","claims":["current_release_date"]}]}`);
       const value = extractJson(response.text);
       if (value.game_name !== game || !Array.isArray(value.sources) || !Array.isArray(value.current_content)) throw Error('研究结果结构不完整');
+      const officialDomains = ['mihoyo.com', 'hoyoverse.com', 'hoyolab.com', 'kurogames.com', 'gryphline.com', 'hypergryph.com', 'yh.wanmei.com', 'stellasora.yostar.cn'];
+      for (const source of value.sources) {
+        const url = new URL(source.url);
+        if (url.protocol !== 'https:' || url.username || url.password || !officialDomains.some(domain => url.hostname === domain || url.hostname.endsWith(`.${domain}`))) throw Error('研究结果使用了非官方来源');
+        if (typeof source.quote !== 'string' || source.quote.length < 4 || !Array.isArray(source.claims)) throw Error('缺少原文引用');
+      }
       const validDate = date => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date) && Number.isFinite(Date.parse(date)) && new Date(date).toISOString().slice(0, 10) === date;
       if (value.current_release_date !== null && !validDate(value.current_release_date)) throw Error('当前版本日期无效');
       if (value.next_release_date !== null && !validDate(value.next_release_date)) throw Error('下一版本日期无效');

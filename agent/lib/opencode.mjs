@@ -73,17 +73,9 @@ function createConfig(gatewaySession, webResearch) {
     // relying only on the child/reviewer prompts.
     permission: {
       '*': 'deny',
-      ...(webResearch ? { websearch: 'allow', webfetch: {
-        '*': 'deny',
-        'https://*.mihoyo.com/*': 'allow',
-        'https://*.hoyoverse.com/*': 'allow',
-        'https://*.hoyolab.com/*': 'allow',
-        'https://*.kurogames.com/*': 'allow',
-        'https://*.gryphline.com/*': 'allow',
-        'https://*.hypergryph.com/*': 'allow',
-        'https://yh.wanmei.com/*': 'allow',
-        'https://stellasora.yostar.cn/*': 'allow',
-      } } : {}),
+      // Pinned OpenCode 1.18.12 accepts actions, not URL maps, for webfetch.
+      // The research output is separately restricted to official sources.
+      ...(webResearch ? { websearch: 'allow', webfetch: 'allow' } : {}),
     },
     provider: {
       [PROVIDER_ID]: provider,
