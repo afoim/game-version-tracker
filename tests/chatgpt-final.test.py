@@ -2,6 +2,8 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+import ast
+from types import SimpleNamespace
 
 spec = importlib.util.spec_from_file_location('research', Path(__file__).parents[1] / 'agent/chatgpt-version-research.py')
 module = importlib.util.module_from_spec(spec)
@@ -34,5 +36,38 @@ class FinalAnswerTests(unittest.TestCase):
         for url in ('file:///etc/passwd', 'https://user:secret@example.com', 'http://mc.kurogames.com'):
             bad = dict(self.answer, sources=[dict(self.answer['sources'][0], url=url)])
             with self.assertRaises(ValueError): module.parse_final(json.dumps(bad), '鸣潮')
+
+class PollingTests(unittest.TestCase):
+    def backend(self, responses):
+        class HttpError(Exception):
+            status_code = 429
+        clock = SimpleNamespace(now=0, delays=[])
+        def sleep(delay):
+            clock.delays.append(delay)
+            clock.now += delay
+        tree = ast.parse(Path(module.__file__).read_text(encoding='utf-8'))
+        node = next(n for n in ast.walk(tree) if isinstance(n, ast.ClassDef) and n.name == 'FinalSearchBackend')
+        namespace = dict(OpenAIBackendAPI=object, UpstreamHTTPError=HttpError,
+                         time=SimpleNamespace(monotonic=lambda: clock.now, sleep=sleep))
+        exec(compile(ast.Module(body=[node], type_ignores=[]), 'actual-polling-class', 'exec'), namespace)
+        backend = namespace['FinalSearchBackend']()
+        iterator = iter(responses)
+        def get(_):
+            result = next(iterator)
+            if result == '429': raise HttpError()
+            return result
+        backend._get_search_conversation = get
+        backend._extract_search_result = lambda _, result: result
+        return backend, clock
+
+    def test_throttled_reads_back_off_and_partial_answer_is_not_accepted(self):
+        backend, clock = self.backend(['429', '429', {'status':'in_progress','answer':'partial'},
+                                       {'status':'finished_successfully','answer':'final'}])
+        self.assertEqual(backend._wait_search_result('test', 100, 3)['answer'], 'final')
+        self.assertEqual(clock.delays, [15, 30, 8])
+
+    def test_timeout_does_not_publish_partial_answer(self):
+        backend, clock = self.backend([{'status':'in_progress','answer':'partial'}])
+        with self.assertRaises(TimeoutError): backend._wait_search_result('test', 5, 3)
 
 if __name__ == '__main__': unittest.main()

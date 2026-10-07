@@ -27,3 +27,5 @@
 ## 检查
 
 `npm test`；`python3 tests/chatgpt-final.test.py`；`npm run validate`。真实运行后必须复核八个游戏的日期和当前内容，并从主站游戏资讯页面检查桌面和手机的显示，健康检查或 JSON 合法不代表已完成内容复核。
+
+实测（2026-10-07）：生产 oneshot 于08:20成功，八个独立会话最终答案、8款游戏、29条媒体，提交4caca8e已由绘图机专用密钥推送并自动发布到Pages；CDN generated_at=2026-10-07T00:20:21.054Z。整轮6分41秒，峰值内存642.9MiB。主站生产页面桌面及390px手机显示与发布数据一致。31项Node回归、7项Python回归通过；小时timer enabled/active，两条Actions disabled_manually。有限实跑不保证未来上游可用性；失败保留旧发布数据。会话读取429使用递增退避，桥接账号池只读，不回写生图账号快照。
