@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { GAME_NAMES, validateDataset } from './lib/validate.mjs';
 import { buildFeedGames } from './lib/media-feed.mjs';
 import { elapsedReleaseDays, explicitReleaseDate } from './lib/release-date.mjs';
-import { verifySources, citedReleaseDate, citedDate, collectEndfieldRelease, officialVersionEnd, observedCycle } from './lib/source-verification.mjs';
+import { verifySources, citedReleaseDate, citedDate, collectEndfieldRelease, officialVersionEnd, announcedNextDate, observedCycle } from './lib/source-verification.mjs';
 
 const read = async file => JSON.parse(await readFile(file, 'utf8'));
 const dataset = await read('data/games.json');
@@ -31,7 +31,7 @@ for (const name of GAME_NAMES) {
   if (!Array.isArray(c.sources) || !c.sources.length) throw Error(`Missing sources: ${name}`);
   if (!['official', 'estimate'].includes(c.next_release_kind)) throw Error(`Missing date provenance: ${name}`);
   if (c.next_release_kind === 'estimate' && (!Number.isInteger(c.cycle_days) || c.cycle_days < 14 || c.cycle_days > 90)) throw Error(`Invalid cycle: ${name}`);
-  const end = officialVersionEnd(c.current_version, audit.evidence[name] || []);
+  const end = officialVersionEnd(c.current_version, audit.evidence[name] || []) || announcedNextDate(c.next_version, audit.evidence[name] || []);
   const cycle = observedCycle(audit.evidence[name] || []);
   const cycleDays = cycle?.days || 42;
   const next = end?.date || (c.next_release_kind === 'estimate'

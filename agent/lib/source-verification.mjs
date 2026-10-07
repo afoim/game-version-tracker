@@ -121,6 +121,21 @@ export function officialVersionEnd(version, evidence) {
   return null;
 }
 
+export function announcedNextDate(version, evidence) {
+  const key = version.match(/\d+(?:\.\d+)+/)?.[0] || version.replace(/预计|版本|核心章节|[「」\s]/g, '');
+  if (!key) return null;
+  for (const item of evidence) {
+    if (!item.title.replace(/[「」\s]/g, '').includes(key) || !item.published_at) continue;
+    const match = item.text?.match(/版本将于(?:(\d{4})年)?(\d{1,2})月(\d{1,2})日上线/);
+    if (!match) continue;
+    const year = match[1] || new Date(item.published_at).getUTCFullYear();
+    const date = `${year}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`;
+    if (!Number.isFinite(Date.parse(date)) || Math.abs(Date.parse(date) - Date.parse(item.published_at)) > 90 * 86400000) continue;
+    return { date, url: item.url, title: item.title, quote: match[0], checked_at: item.checked_at };
+  }
+  return null;
+}
+
 export function observedCycle(evidence) {
   const releases = new Map();
   for (const item of evidence) {

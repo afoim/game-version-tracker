@@ -1,6 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allowedSource, verifySources, citedReleaseDate, citedDate, observedCycle, officialVersionEnd } from '../agent/lib/source-verification.mjs';
+import { allowedSource, verifySources, citedReleaseDate, citedDate, observedCycle, officialVersionEnd, announcedNextDate } from '../agent/lib/source-verification.mjs';
+
+test('next version announcement anchors its explicit date to publication year', () => {
+  const evidence = [{title: '「丹青渡」版本前瞻',text:'「丹青渡」核心章节版本将于10月15日上线！',published_at:'2026-10-06T13:00:00Z'}];
+  assert.equal(announcedNextDate('「丹青渡」', evidence).date, '2026-10-15');
+  assert.equal(announcedNextDate('「雪凇幽梦」', evidence), null);
+});
 
 test('official next date must occur in the verified quotation', () => {
   const sources = [{ quote: '新版本将于2026年10月15日上线', claims: ['next_release_date'] }];
