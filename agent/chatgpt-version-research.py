@@ -155,6 +155,22 @@ sources.quote 必须是该页面中的一段连续逐字原文，不能拼接远
             return {'game_name': game, 'status': 'failed', 'error_type': type(error).__name__}
         finally:
             if backend is not None:
+                # 搜索成功、解析失败、轮询超时或 SSE 中断都不保留网页端临时会话。
+                # OpenAIBackendAPI 在收到 conversation_id 的第一帧时就会记录它，
+                # 所以即使 search() 没有返回，也能在这里清理。
+                conversation_id = str(getattr(backend, 'last_conversation_id', '') or '').strip()
+                if conversation_id:
+                    try:
+                        backend.delete_conversation(conversation_id)
+                        print(f'[chatgpt-research] {game} conversation hidden', flush=True)
+                    except Exception as cleanup_error:
+                        # 清理失败只留日志，不改变本轮研究结果，也不做人工复核分支。
+                        print(
+                            f'[chatgpt-research] {game} conversation cleanup failed: '
+                            f'{type(cleanup_error).__name__}: {str(cleanup_error)[:240]}',
+                            file=sys.stderr,
+                            flush=True,
+                        )
                 backend.close()
 
     games = [args.game] if args.game else GAMES
