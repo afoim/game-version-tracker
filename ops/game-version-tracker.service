@@ -1,0 +1,14 @@
+[Unit]
+Description=AcoFork local game facts and Bilibili collector
+After=network-online.target supervisor.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/root/game-version-tracker
+ExecStart=/usr/bin/python3 /root/game-version-tracker/agent/local-run.py --publish
+TimeoutStartSec=50min
+UMask=0077
+Environment=PYTHONUNBUFFERED=1
+Environment=AGENT_MAX_DYNAMIC_PAGES=3
+EnvironmentFile=-/root/game-version-tracker/.agent-runtime/local.env

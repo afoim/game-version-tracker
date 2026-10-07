@@ -1,6 +1,6 @@
 # Game Version Tracker
 
-由 GitHub Actions 定时运行的 AI Agent 游戏版本维护仓库。发布 `data/games.json`、`data/media-feed.json` 与 `data/media/**`。
+当前生产改为绘图机每小时运行，ChatGPT 八款游戏独立会话 + 独立 B 站批次，GitHub Actions 已停用。完整现行流程与部署见 [LOCAL_RUNBOOK.md](LOCAL_RUNBOOK.md)。下文旧 Agent/Actions 说明仅作历史参考，不是当前运行入口。发布 `data/games.json`、`data/media-feed.json` 与 `data/media/**`。
 
 ## 维护游戏
 

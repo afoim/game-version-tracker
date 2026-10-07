@@ -1,0 +1,11 @@
+[Unit]
+Description=Update AcoFork game news every hour
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+AccuracySec=1min
+Unit=game-version-tracker.service
+
+[Install]
+WantedBy=timers.target
