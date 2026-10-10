@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-10T08:01:12.936Z",
+  "generated_at": "2026-10-10T10:01:02.139Z",
   "ui": {
     "page": {
       "title": "游戏资讯",
@@ -85,14 +85,14 @@
         "game_name": "原神",
         "current_version": "7.1「往冥府的安魂歌」",
         "current_content": [
-          "魔神任务第七章·第四幕「往冥府的安魂歌」相关剧情",
-          "纳塔后续区域与世界任务内容",
-          "限定五星角色「雪宴之锋·薇斯纳(风)」「幽歌萦渊·沃雅妮莎(水)」活动祈愿",
-          "限定五星武器「单手剑·蝶变」「法器·漩流颂歌」等活动祈愿",
-          "版本活动「判测胜券本征」等限时活动"
+          "推进至冬相关主线剧情，围绕「往冥府的安魂歌」展开新的故事内容",
+          "新增角色与活动祈愿内容，包括限定五星角色薇斯纳、沃雅妮莎等",
+          "开放7.1版本活动与限时玩法",
+          "新增版本任务、世界内容及相关系统优化",
+          "包含版本更新补偿与问题修复内容"
         ],
         "current_version_days": 17,
-        "next_version": "预计7.2",
+        "next_version": "预计7.2版本",
         "next_content": [],
         "preview_status": "尚未发布",
         "preview_title": null,
@@ -115,25 +115,16 @@
             "claims": [
               "current_release_date"
             ],
-            "checked_at": "2026-10-10T08:01:10.913Z"
+            "checked_at": "2026-10-10T10:01:00.100Z"
           },
           {
             "url": "https://www.bilibili.com/opus/1251036364630130726",
             "title": "「往冥府的安魂歌」7.1版本更新说明",
             "claims": [
-              "current_version"
+              "current_version",
+              "current_content"
             ],
-            "quote": "亲爱的旅行者：\n以下是7.1版本——「往冥府的安魂歌」更新与补偿内容。",
-            "type": "official",
-            "checked_at": "2026-10-08T03:00:18.570Z"
-          },
-          {
-            "url": "https://www.bilibili.com/opus/1251036364630130726",
-            "title": "「往冥府的安魂歌」7.1版本更新说明",
-            "claims": [
-              "current_release_date"
-            ],
-            "quote": "停服更新补偿：原石*300（停服维护每小时补偿60原石）",
+            "quote": "以下是7.1版本——「往冥府的安魂歌」更新与补偿内容。",
             "type": "official",
             "checked_at": "2026-10-08T03:00:18.570Z"
           },
@@ -146,26 +137,6 @@
             "quote": "《原神》7.1版本「往冥府的安魂歌」将于2026年9月23日上线。",
             "type": "official",
             "checked_at": "2026-10-09T16:00:15.479Z"
-          },
-          {
-            "url": "https://www.bilibili.com/video/BV1k5GA6CE3r/",
-            "title": "《原神》7.0版本「无神怜爱的雪国」前瞻特别节目",
-            "claims": [
-              "cycle_basis"
-            ],
-            "quote": "《原神》7.0版本「无神怜爱的雪国」将于2026年8月12日上线。",
-            "type": "official",
-            "checked_at": "2026-10-09T16:00:15.611Z"
-          },
-          {
-            "url": "https://www.bilibili.com/opus/1257423404049367043",
-            "title": "「虚星临渡」活动祈愿将于2026年10月13日18:00开启，届时，限定5星角色「虚渊暗星·丝柯克(冰)」的祈…",
-            "claims": [
-              "current_content"
-            ],
-            "quote": "「虚星临渡」活动祈愿将于2026年10月13日18:00开启，届时，限定5星角色「虚渊暗星·丝柯克(冰)」的祈愿获取概率将大幅提升！",
-            "type": "official",
-            "checked_at": "2026-10-10T08:00:20.798Z"
           }
         ],
         "preview_images": [],
@@ -173,18 +144,18 @@
         "next_release_date": "2026-11-04",
         "next_release_kind": "estimate",
         "cycle_basis": "缺少连续三个版本的可核验日期，使用用户指定默认42天周期估算",
-        "facts_checked_at": "2026-10-10T08:01:10.913Z",
+        "facts_checked_at": "2026-10-10T10:01:00.100Z",
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/genshin.ico"
       },
       {
         "game_name": "崩坏：星穹铁道",
         "current_version": "4.6版本「月升之前，与兽共舞」",
         "current_content": [
-          "全新版本剧情「月升之前，与兽共舞」",
-          "限定五星角色「真珠（欢愉·冰）」加入跃迁",
+          "全新角色「真珠（欢愉•冰）」上线",
+          "开拓任务「千星城」-「月升之前，与兽共舞」开启",
           "活动「爱，幽灵与机器人」开启",
-          "活动「星际和平盛典：一镜到底」等玩法上线",
-          "新时装与「星际幻宠」相关内容上线"
+          "「星际和平盛典：一镜到底」「星际碰碰好搭档！」等活动上线",
+          "绯英时装「月待花时」、风堇时装「云边拾暖」上线"
         ],
         "current_version_days": 12,
         "next_version": "预计4.7版本",
@@ -218,26 +189,16 @@
             "claims": [
               "current_release_date"
             ],
-            "checked_at": "2026-10-10T08:01:11.158Z"
+            "checked_at": "2026-10-10T10:01:00.106Z"
           },
           {
             "url": "https://www.bilibili.com/opus/1252891786169286742",
             "title": "4.6版本「月升之前，与兽共舞」版本更新说明",
             "claims": [
               "current_release_date",
-              "next_release_date"
+              "cycle_basis"
             ],
             "quote": "4.6版本的持续时间为 2026/09/28 4.6版本更新后 - 2026/11/11 06:00。",
-            "type": "official",
-            "checked_at": "2026-10-10T08:00:20.751Z"
-          },
-          {
-            "url": "https://www.bilibili.com/opus/1252891786169286742",
-            "title": "4.6版本「月升之前，与兽共舞」版本更新说明",
-            "claims": [
-              "current_release_date"
-            ],
-            "quote": "■更新时间\n2026/09/28 06:00开始，预计5个小时完成。",
             "type": "official",
             "checked_at": "2026-10-10T08:00:20.751Z"
           },
@@ -268,7 +229,7 @@
         "next_release_date": "2026-11-11",
         "next_release_kind": "official",
         "cycle_basis": "官方版本公告明确日期",
-        "facts_checked_at": "2026-10-10T08:01:11.158Z",
+        "facts_checked_at": "2026-10-10T10:01:00.106Z",
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/starrail.ico"
       },
       {
@@ -276,10 +237,10 @@
         "current_version": "9.1版本「时序照新」",
         "current_content": [
           "全新S级角色寻梦者「时序之律者」登场",
-          "主线第二部后日谈「海正用火的声音歌唱」更新",
-          "主题活动「相遇♪回忆玩具小屋」开启",
-          "十周年福利活动开启",
-          "全新服装内容上线"
+          "主线第二部后日谈「海正用火的声音歌唱」开放",
+          "主题活动「相遇♪回忆玩具小屋」开放",
+          "十周年庆典相关福利活动开启",
+          "周年庆相关服装、补给及登录奖励活动"
         ],
         "current_version_days": 16,
         "next_version": "预计9.2版本",
@@ -301,39 +262,29 @@
             "claims": [
               "current_release_date"
             ],
-            "quote": "为了给舰长带来更好的游戏体验，《崩坏3》将在9月24日（周四）进行版本更新维护，维护完成后将更新为9.1版本——「时序照新」。",
+            "quote": "《崩坏3》将在9月24日（周四）进行版本更新维护，维护完成后将更新为9.1版本——「时序照新」。",
             "type": "official",
-            "checked_at": "2026-10-10T07:00:19.750Z"
-          },
-          {
-            "url": "https://www.bilibili.com/opus/1250742582391078912",
-            "title": "★《崩坏3》9.1版本维护通知、新活动预告★",
-            "claims": [
-              "current_release_date"
-            ],
-            "quote": "维护时间\n9月24日06:00~11:00",
-            "type": "official",
-            "checked_at": "2026-10-10T07:00:19.750Z"
+            "checked_at": "2026-10-10T10:00:19.822Z"
           },
           {
             "url": "https://www.bilibili.com/opus/1227364216405491729",
             "title": "★《崩坏3》9.0版本维护通知、新活动预告★",
             "claims": [
-              "current_content"
+              "cycle_basis"
             ],
-            "quote": "更多内容，请点击下方图片查看吧！",
+            "quote": "《崩坏3》将在7月23日（周四）进行版本更新维护，维护完成后将更新为9.0版本——「曙梦向明」。",
             "type": "official",
             "checked_at": "2026-10-06T23:00:15.853Z"
           },
           {
-            "url": "https://www.bilibili.com/opus/1249760944020520968",
-            "title": "★《崩坏3》9.1版本「时序照新」宣传PV 现已发布★",
+            "url": "https://www.bilibili.com/opus/1206583446674079752",
+            "title": "★《崩坏3》8.9版本维护通知、新活动预告★",
             "claims": [
-              "current_content"
+              "cycle_basis"
             ],
-            "quote": "《崩坏3》9.1版本「时序照新」即将开启！全新S级角色寻梦者「时序之律者」登场！\n还有主线第二部后日谈「海正用火的声音歌唱」、主题活动「相遇♪回忆玩具小屋」、十周年福利与全新服装重磅来袭，敬请期待！",
+            "quote": "《崩坏3》将在5月28日（周四）进行版本更新维护，维护完成后将更新为8.9版本——「羽落万生」。",
             "type": "official",
-            "checked_at": "2026-10-10T08:00:29.212Z"
+            "checked_at": "2026-10-06T23:00:15.853Z"
           }
         ],
         "preview_images": [],
@@ -341,18 +292,18 @@
         "next_release_date": "2026-11-23",
         "next_release_kind": "estimate",
         "cycle_basis": "近期三个官方维护日期 2026-05-28、2026-07-23、2026-09-24，间隔 56、63 天，按平均周期估算",
-        "facts_checked_at": "2026-10-10T08:01:11.504Z",
+        "facts_checked_at": "2026-10-10T10:01:00.223Z",
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/honkai3.ico"
       },
       {
         "game_name": "绝区零",
         "current_version": "3.2版本「她与她的隐秘往事」",
         "current_content": [
-          "3.2版本「她与她的隐秘往事」主线及版本内容",
-          "限定S级代理人「洛克茜」加入限时调频",
-          "限定S级代理人「普罗米娅」加入限时调频",
-          "S级音擎「绯月银棺」「朔月裁霜」加入限时频道",
-          "版本活动与免费领取妄想天使全新时装相关内容"
+          "全新S级代理人「克拉蕾(电·锋御)」与「洛克茜(风·击破)」加入调频",
+          "新增S级音擎「猩红渴望」「绯月银棺」及相关养成内容",
+          "新增限时活动「天使应援大作战」并可获取「妄想天使」限定时装",
+          "新增「新人绳匠指南」自选限定S级代理人与音擎奖励",
+          "新增敌人、动态壁纸、丽都城募奖励等系统与内容更新"
         ],
         "current_version_days": 31,
         "next_version": "3.3版本「重返天空的旅程」",
@@ -392,7 +343,7 @@
             "claims": [
               "current_release_date"
             ],
-            "checked_at": "2026-10-10T08:01:11.525Z"
+            "checked_at": "2026-10-10T10:01:00.696Z"
           },
           {
             "url": "https://www.bilibili.com/opus/1245841180737929286",
@@ -400,7 +351,7 @@
             "claims": [
               "current_release_date"
             ],
-            "quote": "【更新开始时间】\n2026/09/09 06:00（UTC+8）\n预计5个小时完成。",
+            "quote": "更新开始时间\n\n2026/09/09 06:00（UTC+8）\n\n预计5个小时完成。",
             "type": "official",
             "checked_at": "2026-10-06T23:00:16.087Z"
           },
@@ -424,46 +375,25 @@
             ],
             "quote": "《绝区零》3.3版本「重返天空的旅程」将于10月21日正式上线，全新S级代理人「菲欧妮」、「赛维里安」即将登场！",
             "type": "official",
-            "checked_at": "2026-10-10T06:00:28.757Z"
-          },
-          {
-            "url": "https://www.bilibili.com/opus/1257179885854523442",
-            "title": "《绝区零》3.3版本「重返天空的旅程」前瞻特别节目",
-            "claims": [
-              "preview_published"
-            ],
-            "quote": "本次特别节目中的一切人物、故事、设定仅为节目包装，均与《绝区零》原作无关，展示画面与奖励等均为开发中内容，实际内容请以正式上线为准。",
-            "type": "official",
-            "checked_at": "2026-10-10T06:00:28.757Z"
-          },
-          {
-            "url": "https://www.bilibili.com/opus/1257179885854523442",
-            "title": "《绝区零》3.3版本「重返天空的旅程」前瞻特别节目",
-            "claims": [
-              "next_version",
-              "current_content"
-            ],
-            "quote": "《绝区零》3.3版本「重返天空的旅程」将于10月21日正式上线，全新S级代理人「菲欧妮」、「赛维里安」即将登场！",
-            "type": "official",
-            "checked_at": "2026-10-10T06:00:28.757Z"
+            "checked_at": "2026-10-10T10:00:19.745Z"
           }
         ],
         "current_release_date": "2026-09-09",
         "next_release_date": "2026-10-21",
         "next_release_kind": "official",
         "cycle_basis": "官方版本公告明确日期",
-        "facts_checked_at": "2026-10-10T08:01:11.525Z",
+        "facts_checked_at": "2026-10-10T10:01:00.696Z",
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/zzz.ico"
       },
       {
         "game_name": "鸣潮",
         "current_version": "3.7「镜锁妄世，心照红尘」",
         "current_content": [
-          "全新角色：5星共鸣者「心」（导电/音感仪）与5星共鸣者「锁暝」（导电/迅刀）",
-          "全新剧情：潮汐任务第四章第四幕「梦枢心相由心生」",
-          "新增区域相关内容：梦枢天罗探索、残象聚落「梦枢天罗残象聚落」",
-          "新增玩法与活动：「团团勇者大乱斗」「梦构匣中」「天工寻物」等版本活动",
-          "性能与体验优化：新增部分移动端Vulkan支持、全平台性能优化及拍照模式增强"
+          "全新角色：5星共鸣者「心」、5星共鸣者「锁暝」",
+          "全新区域：「梦枢天罗」",
+          "全新剧情：潮汐任务第四章・第四幕「梦枢心相由心生」",
+          "新增玩法与活动：「团团勇者大乱斗」「梦构匣中」「天工寻物」等",
+          "图像与性能优化，包括部分移动端Vulkan支持及全平台性能优化"
         ],
         "current_version_days": 10,
         "next_version": "预计3.8版本",
@@ -486,7 +416,7 @@
             "claims": [
               "current_release_date"
             ],
-            "checked_at": "2026-10-10T08:01:11.665Z"
+            "checked_at": "2026-10-10T10:01:00.799Z"
           },
           {
             "url": "https://www.bilibili.com/opus/1253680342191046665",
@@ -496,27 +426,7 @@
             ],
             "quote": "✦更新维护时间：2026年9月30日04:00 ~ 2026年9月30日11:00（UTC+8）",
             "type": "official",
-            "checked_at": "2026-10-10T06:00:36.398Z"
-          },
-          {
-            "url": "https://www.bilibili.com/opus/1251098255067971586",
-            "title": "《鸣潮》3.7版本更新维护预告",
-            "claims": [
-              "current_content"
-            ],
-            "quote": "✦全新剧情✦\n〖潮汐任务〗第四章・第四幕「梦枢心相由心生」",
-            "type": "official",
-            "checked_at": "2026-10-06T23:00:33.015Z"
-          },
-          {
-            "url": "https://www.bilibili.com/opus/1251098255067971586",
-            "title": "《鸣潮》3.7版本更新维护预告",
-            "claims": [
-              "current_version"
-            ],
-            "quote": "为了提供全新游戏内容以及更好的游戏体验，我们将在近期进行3.7版本「镜锁妄世，心照红尘」的更新维护。",
-            "type": "official",
-            "checked_at": "2026-10-06T23:00:33.015Z"
+            "checked_at": "2026-10-10T10:00:27.833Z"
           }
         ],
         "preview_images": [],
@@ -524,21 +434,19 @@
         "next_release_date": "2026-11-11",
         "next_release_kind": "estimate",
         "cycle_basis": "缺少连续三个版本的可核验日期，使用用户指定默认42天周期估算",
-        "facts_checked_at": "2026-10-10T08:01:11.665Z",
+        "facts_checked_at": "2026-10-10T10:01:00.799Z",
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/wuwa.ico"
       },
       {
         "game_name": "明日方舟：终末地",
         "current_version": "「雪凇幽梦」版本",
         "current_content": [
-          "「雪凇幽梦」版本开启，包含版本活动与相关更新内容",
           "完成活动可免费获得满潜能干员「噗切娜」及武器「点心时刻」",
-          "「绚丽异彩」重构寻访#1开启，「伊冯」获取概率UP",
-          "「影拓丰碑 - 幽影刻形」系列玩法开放，包含普通模式与苦难模式",
-          "「融合！山团团！」趣味活动开放"
+          "「绚丽异彩」重构寻访#1开启，伊冯获取概率UP",
+          "版本相关剧情与活动内容「雪凇幽梦」上线"
         ],
         "current_version_days": 38,
-        "next_version": "预计「丹青渡」版本",
+        "next_version": "「丹青渡」版本",
         "next_content": [],
         "preview_status": "已发布",
         "preview_title": "《明日方舟：终末地》「丹青渡」版本前瞻特别节目回顾",
@@ -555,10 +463,10 @@
         "sources": [
           {
             "date": "2026-10-15",
-            "url": "https://www.bilibili.com/opus/1256079648339525640",
-            "title": "《明日方舟：终末地》「丹青渡」版本前瞻特别节目现已结束，感谢管理员的观看，为您奉上本次前瞻特别节目的情报。",
+            "url": "https://www.bilibili.com/opus/1257514886860111896",
+            "title": "《明日方舟：终末地》新版本「丹青渡」将于10月15日正式开启！",
             "quote": "版本将于10月15日上线",
-            "checked_at": "2026-10-10T06:00:36.362Z",
+            "checked_at": "2026-10-10T10:00:27.870Z",
             "type": "official_community",
             "claims": [
               "next_release_date"
@@ -571,18 +479,28 @@
             "claims": [
               "current_release_date"
             ],
-            "checked_at": "2026-10-10T08:01:12.597Z"
+            "checked_at": "2026-10-10T10:01:01.499Z"
+          },
+          {
+            "url": "https://www.bilibili.com/opus/1251855837915250689",
+            "title": "▼ 「雪凇幽梦」版本现已开启！",
+            "claims": [
+              "current_release_date"
+            ],
+            "quote": "9月25日\n#明日方舟终末地##雪凇幽梦#\n\n后勤备忘 - 独家揭秘! | 伊冯\n\n[当前资料状态：已入库]",
+            "type": "official",
+            "checked_at": "2026-10-07T01:00:39.548Z"
           },
           {
             "url": "https://www.bilibili.com/opus/1255211066404634628",
             "title": "「影拓丰碑 - 幽影刻形」系列更新说明",
             "claims": [
               "current_version",
-              "current_release_date"
+              "current_content"
             ],
-            "quote": "「雪凇幽梦」版本现已开启！",
+            "quote": "▼ 「雪凇幽梦」版本现已开启！\n完成活动免费领满潜能干员【噗切娜】及武器【点心时刻】！「绚丽异彩」重构寻访#1开启，【伊冯】获取概率UP！",
             "type": "official",
-            "checked_at": "2026-10-10T06:00:36.362Z"
+            "checked_at": "2026-10-10T10:00:27.873Z"
           },
           {
             "url": "https://www.bilibili.com/opus/1256285673647767600",
@@ -591,9 +509,20 @@
               "next_version",
               "next_release_date"
             ],
-            "quote": "秋景现，丹青垂。《明日方舟：终末地》新版本「丹青渡」将于10月15日开启。",
+            "quote": "秋景现，丹青垂。《明日方舟：终末地》新版本「丹青渡」将于10月15日开启。通过本期研发通讯，我们将为管理员介绍即将在此版本中上线的一系列优化与调整。",
             "type": "official",
-            "checked_at": "2026-10-10T06:00:36.361Z"
+            "checked_at": "2026-10-10T10:00:27.872Z"
+          },
+          {
+            "url": "https://www.bilibili.com/opus/1256079648339525640",
+            "title": "《明日方舟：终末地》「丹青渡」版本前瞻特别节目现已结束，感谢管理员的观看，为您奉上本次前瞻特别节目的情报。",
+            "claims": [
+              "preview_published",
+              "next_version"
+            ],
+            "quote": "《明日方舟：终末地》「丹青渡」版本前瞻特别节目现已结束，感谢管理员的观看，为您奉上本次前瞻特别节目的情报。\n\n▼//版本寻访公开\n▼//地图场景前瞻\n▼//玩法活动前瞻\n▼//版本活动前瞻",
+            "type": "official",
+            "checked_at": "2026-10-10T10:00:27.872Z"
           },
           {
             "url": "https://www.bilibili.com/opus/1256067442061344784",
@@ -601,9 +530,9 @@
             "claims": [
               "preview_published"
             ],
-            "quote": "「丹青渡」新版本导览专题网页上线，一站式查阅新版本内容，浏览即可领取【嵌晶玉】×1000、【折金票】×10000、【初级认知载体】×8、【武器检查套组】×4。",
+            "quote": "「丹青渡」新版本导览专题网页上线，一站式查阅新版本内容，浏览即可领取〖嵌晶玉〗×1000、〖折金票〗×10000、〖初级认知载体〗×8，〖武器检查套组〗×4。",
             "type": "official",
-            "checked_at": "2026-10-10T06:00:36.363Z"
+            "checked_at": "2026-10-10T10:00:27.873Z"
           }
         ],
         "preview_images": [],
@@ -611,17 +540,17 @@
         "next_release_date": "2026-10-15",
         "next_release_kind": "official",
         "cycle_basis": "官方版本公告明确日期",
-        "facts_checked_at": "2026-10-10T08:01:12.597Z",
+        "facts_checked_at": "2026-10-10T10:01:01.499Z",
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/endfield.png"
       },
       {
         "game_name": "异环",
         "current_version": "1.4「祷歌为谁而诵」",
         "current_content": [
-          "全新正篇剧情「魔女」及都市偕游、居家时刻等角色剧情内容",
-          "新增全新区域「噗卡乐园」「圣阿尔博镇」",
-          "新增限定S级角色「黑羽」与限定S级弧盘「罪与罚」",
-          "异环×Porsche联动开启，新增联动车辆与俱乐部内容",
+          "全新正篇剧情「魔女」",
+          "全新区域「噗卡乐园」「圣阿尔博镇」",
+          "全新限定S级角色「黑羽」及弧盘「罪与罚」",
+          "异环×Porsche联动二期开启，全新载具上线",
           "新增配饰系统、多人联机优化、无人机跟拍等功能优化"
         ],
         "current_version_days": 16,
@@ -642,11 +571,12 @@
             "url": "https://www.bilibili.com/opus/1251145718800842753",
             "title": "《异环》1.4版本「祷歌为谁而诵」更新公告",
             "claims": [
-              "current_release_date"
+              "current_release_date",
+              "current_version"
             ],
             "quote": "《异环》计划将于9月24日06:00 – 11:00进行版本更新维护。本次更新维护完成后，将开启全新1.4版本「祷歌为谁而诵」。",
             "type": "official",
-            "checked_at": "2026-10-10T08:00:45.130Z"
+            "checked_at": "2026-10-10T10:00:35.484Z"
           },
           {
             "url": "https://yh.wanmei.com/news/gamebroad/20260923/264278.html",
@@ -654,9 +584,9 @@
             "claims": [
               "current_content"
             ],
-            "quote": "● 全新限定S级角色「黑羽」\n\n开放时间：9月24日版本更新后-10月15日05:59",
+            "quote": "● 全新正篇剧情「魔女」\n\n神秘的来信，诡异的仪式，充满谜团的小镇……\n\n恐惧蒙蔽了本该明亮的双眼，烈火驱不散可怖诅咒的阴霾。",
             "type": "official",
-            "checked_at": "2026-10-10T08:01:12.761Z"
+            "checked_at": "2026-10-10T10:01:01.835Z"
           },
           {
             "url": "https://yh.wanmei.com/news/gamebroad/20260923/264278.html",
@@ -664,19 +594,19 @@
             "claims": [
               "current_content"
             ],
-            "quote": "五、 异环×Porsche 联动开启\n\n● 全新盲盒「骏影疾驰」上线",
+            "quote": "● 全新区域「噗卡乐园」\n\n快乐交汇之处，奇迹便有了发生的可能。\n\n欢迎来到噗卡乐园，请尽情享受这里的一切，不论是冒险还是奇遇，甚至是偶尔遇见的不可思议的传说，拥抱它们并写下你自己的故事吧！",
             "type": "official",
-            "checked_at": "2026-10-10T08:01:12.761Z"
+            "checked_at": "2026-10-10T10:01:01.835Z"
           },
           {
-            "url": "https://www.bilibili.com/video/BV1NUMy6oEgd/",
-            "title": "《异环》1.3版本前瞻特别节目回顾",
+            "url": "https://yh.wanmei.com/news/gamebroad/20260923/264278.html",
+            "title": "《异环》1.4版本「祷歌为谁而诵」更新公告",
             "claims": [
               "cycle_basis"
             ],
-            "quote": "《异环》1.3版本「雾中朔望星回」将于8月13日版本更新后开启！",
+            "quote": "2026年10月15日更新维护后，鉴定师可从邮件领取明音时装「吧台特调」、方斯*2000000。",
             "type": "official",
-            "checked_at": "2026-10-10T08:00:48.075Z"
+            "checked_at": "2026-10-10T10:01:01.835Z"
           },
           {
             "url": "https://yh.wanmei.com/news/index.html",
@@ -684,9 +614,9 @@
             "claims": [
               "preview_published"
             ],
-            "quote": "《异环》1.4版本「祷歌为谁而诵」更新公告《异环》计划将于9月24日06:00 – 11:00进行版本更新维护。本次更新维护完成后，将开启全新1.4版本「祷歌为谁而诵」。",
+            "quote": "最新新闻公告活动\n\n《异环》1.4版本「祷歌为谁而诵」更新公告《异环》计划将于9月24日06:00 – 11:00进行版本更新维护。本次更新维护完成后，将开启全新1.4版本「祷歌为谁而诵」。2026-09-23公告",
             "type": "official",
-            "checked_at": "2026-10-10T08:01:12.899Z"
+            "checked_at": "2026-10-10T10:01:01.960Z"
           }
         ],
         "preview_images": [],
@@ -694,21 +624,21 @@
         "next_release_date": "2026-11-05",
         "next_release_kind": "estimate",
         "cycle_basis": "缺少连续三个版本的可核验日期，使用用户指定默认42天周期估算",
-        "facts_checked_at": "2026-10-10T08:01:12.900Z",
+        "facts_checked_at": "2026-10-10T10:01:01.961Z",
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/yh.ico"
       },
       {
         "game_name": "星塔旅人（国服）",
-        "current_version": "2026-09-29「遥远的塔」",
+        "current_version": "「遥远的塔」",
         "current_content": [
-          "主线剧情第九章「遥远的塔」更新",
-          "全新五星旅人「艾蕾」登场",
-          "五星秘纹「睡前童话」登场",
-          "五星旅人「翡冷翠」与五星秘纹「仙踪良梦」复刻",
-          "限时活动、诺瓦异闻、限时玩法开启"
+          "「遥远的塔」主线更新纪念活动开启",
+          "新增「遥远的塔」版本内容与相关活动",
+          "新增限时活动「联合讨伐」",
+          "新增限时活动「灾变防线」",
+          "包含版本剧情推进及活动奖励内容"
         ],
         "current_version_days": 11,
-        "next_version": "预计下一次大型版本更新",
+        "next_version": "预计下一版本",
         "next_content": [],
         "preview_status": "尚未发布",
         "preview_title": null,
@@ -730,37 +660,28 @@
             "claims": [
               "current_release_date"
             ],
-            "checked_at": "2026-10-10T08:01:12.929Z"
+            "checked_at": "2026-10-10T10:01:02.132Z"
           },
           {
-            "url": "https://www.bilibili.com/opus/1252605739240783878",
-            "title": "✧主线剧情第九章「遥远的塔」更新预告",
+            "url": "https://www.bilibili.com/opus/1253061231258894336",
+            "title": "《星塔旅人》09月29日维护更新说明",
             "claims": [
               "current_release_date"
             ],
-            "quote": "▌更新时间\n2026/09/29 维护结束后",
+            "quote": "▌维护时间\n2026年09月29日 11:00 ~ 17:00",
             "type": "official",
-            "checked_at": "2026-10-08T01:00:44.565Z"
+            "checked_at": "2026-10-10T10:00:35.500Z"
           },
           {
-            "url": "https://www.bilibili.com/opus/1252582546415288320",
-            "title": "✧「遥远的塔」版本内容一览",
+            "url": "https://www.bilibili.com/opus/1253417488054484995",
+            "title": "✧09月29日维护更新结束",
             "claims": [
+              "current_version",
               "current_content"
             ],
-            "quote": "全新五星旅人「艾蕾」、五星秘纹「睡前童话」，五星旅人「翡冷翠」、五星秘纹「仙踪良梦」复刻，紫槿全新3D战斗形象「我的舞台我建造」、苍兰3D战斗形象「落雪的赠礼」复刻即将登场。\n全新限时活动、诺瓦异闻、限时玩法等内容将在「遥远的塔」主线更新纪念活动版本与魔王大人相见！",
+            "quote": "消失多年的星塔，再度现身米拉什；与此同时，安琪的大军也已兵临城下。是战，是退，还是牺牲自己保全同伴——最终，你将做出怎样的抉择？\n本次维护更新已结束，「遥远的塔」主线更新纪念活动现已开启！您可以正常登录游戏继续进行您的旅途。",
             "type": "official",
-            "checked_at": "2026-10-07T13:00:39.681Z"
-          },
-          {
-            "url": "https://www.bilibili.com/opus/1251944664284528672",
-            "title": "《星塔旅人》「遥远的塔」主线更新纪念活动PV现已发布！",
-            "claims": [
-              "current_release_date"
-            ],
-            "quote": "主线更新纪念活动「遥远的塔」，09月29日正式开启！",
-            "type": "official",
-            "checked_at": "2026-10-08T01:00:44.565Z"
+            "checked_at": "2026-10-10T10:00:35.500Z"
           }
         ],
         "preview_images": [],
@@ -768,7 +689,7 @@
         "next_release_date": "2026-11-10",
         "next_release_kind": "estimate",
         "cycle_basis": "缺少连续三个版本的可核验日期，使用用户指定默认42天周期估算",
-        "facts_checked_at": "2026-10-10T08:01:12.929Z",
+        "facts_checked_at": "2026-10-10T10:01:02.132Z",
         "icon_url": "https://game-version-tracker.pages.dev/media/game-icons/stellasora.webp"
       }
     ]
@@ -798,6 +719,66 @@
     ],
     "items": [
       {
+        "id": "zzz:BV1hipY6TE4A",
+        "game_name": "绝区零",
+        "category": "promotional_pv",
+        "category_label": "宣传影像",
+        "title": "《绝区零》2026 FES | 布梦嘉年华PV",
+        "description": "待星光与美梦交织，嘉年华即将启幕。\n绳匠，欢迎来到布梦嘉年华，这场属于您的盛会！\n绝区零 2026 FES将于11月27日-11月29日在杭州大会展中心举办，更多活动细节将会陆续公布，敬请期待~\n\n—— 欢迎来到新艾利都！——",
+        "version": null,
+        "bvid": "BV1hipY6TE4A",
+        "published_at": "2026-10-10T04:00:28.000Z",
+        "duration": "00:53",
+        "url": "https://www.bilibili.com/video/BV1hipY6TE4A/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1hipY6TE4A",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1hipY6TE4A.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1636034895",
+          "dynamic_url": "https://www.bilibili.com/opus/1257422233668681809"
+        }
+      },
+      {
+        "id": "zzz:BV1h4pb6oEWC",
+        "game_name": "绝区零",
+        "category": "preview_program",
+        "category_label": "版本前瞻",
+        "title": "《绝区零》3.3版本「重返天空的旅程」前瞻特别节目",
+        "description": "《绝区零》3.3版本「重返天空的旅程」将于10月21日正式上线，全新S级代理人「菲欧妮」、「赛维里安」即将登场！\n\n本次特别节目中的一切人物、故事、设定仅为节目包装，均与《绝区零》原作无关，展示画面与奖励等均为开发中内容，实际内容请以正式上线为准。\n另外，本次特别节目中的兑换码将于10月11日 23:59:59失效，记得尽快兑换哦~\n配音演员：刘雨轩、宋媛媛、杨超然\n\n—— 欢迎来到罗斯凯利法！——\n▼《绝区零》3.3版本「重返天空的旅程」将于10月21日上线！\n版本期间，参与活动可免费领取妄想天使时装！",
+        "version": "3.3",
+        "bvid": "BV1h4pb6oEWC",
+        "published_at": "2026-10-09T12:20:02.000Z",
+        "duration": "33:54",
+        "url": "https://www.bilibili.com/video/BV1h4pb6oEWC/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1h4pb6oEWC",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1h4pb6oEWC.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1636034895",
+          "dynamic_url": "https://www.bilibili.com/opus/1257179885854523442"
+        }
+      },
+      {
+        "id": "zzz:BV1rAp46vEaB",
+        "game_name": "绝区零",
+        "category": "version_pv",
+        "category_label": "版本 PV",
+        "title": "《绝区零》3.3版本PV | 重返天空的旅程",
+        "description": "聪颖而理性的孩子\n愿你的「智慧」驱散未知的迷雾，让众人…得以看清前路。\n果敢无畏、满怀勇气的孩子\n愿你的「热忱」点亮长明的灯火，让寒夜…不再漫长如昨。\n而我最坚定的孩子，我最虔信的孩子…\n愿你的「责任」…不再使你孑然一身；愿他们爱你，正如你爱着他们。\n正如…你愿意为他们牺牲一切。\n\n—— 欢迎来到罗斯凯利法！——\n▼《绝区零》3.3版本「重返天空的旅程」将于10月21日上线！\n版本期间，参与活动可免费领取妄想天使时装！\nbilibili安卓端下载地址：https://www.biligame.com/de",
+        "version": "3.3",
+        "bvid": "BV1rAp46vEaB",
+        "published_at": "2026-10-09T12:10:02.000Z",
+        "duration": "26:36",
+        "url": "https://www.bilibili.com/video/BV1rAp46vEaB/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1rAp46vEaB",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1rAp46vEaB.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1636034895",
+          "dynamic_url": "https://www.bilibili.com/opus/1257177308879388695"
+        }
+      },
+      {
         "id": "genshin:BV1F8aJ6TEKz",
         "game_name": "原神",
         "category": "promotional_pv",
@@ -826,7 +807,7 @@
         "description": "你醒来的时间尚短，管理员。但随着你的这次苏醒，有些曾经不变的东西正在发生变化——只有你才能带来的变化。",
         "version": null,
         "bvid": "BV1Vbpc6QE6o",
-        "published_at": "2026-10-06T13:30:00.000Z",
+        "published_at": "2026-10-06T13:30:03.000Z",
         "duration": "03:58",
         "url": "https://www.bilibili.com/video/BV1Vbpc6QE6o/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1Vbpc6QE6o",
@@ -834,7 +815,7 @@
         "source": {
           "platform": "bilibili",
           "official_mid": "1265652806",
-          "dynamic_url": null
+          "dynamic_url": "https://www.bilibili.com/opus/1256084673452310596"
         }
       },
       {
@@ -846,15 +827,15 @@
         "description": "《明日方舟：终末地》核心章节「丹青渡」版本前瞻特别节目现已结束，感谢管理员的观看。\n\n为了方便管理员更快捷地了解新版本内容，我们已上线【新版本导览】专题网页。浏览网页并点击领取奖励，即可获得嵌晶玉×1000，折金票×10000，初级认知载体×8，武器检查套组×4。\n管理员可以通过下方链接、前瞻特别节目中的二维码，或者游戏内邮件、游戏内公告、官方自媒体账号等方式进入【新版本导览】专题网页。\n\n>>点击前往：https://b23.tv/yJVppxh\n\n未来我们也会在官方自媒体账号陆续更新《明日方舟：终末地",
         "version": null,
         "bvid": "BV1uHpw6jEn8",
-        "published_at": "2026-10-06T13:15:00.000Z",
-        "duration": "72:59",
+        "published_at": "2026-10-06T13:15:02.000Z",
+        "duration": "01:12:59",
         "url": "https://www.bilibili.com/video/BV1uHpw6jEn8/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1uHpw6jEn8",
         "poster_url": "https://game-version-tracker.pages.dev/media/catalog/endfield/BV1uHpw6jEn8.jpg",
         "source": {
           "platform": "bilibili",
           "official_mid": "1265652806",
-          "dynamic_url": null
+          "dynamic_url": "https://www.bilibili.com/opus/1256080803676291121"
         }
       },
       {
@@ -866,7 +847,7 @@
         "description": "宏山人，自有他们的办法。",
         "version": null,
         "bvid": "BV1z6pw6AEBD",
-        "published_at": "2026-10-06T13:00:00.000Z",
+        "published_at": "2026-10-06T13:00:07.000Z",
         "duration": "02:12",
         "url": "https://www.bilibili.com/video/BV1z6pw6AEBD/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1z6pw6AEBD",
@@ -874,7 +855,7 @@
         "source": {
           "platform": "bilibili",
           "official_mid": "1265652806",
-          "dynamic_url": null
+          "dynamic_url": "https://www.bilibili.com/opus/1256076959698386951"
         }
       },
       {
@@ -886,7 +867,7 @@
         "description": "美味通行，堡已就位！\n11月5日，汉堡王×《明日方舟：终末地》联动开启，\n和干员们相约汉堡王、完成美味特别任务吧~\n\n更多联动详情敬请关注汉堡王官方自媒体账号。",
         "version": null,
         "bvid": "BV1foHf69EGU",
-        "published_at": "2026-10-06T12:40:00.000Z",
+        "published_at": "2026-10-06T12:40:01.000Z",
         "duration": "01:01",
         "url": "https://www.bilibili.com/video/BV1foHf69EGU/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1foHf69EGU",
@@ -894,7 +875,7 @@
         "source": {
           "platform": "bilibili",
           "official_mid": "1265652806",
-          "dynamic_url": null
+          "dynamic_url": "https://www.bilibili.com/opus/1256071780002431033"
         }
       },
       {
@@ -918,23 +899,23 @@
         }
       },
       {
-        "id": "wuwa:BV1s8aq6FEfJ",
-        "game_name": "鸣潮",
-        "category": "promotional_pv",
-        "category_label": "宣传影像",
-        "title": "《鸣潮》共鸣者「心」PV | 梦阑珊",
-        "description": "你已能独行至此……\n不必再沉溺此梦了。\n \n中文CV\n心：菊花花\n角：黄莺\n\n日文CV\n心：能登麻美子\n角：恒松步\n\n英文CV\n心：Suzie Yeung\n角：Lourdes Faberes\n\n韩文CV\n心：소연\n角：이소영",
+        "id": "zzz:BV1Qka76JEWQ",
+        "game_name": "绝区零",
+        "category": "character_pv",
+        "category_label": "角色 PV",
+        "title": "《绝区零》洛克茜角色PV | 发条骑士",
+        "description": "「小洛克茜，你会永远陪在我身边吗？」\n「以我浴血之心，完成永恒的誓言。」\n就这样，骑士打败了魔王，带着公主走出高塔。\n从此，公主与骑士过上了幸福快乐的生活。\n\n洛克茜CV\n中：刘一蕾\n日：赤﨑千夏\n\n克拉蕾CV\n中：柳知萧\n日：植田佳奈\n\n—— 欢迎来到罗斯凯利法！——\n▼《绝区零》3.2版本「她与她的隐秘往事」现已上线！\n限定S级代理人「克拉蕾」&「南宫羽」现已加入调频&复刻。\n版本期间，参与活动可免费领取妄想天使全新时装！\nbilibili安卓端下载地址：https://www.biligame.co",
         "version": null,
-        "bvid": "BV1s8aq6FEfJ",
-        "published_at": "2026-09-28T03:00:00.000Z",
-        "duration": "19:22",
-        "url": "https://www.bilibili.com/video/BV1s8aq6FEfJ/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1s8aq6FEfJ",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/wuwa/BV1s8aq6FEfJ.jpg",
+        "bvid": "BV1Qka76JEWQ",
+        "published_at": "2026-09-29T04:00:26.000Z",
+        "duration": "10:24",
+        "url": "https://www.bilibili.com/video/BV1Qka76JEWQ/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1Qka76JEWQ",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1Qka76JEWQ.jpg",
         "source": {
           "platform": "bilibili",
-          "official_mid": "1955897084",
-          "dynamic_url": null
+          "official_mid": "1636034895",
+          "dynamic_url": "https://www.bilibili.com/opus/1253340288163774471"
         }
       },
       {
@@ -946,7 +927,7 @@
         "description": "母题：什么是完美的艺术？\n为世界存亡挥笔时，她忘记了问题，却得到了答案。\n \n中文CV：\n真珠——苏婉\n ‌\n日文CV：\n真珠——安野希世乃\n ‌\n英文CV：\n真珠——Cat Protano\n ‌\n韩文CV：\n真珠——여윤미",
         "version": null,
         "bvid": "BV1Rmh96ZEXh",
-        "published_at": "2026-09-27T04:00:13.000Z",
+        "published_at": "2026-09-27T04:00:00.000Z",
         "duration": "08:51",
         "url": "https://www.bilibili.com/video/BV1Rmh96ZEXh/",
         "player_url": "https://player.bilibili.com/player.html?bvid=BV1Rmh96ZEXh",
@@ -954,7 +935,7 @@
         "source": {
           "platform": "bilibili",
           "official_mid": "1340190821",
-          "dynamic_url": "https://www.bilibili.com/opus/1252598061942702182"
+          "dynamic_url": null
         }
       },
       {
@@ -1078,6 +1059,66 @@
         }
       },
       {
+        "id": "honkai3:BV1aLeb6sEC5",
+        "game_name": "崩坏3",
+        "category": "preview_program",
+        "category_label": "版本前瞻",
+        "title": "《崩坏3》十周年庆典特别节目录像",
+        "description": "本次节目中，配音演员赵爽、张若瑜、孙艳琦、闫夜桥、可可味、溯浔、宴宁、Mace、阮从青、陶典、菊花花、hanser、花玲、唐雅菁一同揭秘了9.1版本的全新内容，带来了全新S级角色「时序之律者」、主线第二部后日谈「海正用火的声音歌唱」、主题活动「相遇♪回忆玩具小屋」、新服装与丰富周年活动的情报以及嘉宾配音挑战与配音幕后环节~",
+        "version": null,
+        "bvid": "BV1aLeb6sEC5",
+        "published_at": "2026-09-19T13:10:01.000Z",
+        "duration": "01:19:09",
+        "url": "https://www.bilibili.com/video/BV1aLeb6sEC5/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1aLeb6sEC5",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/honkai3/BV1aLeb6sEC5.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "27534330",
+          "dynamic_url": "https://www.bilibili.com/opus/1249771062975004691"
+        }
+      },
+      {
+        "id": "honkai3:BV1pKe26sEPf",
+        "game_name": "崩坏3",
+        "category": "version_pv",
+        "category_label": "版本 PV",
+        "title": "《崩坏3》9.1版本「时序照新」宣传PV",
+        "description": "《崩坏3》9.1版本「时序照新」即将开启！全新S级角色寻梦者「时序之律者」登场！\n还有主线第二部后日谈「海正用火的声音歌唱」、主题活动「相遇♪回忆玩具小屋」、十周年福利与全新服装重磅来袭，敬请期待！\n \n配音演员：\n希娜狄雅——孙艳琦\n寻梦者——张若瑜",
+        "version": "9.1",
+        "bvid": "BV1pKe26sEPf",
+        "published_at": "2026-09-19T12:30:02.000Z",
+        "duration": "01:56",
+        "url": "https://www.bilibili.com/video/BV1pKe26sEPf/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1pKe26sEPf",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/honkai3/BV1pKe26sEPf.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "27534330",
+          "dynamic_url": "https://www.bilibili.com/opus/1249760759312810020"
+        }
+      },
+      {
+        "id": "wuwa:BV1s8aq6FEfJ",
+        "game_name": "鸣潮",
+        "category": "promotional_pv",
+        "category_label": "宣传影像",
+        "title": "《鸣潮》共鸣者「心」PV | 梦阑珊",
+        "description": "你已能独行至此……\n不必再沉溺此梦了。\n \n中文CV\n心：菊花花\n角：黄莺\n\n日文CV\n心：能登麻美子\n角：恒松步\n\n英文CV\n心：Suzie Yeung\n角：Lourdes Faberes\n\n韩文CV\n心：소연\n角：이소영",
+        "version": null,
+        "bvid": "BV1s8aq6FEfJ",
+        "published_at": "2026-09-28T03:00:00.000Z",
+        "duration": "19:22",
+        "url": "https://www.bilibili.com/video/BV1s8aq6FEfJ/",
+        "player_url": "https://player.bilibili.com/player.html?bvid=BV1s8aq6FEfJ",
+        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/wuwa/BV1s8aq6FEfJ.jpg",
+        "source": {
+          "platform": "bilibili",
+          "official_mid": "1955897084",
+          "dynamic_url": null
+        }
+      },
+      {
         "id": "wuwa:BV1mKe86JES7",
         "game_name": "鸣潮",
         "category": "version_pv",
@@ -1135,186 +1176,6 @@
           "platform": "bilibili",
           "official_mid": "1955897084",
           "dynamic_url": null
-        }
-      },
-      {
-        "id": "yh:BV1jWej6hET5",
-        "game_name": "异环",
-        "category": "version_pv",
-        "category_label": "版本 PV",
-        "title": "《异环》1.4版本PV「祷歌为谁而诵」",
-        "description": "我们在哪儿？欢声笑语在耳边回响。\n好多好玩的地方，拉着我的手不放。\n尽情享受吧，特地为你施展，让你微笑的咒语\n永远，永远不会完。\n\n《异环》1.4版本「祷歌为谁而诵」将于9月24日版本更新后开启！",
-        "version": "1.4",
-        "bvid": "BV1jWej6hET5",
-        "published_at": "2026-09-17T03:00:00.000Z",
-        "duration": "07:28",
-        "url": "https://www.bilibili.com/video/BV1jWej6hET5/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1jWej6hET5",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/yh/BV1jWej6hET5.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "3546636978489848",
-          "dynamic_url": null
-        }
-      },
-      {
-        "id": "yh:BV1Lxej6FEhv",
-        "game_name": "异环",
-        "category": "preview_program",
-        "category_label": "版本前瞻",
-        "title": "《异环》1.4版本前瞻特别节目回顾",
-        "description": "《异环》1.4版本「祷歌为谁而诵」将于9月24日版本更新后开启！\n1.4版本前瞻特别节目现已结束，感谢各位鉴定师的收看~",
-        "version": "1.4",
-        "bvid": "BV1Lxej6FEhv",
-        "published_at": "2026-09-16T12:10:00.000Z",
-        "duration": "43:21",
-        "url": "https://www.bilibili.com/video/BV1Lxej6FEhv/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1Lxej6FEhv",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/yh/BV1Lxej6FEhv.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "3546636978489848",
-          "dynamic_url": null
-        }
-      },
-      {
-        "id": "honkai3:BV1aLeb6sEC5",
-        "game_name": "崩坏3",
-        "category": "preview_program",
-        "category_label": "版本前瞻",
-        "title": "《崩坏3》十周年庆典特别节目录像",
-        "description": "本次节目中，配音演员赵爽、张若瑜、孙艳琦、闫夜桥、可可味、溯浔、宴宁、Mace、阮从青、陶典、菊花花、hanser、花玲、唐雅菁一同揭秘了9.1版本的全新内容，带来了全新S级角色「时序之律者」、主线第二部后日谈「海正用火的声音歌唱」、主题活动「相遇♪回忆玩具小屋」、新服装与丰富周年活动的情报以及嘉宾配音挑战与配音幕后环节~",
-        "version": null,
-        "bvid": "BV1aLeb6sEC5",
-        "published_at": "2026-09-19T13:10:00.000Z",
-        "duration": "79:09",
-        "url": "https://www.bilibili.com/video/BV1aLeb6sEC5/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1aLeb6sEC5",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/honkai3/BV1aLeb6sEC5.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "27534330",
-          "dynamic_url": null
-        }
-      },
-      {
-        "id": "honkai3:BV1pKe26sEPf",
-        "game_name": "崩坏3",
-        "category": "version_pv",
-        "category_label": "版本 PV",
-        "title": "《崩坏3》9.1版本「时序照新」宣传PV",
-        "description": "《崩坏3》9.1版本「时序照新」即将开启！全新S级角色寻梦者「时序之律者」登场！\n还有主线第二部后日谈「海正用火的声音歌唱」、主题活动「相遇♪回忆玩具小屋」、十周年福利与全新服装重磅来袭，敬请期待！\n \n配音演员：\n希娜狄雅——孙艳琦\n寻梦者——张若瑜",
-        "version": "9.1",
-        "bvid": "BV1pKe26sEPf",
-        "published_at": "2026-09-19T12:30:00.000Z",
-        "duration": "01:56",
-        "url": "https://www.bilibili.com/video/BV1pKe26sEPf/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1pKe26sEPf",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/honkai3/BV1pKe26sEPf.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "27534330",
-          "dynamic_url": null
-        }
-      },
-      {
-        "id": "honkai3:BV1abNd6bE6L",
-        "game_name": "崩坏3",
-        "category": "version_pv",
-        "category_label": "版本 PV",
-        "title": "《崩坏3》9.0版本「曙梦向明」宣传PV",
-        "description": "《崩坏3》9.0版本「曙梦向明」即将开启！\n主线第二部终章「从此，拥抱未来」、主题活动「舰舰与许愿树秘闻」、全新服装重磅来袭，敬请期待！\n \n配音演员：\n寻梦者——张若瑜\n蕾耶拉——张若瑜\n松雀——赵爽\n赫丽娅——溯浔\n科拉莉——可可味\n希娜狄雅——孙艳琦\n符华——Mace",
-        "version": "9.0",
-        "bvid": "BV1abNd6bE6L",
-        "published_at": "2026-07-18T10:00:00.000Z",
-        "duration": "02:03",
-        "url": "https://www.bilibili.com/video/BV1abNd6bE6L/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1abNd6bE6L",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/honkai3/BV1abNd6bE6L.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "27534330",
-          "dynamic_url": null
-        }
-      },
-      {
-        "id": "honkai3:BV15MGi6oEFp",
-        "game_name": "崩坏3",
-        "category": "preview_program",
-        "category_label": "版本前瞻",
-        "title": "《崩坏3》V8.9「羽落万生」特别节目录像",
-        "description": "本次节目中，配音演员唐雅菁、hanser一同揭秘了8.9版本的全新内容，带来全新S级角色「愈生佑翎」、主题活动「极限时速：外卖行者」以及新服装的情报！同时，配音演员闫夜桥、孙艳琦做客洛星大冒险，带来主线第二部第十三章「一朵玫瑰的屈膝礼」的最新情报~",
-        "version": null,
-        "bvid": "BV15MGi6oEFp",
-        "published_at": "2026-05-23T12:30:00.000Z",
-        "duration": "23:49",
-        "url": "https://www.bilibili.com/video/BV15MGi6oEFp/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV15MGi6oEFp",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/honkai3/BV15MGi6oEFp.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "27534330",
-          "dynamic_url": null
-        }
-      },
-      {
-        "id": "zzz:BV1hipY6TE4A",
-        "game_name": "绝区零",
-        "category": "promotional_pv",
-        "category_label": "宣传影像",
-        "title": "《绝区零》2026 FES | 布梦嘉年华PV",
-        "description": "待星光与美梦交织，嘉年华即将启幕。\n绳匠，欢迎来到布梦嘉年华，这场属于您的盛会！\n绝区零 2026 FES将于11月27日-11月29日在杭州大会展中心举办，更多活动细节将会陆续公布，敬请期待~\n\n—— 欢迎来到新艾利都！——",
-        "version": null,
-        "bvid": "BV1hipY6TE4A",
-        "published_at": "2026-10-10T04:00:28.000Z",
-        "duration": "00:53",
-        "url": "https://www.bilibili.com/video/BV1hipY6TE4A/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1hipY6TE4A",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1hipY6TE4A.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "1636034895",
-          "dynamic_url": "https://www.bilibili.com/opus/1257422233668681809"
-        }
-      },
-      {
-        "id": "zzz:BV1h4pb6oEWC",
-        "game_name": "绝区零",
-        "category": "preview_program",
-        "category_label": "版本前瞻",
-        "title": "《绝区零》3.3版本「重返天空的旅程」前瞻特别节目",
-        "description": "《绝区零》3.3版本「重返天空的旅程」将于10月21日正式上线，全新S级代理人「菲欧妮」、「赛维里安」即将登场！\n\n本次特别节目中的一切人物、故事、设定仅为节目包装，均与《绝区零》原作无关，展示画面与奖励等均为开发中内容，实际内容请以正式上线为准。\n另外，本次特别节目中的兑换码将于10月11日 23:59:59失效，记得尽快兑换哦~\n配音演员：刘雨轩、宋媛媛、杨超然\n\n—— 欢迎来到罗斯凯利法！——\n▼《绝区零》3.3版本「重返天空的旅程」将于10月21日上线！\n版本期间，参与活动可免费领取妄想天使时装！",
-        "version": "3.3",
-        "bvid": "BV1h4pb6oEWC",
-        "published_at": "2026-10-09T12:20:02.000Z",
-        "duration": "33:54",
-        "url": "https://www.bilibili.com/video/BV1h4pb6oEWC/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1h4pb6oEWC",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1h4pb6oEWC.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "1636034895",
-          "dynamic_url": "https://www.bilibili.com/opus/1257179885854523442"
-        }
-      },
-      {
-        "id": "zzz:BV1rAp46vEaB",
-        "game_name": "绝区零",
-        "category": "version_pv",
-        "category_label": "版本 PV",
-        "title": "《绝区零》3.3版本PV | 重返天空的旅程",
-        "description": "聪颖而理性的孩子\n愿你的「智慧」驱散未知的迷雾，让众人…得以看清前路。\n果敢无畏、满怀勇气的孩子\n愿你的「热忱」点亮长明的灯火，让寒夜…不再漫长如昨。\n而我最坚定的孩子，我最虔信的孩子…\n愿你的「责任」…不再使你孑然一身；愿他们爱你，正如你爱着他们。\n正如…你愿意为他们牺牲一切。\n\n—— 欢迎来到罗斯凯利法！——\n▼《绝区零》3.3版本「重返天空的旅程」将于10月21日上线！\n版本期间，参与活动可免费领取妄想天使时装！\nbilibili安卓端下载地址：https://www.biligame.com/de",
-        "version": "3.3",
-        "bvid": "BV1rAp46vEaB",
-        "published_at": "2026-10-09T12:10:02.000Z",
-        "duration": "26:36",
-        "url": "https://www.bilibili.com/video/BV1rAp46vEaB/",
-        "player_url": "https://player.bilibili.com/player.html?bvid=BV1rAp46vEaB",
-        "poster_url": "https://game-version-tracker.pages.dev/media/catalog/zzz/BV1rAp46vEaB.jpg",
-        "source": {
-          "platform": "bilibili",
-          "official_mid": "1636034895",
-          "dynamic_url": "https://www.bilibili.com/opus/1257177308879388695"
         }
       }
     ]
